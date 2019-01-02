@@ -6057,6 +6057,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114702362761294208, guid: 96b4e77b32ed046429bd4be36dcff889,
+        type: 2}
+      propertyPath: alerted
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96b4e77b32ed046429bd4be36dcff889, type: 2}
   m_IsPrefabAsset: 0
@@ -7671,6 +7676,7 @@ GameObject:
   - component: {fileID: 1463808834}
   - component: {fileID: 1463808833}
   - component: {fileID: 1463808832}
+  - component: {fileID: 1463808835}
   m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
@@ -7762,6 +7768,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1463808835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1463808831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08ee22c9fcc6e8449a61f88d1f5ed96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1488443308
 GameObject:
   m_ObjectHideFlags: 0
@@ -8575,6 +8592,11 @@ Prefab:
     - target: {fileID: 4985275847722560, guid: 7654d99db33cd734e8f07f0a343400d8, type: 2}
       propertyPath: m_RootOrder
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 50542828601394112, guid: 7654d99db33cd734e8f07f0a343400d8,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7654d99db33cd734e8f07f0a343400d8, type: 2}

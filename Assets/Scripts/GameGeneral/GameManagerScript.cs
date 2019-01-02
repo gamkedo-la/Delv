@@ -36,11 +36,17 @@ public class GameManagerScript : MonoBehaviour {
         //Press the space key to add the Scene additively and move the GameObject to that Scene
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(LoadYourAsyncScene());
+            StartCoroutine(LoadNextScene());
         }
+
     }
 
-    IEnumerator LoadYourAsyncScene()
+    void GoToNextScene()
+    {
+        StartCoroutine(LoadNextScene());
+    }
+
+    IEnumerator LoadNextScene()
     {
         //Set the current Scene to be able to unload it later
         Scene currentScene = SceneManager.GetActiveScene();
@@ -57,10 +63,11 @@ public class GameManagerScript : MonoBehaviour {
         {
         //SceneManager.MoveGameObjectToScene(m_MyGameObject, SceneManager.GetSceneByName(m_Scene));
         //SceneManager.MoveGameObjectToScene(m_MainCamera, SceneManager.GetSceneByName(m_Scene));
-        SceneManager.UnloadSceneAsync(currentScene);
-        PC = m_MyGameObject.GetComponentInChildren<PlayerController>();
-        PC.SendMessage("GoToStart");
-        Debug.Log("Go to start message sent");
+            SceneManager.UnloadSceneAsync(currentScene);
+            PC = m_MyGameObject.GetComponentInChildren<PlayerController>();
+            PC.SendMessage("GoToStart");
+            Debug.Log("Go to start message sent");
+            Debug.Log("Scene loaded Successfully");
         //Unload the previous Scene
         }
         

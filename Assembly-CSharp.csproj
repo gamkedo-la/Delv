@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{67BE9039-59A3-0AB6-586F-7E4EFD2F9A24}</ProjectGuid>
+    <ProjectGuid>{3CB5B609-9B3A-B09F-B535-2F6E8E7F571B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\HBdirector.cs" />
+    <Compile Include="Assets\GoToNextScene.cs" />
     <Compile Include="Assets\Imports\CameraSolidFollow.cs" />
     <Compile Include="Assets\Imports\ControllerHandler.cs" />
     <Compile Include="Assets\Imports\ControllerMovementScript.cs" />
@@ -74,8 +74,6 @@
     <Compile Include="Assets\Imports\PlayerShooting.cs" />
     <Compile Include="Assets\Imports\TetherControls.cs" />
     <Compile Include="Assets\Imports\TurretBoy.cs" />
-    <Compile Include="Assets\ParticleHazard.cs" />
-    <Compile Include="Assets\SceneStartPoint.cs" />
     <Compile Include="Assets\Scripts\Enemy\AI\DumbFollowAI.cs" />
     <Compile Include="Assets\Scripts\Enemy\AI\SlowAimer.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
@@ -87,8 +85,11 @@
     <Compile Include="Assets\Scripts\GameGeneral\GameManagerScript.cs" />
     <Compile Include="Assets\Scripts\GameGeneral\ParticleDeathTimer.cs" />
     <Compile Include="Assets\Scripts\GameGeneral\RoomActivator.cs" />
+    <Compile Include="Assets\Scripts\GameGeneral\SceneStartPoint.cs" />
     <Compile Include="Assets\Scripts\GameGeneral\SecretRoomCoverScript.cs" />
     <Compile Include="Assets\Scripts\GameGeneral\TimeManager.cs" />
+    <Compile Include="Assets\Scripts\HBdirector.cs" />
+    <Compile Include="Assets\Scripts\ParticleHazard.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Aimer.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\ControllerAimer.cs" />
@@ -101,16 +102,16 @@
     <Compile Include="Assets\Scripts\Weapons\Projectiles\BulletMovementScript.cs" />
     <Compile Include="Assets\Scripts\Weapons\Projectiles\Fireball.cs" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/Trenton/Desktop/Relic/Throwaways/PreludePitch/RPrelude/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Trenton/Desktop/Delv/Delv/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Trenton/Desktop/Relic/Throwaways/PreludePitch/RPrelude/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Trenton/Desktop/Delv/Delv/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/Trenton/Desktop/Relic/Throwaways/PreludePitch/RPrelude/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/Trenton/Desktop/Delv/Delv/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/Trenton/Desktop/Relic/Throwaways/PreludePitch/RPrelude/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Trenton/Desktop/Delv/Delv/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
