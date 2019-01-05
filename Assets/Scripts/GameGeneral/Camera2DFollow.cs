@@ -6,6 +6,8 @@ namespace UnityStandardAssets._2D
     public class Camera2DFollow : MonoBehaviour
     {
         public Transform target;
+        public GameObject PlayerGO;
+        public float InitialZ;
         public float damping = 1;
         public float lookAheadFactor = 3;
         public float lookAheadReturnSpeed = 0.5f;
@@ -18,14 +20,27 @@ namespace UnityStandardAssets._2D
 
         private void Awake()
         {
-            GameObject PlayerGO = GameObject.FindGameObjectWithTag("Player");
+            PlayerGO = GameObject.FindGameObjectWithTag("Player");
             target = PlayerGO.transform;
+            InitialZ = PlayerGO.transform.position.z;
+
         }
         // Use this for initialization
         private void Start()
         {
             m_LastTargetPosition = target.position;
             m_OffsetZ = (transform.position - target.position).z;
+        }
+
+        public void RoomLock(Transform Room)
+        {
+            target = Room;
+        }
+        public void Unlock()
+        {
+            PlayerGO = GameObject.FindGameObjectWithTag("Player");
+            target = PlayerGO.transform;
+
         }
 
 
@@ -58,10 +73,11 @@ namespace UnityStandardAssets._2D
 
             Vector3 aheadTargetPos = target.position + m_LookAheadPos + Vector3.forward*m_OffsetZ;
             Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
-
+            newPos.z = InitialZ;
             transform.position = newPos;
 
             m_LastTargetPosition = target.position;
         }
+
     }
 }

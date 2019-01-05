@@ -300,6 +300,19 @@ Prefab:
       propertyPath: Waves.Array.data[1].EnemiesPerWave
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4475273448180400, guid: 4df031079aeb1e8429373bd3126cad95, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475273448180400, guid: 4df031079aeb1e8429373bd3126cad95, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114313203203811894, guid: 4df031079aeb1e8429373bd3126cad95,
+        type: 2}
+      propertyPath: CameraLockType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4df031079aeb1e8429373bd3126cad95, type: 2}
   m_IsPrefabAsset: 0
@@ -465,6 +478,75 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.4364395, y: 0.5960722}
   m_EdgeRadius: 0
+--- !u!1001 &141789782
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
+        type: 2}
+      propertyPath: Waves.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154075649258216, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 13.901487
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154075649258216, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.14814484
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154075649258216, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.05178339
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154075649258216, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154075649258216, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154075649258216, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154075649258216, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154075649258216, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
+        type: 2}
+      propertyPath: Waves.Array.data[1].EnemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
+        type: 2}
+      propertyPath: Waves.Array.data[1].Enemy
+      value: 
+      objectReference: {fileID: 1553617869375934, guid: 7654d99db33cd734e8f07f0a343400d8,
+        type: 2}
+    - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
+        type: 2}
+      propertyPath: Waves.Array.data[2].EnemiesPerWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
+        type: 2}
+      propertyPath: Waves.Array.data[2].Enemy
+      value: 
+      objectReference: {fileID: 1553617869375934, guid: 7654d99db33cd734e8f07f0a343400d8,
+        type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &150976060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,7 +1266,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4346693591361514, guid: 0cce9d1555a461149a100d5cc8cbd315, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114934976917001252, guid: 0cce9d1555a461149a100d5cc8cbd315,
         type: 2}
@@ -1416,7 +1498,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &818684473
 GameObject:
@@ -2345,7 +2427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1721045609
 GameObject:

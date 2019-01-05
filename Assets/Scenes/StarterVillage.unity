@@ -600,6 +600,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1829146627762290, guid: 4df031079aeb1e8429373bd3126cad95, type: 2}
+      propertyPath: m_Name
+      value: RoomTestExampleWithLock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4df031079aeb1e8429373bd3126cad95, type: 2}
   m_IsPrefabAsset: 0
@@ -5999,6 +6003,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 823547477}
+  PlayerGO: {fileID: 0}
+  InitialZ: 0
   damping: 0.3
   lookAheadFactor: 2
   lookAheadReturnSpeed: 0.7
@@ -8427,11 +8433,6 @@ Prefab:
     - target: {fileID: 4985275847722560, guid: 7654d99db33cd734e8f07f0a343400d8, type: 2}
       propertyPath: m_RootOrder
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 50542828601394112, guid: 7654d99db33cd734e8f07f0a343400d8,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7654d99db33cd734e8f07f0a343400d8, type: 2}

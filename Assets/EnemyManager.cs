@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityStandardAssets._2D;
 using UnityEngine;
 
 [System.Serializable]
@@ -25,6 +26,10 @@ public class EnemyManager : MonoBehaviour
     public GameObject Reward;
     public Transform RewardPoint;
 
+    public bool CameraLockType;
+    public GameObject CamParent;
+    public Transform CamCenter;
+
     public bool LockType;
     public GameObject RoomLockGO;
     public Transform[] RoomLockPoints;
@@ -35,6 +40,7 @@ public class EnemyManager : MonoBehaviour
     {
         _currentWave = -1; // avoid off by 1
         _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
+        CamParent = GameObject.Find("CamParent");
 
 
     }
@@ -48,6 +54,10 @@ public class EnemyManager : MonoBehaviour
             {
                 LockRoom();
             }
+            if (CameraLockType)
+            {
+                LockCam();
+            }
             StartNextWave();
         }
     }
@@ -56,7 +66,7 @@ public class EnemyManager : MonoBehaviour
     {
         _currentWave++;
 
-        // win
+        // win condition
         if (_currentWave > _totalWaves)
         {
             RoomComplete();
@@ -124,6 +134,20 @@ public class EnemyManager : MonoBehaviour
         {
             Destroy(L);
         }
+    }
+
+    public void LockCam()
+    {
+        CamParent = GameObject.Find("CamParent");
+        Camera2DFollow C2D = CamParent.GetComponent<Camera2DFollow>();
+        C2D.SendMessage("RoomLock", CamCenter);
+        
+    }
+    public void UnlockCam()
+    {
+        CamParent = GameObject.Find("CamParent");
+        Camera2DFollow C2D = CamParent.GetComponent<Camera2DFollow>();
+        C2D.SendMessage("Unlock");
     }
 
     public void RoomComplete()

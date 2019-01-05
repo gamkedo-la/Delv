@@ -163,6 +163,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1935907494728462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4475273448180400}
+  m_Layer: 0
+  m_Name: CamCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4107779273377712
 Transform:
   m_ObjectHideFlags: 1
@@ -228,6 +243,19 @@ Transform:
   m_Father: {fileID: 4657727105680974}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4475273448180400
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1935907494728462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5, y: -0.27, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4657727105680974}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4581316619693728
 Transform:
   m_ObjectHideFlags: 1
@@ -286,6 +314,7 @@ Transform:
   - {fileID: 4107779273377712}
   - {fileID: 4740067931948938}
   - {fileID: 4595213280163608}
+  - {fileID: 4475273448180400}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -351,6 +380,10 @@ MonoBehaviour:
   TimeBetweenEnemies: 1
   Reward: {fileID: 1827425564834512, guid: 99718121f1f6b054eb43cfadab9b18ee, type: 2}
   RewardPoint: {fileID: 4136581540781082}
+  CameraLockType: 1
+  CamParent: {fileID: 0}
+  CamCenter: {fileID: 4475273448180400}
+  LockType: 1
   RoomLockGO: {fileID: 1587086661631566, guid: df898787181a20d4bb6fc5f3b4f60c99, type: 2}
   RoomLockPoints:
   - {fileID: 4350081540744152}
