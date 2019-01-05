@@ -29,7 +29,7 @@ public class RoomActivator : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        if (Enemies[0] != null)
+        if ((Enemies[0] != null) && HasEnemies)
         {
             AI[0] = Enemies[0].GetComponent<DumbFollowAI>();
             AI[1] = Enemies[1].GetComponent<DumbFollowAI>();

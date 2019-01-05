@@ -202,10 +202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13d69a2f47493340b278ae346cff037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 2.5
   player: {fileID: 0}
   AlertDistance: 0
-  alerted: 0
+  alerted: 1
   rawDMG: 5
   DMGtype: normal
 --- !u!114 &114703709488554860
@@ -230,6 +230,7 @@ MonoBehaviour:
     type: 2}
   TinyScrapeParticle: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
     type: 2}
+  spawner: {fileID: 0}
 --- !u!212 &212593070053501244
 SpriteRenderer:
   m_ObjectHideFlags: 1

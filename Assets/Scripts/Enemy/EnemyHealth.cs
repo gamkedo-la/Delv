@@ -5,14 +5,21 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour {
 
     public float Health = 100;
+    //Armor and shields aren't going to be used. Just keeping them in if I can stretch goal/polish this up later.
     public int Armor = 0;
     public int Shields = 0;
+    //
+    // Invincibility frames and the amount to apply on damage.
     public float iFrames = 0f;
     public float iAmount = 0.5f;
     int initLayer;
+
+    //These particles are for varying damage types and particles to go with them.
     public GameObject DeathParticle;
     public GameObject ScrapeParticle;
     public GameObject TinyScrapeParticle;
+
+    public EnemyManager spawner;
 
     void Awake()
     {
@@ -38,7 +45,7 @@ public class EnemyHealth : MonoBehaviour {
     {
         if (coll.gameObject.tag == "PlayerProjectile")
         {
-            //Code wizard note: If anyone has a simple way of pushing the player away from the damage contact points, I'd be all ears. Had an idea to inverse the vector of where it came from and add force but not sure.
+            //Code wizard note: If anyone has a simple way of pushing the entity away from the damage contact points, I'd be all ears. Had an idea to inverse the vector of where it came from and add force but not sure.
             Debug.Log("Player Projectile Encountered");
         }
     }
@@ -79,6 +86,10 @@ public class EnemyHealth : MonoBehaviour {
     void Die()
     {
         Instantiate(DeathParticle, transform.position, transform.rotation);
+        if (spawner != null)
+        {
+            spawner.SendMessage("EnemyDefeated");
+        }
         Destroy(gameObject);
     }
 }

@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\EnemyManager.cs" />
     <Compile Include="Assets\GoToNextScene.cs" />
     <Compile Include="Assets\Imports\CameraSolidFollow.cs" />
     <Compile Include="Assets\Imports\ControllerHandler.cs" />

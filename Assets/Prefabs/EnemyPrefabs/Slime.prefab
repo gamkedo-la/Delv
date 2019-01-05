@@ -103,7 +103,7 @@ MonoBehaviour:
   speed: 1.5
   player: {fileID: 0}
   AlertDistance: 0
-  alerted: 0
+  alerted: 1
   rawDMG: 5
   DMGtype: normal
 --- !u!114 &114582559482160304
@@ -128,6 +128,7 @@ MonoBehaviour:
     type: 2}
   TinyScrapeParticle: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
     type: 2}
+  spawner: {fileID: 0}
 --- !u!212 &212231918987702184
 SpriteRenderer:
   m_ObjectHideFlags: 1

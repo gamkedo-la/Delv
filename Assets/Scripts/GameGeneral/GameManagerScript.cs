@@ -41,8 +41,9 @@ public class GameManagerScript : MonoBehaviour {
 
     }
 
-    void GoToNextScene()
+    public void GoToScene(string sentscene)
     {
+        m_Scene = sentscene;
         StartCoroutine(LoadNextScene());
     }
 

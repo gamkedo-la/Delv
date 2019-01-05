@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GoToNextScene : MonoBehaviour {
 
-    private GameManagerScript GM;
+    public GameManagerScript GM;
     private bool SequenceFired = false;
+    public string NextScene;
 
 	// Use this for initialization
 	void Start ()
@@ -16,11 +17,11 @@ public class GoToNextScene : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && SequenceFired == false)
+        if (collision.gameObject.tag == "Player" && SequenceFired == false && NextScene != null)
         {
             SequenceFired = true;
-            GM.SendMessage("GoToNextScene");
-            Debug.Log("Sent GoToNextScene message");
+            GM.SendMessage("GoToScene", NextScene);
+            Debug.Log("Sent GoToScene (" + NextScene + ") message");
         }
         
     }
