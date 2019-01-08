@@ -6048,58 +6048,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1371710896068110, guid: 4701660b7389f2d45b31d611ee0e57a8, type: 2}
-      propertyPath: m_Name
-      value: ControllerCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 212213757794667018, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212213757794667018, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212213757794667018, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 61933847297090926, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.8125
-      objectReference: {fileID: 0}
-    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 2}
-      propertyPath: DamagedParticle
-      value: 
-      objectReference: {fileID: 1785378511647156, guid: 83f4455bfc1a8274aa1ee3441ee2be51,
-        type: 2}
-    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 2}
-      propertyPath: DeathParticle
-      value: 
-      objectReference: {fileID: 1330777680275852, guid: 52f6656aacdbb9d4daee66404bfa8b48,
-        type: 2}
-    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 2}
-      propertyPath: LightlyDamaged
-      value: 
-      objectReference: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
-        type: 2}
-    - target: {fileID: 114899752021761330, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 2}
-      propertyPath: fireDelay
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114899752021761330, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 2}
-      propertyPath: EnergyCost1
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4701660b7389f2d45b31d611ee0e57a8, type: 2}
   m_IsPrefabAsset: 0

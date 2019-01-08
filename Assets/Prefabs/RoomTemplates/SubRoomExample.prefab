@@ -196,7 +196,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1113444234916210}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.23, y: -1.66, z: 0}
+  m_LocalPosition: {x: -0.26, y: -4.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4154075649258216}
@@ -209,7 +209,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1901573759527530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 13.901487, y: -0.14814484, z: -0.05178339}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4301879453330402}
@@ -257,7 +257,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1944325048625370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.9, y: -0.59, z: 0}
+  m_LocalPosition: {x: -0.37, y: -0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4154075649258216}
@@ -341,11 +341,21 @@ MonoBehaviour:
   Waves:
   - EnemiesPerWave: 1
     Enemy: {fileID: 1553617869375934, guid: 7654d99db33cd734e8f07f0a343400d8, type: 2}
+  - EnemiesPerWave: 1
+    Enemy: {fileID: 1553617869375934, guid: 7654d99db33cd734e8f07f0a343400d8, type: 2}
+  - EnemiesPerWave: 1
+    Enemy: {fileID: 1553617869375934, guid: 7654d99db33cd734e8f07f0a343400d8, type: 2}
   SpawnPoints:
   - {fileID: 4301879453330402}
+  - {fileID: 4216519334423772}
+  - {fileID: 4305921821578314}
+  - {fileID: 4150982188500968}
   TimeBetweenEnemies: 1
   Reward: {fileID: 0}
   RewardPoint: {fileID: 0}
+  CameraLockType: 0
+  CamParent: {fileID: 0}
+  CamCenter: {fileID: 0}
   LockType: 0
   RoomLockGO: {fileID: 1587086661631566, guid: df898787181a20d4bb6fc5f3b4f60c99, type: 2}
   RoomLockPoints:

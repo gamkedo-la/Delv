@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9d6d58f7c5e274b88fb67eb35ec57a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawDMG: 20
+  rawDMG: 25
   DMGtype: fire
   Owner: {fileID: 0}
   DeathParticle: {fileID: 1818785470270938, guid: 319cd2b410174c245b4e87d2f1f5c2d6,

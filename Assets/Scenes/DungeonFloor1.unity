@@ -485,11 +485,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
-        type: 2}
-      propertyPath: Waves.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4154075649258216, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
       propertyPath: m_LocalPosition.x
       value: 13.901487
@@ -524,26 +519,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
         type: 2}
-      propertyPath: Waves.Array.data[1].EnemiesPerWave
-      value: 1
+      propertyPath: TimeBetweenEnemies
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
-        type: 2}
-      propertyPath: Waves.Array.data[1].Enemy
-      value: 
-      objectReference: {fileID: 1553617869375934, guid: 7654d99db33cd734e8f07f0a343400d8,
-        type: 2}
-    - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
-        type: 2}
-      propertyPath: Waves.Array.data[2].EnemiesPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114550230451215238, guid: df36bed0be6701c4ea0688f08f5d3164,
-        type: 2}
-      propertyPath: Waves.Array.data[2].Enemy
-      value: 
-      objectReference: {fileID: 1553617869375934, guid: 7654d99db33cd734e8f07f0a343400d8,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df36bed0be6701c4ea0688f08f5d3164, type: 2}
   m_IsPrefabAsset: 0

@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 212870340148819826}
   - component: {fileID: 50875821726787420}
   - component: {fileID: 61998830473389072}
-  - component: {fileID: 114989314139340418}
   - component: {fileID: 61173257502566390}
   - component: {fileID: 114375173384209822}
   m_Layer: 8
@@ -59,7 +58,7 @@ GameObject:
   - component: {fileID: 4511788783015806}
   - component: {fileID: 212213757794667018}
   m_Layer: 0
-  m_Name: Cursor (1)
+  m_Name: ControllerCursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +237,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3125, y: 0.8125}
+  m_Size: {x: 0.8125, y: 0.8125}
   m_EdgeRadius: 0
 --- !u!61 &61998830473389072
 BoxCollider2D:
@@ -284,6 +283,12 @@ MonoBehaviour:
   GameManagerGO: {fileID: 0}
   GameManager: {fileID: 0}
   TimeManager: {fileID: 0}
+  MainCam: {fileID: 0}
+  healthdirectorGO: {fileID: 0}
+  healthdirector: {fileID: 0}
+  HealthBar: {fileID: 0}
+  EnergyBar: {fileID: 0}
+  MaxHealth: 100
   Health: 100
   MaxEnergy: 100
   Energy: 100
@@ -293,9 +298,11 @@ MonoBehaviour:
   PickupCD: 0
   iFrames: 0
   iAmount: 0.5
-  DeathParticle: {fileID: 1785378511647156, guid: 83f4455bfc1a8274aa1ee3441ee2be51,
+  DeathParticle: {fileID: 1330777680275852, guid: 52f6656aacdbb9d4daee66404bfa8b48,
     type: 2}
-  DamagedParticle: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
+  DamagedParticle: {fileID: 1785378511647156, guid: 83f4455bfc1a8274aa1ee3441ee2be51,
+    type: 2}
+  LightlyDamaged: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
     type: 2}
   EnergyCost1: 0
   EnergyCost2: 0
@@ -361,34 +368,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectilePrefab: {fileID: 1847105040016692, guid: dafd9203b84138c4abe44c691ea88cd1,
     type: 2}
-  fireDelay: 1
+  fireDelay: 0.6
   bulletOffset: {x: 0, y: 0.3, z: 0}
-  EnergyCost1: 25
+  EnergyCost1: 15
   EnergyCost2: 0.2
+  MoveDir: {x: 0, y: 0}
   ShotParticle: {fileID: 1348283218343394, guid: 34b108bc8446b214aa681d6841acc799,
     type: 2}
   FireSpray: {fileID: 1830864899307532}
   FSPS: {fileID: 0}
---- !u!114 &114989314139340418
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1115636747219654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e2496da91786534da1cb714e7739d10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 100
-  Armor: 0
-  Shields: 0
-  iFrames: 0
-  iAmount: 1
-  DeathParticle: {fileID: 1330777680275852, guid: 52f6656aacdbb9d4daee66404bfa8b48,
-    type: 2}
-  ScrapeParticle: {fileID: 1785378511647156, guid: 83f4455bfc1a8274aa1ee3441ee2be51,
-    type: 2}
 --- !u!198 &198255331008128140
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -5024,7 +5012,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
