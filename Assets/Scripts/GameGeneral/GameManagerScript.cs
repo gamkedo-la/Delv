@@ -31,15 +31,7 @@ public class GameManagerScript : MonoBehaviour {
 
 
 
-    void Update()
-    {
-        //Press the space key to add the Scene additively and move the GameObject to that Scene
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(LoadNextScene());
-        }
 
-    }
 
     public void GoToScene(string sentscene)
     {
