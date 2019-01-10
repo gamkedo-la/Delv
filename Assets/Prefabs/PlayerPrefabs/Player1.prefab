@@ -112,7 +112,7 @@ Transform:
   m_Children:
   - {fileID: 4896097573690788}
   m_Father: {fileID: 4727615063680378}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4511788783015806
 Transform:
@@ -125,7 +125,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4727615063680378}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4727615063680378
 Transform:
@@ -137,8 +137,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4225649278808764}
   - {fileID: 4511788783015806}
+  - {fileID: 4225649278808764}
   m_Father: {fileID: 4810588144668864}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -278,7 +278,6 @@ MonoBehaviour:
   PlayerIndex: 1
   EquippedWeapon: {fileID: 1461037899132968}
   PotentialWeapon: {fileID: 0}
-  Aimer: {fileID: 0}
   DeadWeapon: {fileID: 0}
   GameManagerGO: {fileID: 0}
   GameManager: {fileID: 0}
@@ -288,6 +287,8 @@ MonoBehaviour:
   healthdirector: {fileID: 0}
   HealthBar: {fileID: 0}
   EnergyBar: {fileID: 0}
+  Aimer: {fileID: 0}
+  ControllerType: 1
   MaxHealth: 100
   Health: 100
   MaxEnergy: 100
@@ -313,6 +314,7 @@ MonoBehaviour:
   RstickH: 
   RstickV: 
   SP: {fileID: 0}
+  CursorGO: {fileID: 0}
 --- !u!114 &114552386764726292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -353,8 +355,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b040b0f4ca421746b34b0e3256eda79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  TickedOn: 1
+  PC: {fileID: 0}
+  ParentPlayerIndex: 0
+  PlayerGO: {fileID: 0}
+  CursorGO: {fileID: 0}
 --- !u!114 &114899752021761330
 MonoBehaviour:
   m_ObjectHideFlags: 1

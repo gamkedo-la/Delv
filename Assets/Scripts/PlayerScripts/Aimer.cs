@@ -6,30 +6,25 @@ public class Aimer : MonoBehaviour {
 
 
 
-    public GameObject Player;
-    public bool TickedOn = true;
-    private SpriteRenderer SR;
-    [SerializeField]
+    public PlayerController PC;
+    public float ParentPlayerIndex;
+    public GameObject PlayerGO;
+    public GameObject CursorGO;
 
 
     // Use this for initialization
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
-
+        PC = GetComponentInParent<PlayerController>();
+        ParentPlayerIndex = PC.PlayerIndex;
+        Transform PlayerTF = this.transform.parent;
+        PlayerGO = PlayerTF.gameObject;
+        CursorGO = GameObject.Find("Cursor");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //makes the indicator always follow the player, and hide if shift is pressed
-        //transform.position = Player.transform.position;
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            TickedOn = !TickedOn;
-            this.enabled = !this.enabled;
-        }
-
 
     }
 

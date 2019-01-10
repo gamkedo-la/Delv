@@ -34,15 +34,8 @@ public class ControllerAimer : MonoBehaviour {
         {
             angle = Mathf.Atan2(RightStickVInput, RightStickHInput) * Mathf.Rad2Deg;
         }
-        //Var works with any variable I think? So I dont have to specify. This is getting my mouse position and rotating the forward vector to mouse position.
-        //var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //var mousePosition = new Vector3(0,0,angle);
-        //The autocode thing in VS did most of this after I tried to turn it normalyl
-        //This is the declaration of rot and then a lock so I don't make my ship look up and down the wrong axiseseseseseseesssZ.
         transform.rotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg);
         transform.eulerAngles = new Vector3(0, 0, angle);
-        //Debug.Log(string.Format("RightStickHInput = {0}", RightStickHInput)); ;
-        //Debug.Log(string.Format("RightStickVInput = {0}", RightStickVInput)); ;
     }
 
 

@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour {
     public float PlayerIndex = 1;
     public GameObject EquippedWeapon;
     public Transform PotentialWeapon;
-    public Transform Aimer;
     private SpriteRenderer SR;
     private Rigidbody2D _rb;
     public GameObject DeadWeapon;
@@ -29,6 +28,13 @@ public class PlayerController : MonoBehaviour {
     public HBdirector healthdirector;
     public Slider HealthBar;
     public Slider EnergyBar;
+
+    //Controller directors
+    public Transform Aimer;
+    private Aimer MouseAimer;
+    private ControllerAimer ConAimer;
+    private GameObject ConCursorGO;
+    public int ControllerType = 0;
 
     // Player Stats
     public float MaxHealth = 100;
@@ -50,6 +56,7 @@ public class PlayerController : MonoBehaviour {
     public float iFrames = 0f;
     public float iAmount = 0.5f;
     int initLayer;
+
     //EmittedParticles (Damaged
     public GameObject DeathParticle;
     public GameObject DamagedParticle;
@@ -76,7 +83,11 @@ public class PlayerController : MonoBehaviour {
     public string RstickH;
     public string RstickV;
 
+    //Startpoint
     public GameObject SP;
+
+    //Cursor for mouse.
+    public GameObject CursorGO;
 
 
     private void OnEnable()
@@ -108,6 +119,10 @@ public class PlayerController : MonoBehaviour {
         Health = MaxHealth;
         HealthBar.value = CalculateHealth();
         EnergyBar.value = CalculateEnergy();
+        CursorGO = GameObject.Find("MouseCursor");
+        ConCursorGO = Aimer.GetChild(0).gameObject;
+        MouseAimer = Aimer.GetComponent<Aimer>();
+        ConAimer = Aimer.GetComponent<ControllerAimer>();
 
 
         // DONT FORGET WHEN A PLAYER DIES TO LEAVE A TODO SPOT FOR REVIVAL
@@ -192,11 +207,47 @@ public class PlayerController : MonoBehaviour {
         }
 
         /// MOVEMENT CONSTRUCTION AREA
+        /// If using a controller////////////////////////////////
+        if (ControllerType == 1)
+        {
+            ConAimer.enabled = true;
+            MouseAimer.enabled = false;
+            CursorGO.SetActive(false);
+            ConCursorGO.SetActive(true);
+            LstickH = "LeftStickHInput" + PlayerIndex;
+            LstickV = "LeftStickVInput" + PlayerIndex;
+            RstickH = "RightStickHInput" + PlayerIndex;
+            RstickV = "RightStickVInput" + PlayerIndex;
 
-        LstickH = "LeftStickHInput" + PlayerIndex;
-        LstickV = "LeftStickVInput" + PlayerIndex;
-        RstickH = "RightStickHInput" + PlayerIndex;
-        RstickV = "RightStickVInput" + PlayerIndex;
+        }
+        //If using the keyboard (1st player)
+        if (ControllerType == 0)
+        {
+            ConAimer.enabled = false;
+            MouseAimer.enabled = true;
+            CursorGO.SetActive(true);
+            ConCursorGO.SetActive(false);
+            LstickH = ("Horizontal");
+            LstickV = ("Vertical");
+        }
+
+
+        ///REMINDER///
+        ///TEMPORARY///
+        ///MAKE AN OPTIONS MENU TO SWAP BETWEEN CONTROLLER TYPE, MAKING IT AUTOMATIC WOULD ADD IT TO EVERY PLAYERCONTROLLER
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (ControllerType == 0)
+            {
+                ControllerType = 1;
+            }
+            if (ControllerType == 1)
+            {
+                ControllerType = 0;
+            }
+
+
+        }
 
 
         /// MOVEMENT ITSELF
