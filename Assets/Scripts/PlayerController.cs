@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour {
     public HBdirector healthdirector;
     public Slider HealthBar;
     public Slider EnergyBar;
+    [Space]
+
 
     //Controller directors
     public Transform Aimer;
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour {
     private ControllerAimer ConAimer;
     private GameObject ConCursorGO;
     public int ControllerType = 0;
+    [Space]
+
 
     // Player Stats
     public float MaxHealth = 100;
@@ -46,29 +50,38 @@ public class PlayerController : MonoBehaviour {
     public int EnergyType = 1; //1 = Mana, 2 = Stamina, 3 = Will
     public float speed = 25;
     public float EnergyRegenRate;
+    [Space]
+
 
     //Player Specific Cooldowns
     [SerializeField]
     private float PickupCD;
+    [Space]
 
 
     // iframes
     public float iFrames = 0f;
     public float iAmount = 0.5f;
     int initLayer;
+    [Space]
+
 
     //EmittedParticles (Damaged
     public GameObject DeathParticle;
     public GameObject DamagedParticle;
     public GameObject LightlyDamaged;
+    [Space]
+
 
 
     // These are for mana/stamina/will requirements for a skill, these are sent up when the player picks a weapon up.
     public float EnergyCost1;
     public float EnergyCost2;
+    [Space]
     // This gets the cooldown from the weapon
     public bool CD1;
     public bool CD2;
+    [Space]
 
 
     //These are for aim orientation
@@ -76,16 +89,16 @@ public class PlayerController : MonoBehaviour {
     //public float LVinput;
     //public float RHinput;
     //public float RVinput;
-
+    [Space]
     //Movement Indexing strings
     public string LstickH;
     public string LstickV;
     public string RstickH;
     public string RstickV;
-
+    [Space]
     //Startpoint
     public GameObject SP;
-
+    [Space]
     //Cursor for mouse.
     public GameObject CursorGO;
 

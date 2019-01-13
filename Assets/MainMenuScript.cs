@@ -5,25 +5,28 @@ using UnityEngine;
 
 public class MainMenuScript : MonoBehaviour {
 
+    [SerializeField]
+    private GameManagerScript GM;
+
 	// Use this for initialization
 	void Start ()
     {
-		
+        GameObject GMGO = GameObject.Find("GameManager");
+        GM = GMGO.GetComponent<GameManagerScript>();
 	}
 	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+
 
     public void Singleplayer()
     {
+        GM.EnablePlayer1();
         SceneManager.LoadScene(1);
     }
     public void Multiplayer()
     {
-
+        GM.EnablePlayer1();
+        GM.EnablePlayer2();
+        SceneManager.LoadScene(1);
     }
 
     public void Settings()

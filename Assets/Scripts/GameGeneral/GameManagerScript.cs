@@ -10,36 +10,70 @@ public class GameManagerScript : MonoBehaviour {
     //Assign your GameObject you want to move Scene in the Inspector
     public GameObject m_MyGameObject;
     //public GameObject m_MainCamera;
-    public PlayerController PC1;
-    public float PlayerIndex;
 
-    //Settings
+    ///Settings///
+    //General Settings
+    public bool HeavyParticles = true;
     public bool Screenshake = true;
+
+    [Space]
+    //PlayerCount
+    [Space]
+    public int PlayerCount = 1;
+
+    [Space]
+
+    // Player 1 info and controls
+    public GameObject Player1GO;
+    public PlayerController PC1;
+
+    // Player 2 info and controls
+    public GameObject Player2GO;
+    public PlayerController PC2;
+
+    /// 
 
     private void Awake()
     {
+        FloatingTextController.Initialize();
         DontDestroyOnLoad(this.gameObject);
-        PC1 = m_MyGameObject.GetComponentInChildren<PlayerController>();
-        PlayerIndex = PC1.PlayerIndex;
     }
 
     // Use this for initialization
     void Start ()
     {
         //Sends player to the start as soon as the GM is starting
-        PC1.SendMessage("GoToStart");
-        FloatingTextController.Initialize();
     }
 
 
-    public static void InitializeGame()
+    public void InitializeGame()
     {
-        FloatingTextController.Initialize();
+    }
+    public void LinkPlayers()
+    {
+        PC1 = Player1GO.GetComponent<PlayerController>();
+        if (PlayerCount == 2)
+        {
+            PC2 = Player2GO.GetComponent<PlayerController>();
+
+        }
+    }
+
+    public void EnablePlayer1()
+    {
         LinkPlayers();
+        Player1GO.SetActive(true);
     }
-    public static void LinkPlayers()
+    public void EnablePlayer2()
     {
-
+        LinkPlayers();
+        Player2GO.SetActive(true);
+    }
+    public void DisablePlayer2()
+    {
+        PlayerCount = 1;
+        LinkPlayers();
+        Player2GO.SetActive(false);
     }
 
 
@@ -74,7 +108,6 @@ public class GameManagerScript : MonoBehaviour {
         //SceneManager.MoveGameObjectToScene(m_MyGameObject, SceneManager.GetSceneByName(m_Scene));
         //SceneManager.MoveGameObjectToScene(m_MainCamera, SceneManager.GetSceneByName(m_Scene));
             SceneManager.UnloadSceneAsync(currentScene);
-            PC1 = m_MyGameObject.GetComponentInChildren<PlayerController>();
             PC1.SendMessage("GoToStart");
             Debug.Log("Go to start message sent");
             Debug.Log("Scene loaded Successfully");

@@ -17,10 +17,12 @@ namespace UnityStandardAssets._2D
         private Vector3 m_LastTargetPosition;
         private Vector3 m_CurrentVelocity;
         private Vector3 m_LookAheadPos;
+        [SerializeField]
+        private GameManagerScript GM;
 
         private void Awake()
         {
-            PlayerGO = GameObject.FindGameObjectWithTag("Player");
+            PlayerGO = GM.Player1GO;
             target = PlayerGO.transform;
             InitialZ = PlayerGO.transform.position.z;
 
@@ -38,7 +40,7 @@ namespace UnityStandardAssets._2D
         }
         public void Unlock()
         {
-            PlayerGO = GameObject.FindGameObjectWithTag("Player");
+            PlayerGO = GM.Player1GO;
             target = PlayerGO.transform;
 
         }
@@ -49,14 +51,10 @@ namespace UnityStandardAssets._2D
         {
             if (!target)
             {
-                GameObject PlayerGO = GameObject.FindGameObjectWithTag("Player");
+                PlayerGO = GM.Player1GO;
                 target = PlayerGO.transform;
             }
-            if (!target)
-            {
-                GameObject EnemyNext = GameObject.FindGameObjectWithTag("Enemy");
-                target = EnemyNext.transform;
-            }
+
             // only update lookahead pos if accelerating or changed direction
             float xMoveDelta = (target.position - m_LastTargetPosition).x;
 
