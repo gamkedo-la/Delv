@@ -10,28 +10,45 @@ public class GameManagerScript : MonoBehaviour {
     //Assign your GameObject you want to move Scene in the Inspector
     public GameObject m_MyGameObject;
     //public GameObject m_MainCamera;
-    public PlayerController PC;
+    public PlayerController PC1;
     public float PlayerIndex;
+
+    //Settings
     public bool Screenshake = true;
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        PC = m_MyGameObject.GetComponentInChildren<PlayerController>();
-        PlayerIndex = PC.PlayerIndex;
+        PC1 = m_MyGameObject.GetComponentInChildren<PlayerController>();
+        PlayerIndex = PC1.PlayerIndex;
     }
 
     // Use this for initialization
     void Start ()
     {
         //Sends player to the start as soon as the GM is starting
-        PC.SendMessage("GoToStart");
+        PC1.SendMessage("GoToStart");
         FloatingTextController.Initialize();
     }
 
 
+    public static void InitializeGame()
+    {
+        FloatingTextController.Initialize();
+        LinkPlayers();
+    }
+    public static void LinkPlayers()
+    {
+
+    }
 
 
+
+    /// <summary>
+    ///  This is the scene swapper area, simple and rudimentary. Will probably update it if project complexity
+    ///  increases. For now this is all we need.
+    /// </summary>
+    /// 
 
     public void GoToScene(string sentscene)
     {
@@ -57,8 +74,8 @@ public class GameManagerScript : MonoBehaviour {
         //SceneManager.MoveGameObjectToScene(m_MyGameObject, SceneManager.GetSceneByName(m_Scene));
         //SceneManager.MoveGameObjectToScene(m_MainCamera, SceneManager.GetSceneByName(m_Scene));
             SceneManager.UnloadSceneAsync(currentScene);
-            PC = m_MyGameObject.GetComponentInChildren<PlayerController>();
-            PC.SendMessage("GoToStart");
+            PC1 = m_MyGameObject.GetComponentInChildren<PlayerController>();
+            PC1.SendMessage("GoToStart");
             Debug.Log("Go to start message sent");
             Debug.Log("Scene loaded Successfully");
         //Unload the previous Scene
