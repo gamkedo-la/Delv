@@ -19,13 +19,14 @@ public class MainMenuScript : MonoBehaviour {
 
     public void Singleplayer()
     {
-        GM.EnablePlayer1();
+        GM.PlayerCount = 1;
+        GM.InitializeGame();
         SceneManager.LoadScene(1);
     }
     public void Multiplayer()
     {
-        GM.EnablePlayer1();
-        GM.EnablePlayer2();
+        GM.PlayerCount = 2;
+        GM.InitializeGame();
         SceneManager.LoadScene(1);
     }
 

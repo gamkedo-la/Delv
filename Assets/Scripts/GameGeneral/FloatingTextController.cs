@@ -13,7 +13,7 @@ public class FloatingTextController : MonoBehaviour {
     public static void Initialize()
     {
         Debug.Log("initializing Floatingtext Controller");
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("PlayerUI");
         if (!popupText)
         {
             popupText = Resources.Load<DamageNumbers>("Prefabs/PopupTextParent");

@@ -26,16 +26,16 @@ public class GameManagerScript : MonoBehaviour {
     // Player 1 info and controls
     public GameObject Player1GO;
     public PlayerController PC1;
-
+    [Space]
     // Player 2 info and controls
     public GameObject Player2GO;
     public PlayerController PC2;
-
+    [Space]
+    public GameObject[] ThingsToWake;
     /// 
 
     private void Awake()
     {
-        FloatingTextController.Initialize();
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -48,6 +48,16 @@ public class GameManagerScript : MonoBehaviour {
 
     public void InitializeGame()
     {
+        EnablePlayer1();
+        if (PlayerCount == 2)
+        {
+            EnablePlayer2();
+        }
+        foreach (GameObject things in ThingsToWake)
+        {
+            things.SetActive(true);
+        }
+        FloatingTextController.Initialize();
     }
     public void LinkPlayers()
     {
@@ -84,6 +94,8 @@ public class GameManagerScript : MonoBehaviour {
     /// </summary>
     /// 
 
+        
+
     public void GoToScene(string sentscene)
     {
         m_Scene = sentscene;
@@ -111,10 +123,11 @@ public class GameManagerScript : MonoBehaviour {
             PC1.SendMessage("GoToStart");
             Debug.Log("Go to start message sent");
             Debug.Log("Scene loaded Successfully");
+            
         //Unload the previous Scene
         }
         
-
+        
     }
 
 

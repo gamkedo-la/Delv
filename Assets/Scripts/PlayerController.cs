@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour {
     ///  script, and the player movement script all in one.
     ///  
     /// 
-    /// I wrote most of this script without testing. pray for me.
+    ///
+    /// 
+    /// This entire script is held together with duct tape. I am so sorry.
     /// </summary>
     /// 
 
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour {
     public Transform Aimer;
     private Aimer MouseAimer;
     private ControllerAimer ConAimer;
-    private GameObject ConCursorGO;
+    public GameObject ConCursorGO;
     public int ControllerType = 0;
     [Space]
 
@@ -85,10 +87,10 @@ public class PlayerController : MonoBehaviour {
 
 
     //These are for aim orientation
-    //public float LHinput;
-    //public float LVinput;
-    //public float RHinput;
-    //public float RVinput;
+    public float LHinput;
+    public float LVinput;
+    public float RHinput;
+    public float RVinput;
     [Space]
     //Movement Indexing strings
     public string LstickH;
@@ -106,6 +108,14 @@ public class PlayerController : MonoBehaviour {
     private void OnEnable()
     {
         GoToStart();
+        EquippedWeapon.SendMessage("PlayerConnect");
+        Health = MaxHealth;
+        HealthBar.value = CalculateHealth();
+        EnergyBar.value = CalculateEnergy();
+        //CursorGO = GameObject.Find("MouseCursor");
+        //ConCursorGO = Aimer.GetChild(0).gameObject;
+        MouseAimer = Aimer.GetComponent<Aimer>();
+        ConAimer = Aimer.GetComponent<ControllerAimer>();
     }
     void Awake()
     {
@@ -118,28 +128,26 @@ public class PlayerController : MonoBehaviour {
         GameManager = GameManagerGO.GetComponent<GameManagerScript>();
         TimeManager = GameManager.GetComponent<TimeManager>();
         MainCam = Camera.main;
-        healthdirectorGO = GameObject.FindGameObjectWithTag("P1HB");
-        healthdirector = healthdirectorGO.GetComponent<HBdirector>();
         HealthBar = healthdirector.HealthBar;
         EnergyBar = healthdirector.EnergyBar;
 
     }
 
     // Use this for initialization
-    void Start ()
-    {
-        EquippedWeapon.SendMessage("PlayerConnect");
-        Health = MaxHealth;
-        HealthBar.value = CalculateHealth();
-        EnergyBar.value = CalculateEnergy();
-        CursorGO = GameObject.Find("MouseCursor");
-        ConCursorGO = Aimer.GetChild(0).gameObject;
-        MouseAimer = Aimer.GetComponent<Aimer>();
-        ConAimer = Aimer.GetComponent<ControllerAimer>();
+    //void Enable ()
+    //{
+    //    EquippedWeapon.SendMessage("PlayerConnect");
+    //    Health = MaxHealth;
+    //    HealthBar.value = CalculateHealth();
+    //    EnergyBar.value = CalculateEnergy();
+    //    CursorGO = GameObject.Find("MouseCursor");
+    //    ConCursorGO = Aimer.GetChild(0).gameObject;
+    //    MouseAimer = Aimer.GetComponent<Aimer>();
+    //    ConAimer = Aimer.GetComponent<ControllerAimer>();
 
 
-        // DONT FORGET WHEN A PLAYER DIES TO LEAVE A TODO SPOT FOR REVIVAL
-    }
+    //    // DONT FORGET WHEN A PLAYER DIES TO LEAVE A TODO SPOT FOR REVIVAL
+    //}
 
 
 
@@ -233,7 +241,7 @@ public class PlayerController : MonoBehaviour {
             RstickV = "RightStickVInput" + PlayerIndex;
 
         }
-        //If using the keyboard (1st player)
+        //If using the keyboard (1st player only)
         if (ControllerType == 0)
         {
             ConAimer.enabled = false;
@@ -252,11 +260,15 @@ public class PlayerController : MonoBehaviour {
         {
             if (ControllerType == 0)
             {
+                Debug.Log("Swapped to controller type (Xbox one) for player " + PlayerIndex);
                 ControllerType = 1;
+                return;
             }
             if (ControllerType == 1)
             {
+                Debug.Log("Swapped to controller type (Keyboard) for player " + PlayerIndex);
                 ControllerType = 0;
+                return;
             }
 
 
@@ -388,8 +400,11 @@ public class PlayerController : MonoBehaviour {
     void GoToStart()
     {
         SP = GameObject.FindGameObjectWithTag("StartZone");
+        if (!(SP == null))
+        {
         transform.position = SP.transform.position;
-        Debug.Log("Player received GoToStart command");
+        Debug.Log("Player Received GoToStart command");
+        }
     }
 
 

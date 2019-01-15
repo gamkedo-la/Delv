@@ -20,11 +20,11 @@ public class HBdirector : MonoBehaviour
         PC = AttachedPlayer.GetComponent<PlayerController>();
         PlayerIndex = PC.PlayerIndex;
 	}
-
-    private void Start()
+    private void OnEnable()
     {
-        
-    }
-    // Update is called once per frame
+        AttachedPlayer = GameObject.FindGameObjectWithTag("Player");
+        PC = AttachedPlayer.GetComponent<PlayerController>();
+        PlayerIndex = PC.PlayerIndex;
 
+    }
 }

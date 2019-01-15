@@ -22,9 +22,13 @@ public class Aimer : MonoBehaviour {
         CursorGO = GameObject.Find("MouseCursor");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
+        PC = GetComponentInParent<PlayerController>();
+        ParentPlayerIndex = PC.PlayerIndex;
+        Transform PlayerTF = this.transform.parent;
+        PlayerGO = PlayerTF.gameObject;
+        CursorGO = GameObject.Find("MouseCursor");
 
     }
 

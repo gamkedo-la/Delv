@@ -20,6 +20,13 @@ public class ControllerAimer : MonoBehaviour {
         Transform PlayerTF = this.transform.parent;
         PlayerGO = PlayerTF.gameObject;
     }
+    private void OnEnable()
+    {
+        PC = GetComponentInParent<PlayerController>();
+        ParentPlayerIndex = PC.PlayerIndex;
+        Transform PlayerTF = this.transform.parent;
+        PlayerGO = PlayerTF.gameObject;
+    }
     // Use this for initialization
     void Start ()
     {
@@ -38,9 +45,4 @@ public class ControllerAimer : MonoBehaviour {
         transform.eulerAngles = new Vector3(0, 0, angle);
     }
 
-
-        void Update ()
-    {
-		
-	}
 }

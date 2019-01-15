@@ -22,14 +22,15 @@ namespace UnityStandardAssets._2D
 
         private void Awake()
         {
-            PlayerGO = GM.Player1GO;
-            target = PlayerGO.transform;
-            InitialZ = PlayerGO.transform.position.z;
 
         }
         // Use this for initialization
         private void Start()
         {
+            PlayerGO = GM.Player1GO;
+            target = PlayerGO.transform;
+            InitialZ = PlayerGO.transform.position.z;
+
             m_LastTargetPosition = target.position;
             m_OffsetZ = (transform.position - target.position).z;
         }
