@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour {
     private ControllerAimer ConAimer;
     public GameObject ConCursorGO;
     public int ControllerType = 0;
+    public int ControllerSlot = 0;
     [Space]
 
 
@@ -172,25 +173,21 @@ public class PlayerController : MonoBehaviour {
 
 
         /// INPUT FOR SHOOTING
-        if (Input.GetButton("Primary" + PlayerIndex))
+        if (Input.GetButton("Primary" + ControllerSlot))
         {
             FireWeapon1();
         }
-        if (Input.GetButton("Secondary" + PlayerIndex))
+        if (Input.GetButton("Secondary" + ControllerSlot))
         {
             FireWeapon2();
         }
-        if ((Input.GetButtonUp("Primary" + PlayerIndex)) || (Energy < EnergyCost1))
+        if ((Input.GetButtonUp("Primary" + ControllerSlot)) || (Energy < EnergyCost1))
         {
             CancelWeapon1();
         }
-        if ((Input.GetButtonUp("Secondary" + PlayerIndex)) || (Energy < EnergyCost2))
+        if ((Input.GetButtonUp("Secondary" + ControllerSlot)) || (Energy < EnergyCost2))
         {
             CancelWeapon2();
-        }
-        if (Input.GetButton("Cancel"))
-        {
-            GoToStart();
         }
 
     }
@@ -235,10 +232,10 @@ public class PlayerController : MonoBehaviour {
             MouseAimer.enabled = false;
             CursorGO.SetActive(false);
             ConCursorGO.SetActive(true);
-            LstickH = "LeftStickHInput" + PlayerIndex;
-            LstickV = "LeftStickVInput" + PlayerIndex;
-            RstickH = "RightStickHInput" + PlayerIndex;
-            RstickV = "RightStickVInput" + PlayerIndex;
+            LstickH = "LeftStickHInput" + ControllerSlot;
+            LstickV = "LeftStickVInput" + ControllerSlot;
+            RstickH = "RightStickHInput" + ControllerSlot;
+            RstickV = "RightStickVInput" + ControllerSlot;
 
         }
         //If using the keyboard (1st player only)
@@ -313,7 +310,7 @@ public class PlayerController : MonoBehaviour {
         if ((coll.gameObject.tag == "MageWeapon") && (EnergyType == 1)) //REMEMBER TO SPREAD THIS ONCE FIXED
         {
             PotentialWeapon = coll.transform;
-            if ((Input.GetButtonDown("Pickup"+PlayerIndex)) && PickupCD <=0) //REMEMBER TO CHANGE THIS BUTTON
+            if ((Input.GetButtonDown("Pickup"+ ControllerSlot)) && PickupCD <=0) //REMEMBER TO CHANGE THIS BUTTON
             {
             PickupWeapon();
             }
