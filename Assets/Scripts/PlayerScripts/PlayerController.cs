@@ -422,7 +422,7 @@ public class PlayerController : MonoBehaviour {
             Instantiate(DamagedParticle, transform.position, transform.rotation);
             CameraShake shaker = MainCam.GetComponent<CameraShake>();
 
-            if (GameManager.Screenshake)
+            if (GameManagerScript.Screenshake)
             {
                 shaker.Shake(.2f,3,15);
             }

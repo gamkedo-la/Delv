@@ -82,12 +82,12 @@ public class FireProjectileScript : MonoBehaviour
         Instantiate(ProjectilePrefab, transform.position + offset, transform.rotation);
         CameraShake shaker = MainCam.GetComponent<CameraShake>();
 
-        if (GameManager.Screenshake)
+        if (GameManagerScript.Screenshake)
         {
             shaker.Shake(.1f, 3, 5);
         }
 
-        if (ShotParticle != null)
+        if ((ShotParticle != null) && (GameManagerScript.ParticleIntensity > 1))
         {
             Instantiate(ShotParticle, transform.position + offset, transform.rotation);
         }

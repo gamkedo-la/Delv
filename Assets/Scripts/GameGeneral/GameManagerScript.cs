@@ -13,8 +13,8 @@ public class GameManagerScript : MonoBehaviour {
 
     ///Settings///
     //General Settings
-    public bool HeavyParticles = true;
-    public bool Screenshake = true;
+    public static int ParticleIntensity = 3;
+    public static bool Screenshake = true;
 
     [Space]
     //PlayerCount
