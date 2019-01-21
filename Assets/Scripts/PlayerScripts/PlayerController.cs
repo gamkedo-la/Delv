@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour {
 
         }
         //If using the keyboard (1st player only)
-        if (ControllerType == 0)
+        if ((ControllerType == 0) && PlayerIndex == 1)
         {
             ConAimer.enabled = false;
             MouseAimer.enabled = true;
@@ -255,13 +255,13 @@ public class PlayerController : MonoBehaviour {
         ///MAKE AN OPTIONS MENU TO SWAP BETWEEN CONTROLLER TYPE, MAKING IT AUTOMATIC WOULD ADD IT TO EVERY PLAYERCONTROLLER
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (ControllerType == 0)
+            if ((ControllerType == 0) && PlayerIndex == 1)
             {
                 Debug.Log("Swapped to controller type (Xbox one) for player " + PlayerIndex);
                 ControllerType = 1;
                 return;
             }
-            if (ControllerType == 1)
+            if ((ControllerType == 1) && PlayerIndex == 1)
             {
                 Debug.Log("Swapped to controller type (Keyboard) for player " + PlayerIndex);
                 ControllerType = 0;

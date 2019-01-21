@@ -26,10 +26,12 @@ public class GameManagerScript : MonoBehaviour {
     // Player 1 info and controls
     public GameObject Player1GO;
     public PlayerController PC1;
+    public GameObject Player1UI;
     [Space]
     // Player 2 info and controls
     public GameObject Player2GO;
     public PlayerController PC2;
+    public GameObject Player2UI;
     [Space]
     public GameObject[] ThingsToWake;
     /// 
@@ -72,11 +74,13 @@ public class GameManagerScript : MonoBehaviour {
     public void EnablePlayer1()
     {
         LinkPlayers();
+        Player1UI.SetActive(true);
         Player1GO.SetActive(true);
     }
     public void EnablePlayer2()
     {
         LinkPlayers();
+        Player2UI.SetActive(true);
         Player2GO.SetActive(true);
     }
     public void DisablePlayer2()

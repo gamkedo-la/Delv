@@ -15,6 +15,7 @@ TagManager:
   - MeleeWeapon
   - StartZone
   - P1HB
+  - P2HB
   layers:
   - Default
   - TransparentFX

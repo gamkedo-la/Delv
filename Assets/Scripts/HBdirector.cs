@@ -14,17 +14,17 @@ public class HBdirector : MonoBehaviour
 
 
     // Use this for initialization
-    void Awake ()
-    {
-        AttachedPlayer = GameObject.FindGameObjectWithTag("Player");
-        PC = AttachedPlayer.GetComponent<PlayerController>();
-        PlayerIndex = PC.PlayerIndex;
-	}
-    private void OnEnable()
-    {
-        AttachedPlayer = GameObject.FindGameObjectWithTag("Player");
-        PC = AttachedPlayer.GetComponent<PlayerController>();
-        PlayerIndex = PC.PlayerIndex;
+ //   void Awake ()
+ //   {
+ //       AttachedPlayer = GameObject.FindGameObjectWithTag("Player");
+ //       PC = AttachedPlayer.GetComponent<PlayerController>();
+ //       PlayerIndex = PC.PlayerIndex;
+	//}
+ //   private void OnEnable()
+ //   {
+ //       AttachedPlayer = GameObject.FindGameObjectWithTag("Player");
+ //       PC = AttachedPlayer.GetComponent<PlayerController>();
+ //       PlayerIndex = PC.PlayerIndex;
 
-    }
+ //   }
 }
