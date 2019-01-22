@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour {
 
-    //Type in the name of the Scene you would like to load in the Inspector
+
+    //Directors
+    public GameObject DebugUIGO;
     public string m_Scene;
-    //Assign your GameObject you want to move Scene in the Inspector
     public GameObject m_MyGameObject;
-    //public GameObject m_MainCamera;
 
     ///Settings///
-    //General Settings
+    //Static General Settings
     public static int ParticleIntensity = 3;
     public static bool Screenshake = true;
+    public static bool DamageText = true;
 
     [Space]
     //PlayerCount
@@ -104,6 +105,11 @@ public class GameManagerScript : MonoBehaviour {
     {
         m_Scene = sentscene;
         StartCoroutine(LoadNextScene());
+    }
+
+    public void ToggleDebugUI()
+    {
+        DebugUIGO.SetActive(!(DebugUIGO));
     }
 
     IEnumerator LoadNextScene()

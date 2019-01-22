@@ -9,13 +9,17 @@ public class SlowAimer : MonoBehaviour {
     public float RotationSpeed = 5;
     private Rigidbody2D rb;
     public bool alert;
+    public GameObject Projectile;
+    public Vector3 offset;
+    public Quaternion rotoffset = new Quaternion (0,0,90,0);
 
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(FireSequence());
 		
 	}
 	
@@ -37,5 +41,16 @@ public class SlowAimer : MonoBehaviour {
         {
             Target = GameObject.FindGameObjectWithTag("Player").transform;
         }
+    }
+    IEnumerator FireSequence()
+    {
+        Instantiate(Projectile, transform.position + offset, transform.rotation);
+        yield return new WaitForSeconds(1);
+        Instantiate(Projectile, transform.position + offset, transform.rotation);
+        yield return new WaitForSeconds(1);
+        Instantiate(Projectile, transform.position + offset, transform.rotation);
+        yield return new WaitForSeconds(3);
+        StartCoroutine(FireSequence());
+
     }
 }

@@ -267,14 +267,17 @@ public class PlayerController : MonoBehaviour {
                 ControllerType = 0;
                 return;
             }
+        }
 
-
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            GameManager.SendMessage("ToggleDebugUI");
         }
 
 
-        /// MOVEMENT ITSELF
+            /// MOVEMENT ITSELF
 
-        var Vinput = Input.GetAxis(LstickV);
+            var Vinput = Input.GetAxis(LstickV);
         _rb.AddForce(gameObject.transform.up * speed * Vinput);
 
         var Hinput = Input.GetAxis(LstickH);
@@ -413,13 +416,19 @@ public class PlayerController : MonoBehaviour {
     {
         Debug.Log("Player health damaged for " + DMG + " Damage");
         Health -= DMG;
-        Instantiate(LightlyDamaged, transform.position, transform.rotation);
-        if (DMG > 3)
+        if (GameManagerScript.ParticleIntensity == 3)
+        {
+            Instantiate(LightlyDamaged, transform.position, transform.rotation);
+        }
+        if (DMG > 10)
         {
             TimeManager.SlowMo();
             iFrames = iAmount;
             gameObject.layer = 12;
-            Instantiate(DamagedParticle, transform.position, transform.rotation);
+            if (GameManagerScript.ParticleIntensity > 1)
+            {
+                Instantiate(DamagedParticle, transform.position, transform.rotation);
+            }
             CameraShake shaker = MainCam.GetComponent<CameraShake>();
 
             if (GameManagerScript.Screenshake)

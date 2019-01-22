@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class BulletMovementScript : MonoBehaviour {
 
-    public float maxSpeed = 5f;
+    public float Speed = 5f;
     public float lifetime = 10f;
+    public bool up;
+    public bool right;
+    private Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start ()
     {
-		
+        rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
-        Vector3 pos = transform.position;
-        Vector3 velocity = new Vector3(0, maxSpeed * Time.deltaTime, 0);
-        pos += (transform.rotation * velocity);
-        transform.position = pos;
+        if (up)
+        {
+            rb.AddForce(transform.up * Speed);
+        }
+
+        if (right)
+        {
+            rb.AddForce(-transform.right * Speed);
+        }
 
         lifetime -= Time.deltaTime;
         if (lifetime <= 0)

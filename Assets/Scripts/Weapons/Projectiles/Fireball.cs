@@ -42,7 +42,6 @@ public class Fireball : MonoBehaviour {
         }
         if (coll.gameObject.tag == "Environment")
         {
-            Debug.Log("PlayerBulletHitWall");
             Die();
         }
     }
@@ -56,8 +55,11 @@ public class Fireball : MonoBehaviour {
 
     }
     void Die()
-    {
-        Instantiate(DeathParticle, transform.position, transform.rotation);
+    { 
+        if (GameManagerScript.ParticleIntensity > 1)
+        {
+            Instantiate(DeathParticle, transform.position, transform.rotation);
+        }
         Destroy(gameObject);
     }
 
