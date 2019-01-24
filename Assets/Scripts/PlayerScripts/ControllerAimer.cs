@@ -35,8 +35,8 @@ public class ControllerAimer : MonoBehaviour {
     private void FixedUpdate()
     {
 
-         RightStickHInput = Input.GetAxis("RightStickHInput"+PC.PlayerIndex);
-         RightStickVInput = Input.GetAxis("RightStickVInput"+PC.PlayerIndex);
+         RightStickHInput = Input.GetAxis("RightStickHInput"+PC.ControllerSlot);
+         RightStickVInput = Input.GetAxis("RightStickVInput"+PC.ControllerSlot);
         if (RightStickHInput != 0.0f || RightStickVInput != 0.0f)
         {
             angle = Mathf.Atan2(RightStickVInput, RightStickHInput) * Mathf.Rad2Deg;

@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class SceneStartPoint : MonoBehaviour {
 
-    public GameObject Player;
+    public GameObject[] Player;
     public bool HasPlayerBeenBrought = false;
 
 
 	// Use this for initialization
 	void Start ()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = new GameObject[2];
+        Player = GameObject.FindGameObjectsWithTag("Player");
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (!Player)
+        if (!Player[0])
         {
-            Player = GameObject.FindGameObjectWithTag("Player");
+            Player = GameObject.FindGameObjectsWithTag("Player");
         }
-        if ((!HasPlayerBeenBrought) && (Player != null))
+        if ((!HasPlayerBeenBrought) && (Player[0] != null))
         {
-            Player.SendMessage("GoToStart");
+            foreach (GameObject pl in Player)
+            {
+            pl.SendMessage("GoToStart");
+
+            }
         }
 	}
 

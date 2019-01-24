@@ -12,24 +12,26 @@ public class Wave
 
 public class EnemyManager : MonoBehaviour
 {
+    public GameManagerScript GM;
+    [Space]
     public Wave[] Waves; // class to hold information per wave
     public Transform[] SpawnPoints;
     public float TimeBetweenEnemies = 2f;
-
+    [Space]
     private int _totalEnemiesInCurrentWave;
     private int _enemiesInWaveLeft;
     private int _spawnedEnemies;
-
+    [Space]
     private int _currentWave;
     private int _totalWaves;
-
+    [Space]
     public GameObject Reward;
     public Transform RewardPoint;
-
+    [Space]
     public bool CameraLockType;
     public GameObject CamParent;
     public Transform CamCenter;
-
+    [Space]
     public bool LockType;
     public GameObject RoomLockGO;
     public Transform[] RoomLockPoints;
@@ -41,14 +43,17 @@ public class EnemyManager : MonoBehaviour
         _currentWave = -1; // avoid off by 1
         _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         CamParent = GameObject.Find("CamParent");
+        GameObject GMGO = GameObject.Find("GameManager");
+        GM = GMGO.GetComponent<GameManagerScript>();
 
 
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if ((col.tag == "Player") && !RoomActive)
+        if ((col.gameObject.name == "Player1") && !RoomActive)
         {
+            
             RoomActive = true;
             if (LockType)
             {
@@ -59,6 +64,7 @@ public class EnemyManager : MonoBehaviour
                 LockCam();
             }
             StartNextWave();
+            RecallP2();
         }
     }
 
@@ -148,6 +154,11 @@ public class EnemyManager : MonoBehaviour
         CamParent = GameObject.Find("CamParent");
         Camera2DFollow C2D = CamParent.GetComponent<Camera2DFollow>();
         C2D.SendMessage("Unlock");
+    }
+
+    public void RecallP2()
+    {
+        GM.SendMessage("RecallPlayer2");
     }
 
     public void RoomComplete()

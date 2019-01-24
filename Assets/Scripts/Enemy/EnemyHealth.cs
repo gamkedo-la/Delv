@@ -73,11 +73,11 @@ public class EnemyHealth : MonoBehaviour {
         iFrames = iAmount;
         gameObject.layer = 12;
         Debug.Log(gameObject + " health is now " + Health);
-        if (DMG > 10)
+        if ((DMG > 10) && (GameManagerScript.ParticleIntensity > 0))
         {
             Instantiate(ScrapeParticle, transform.position, transform.rotation);
         }
-        if (DMG < 10)
+        if ((DMG < 10) && (GameManagerScript.ParticleIntensity > 1))
         {
             Instantiate(TinyScrapeParticle, transform.position, transform.rotation);
         }
@@ -85,7 +85,10 @@ public class EnemyHealth : MonoBehaviour {
     }
     void Die()
     {
+        if (GameManagerScript.ParticleIntensity >= 2)
+        {
         Instantiate(DeathParticle, transform.position, transform.rotation);
+        }
         if (spawner != null)
         {
             spawner.SendMessage("EnemyDefeated");

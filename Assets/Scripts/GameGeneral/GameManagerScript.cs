@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityStandardAssets._2D;
 
 public class GameManagerScript : MonoBehaviour {
 
@@ -10,6 +11,9 @@ public class GameManagerScript : MonoBehaviour {
     public GameObject DebugUIGO;
     public string m_Scene;
     public GameObject m_MyGameObject;
+    public Animator ScreenTrans;
+    public Camera2DFollow CAM;
+    public GameObject P2CAM;
 
     ///Settings///
     //Static General Settings
@@ -81,6 +85,8 @@ public class GameManagerScript : MonoBehaviour {
     public void EnablePlayer2()
     {
         LinkPlayers();
+        P2CAM.SetActive(true);
+        CAM.target = P2CAM.transform;
         Player2UI.SetActive(true);
         Player2GO.SetActive(true);
     }
@@ -104,7 +110,14 @@ public class GameManagerScript : MonoBehaviour {
     public void GoToScene(string sentscene)
     {
         m_Scene = sentscene;
-        StartCoroutine(LoadNextScene());
+        ScreenTrans.SetTrigger("FadeOut");
+    }
+
+    public void FadeComplete()
+    {
+        Debug.Log("Loading scene " + m_Scene);
+        SceneManager.LoadScene(m_Scene);
+        ScreenTrans.SetTrigger("FadeIn");
     }
 
     public void ToggleDebugUI()
@@ -112,36 +125,36 @@ public class GameManagerScript : MonoBehaviour {
         DebugUIGO.SetActive(!(DebugUIGO));
     }
 
-    IEnumerator LoadNextScene()
+    //Pulls player 2 back to player 1. Happens when room's combat starts.
+    public void RecallPlayer2()
     {
-        //Set the current Scene to be able to unload it later
-        Scene currentScene = SceneManager.GetActiveScene();
-
-        // The Application loads the Scene in the background at the same time as the current Scene.
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(m_Scene, LoadSceneMode.Additive);
-
-        //Wait until the last operation fully loads to return anything
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-        if (asyncLoad.isDone)
-        {
-        //SceneManager.MoveGameObjectToScene(m_MyGameObject, SceneManager.GetSceneByName(m_Scene));
-        //SceneManager.MoveGameObjectToScene(m_MainCamera, SceneManager.GetSceneByName(m_Scene));
-            SceneManager.UnloadSceneAsync(currentScene);
-            PC1.SendMessage("GoToStart");
-            Debug.Log("Go to start message sent");
-            Debug.Log("Scene loaded Successfully");
-            
-        //Unload the previous Scene
-        }
-        
-        
+        Player2GO.transform.position = Player1GO.transform.position;
+        Debug.Log("Player 2 recalled");
     }
 
+    //IEnumerator LoadNextScene()
+    //{
+    //    //Set the current Scene to be able to unload it later
+    //    Scene currentScene = SceneManager.GetActiveScene();
 
+    //    // The Application loads the Scene in the background at the same time as the current Scene.
+    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(m_Scene, LoadSceneMode.Additive);
 
-    
-    
+    //    //Wait until the last operation fully loads to return anything
+    //    while (!asyncLoad.isDone)
+    //    {
+    //        yield return null;
+    //    }
+    //    if (asyncLoad.isDone)
+    //    {
+    //    //SceneManager.MoveGameObjectToScene(m_MyGameObject, SceneManager.GetSceneByName(m_Scene));
+    //    //SceneManager.MoveGameObjectToScene(m_MainCamera, SceneManager.GetSceneByName(m_Scene));
+    //        SceneManager.UnloadSceneAsync(currentScene);
+    //        PC1.SendMessage("GoToStart");
+    //        Debug.Log("Go to start message sent");
+    //        Debug.Log("Scene loaded Successfully");
+            
+    //    //Unload the previous Scene
+    //    }
+    //}
 }

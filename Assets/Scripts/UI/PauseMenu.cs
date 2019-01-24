@@ -7,7 +7,6 @@ public class PauseMenu : MonoBehaviour {
 
     public static bool GameIsPaused = false;
     private GameManagerScript GameManager;
-    private TimeManager TimeManager;
     public GameObject PauseContainerGO;
 
 
@@ -17,7 +16,6 @@ public class PauseMenu : MonoBehaviour {
         PauseContainerGO = this.transform.GetChild(0).gameObject;
         GameObject GameManagerGO = GameObject.FindGameObjectWithTag("GameManager");
         GameManager = GameManagerGO.GetComponent<GameManagerScript>();
-        TimeManager = GameManager.GetComponent<TimeManager>();
 
     }
 

@@ -104,7 +104,7 @@ public class FireProjectileScript : MonoBehaviour
     public void Fire2()
     {
         FireSpray.SetActive(true);
-        Playerrb.velocity = Playerrb.velocity + new Vector2((CA.RightStickVInput*.5f), -(CA.RightStickHInput * .5f));
+        Playerrb.velocity = Playerrb.velocity + new Vector2((CA.RightStickVInput * .5f), -(CA.RightStickHInput * .5f));
     }
 
     public void CancelWeapon2()

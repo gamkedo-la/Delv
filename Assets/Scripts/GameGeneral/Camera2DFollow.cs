@@ -43,7 +43,6 @@ namespace UnityStandardAssets._2D
         {
             PlayerGO = GM.Player1GO;
             target = PlayerGO.transform;
-
         }
 
 

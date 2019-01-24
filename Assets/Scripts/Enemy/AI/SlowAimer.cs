@@ -11,7 +11,6 @@ public class SlowAimer : MonoBehaviour {
     public bool alert;
     public GameObject Projectile;
     public Vector3 offset;
-    public Quaternion rotoffset = new Quaternion (0,0,90,0);
     [Space]
     public float TimeBetweenShots = 1;
     public float TimeBetweenBursts = 3;

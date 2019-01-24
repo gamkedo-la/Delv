@@ -227,7 +227,18 @@ public class PlayerController : MonoBehaviour {
 
         /// MOVEMENT CONSTRUCTION AREA
         /// If using a controller////////////////////////////////
+
         if (ControllerType == 1)
+        {
+            ConAimer.enabled = true;
+            ConCursorGO.SetActive(true);
+            LstickH = "LeftStickHInput" + ControllerSlot;
+            LstickV = "LeftStickVInput" + ControllerSlot;
+            RstickH = "RightStickHInput" + ControllerSlot;
+            RstickV = "RightStickVInput" + ControllerSlot;
+
+        }
+        if ((ControllerType == 1) && PlayerIndex == 1)
         {
             ConAimer.enabled = true;
             MouseAimer.enabled = false;
