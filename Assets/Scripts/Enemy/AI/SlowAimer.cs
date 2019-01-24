@@ -12,6 +12,9 @@ public class SlowAimer : MonoBehaviour {
     public GameObject Projectile;
     public Vector3 offset;
     public Quaternion rotoffset = new Quaternion (0,0,90,0);
+    [Space]
+    public float TimeBetweenShots = 1;
+    public float TimeBetweenBursts = 3;
 
 
     // Use this for initialization
@@ -45,11 +48,11 @@ public class SlowAimer : MonoBehaviour {
     IEnumerator FireSequence()
     {
         Instantiate(Projectile, transform.position + offset, transform.rotation);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(TimeBetweenShots);
         Instantiate(Projectile, transform.position + offset, transform.rotation);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(TimeBetweenShots);
         Instantiate(Projectile, transform.position + offset, transform.rotation);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(TimeBetweenBursts);
         StartCoroutine(FireSequence());
 
     }

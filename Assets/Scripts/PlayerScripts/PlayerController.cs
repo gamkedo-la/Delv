@@ -172,6 +172,7 @@ public class PlayerController : MonoBehaviour {
 
 
 
+
         /// INPUT FOR SHOOTING
         if (Input.GetButton("Primary" + ControllerSlot))
         {
@@ -259,25 +260,32 @@ public class PlayerController : MonoBehaviour {
             {
                 Debug.Log("Swapped to controller type (Xbox one) for player " + PlayerIndex);
                 ControllerType = 1;
+                ControllerSlot = 1;
                 return;
             }
             if ((ControllerType == 1) && PlayerIndex == 1)
             {
                 Debug.Log("Swapped to controller type (Keyboard) for player " + PlayerIndex);
                 ControllerType = 0;
+                ControllerSlot = 0;
                 return;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad0))
+        //DEBUGGING TOOLS FOR PLAYER INDEX AND CONTROLLER SLOTS FOR PLAYER 1
+        if ((Input.GetKeyDown(KeyCode.Keypad0)) && PlayerIndex == 1)
         {
-            GameManager.SendMessage("ToggleDebugUI");
+            ControllerSlot = 0;
+        }
+        if ((Input.GetKeyDown(KeyCode.Keypad1)) && PlayerIndex == 1)
+        {
+            ControllerSlot = 1;
         }
 
 
-            /// MOVEMENT ITSELF
+        /// MOVEMENT ITSELF
 
-            var Vinput = Input.GetAxis(LstickV);
+        var Vinput = Input.GetAxis(LstickV);
         _rb.AddForce(gameObject.transform.up * speed * Vinput);
 
         var Hinput = Input.GetAxis(LstickH);
@@ -416,11 +424,11 @@ public class PlayerController : MonoBehaviour {
     {
         Debug.Log("Player health damaged for " + DMG + " Damage");
         Health -= DMG;
-        if (GameManagerScript.ParticleIntensity == 3)
+        if ((GameManagerScript.ParticleIntensity == 3)&&(DMG < 10 )&&( DMG > 0))
         {
             Instantiate(LightlyDamaged, transform.position, transform.rotation);
         }
-        if (DMG > 10)
+        if (DMG >= 10)
         {
             TimeManager.SlowMo();
             iFrames = iAmount;
@@ -441,10 +449,26 @@ public class PlayerController : MonoBehaviour {
         {
             Die();
         }
+        if (Health > MaxHealth)
+        {
+            Health = MaxHealth;
+        }
         HealthBar.value = CalculateHealth();
         Debug.Log("Player health is now " + Health);
         
     }
+
+    void DamageEnergy(float DMG)
+    {
+        Energy -= DMG;
+        if (Energy > MaxEnergy)
+        {
+            Energy = MaxEnergy;
+        }
+
+
+    }
+
 
     float CalculateHealth()
     {

@@ -3915,6 +3915,11 @@ PrefabInstance:
       propertyPath: ControllerType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
+        type: 3}
+      propertyPath: ControllerSlot
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 114899752021761330, guid: 4701660b7389f2d45b31d611ee0e57a8,
         type: 3}
       propertyPath: ProjectilePrefab

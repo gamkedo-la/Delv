@@ -16,6 +16,7 @@ TagManager:
   - StartZone
   - P1HB
   - P2HB
+  - Items
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Environment
   - GroundClutter
   - RoomLocks
-  - 
+  - Items
   - 
   - 
   - 
