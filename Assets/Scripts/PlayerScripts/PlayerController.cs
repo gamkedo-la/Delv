@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject ConCursorGO;
     public int ControllerType = 0;
     public int ControllerSlot = 0;
+    public bool isBot = false;
     [Space]
 
 
@@ -315,10 +316,20 @@ public class PlayerController : MonoBehaviour {
             ControllerSlot = 1;
         }
 
+        float Vinput;
+        /// Crude Bot Test 
+        if (isBot)
+        {
+            Vinput = 1.0f;
+        }
+        else
+        {
+            Vinput = Input.GetAxis(LstickV);
+        }
 
         /// MOVEMENT ITSELF
 
-        var Vinput = Input.GetAxis(LstickV);
+
         _rb.AddForce(gameObject.transform.up * speed * Vinput);
 
         var Hinput = Input.GetAxis(LstickH);
