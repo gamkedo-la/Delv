@@ -15,7 +15,11 @@ public class MainMenuScript : MonoBehaviour {
         GM = GMGO.GetComponent<GameManagerScript>();
 	}
 	
-
+    public void AIBot(bool isOn)
+    {
+        GM.isAIBot = isOn;
+        Debug.Log("AI bot is on? " + GM.isAIBot);
+    }
 
     public void Singleplayer()
     {

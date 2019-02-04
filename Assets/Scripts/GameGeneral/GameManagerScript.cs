@@ -25,6 +25,7 @@ public class GameManagerScript : MonoBehaviour {
     //PlayerCount
     [Space]
     public int PlayerCount = 1;
+    public bool isAIBot = false;
 
     [Space]
 
