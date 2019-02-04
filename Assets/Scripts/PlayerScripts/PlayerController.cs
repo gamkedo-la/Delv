@@ -7,13 +7,13 @@ public class PlayerController : MonoBehaviour {
     /// <summary>
     ///  This is the all emcompassing player script, basically combining the player indexing, the health/mana/stamina/will
     ///  script, and the player movement script all in one.
-    ///  
-    /// 
     ///
-    /// 
+    ///
+    ///
+    ///
     /// This entire script is held together with duct tape. I am so sorry.
     /// </summary>
-    /// 
+    ///
 
     // These vars are related to figuring out who it's coming from. Directors really.
     public float PlayerIndex = 1;
@@ -104,6 +104,8 @@ public class PlayerController : MonoBehaviour {
     [Space]
     //Cursor for mouse.
     public GameObject CursorGO;
+    [Space]
+    public bool isDead = false;
 
 
     private void OnEnable()
@@ -117,7 +119,27 @@ public class PlayerController : MonoBehaviour {
         //ConCursorGO = Aimer.GetChild(0).gameObject;
         MouseAimer = Aimer.GetComponent<Aimer>();
         ConAimer = Aimer.GetComponent<ControllerAimer>();
+
+        if (isDead) {
+            if (ControllerType == 0) {
+            MouseAimer.enabled = true;
+            }
+            else if (ControllerType == 1) {
+                ConAimer.enabled = true;
+            }
+
+            isDead = false;
+        }
     }
+
+    void OnDisable()
+    {
+        if (isDead) {
+            MouseAimer.enabled = false;
+            ConAimer.enabled = false;
+        }
+    }
+
     void Awake()
     {
         initLayer = gameObject.layer;
@@ -466,7 +488,6 @@ public class PlayerController : MonoBehaviour {
         }
         HealthBar.value = CalculateHealth();
         Debug.Log("Player health is now " + Health);
-        
     }
 
     void DamageEnergy(float DMG)
@@ -476,15 +497,13 @@ public class PlayerController : MonoBehaviour {
         {
             Energy = MaxEnergy;
         }
-
-
     }
-
 
     float CalculateHealth()
     {
         return Health / MaxHealth;
     }
+
     float CalculateEnergy()
     {
         return Energy / MaxEnergy;
@@ -494,7 +513,10 @@ public class PlayerController : MonoBehaviour {
     {
         //TODO: Leave stats in the GM for revival purposes.
         Instantiate(DeathParticle, transform.position, transform.rotation);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
+        isDead = true;
+        enabled = false;
 	}
 
-    }
+}
