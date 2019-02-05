@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour {
     public HBdirector healthdirector;
     public Slider HealthBar;
     public Slider EnergyBar;
+    //Dialogue director
+    public GameObject DialogueTarget;
+    public float DialogueCD;
     [Space]
 
 
@@ -38,7 +41,7 @@ public class PlayerController : MonoBehaviour {
     private Aimer MouseAimer;
     private ControllerAimer ConAimer;
     public GameObject ConCursorGO;
-    public int ControllerType = 0;
+    public int ControllerType = 0; //0 is keyboard (reserved for player 1), 1 is Xinput (Xbox 360 or Xbox 1), and 2 will be DualShock4 when it's remade.
     public int ControllerSlot = 0;
     public bool isBot = false;
     [Space]
@@ -233,9 +236,13 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (PickupCD > 0)
+        if (PickupCD > 0) //Cooldown for Pickup Inputs
         {
             PickupCD -= Time.deltaTime;
+        }
+        if (DialogueCD > 0) //Cooldown for Dialogue Inputs
+        {
+            DialogueCD -= Time.deltaTime;
         }
 
         /// INVICIBILITY FRAMES AREA
@@ -378,6 +385,16 @@ public class PlayerController : MonoBehaviour {
         {
             PotentialWeapon = coll.transform;
         }
+        if ((coll.gameObject.tag == "DialogueBox"))
+        {
+            DialogueTarget = coll.gameObject;
+            if (Input.GetButtonDown("Pickup" + ControllerSlot)) //REMEMBER TO CHANGE THIS BUTTON
+            {
+
+                ActivateDialogue();
+            }
+
+        }
     }
     void OnTriggerExit2D(Collider2D coll)
     {
@@ -518,6 +535,11 @@ public class PlayerController : MonoBehaviour {
     float CalculateEnergy()
     {
         return Energy / MaxEnergy;
+    }
+
+    void ActivateDialogue()
+    {
+        DialogueTarget.SendMessage("SendDialogue");
     }
 
     void Die ()
