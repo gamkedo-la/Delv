@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1224397774}
+      - m_Target: {fileID: 0}
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -5228,7 +5228,6 @@ GameObject:
   - component: {fileID: 1224397777}
   - component: {fileID: 1224397776}
   - component: {fileID: 1224397775}
-  - component: {fileID: 1224397774}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -5259,19 +5258,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1224397774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224397772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff8df0e9a657584c8b91e54b98d212c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PauseContainerGO: {fileID: 0}
 --- !u!114 &1224397775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5917,7 +5903,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1224397774}
+      - m_Target: {fileID: 0}
         m_MethodName: Settings
         m_Mode: 1
         m_Arguments:
@@ -8435,7 +8421,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1224397774}
+      - m_Target: {fileID: 0}
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -8739,7 +8725,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1224397774}
+      - m_Target: {fileID: 0}
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
