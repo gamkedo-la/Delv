@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour {
     public int ControllerType = 0; //0 is keyboard (reserved for player 1), 1 is Xinput (Xbox 360 or Xbox 1), and 2 will be DualShock4 when it's remade.
     public int ControllerSlot = 0;
     public bool isBot = false;
+
+    public CircleCollider2D reviveCollider;
+
     [Space]
 
 
@@ -128,11 +131,13 @@ public class PlayerController : MonoBehaviour {
 
         if (isDead) {
             if (ControllerType == 0) {
-            MouseAimer.enabled = true;
+                MouseAimer.enabled = true;
             }
             else if (ControllerType == 1) {
                 ConAimer.enabled = true;
             }
+
+            reviveCollider.enabled = false;
 
             isDead = false;
         }
@@ -326,7 +331,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         float Vinput;
-        /// Crude Bot Test 
+        /// Crude Bot Test
         if (isBot)
         {
             Vinput = 1.0f;
@@ -401,7 +406,15 @@ public class PlayerController : MonoBehaviour {
                 Debug.Log("Player Hit Cancel button");
                 ActivateTarget.SendMessage("DeactivateDialogue");
             }
+        }
 
+        if (coll.gameObject.tag == "Player")
+        {
+            PlayerController other = coll.gameObject.GetComponent<PlayerController>();
+            if (other && other.isDead)
+            {
+                Debug.Log(gameObject.name + " is touching other dead player: " + coll.gameObject.name);
+            }
         }
     }
     void OnTriggerExit2D(Collider2D coll)
@@ -570,6 +583,8 @@ public class PlayerController : MonoBehaviour {
 
         isDead = true;
         enabled = false;
+
+        reviveCollider.enabled = true;
 	}
 
 }

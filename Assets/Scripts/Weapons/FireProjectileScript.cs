@@ -121,6 +121,8 @@ public class FireProjectileScript : MonoBehaviour
             PC = Player.GetComponent<PlayerController>();
             ManaPing();
             Playerrb = Player.GetComponent<Rigidbody2D>();
+            Collider2D thiscol = GetComponent<Collider2D>();
+            thiscol.enabled = false;
             PLDisconnected = false;
         }
 

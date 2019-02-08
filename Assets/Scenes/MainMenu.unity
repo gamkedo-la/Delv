@@ -715,6 +715,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ffca214045fc0241ac219dd36b654ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &115479094
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115479090}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &115858607
 GameObject:
   m_ObjectHideFlags: 0
@@ -4510,6 +4526,21 @@ PrefabInstance:
       propertyPath: CursorGO
       value: 
       objectReference: {fileID: 82391054}
+    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
+        type: 3}
+      propertyPath: Health
+      value: 1000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 61998830473389072, guid: 4701660b7389f2d45b31d611ee0e57a8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61173257502566390, guid: 4701660b7389f2d45b31d611ee0e57a8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4701660b7389f2d45b31d611ee0e57a8, type: 3}
 --- !u!1 &1109784111
