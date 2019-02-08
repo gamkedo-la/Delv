@@ -4924,6 +4924,7 @@ GameObject:
   - component: {fileID: 6865793445521304039}
   - component: {fileID: 6184906593308164609}
   - component: {fileID: 1286401164103740230}
+  - component: {fileID: 3728820590036001650}
   - component: {fileID: 8447110967915570375}
   m_Layer: 8
   m_Name: Player2
@@ -5068,6 +5069,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5052662, y: 0.7664279}
   m_EdgeRadius: 0
+--- !u!58 &3728820590036001650
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300180896068623075}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.06}
+  serializedVersion: 2
+  m_Radius: 0.6
 --- !u!114 &8447110967915570375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5092,10 +5109,14 @@ MonoBehaviour:
   healthdirector: {fileID: 0}
   HealthBar: {fileID: 0}
   EnergyBar: {fileID: 0}
+  DialogueTarget: {fileID: 0}
+  DialogueCD: 0
   Aimer: {fileID: 0}
   ConCursorGO: {fileID: 8703353638757592938}
   ControllerType: 1
   ControllerSlot: 2
+  isBot: 0
+  reviveCollider: {fileID: 3728820590036001650}
   MaxHealth: 100
   Health: 100
   MaxEnergy: 100
@@ -5126,6 +5147,7 @@ MonoBehaviour:
   RstickV: 
   SP: {fileID: 0}
   CursorGO: {fileID: 0}
+  isDead: 0
 --- !u!1 &7803608122810891690
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,9 +30,11 @@ public class PlayerController : MonoBehaviour {
     public HBdirector healthdirector;
     public Slider HealthBar;
     public Slider EnergyBar;
+
+    [Space]
     //Dialogue director
-    public GameObject DialogueTarget;
-    public float DialogueCD;
+    public GameObject ActivateTarget;
+    public float ActivateCD;
     [Space]
 
 
@@ -44,6 +46,9 @@ public class PlayerController : MonoBehaviour {
     public int ControllerType = 0; //0 is keyboard (reserved for player 1), 1 is Xinput (Xbox 360 or Xbox 1), and 2 will be DualShock4 when it's remade.
     public int ControllerSlot = 0;
     public bool isBot = false;
+
+    public CircleCollider2D reviveCollider;
+
     [Space]
 
 
@@ -126,11 +131,13 @@ public class PlayerController : MonoBehaviour {
 
         if (isDead) {
             if (ControllerType == 0) {
-            MouseAimer.enabled = true;
+                MouseAimer.enabled = true;
             }
             else if (ControllerType == 1) {
                 ConAimer.enabled = true;
             }
+
+            reviveCollider.enabled = false;
 
             isDead = false;
         }
@@ -240,9 +247,9 @@ public class PlayerController : MonoBehaviour {
         {
             PickupCD -= Time.deltaTime;
         }
-        if (DialogueCD > 0) //Cooldown for Dialogue Inputs
+        if (ActivateCD > 0) //Cooldown for Dialogue Inputs
         {
-            DialogueCD -= Time.deltaTime;
+            ActivateCD -= Time.deltaTime;
         }
 
         /// INVICIBILITY FRAMES AREA
@@ -324,7 +331,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         float Vinput;
-        /// Crude Bot Test 
+        /// Crude Bot Test
         if (isBot)
         {
             Vinput = 1.0f;
@@ -385,15 +392,29 @@ public class PlayerController : MonoBehaviour {
         {
             PotentialWeapon = coll.transform;
         }
-        if ((coll.gameObject.tag == "DialogueBox"))
+        if ((coll.gameObject.tag == "Activatable"))
         {
-            DialogueTarget = coll.gameObject;
-            if (Input.GetButtonDown("Pickup" + ControllerSlot)) //REMEMBER TO CHANGE THIS BUTTON
+            ActivateTarget = coll.gameObject;
+            if (Input.GetButtonDown("Pickup" + ControllerSlot) && ActivateCD <= 0) //REMEMBER TO CHANGE THIS BUTTON
             {
+                Debug.Log("Player Hit Pickup/Activate button");
+                Activate();
 
-                ActivateDialogue();
             }
+            if (Input.GetButtonDown("Cancel" + ControllerSlot)) //REMEMBER TO CHANGE THIS BUTTON
+            {
+                Debug.Log("Player Hit Cancel button");
+                ActivateTarget.SendMessage("DeactivateDialogue");
+            }
+        }
 
+        if (coll.gameObject.tag == "Player")
+        {
+            PlayerController other = coll.gameObject.GetComponent<PlayerController>();
+            if (other && other.isDead)
+            {
+                Debug.Log(gameObject.name + " is touching other dead player: " + coll.gameObject.name);
+            }
         }
     }
     void OnTriggerExit2D(Collider2D coll)
@@ -409,6 +430,13 @@ public class PlayerController : MonoBehaviour {
         if ((coll.gameObject.tag == "MeleeWeapon") && (EnergyType == 3))
         {
             PotentialWeapon = null;
+        }
+        if ((coll.gameObject.tag == "Activatable"))
+        {
+            Debug.Log("Player walked away from" + ActivateTarget);
+            ActivateTarget.SendMessage("DeactivateDialogue");
+            ActivateTarget = null;
+
         }
     }
 
@@ -537,9 +565,14 @@ public class PlayerController : MonoBehaviour {
         return Energy / MaxEnergy;
     }
 
-    void ActivateDialogue()
+    void Activate()
     {
-        DialogueTarget.SendMessage("SendDialogue");
+        if (ActivateCD <= 0)
+        {
+        Debug.Log("Player sent message Activate to" + ActivateTarget);
+        ActivateTarget.SendMessage("Activate");
+            ActivateCD = 1;
+        }
     }
 
     void Die ()
@@ -550,6 +583,8 @@ public class PlayerController : MonoBehaviour {
 
         isDead = true;
         enabled = false;
+
+        reviveCollider.enabled = true;
 	}
 
 }

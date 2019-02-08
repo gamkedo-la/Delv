@@ -17,6 +17,8 @@ TagManager:
   - P1HB
   - P2HB
   - Items
+  - NPC
+  - Activatable
   layers:
   - Default
   - TransparentFX
@@ -35,7 +37,7 @@ TagManager:
   - GroundClutter
   - RoomLocks
   - Items
-  - 
+  - NPC
   - 
   - 
   - 
