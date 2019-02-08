@@ -30,9 +30,11 @@ public class PlayerController : MonoBehaviour {
     public HBdirector healthdirector;
     public Slider HealthBar;
     public Slider EnergyBar;
+
+    [Space]
     //Dialogue director
-    public GameObject DialogueTarget;
-    public float DialogueCD;
+    public GameObject ActivateTarget;
+    public float ActivateCD;
     [Space]
 
 
@@ -240,9 +242,9 @@ public class PlayerController : MonoBehaviour {
         {
             PickupCD -= Time.deltaTime;
         }
-        if (DialogueCD > 0) //Cooldown for Dialogue Inputs
+        if (ActivateCD > 0) //Cooldown for Dialogue Inputs
         {
-            DialogueCD -= Time.deltaTime;
+            ActivateCD -= Time.deltaTime;
         }
 
         /// INVICIBILITY FRAMES AREA
@@ -385,13 +387,19 @@ public class PlayerController : MonoBehaviour {
         {
             PotentialWeapon = coll.transform;
         }
-        if ((coll.gameObject.tag == "DialogueBox"))
+        if ((coll.gameObject.tag == "Activatable"))
         {
-            DialogueTarget = coll.gameObject;
-            if (Input.GetButtonDown("Pickup" + ControllerSlot)) //REMEMBER TO CHANGE THIS BUTTON
+            ActivateTarget = coll.gameObject;
+            if (Input.GetButtonDown("Pickup" + ControllerSlot) && ActivateCD <= 0) //REMEMBER TO CHANGE THIS BUTTON
             {
+                Debug.Log("Player Hit Pickup/Activate button");
+                Activate();
 
-                ActivateDialogue();
+            }
+            if (Input.GetButtonDown("Cancel" + ControllerSlot)) //REMEMBER TO CHANGE THIS BUTTON
+            {
+                Debug.Log("Player Hit Cancel button");
+                ActivateTarget.SendMessage("DeactivateDialogue");
             }
 
         }
@@ -409,6 +417,13 @@ public class PlayerController : MonoBehaviour {
         if ((coll.gameObject.tag == "MeleeWeapon") && (EnergyType == 3))
         {
             PotentialWeapon = null;
+        }
+        if ((coll.gameObject.tag == "Activatable"))
+        {
+            Debug.Log("Player walked away from" + ActivateTarget);
+            ActivateTarget.SendMessage("DeactivateDialogue");
+            ActivateTarget = null;
+
         }
     }
 
@@ -537,9 +552,14 @@ public class PlayerController : MonoBehaviour {
         return Energy / MaxEnergy;
     }
 
-    void ActivateDialogue()
+    void Activate()
     {
-        DialogueTarget.SendMessage("SendDialogue");
+        if (ActivateCD <= 0)
+        {
+        Debug.Log("Player sent message Activate to" + ActivateTarget);
+        ActivateTarget.SendMessage("Activate");
+            ActivateCD = 1;
+        }
     }
 
     void Die ()
