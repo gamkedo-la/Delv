@@ -4874,15 +4874,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfcab0b587ebfe44aa4671adb2bcbcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 1847105040016692, guid: dafd9203b84138c4abe44c691ea88cd1,
-    type: 3}
   fireDelay: 0.6
   bulletOffset: {x: 0, y: 0.3, z: 0}
   EnergyCost1: 15
   EnergyCost2: 0.2
-  MoveDir: {x: 0, y: 0}
+  CastRange: 5
+  ShockDamage: 15
   ShotParticle: {fileID: 1348283218343394, guid: 34b108bc8446b214aa681d6841acc799,
     type: 3}
+  ShotParticleSystem: {fileID: 0}
+  ProjectilePrefab: {fileID: 1847105040016692, guid: dafd9203b84138c4abe44c691ea88cd1,
+    type: 3}
+  MoveDir: {x: 0, y: 0}
   FireSpray: {fileID: 5102211962905511681}
   FSPS: {fileID: 0}
 --- !u!61 &767373622257320840
@@ -4925,6 +4928,7 @@ GameObject:
   - component: {fileID: 6184906593308164609}
   - component: {fileID: 1286401164103740230}
   - component: {fileID: 3728820590036001650}
+  - component: {fileID: 4209987193203658507}
   - component: {fileID: 8447110967915570375}
   m_Layer: 8
   m_Name: Player2
@@ -5085,6 +5089,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.06}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!114 &4209987193203658507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300180896068623075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5f1e71d897f4419acc934090826dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reviveCollider: {fileID: 3728820590036001650}
 --- !u!114 &8447110967915570375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5109,14 +5126,13 @@ MonoBehaviour:
   healthdirector: {fileID: 0}
   HealthBar: {fileID: 0}
   EnergyBar: {fileID: 0}
-  DialogueTarget: {fileID: 0}
-  DialogueCD: 0
+  ActivateTarget: {fileID: 0}
+  ActivateCD: 0
   Aimer: {fileID: 0}
   ConCursorGO: {fileID: 8703353638757592938}
   ControllerType: 1
   ControllerSlot: 2
   isBot: 0
-  reviveCollider: {fileID: 3728820590036001650}
   MaxHealth: 100
   Health: 100
   MaxEnergy: 100

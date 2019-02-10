@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 61998830473389072}
   - component: {fileID: 61173257502566390}
   - component: {fileID: 4141003162576322384}
+  - component: {fileID: 7414737263110267811}
   - component: {fileID: 114375173384209822}
   m_Layer: 8
   m_Name: Player1
@@ -241,6 +242,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.06}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!114 &7414737263110267811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115636747219654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5f1e71d897f4419acc934090826dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reviveCollider: {fileID: 4141003162576322384}
 --- !u!114 &114375173384209822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +294,7 @@ MonoBehaviour:
   EnergyType: 1
   speed: 50
   EnergyRegenRate: 10
+  reviver: {fileID: 7414737263110267811}
   PickupCD: 0
   iFrames: 0
   iAmount: 0.5
@@ -428,15 +443,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfcab0b587ebfe44aa4671adb2bcbcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 1847105040016692, guid: dafd9203b84138c4abe44c691ea88cd1,
-    type: 3}
   fireDelay: 0.6
   bulletOffset: {x: 0, y: 0.3, z: 0}
   EnergyCost1: 15
   EnergyCost2: 0.2
-  MoveDir: {x: 0, y: 0}
+  CastRange: 5
+  ShockDamage: 15
   ShotParticle: {fileID: 1348283218343394, guid: 34b108bc8446b214aa681d6841acc799,
     type: 3}
+  ShotParticleSystem: {fileID: 0}
+  ProjectilePrefab: {fileID: 1847105040016692, guid: dafd9203b84138c4abe44c691ea88cd1,
+    type: 3}
+  MoveDir: {x: 0, y: 0}
   FireSpray: {fileID: 1830864899307532}
   FSPS: {fileID: 0}
 --- !u!61 &61933847297090926

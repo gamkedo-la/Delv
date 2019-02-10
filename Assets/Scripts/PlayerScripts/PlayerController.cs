@@ -47,10 +47,7 @@ public class PlayerController : MonoBehaviour {
     public int ControllerSlot = 0;
     public bool isBot = false;
 
-    public CircleCollider2D reviveCollider;
-
     [Space]
-
 
     // Player Stats
     public float MaxHealth = 100;
@@ -64,6 +61,7 @@ public class PlayerController : MonoBehaviour {
     public float EnergyRegenRate;
     [Space]
 
+    private Reviver reviver;
 
     //Player Specific Cooldowns
     [SerializeField]
@@ -119,7 +117,10 @@ public class PlayerController : MonoBehaviour {
 
     private void OnEnable()
     {
-        GoToStart();
+        if (!isDead) {
+            GoToStart();
+        }
+
         EquippedWeapon.SendMessage("PlayerConnect");
         Health = MaxHealth;
         HealthBar.value = CalculateHealth();
@@ -136,8 +137,6 @@ public class PlayerController : MonoBehaviour {
             else if (ControllerType == 1) {
                 ConAimer.enabled = true;
             }
-
-            reviveCollider.enabled = false;
 
             isDead = false;
         }
@@ -164,6 +163,7 @@ public class PlayerController : MonoBehaviour {
         MainCam = Camera.main;
         HealthBar = healthdirector.HealthBar;
         EnergyBar = healthdirector.EnergyBar;
+        reviver = GetComponent<Reviver>();
 
     }
 
@@ -569,8 +569,8 @@ public class PlayerController : MonoBehaviour {
     {
         if (ActivateCD <= 0)
         {
-        Debug.Log("Player sent message Activate to" + ActivateTarget);
-        ActivateTarget.SendMessage("Activate");
+            Debug.Log("Player sent message Activate to" + ActivateTarget);
+            ActivateTarget.SendMessage("Activate");
             ActivateCD = 1;
         }
     }
@@ -584,7 +584,11 @@ public class PlayerController : MonoBehaviour {
         isDead = true;
         enabled = false;
 
-        reviveCollider.enabled = true;
+        reviver.SendMessage("PlayerDied");
 	}
 
+    void Revive()
+    {
+        enabled = true;
+    }
 }
