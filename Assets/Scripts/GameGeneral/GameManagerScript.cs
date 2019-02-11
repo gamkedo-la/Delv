@@ -86,12 +86,16 @@ public class GameManagerScript : MonoBehaviour {
     public void EnablePlayer2()
     {
         LinkPlayers();
-        P2CAM.SetActive(true);
-        CAM.target = P2CAM.transform;
+        PC2.isBot = isAIBot;
         Player2UI.SetActive(true);
         Player2GO.SetActive(true);
-        PC2.isBot = isAIBot;
+        if (!PC2.isBot) 
+        {
+            P2CAM.SetActive(true);
+            CAM.target = P2CAM.transform;
+        }
     }
+
     public void DisablePlayer2()
     {
         PlayerCount = 1;
