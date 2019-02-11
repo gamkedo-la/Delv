@@ -333,23 +333,29 @@ public class PlayerController : MonoBehaviour {
             ControllerSlot = 1;
         }
 
+        /// MOVEMENT ITSELF
+
         float Vinput;
-        /// Crude Bot Test
         if (isBot)
         {
-            Vinput = 1.0f;
+            Vinput = AICompanion.VertAxisNow();
         }
         else
         {
             Vinput = Input.GetAxis(LstickV);
         }
 
-        /// MOVEMENT ITSELF
-
+        float Hinput;
+        if (isBot)
+        {
+            Hinput = 0.0f;
+        }
+        else
+        {
+            Hinput = Input.GetAxis(LstickH);
+        }
 
         _rb.AddForce(gameObject.transform.up * speed * Vinput);
-
-        var Hinput = Input.GetAxis(LstickH);
         _rb.AddForce(gameObject.transform.right * (speed) * Hinput);
 
 

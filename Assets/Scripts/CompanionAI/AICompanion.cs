@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class AICompanion : MonoBehaviour
 {
-    private PlayerController AIController;
+    public float vertNow;
 
     // Start is called before the first frame update
     void Start()
-    {
-        AIController = GetComponentInParent<PlayerController>();
+    { 
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (AIController.isBot)
-        {
-            Debug.Log("I am a bot beep boop");
-        }
+        vertNow = Mathf.Cos(Time.timeSinceLevelLoad);
+    }
+
+    public float VertAxisNow()
+    {
+        return vertNow;
     }
 }
