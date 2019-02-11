@@ -6146,6 +6146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aa3764c1ae74a519891fbb8f7c4648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vertNow: 0
+  hortNow: 0
 --- !u!4 &1334943454
 Transform:
   m_ObjectHideFlags: 0
@@ -9303,6 +9305,11 @@ PrefabInstance:
       propertyPath: AICompanion
       value: 
       objectReference: {fileID: 1334943453}
+    - target: {fileID: 8791106670461352375, guid: 6da482bb0600384459fc2a158c8b7b13,
+        type: 3}
+      propertyPath: PC
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6da482bb0600384459fc2a158c8b7b13, type: 3}
 --- !u!4 &8326915504889176791 stripped

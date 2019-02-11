@@ -34,9 +34,17 @@ public class ControllerAimer : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        if (PC.isBot)
+        {
+            RightStickVInput = PC.AICompanion.VertAxisNow();
+            RightStickHInput = PC.AICompanion.HortAxisNow();
+        } 
+        else
+        {
+            RightStickHInput = Input.GetAxis("RightStickHInput" + PC.ControllerSlot);
+            RightStickVInput = Input.GetAxis("RightStickVInput" + PC.ControllerSlot);
+        }
 
-         RightStickHInput = Input.GetAxis("RightStickHInput"+PC.ControllerSlot);
-         RightStickVInput = Input.GetAxis("RightStickVInput"+PC.ControllerSlot);
         if (RightStickHInput != 0.0f || RightStickVInput != 0.0f)
         {
             angle = Mathf.Atan2(RightStickVInput, RightStickHInput) * Mathf.Rad2Deg;

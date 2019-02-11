@@ -5,6 +5,7 @@ using UnityEngine;
 public class AICompanion : MonoBehaviour
 {
     public float vertNow;
+    public float hortNow;
 
     // Start is called before the first frame update
     void Start()
@@ -15,11 +16,17 @@ public class AICompanion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vertNow = Mathf.Cos(Time.timeSinceLevelLoad);
+        vertNow = Mathf.Sin(Time.timeSinceLevelLoad);
+        hortNow = Mathf.Cos(Time.timeSinceLevelLoad);
     }
 
     public float VertAxisNow()
     {
         return vertNow;
+    }
+
+    public float HortAxisNow()
+    {
+        return hortNow;
     }
 }

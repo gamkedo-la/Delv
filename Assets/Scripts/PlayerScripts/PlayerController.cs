@@ -167,7 +167,6 @@ public class PlayerController : MonoBehaviour {
         HealthBar = healthdirector.HealthBar;
         EnergyBar = healthdirector.EnergyBar;
         reviver = GetComponent<Reviver>();
-
     }
 
     // Use this for initialization
@@ -348,7 +347,7 @@ public class PlayerController : MonoBehaviour {
         float Hinput;
         if (isBot)
         {
-            Hinput = 0.0f;
+            Hinput = AICompanion.HortAxisNow();
         }
         else
         {
@@ -369,16 +368,6 @@ public class PlayerController : MonoBehaviour {
         {
             SR.flipX = true;
         }
-
-
-
-
-
-
-
-
-
-
     }
 
 

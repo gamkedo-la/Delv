@@ -29,7 +29,6 @@ public class Aimer : MonoBehaviour {
         Transform PlayerTF = this.transform.parent;
         PlayerGO = PlayerTF.gameObject;
         CursorGO = GameObject.Find("MouseCursor");
-
     }
 
     private void FixedUpdate()

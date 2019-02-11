@@ -73,7 +73,6 @@ public class GameManagerScript : MonoBehaviour {
         if (PlayerCount == 2)
         {
             PC2 = Player2GO.GetComponent<PlayerController>();
-
         }
     }
 
