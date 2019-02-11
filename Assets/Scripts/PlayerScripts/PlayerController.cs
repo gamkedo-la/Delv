@@ -45,8 +45,11 @@ public class PlayerController : MonoBehaviour {
     public GameObject ConCursorGO;
     public int ControllerType = 0; //0 is keyboard (reserved for player 1), 1 is Xinput (Xbox 360 or Xbox 1), and 2 will be DualShock4 when it's remade.
     public int ControllerSlot = 0;
-    public bool isBot = false;
+    [Space]
 
+    // Companion AI
+    public bool isBot;
+    public AICompanion AICompanion;
     [Space]
 
     // Player Stats
