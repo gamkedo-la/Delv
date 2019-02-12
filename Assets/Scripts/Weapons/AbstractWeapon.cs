@@ -19,8 +19,6 @@ abstract public class AbstractWeapon : MonoBehaviour
     protected GameObject Player;
     protected Rigidbody2D Playerrb;
     protected PlayerController PC;
-    protected GameObject GameManagerGO;
-    protected GameManagerScript GameManager;
     protected Camera MainCam;
 
     //Failsafe bools
@@ -103,13 +101,13 @@ abstract public class AbstractWeapon : MonoBehaviour
         //Make this float when grounded. TODO
     }
 
-    public virtual void Fire1() {}
+    public virtual void Fire1() { }
 
-    public virtual void CancelWeapon1() {}
+    public virtual void CancelWeapon1() { }
 
-    public virtual void Fire2() {}
+    public virtual void Fire2() { }
 
-    public virtual void CancelWeapon2() {}
+    public virtual void CancelWeapon2() { }
 
     //Mana costs pings
     protected void ManaPing()

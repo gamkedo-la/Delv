@@ -7,16 +7,16 @@ public class DestroyExtParticle : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        if (GameManagerScript.ParticleIntensity < 2)
+        if (GameManagerScript.instance.ParticleIntensity < 2)
         {
-            GameObject.Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
     void Start()
     {
-        if (GameManagerScript.ParticleIntensity < 2)
+        if (GameManagerScript.instance.ParticleIntensity < 2)
         {
-            GameObject.Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 

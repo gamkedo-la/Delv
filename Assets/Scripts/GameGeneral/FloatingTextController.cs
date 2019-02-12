@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class FloatingTextController : MonoBehaviour {
+public class FloatingTextController : MonoBehaviour
+{
 
     private static DamageNumbers popupText;
     private static GameObject canvas;
@@ -21,9 +22,9 @@ public class FloatingTextController : MonoBehaviour {
     }
 
 
-    public static void CreateFloatingText(string text, Transform location,float DMGAMT)
+    public static void CreateFloatingText(string text, Transform location, float DMGAMT)
     {
-        if (GameManagerScript.DamageText == true)
+        if (GameManagerScript.instance.DamageText == true)
         {
             DamageNumbers instance = Instantiate(popupText);
             Vector2 screenPosition = Camera.main.WorldToScreenPoint(new Vector2((location.position.x + Random.Range(-.3f, .3f)), (location.position.y + Random.Range(-.3f, .3f))));

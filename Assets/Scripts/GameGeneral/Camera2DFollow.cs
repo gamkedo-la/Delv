@@ -17,8 +17,6 @@ namespace UnityStandardAssets._2D
         private Vector3 m_LastTargetPosition;
         private Vector3 m_CurrentVelocity;
         private Vector3 m_LookAheadPos;
-        [SerializeField]
-        private GameManagerScript GM;
 
         private void Awake()
         {
@@ -27,7 +25,7 @@ namespace UnityStandardAssets._2D
         // Use this for initialization
         private void Start()
         {
-            PlayerGO = GM.Player1GO;
+            PlayerGO = GameManagerScript.instance.Player1GO;
             target = PlayerGO.transform;
             InitialZ = PlayerGO.transform.position.z;
 
@@ -41,7 +39,7 @@ namespace UnityStandardAssets._2D
         }
         public void Unlock()
         {
-            PlayerGO = GM.Player1GO;
+            PlayerGO = GameManagerScript.instance.Player1GO;
             target = PlayerGO.transform;
         }
 
@@ -51,7 +49,7 @@ namespace UnityStandardAssets._2D
         {
             if (!target)
             {
-                PlayerGO = GM.Player1GO;
+                PlayerGO = GameManagerScript.instance.Player1GO;
                 target = PlayerGO.transform;
             }
 
@@ -62,14 +60,14 @@ namespace UnityStandardAssets._2D
 
             if (updateLookAheadTarget)
             {
-                m_LookAheadPos = lookAheadFactor*Vector3.right*Mathf.Sign(xMoveDelta);
+                m_LookAheadPos = lookAheadFactor * Vector3.right * Mathf.Sign(xMoveDelta);
             }
             else
             {
-                m_LookAheadPos = Vector3.MoveTowards(m_LookAheadPos, Vector3.zero, Time.deltaTime*lookAheadReturnSpeed);
+                m_LookAheadPos = Vector3.MoveTowards(m_LookAheadPos, Vector3.zero, Time.deltaTime * lookAheadReturnSpeed);
             }
 
-            Vector3 aheadTargetPos = target.position + m_LookAheadPos + Vector3.forward*m_OffsetZ;
+            Vector3 aheadTargetPos = target.position + m_LookAheadPos + Vector3.forward * m_OffsetZ;
             Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
             newPos.z = InitialZ;
             transform.position = newPos;

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour {
+public class EnemyHealth : MonoBehaviour
+{
 
     public float Health = 100;
     //Armor and shields aren't going to be used. Just keeping them in if I can stretch goal/polish this up later.
@@ -67,17 +68,17 @@ public class EnemyHealth : MonoBehaviour {
     void DamageHealth(float DMG)
     {
 
-        FloatingTextController.CreateFloatingText(DMG.ToString(),transform,DMG);
+        FloatingTextController.CreateFloatingText(DMG.ToString(), transform, DMG);
         Debug.Log(gameObject + " health damaged by " + DMG);
         Health -= DMG;
         iFrames = iAmount;
         gameObject.layer = 12;
         Debug.Log(gameObject + " health is now " + Health);
-        if ((DMG > 10) && (GameManagerScript.ParticleIntensity > 0))
+        if ((DMG > 10) && (GameManagerScript.instance.ParticleIntensity > 0))
         {
             Instantiate(ScrapeParticle, transform.position, transform.rotation);
         }
-        if ((DMG < 10) && (GameManagerScript.ParticleIntensity > 1))
+        if ((DMG < 10) && (GameManagerScript.instance.ParticleIntensity > 1))
         {
             Instantiate(TinyScrapeParticle, transform.position, transform.rotation);
         }
@@ -85,9 +86,9 @@ public class EnemyHealth : MonoBehaviour {
     }
     void Die()
     {
-        if (GameManagerScript.ParticleIntensity >= 2)
+        if (GameManagerScript.instance.ParticleIntensity >= 2)
         {
-        Instantiate(DeathParticle, transform.position, transform.rotation);
+            Instantiate(DeathParticle, transform.position, transform.rotation);
         }
         if (spawner != null)
         {

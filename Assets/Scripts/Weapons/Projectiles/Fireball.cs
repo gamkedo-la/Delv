@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fireball : MonoBehaviour {
+public class Fireball : MonoBehaviour
+{
 
     public float rawDMG = 10;
     public string DMGtype = "fire";
@@ -24,18 +25,18 @@ public class Fireball : MonoBehaviour {
         Debug.Log("Fireball made contact with" + coll.gameObject);
         if (coll.gameObject.tag == "Enemy")
         {
-            Debug.Log( coll.gameObject + "has been struck by projectile");
+            Debug.Log(coll.gameObject + "has been struck by projectile");
             coll.SendMessage("DamageHealth", rawDMG);
             // Above is the damage send value, below is where I'm working on knockback. //results inconclusive.
             GameObject EnemyHit = coll.gameObject;
-            Rigidbody2D EnemyRB = EnemyHit.GetComponent <Rigidbody2D>();
+            Rigidbody2D EnemyRB = EnemyHit.GetComponent<Rigidbody2D>();
             Vector3 offset;
             float magsqr;
             offset = Owner.transform.position - EnemyHit.transform.position;
             magsqr = offset.sqrMagnitude;
             if (magsqr > 0f)
             {
-            EnemyRB.AddForce((KnockbackForce * offset.normalized / magsqr) * 10);
+                EnemyRB.AddForce((KnockbackForce * offset.normalized / magsqr) * 10);
             }
             //EnemyRB.AddExplosionForce2D(KnockbackForce, kbvector, expRadius, 3.0F); //This is a 3D function, now I have to think about how to pull it off in 2D
             Die();
@@ -46,17 +47,9 @@ public class Fireball : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     void Die()
-    { 
-        if (GameManagerScript.ParticleIntensity > 1)
+    {
+        if (GameManagerScript.instance.ParticleIntensity > 1)
         {
             Instantiate(DeathParticle, transform.position, transform.rotation);
         }

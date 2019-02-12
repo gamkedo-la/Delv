@@ -5,11 +5,9 @@ using UnityEngine;
 public class FadeAssist : MonoBehaviour
 {
 
-    public GameManagerScript GM;
-
     public void OnFadeComplete()
     {
-        GM.SendMessage("FadeComplete");
+        GameManagerScript.instance.SendMessage("FadeComplete");
 
     }
 

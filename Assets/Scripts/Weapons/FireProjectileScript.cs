@@ -12,8 +12,6 @@ public class FireProjectileScript : AbstractWeapon
 
     protected override void Start()
     {
-        GameManagerGO = GameObject.FindGameObjectWithTag("GameManager");
-        GameManager = GameManagerGO.GetComponent<GameManagerScript>();
         FSPS = FireSpray.GetComponent<ParticleSystem>();
         MainCam = Camera.main;
 
@@ -28,12 +26,12 @@ public class FireProjectileScript : AbstractWeapon
         Instantiate(ProjectilePrefab, transform.position + offset, transform.rotation);
         CameraShake shaker = MainCam.GetComponent<CameraShake>();
 
-        if (GameManagerScript.Screenshake)
+        if (GameManagerScript.instance.Screenshake)
         {
             shaker.Shake(.1f, 3, 5);
         }
 
-        if ((ShotParticle != null) && (GameManagerScript.ParticleIntensity > 1))
+        if ((ShotParticle != null) && (GameManagerScript.instance.ParticleIntensity > 1))
         {
             Instantiate(ShotParticle, transform.position + offset, transform.rotation);
         }

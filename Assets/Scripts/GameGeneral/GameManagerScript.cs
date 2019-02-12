@@ -4,8 +4,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityStandardAssets._2D;
 
-public class GameManagerScript : MonoBehaviour {
+public class GameManagerScript : MonoBehaviour
+{
 
+    public static GameManagerScript instance;
 
     //Directors
     public GameObject DebugUIGO;
@@ -16,10 +18,10 @@ public class GameManagerScript : MonoBehaviour {
     public GameObject P2CAM;
 
     ///Settings///
-    //Static General Settings
-    public static int ParticleIntensity = 3;
-    public static bool Screenshake = true;
-    public static bool DamageText = true;
+    //General Settings
+    public int ParticleIntensity = 3;
+    public bool Screenshake = true;
+    public bool DamageText = true;
 
     [Space]
     //PlayerCount
@@ -44,11 +46,19 @@ public class GameManagerScript : MonoBehaviour {
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
         DontDestroyOnLoad(this.gameObject);
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         //Sends player to the start as soon as the GM is starting
     }
@@ -88,7 +98,7 @@ public class GameManagerScript : MonoBehaviour {
         PC2.isBot = isAIBot;
         Player2UI.SetActive(true);
         Player2GO.SetActive(true);
-        if (!PC2.isBot) 
+        if (!PC2.isBot)
         {
             P2CAM.SetActive(true);
             CAM.target = P2CAM.transform;
@@ -110,7 +120,7 @@ public class GameManagerScript : MonoBehaviour {
     /// </summary>
     /// 
 
-        
+
 
     public void GoToScene(string sentscene)
     {
@@ -158,7 +168,7 @@ public class GameManagerScript : MonoBehaviour {
     //        PC1.SendMessage("GoToStart");
     //        Debug.Log("Go to start message sent");
     //        Debug.Log("Scene loaded Successfully");
-            
+
     //    //Unload the previous Scene
     //    }
     //}

@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class PauseMenu : MonoBehaviour {
+public class PauseMenu : MonoBehaviour
+{
 
     public static bool GameIsPaused = false;
-    private GameManagerScript GameManager;
     public GameObject PauseContainerGO;
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         PauseContainerGO = this.transform.GetChild(0).gameObject;
-        GameObject GameManagerGO = GameObject.FindGameObjectWithTag("GameManager");
-        GameManager = GameManagerGO.GetComponent<GameManagerScript>();
-
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         if (Input.GetButtonDown("Pause"))
         {
@@ -41,8 +38,6 @@ public class PauseMenu : MonoBehaviour {
         GameIsPaused = true;
         //this.transform.GetChild(0).gameObject.SetActive(true);
         Debug.Log("Paused");
-
-
     }
 
     public void Resume()

@@ -12,7 +12,6 @@ public class Wave
 
 public class EnemyManager : MonoBehaviour
 {
-    public GameManagerScript GM;
     [Space]
     public Wave[] Waves; // class to hold information per wave
     public Transform[] SpawnPoints;
@@ -43,17 +42,13 @@ public class EnemyManager : MonoBehaviour
         _currentWave = -1; // avoid off by 1
         _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         CamParent = GameObject.Find("CamParent");
-        GameObject GMGO = GameObject.Find("GameManager");
-        GM = GMGO.GetComponent<GameManagerScript>();
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if ((col.gameObject.name == "Player1") && !RoomActive)
         {
-            
+
             RoomActive = true;
             if (LockType)
             {
@@ -98,7 +93,7 @@ public class EnemyManager : MonoBehaviour
             int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
 
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-             GameObject EnemyInstance = Instantiate(enemy, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
+            GameObject EnemyInstance = Instantiate(enemy, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
             EnemyHealth EH = EnemyInstance.GetComponent<EnemyHealth>();
             EH.spawner = this;
             yield return new WaitForSeconds(TimeBetweenEnemies);
@@ -147,7 +142,7 @@ public class EnemyManager : MonoBehaviour
         CamParent = GameObject.Find("CamParent");
         Camera2DFollow C2D = CamParent.GetComponent<Camera2DFollow>();
         C2D.SendMessage("RoomLock", CamCenter);
-        
+
     }
     public void UnlockCam()
     {
@@ -158,7 +153,7 @@ public class EnemyManager : MonoBehaviour
 
     public void RecallP2()
     {
-        GM.SendMessage("RecallPlayer2");
+        GameManagerScript.instance.SendMessage("RecallPlayer2");
     }
 
     public void RoomComplete()

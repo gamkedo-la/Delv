@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class MultiplayerCamTarget : MonoBehaviour
 {
-
-    public GameManagerScript GM;
     public Transform P1;
     public Transform P2;
 
 
     void OnEnable()
     {
-        P1 = GM.Player1GO.transform;
-        P2 = GM.Player2GO.transform;
+        P1 = GameManagerScript.instance.Player1GO.transform;
+        P2 = GameManagerScript.instance.Player2GO.transform;
     }
 
     // Update is called once per frame

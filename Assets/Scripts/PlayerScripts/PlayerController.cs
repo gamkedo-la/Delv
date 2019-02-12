@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     /// <summary>
     ///  This is the all emcompassing player script, basically combining the player indexing, the health/mana/stamina/will
     ///  script, and the player movement script all in one.
@@ -22,8 +23,6 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer SR;
     private Rigidbody2D _rb;
     public GameObject DeadWeapon;
-    public GameObject GameManagerGO;
-    public GameManagerScript GameManager;
     public TimeManager TimeManager;
     public Camera MainCam;
     public GameObject healthdirectorGO;
@@ -120,7 +119,8 @@ public class PlayerController : MonoBehaviour {
 
     private void OnEnable()
     {
-        if (!isDead) {
+        if (!isDead)
+        {
             GoToStart();
         }
 
@@ -133,11 +133,14 @@ public class PlayerController : MonoBehaviour {
         MouseAimer = Aimer.GetComponent<Aimer>();
         ConAimer = Aimer.GetComponent<ControllerAimer>();
 
-        if (isDead) {
-            if (ControllerType == 0) {
+        if (isDead)
+        {
+            if (ControllerType == 0)
+            {
                 MouseAimer.enabled = true;
             }
-            else if (ControllerType == 1) {
+            else if (ControllerType == 1)
+            {
                 ConAimer.enabled = true;
             }
 
@@ -147,7 +150,8 @@ public class PlayerController : MonoBehaviour {
 
     void OnDisable()
     {
-        if (isDead) {
+        if (isDead)
+        {
             MouseAimer.enabled = false;
             ConAimer.enabled = false;
         }
@@ -160,9 +164,7 @@ public class PlayerController : MonoBehaviour {
         _rb = GetComponent<Rigidbody2D>();
         SR = GetComponent<SpriteRenderer>();
         SP = GameObject.FindGameObjectWithTag("StartZone");
-        GameManagerGO = GameObject.FindGameObjectWithTag("GameManager");
-        GameManager = GameManagerGO.GetComponent<GameManagerScript>();
-        TimeManager = GameManager.GetComponent<TimeManager>();
+        TimeManager = GameManagerScript.instance.GetComponent<TimeManager>();
         MainCam = Camera.main;
         HealthBar = healthdirector.HealthBar;
         EnergyBar = healthdirector.EnergyBar;
@@ -185,13 +187,8 @@ public class PlayerController : MonoBehaviour {
     //    // DONT FORGET WHEN A PLAYER DIES TO LEAVE A TODO SPOT FOR REVIVAL
     //}
 
-
-
-
     private void Update()
     {
-
-
         /// Failsafe for start points
         if (!SP)
         {
@@ -203,10 +200,6 @@ public class PlayerController : MonoBehaviour {
         {
             Energy += EnergyRegenRate * Time.deltaTime;
         }
-
-
-
-
 
         /// INPUT FOR SHOOTING
         if (Input.GetButton("Primary" + ControllerSlot))
@@ -225,13 +218,10 @@ public class PlayerController : MonoBehaviour {
         {
             CancelWeapon2();
         }
-
     }
 
-
-    void FixedUpdate ()
+    void FixedUpdate()
     {
-
         ///Energy Update
         EnergyBar.value = CalculateEnergy();
 
@@ -299,7 +289,6 @@ public class PlayerController : MonoBehaviour {
             LstickH = ("Horizontal");
             LstickV = ("Vertical");
         }
-
 
         ///REMINDER///
         ///TEMPORARY///
@@ -370,16 +359,15 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
     /// PICKUP COLLIDER LOGIC
     void OnTriggerStay2D(Collider2D coll)
     {
         if ((coll.gameObject.tag == "MageWeapon") && (EnergyType == 1)) //REMEMBER TO SPREAD THIS ONCE FIXED
         {
             PotentialWeapon = coll.transform;
-            if ((Input.GetButtonDown("Pickup"+ ControllerSlot)) && PickupCD <=0) //REMEMBER TO CHANGE THIS BUTTON
+            if ((Input.GetButtonDown("Pickup" + ControllerSlot)) && PickupCD <= 0) //REMEMBER TO CHANGE THIS BUTTON
             {
-            PickupWeapon();
+                PickupWeapon();
             }
         }
         if ((coll.gameObject.tag == "RangedWeapon") && (EnergyType == 2))
@@ -434,10 +422,8 @@ public class PlayerController : MonoBehaviour {
             Debug.Log("Player walked away from" + ActivateTarget);
             ActivateTarget.SendMessage("DeactivateDialogue");
             ActivateTarget = null;
-
         }
     }
-
 
     //This is the method to pickup weapons. It looks like goo, because it is.
     void PickupWeapon()
@@ -445,7 +431,7 @@ public class PlayerController : MonoBehaviour {
         PickupCD = 1;
         EquippedWeapon.transform.position = PotentialWeapon.transform.position;
         PotentialWeapon.parent = Aimer.transform;
-        PotentialWeapon.localPosition = new Vector3 (0, 0, 0);
+        PotentialWeapon.localPosition = new Vector3(0, 0, 0);
         EquippedWeapon.transform.parent = null;
         Collider2D EWC = EquippedWeapon.GetComponent<Collider2D>();
         EWC.enabled = true;
@@ -457,7 +443,6 @@ public class PlayerController : MonoBehaviour {
         EquippedWeapon.transform.rotation = new Quaternion(0, 0, 0, 0);
         PotentialWeapon = null;
     }
-
 
     //This is the weapon firing mechanism. Just sends a fire message to the weapon if mana allows.
     void FireWeapon1()
@@ -478,12 +463,10 @@ public class PlayerController : MonoBehaviour {
         {
             Energy -= EnergyCost2;
             EquippedWeapon.SendMessage("Fire2");
-
         }
         if ((Energy < EnergyCost2) || (CD1 == false))
         {
             EquippedWeapon.SendMessage("CancelWeapon2");
-
         }
     }
     void CancelWeapon2()
@@ -491,19 +474,15 @@ public class PlayerController : MonoBehaviour {
         EquippedWeapon.SendMessage("CancelWeapon2");
     }
 
-
     void GoToStart()
     {
         SP = GameObject.FindGameObjectWithTag("StartZone");
         if (!(SP == null))
         {
-        transform.position = SP.transform.position;
-        Debug.Log("Player Received GoToStart command");
+            transform.position = SP.transform.position;
+            Debug.Log("Player Received GoToStart command");
         }
     }
-
-
-
 
     //Will handle damage through sendmessage even though its a bit slow resource wise. Small game should be able to handle it.
     //Will also add Damage type for resistences maybe as a stretch // , string DMGtype
@@ -511,27 +490,29 @@ public class PlayerController : MonoBehaviour {
     {
         Debug.Log("Player health damaged for " + DMG + " Damage");
         Health -= DMG;
-        if ((GameManagerScript.ParticleIntensity == 3)&&(DMG < 10 )&&( DMG > 0))
+        if ((GameManagerScript.instance.ParticleIntensity == 3) && (DMG < 10) && (DMG > 0))
         {
             Instantiate(LightlyDamaged, transform.position, transform.rotation);
         }
+
         if (DMG >= 10)
         {
             TimeManager.SlowMo();
             iFrames = iAmount;
             gameObject.layer = 12;
-            if (GameManagerScript.ParticleIntensity > 1)
+
+            if (GameManagerScript.instance.ParticleIntensity > 1)
             {
                 Instantiate(DamagedParticle, transform.position, transform.rotation);
             }
             CameraShake shaker = MainCam.GetComponent<CameraShake>();
 
-            if (GameManagerScript.Screenshake)
+            if (GameManagerScript.instance.Screenshake)
             {
-                shaker.Shake(.2f,3,15);
+                shaker.Shake(.2f, 3, 15);
             }
-
         }
+
         if (Health <= 0)
         {
             Die();
@@ -573,7 +554,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void Die ()
+    void Die()
     {
         //TODO: Leave stats in the GM for revival purposes.
         Instantiate(DeathParticle, transform.position, transform.rotation);
@@ -583,7 +564,7 @@ public class PlayerController : MonoBehaviour {
         enabled = false;
 
         reviver.SendMessage("PlayerDied");
-	}
+    }
 
     void Revive()
     {
