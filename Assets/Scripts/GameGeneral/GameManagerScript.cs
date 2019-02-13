@@ -98,11 +98,13 @@ public class GameManagerScript : MonoBehaviour
         PC2.isBot = isAIBot;
         Player2UI.SetActive(true);
         Player2GO.SetActive(true);
-        if (!PC2.isBot)
+        if (PC2.isBot)
         {
-            P2CAM.SetActive(true);
-            CAM.target = P2CAM.transform;
+            PC2.AICompanion.Awake();
+            return;
         }
+        P2CAM.SetActive(true);
+        CAM.target = P2CAM.transform;
     }
 
     public void DisablePlayer2()

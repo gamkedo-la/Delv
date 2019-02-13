@@ -204,18 +204,29 @@ public class PlayerController : MonoBehaviour
         }
 
         /// INPUT FOR SHOOTING
+
+        if (isBot)
+        {
+            if (AICompanion.DiceRoll() == 100)
+            {
+                FireWeapon1();
+            }
+        }
         if (Input.GetButton("Primary" + ControllerSlot))
         {
             FireWeapon1();
         }
+
         if (Input.GetButton("Secondary" + ControllerSlot))
         {
             FireWeapon2();
         }
+
         if ((Input.GetButtonUp("Primary" + ControllerSlot)) || (Energy < EnergyCost1))
         {
             CancelWeapon1();
         }
+
         if ((Input.GetButtonUp("Secondary" + ControllerSlot)) || (Energy < EnergyCost2))
         {
             CancelWeapon2();
