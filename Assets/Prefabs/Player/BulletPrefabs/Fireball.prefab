@@ -9538,7 +9538,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9587,5 +9587,5 @@ MonoBehaviour:
   Owner: {fileID: 0}
   DeathParticle: {fileID: 1818785470270938, guid: 319cd2b410174c245b4e87d2f1f5c2d6,
     type: 3}
-  KnockbackForce: 10
+  KnockbackForce: 100
   kbvector: {x: 2, y: 2, z: 0}

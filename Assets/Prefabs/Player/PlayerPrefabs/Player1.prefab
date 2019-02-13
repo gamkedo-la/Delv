@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reviveCollider: {fileID: 4141003162576322384}
+  p2: {fileID: 0}
 --- !u!114 &114375173384209822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,8 +272,6 @@ MonoBehaviour:
   EquippedWeapon: {fileID: 1461037899132968}
   PotentialWeapon: {fileID: 0}
   DeadWeapon: {fileID: 0}
-  GameManagerGO: {fileID: 0}
-  GameManager: {fileID: 0}
   TimeManager: {fileID: 0}
   MainCam: {fileID: 0}
   healthdirectorGO: {fileID: 0}
@@ -286,7 +285,7 @@ MonoBehaviour:
   ControllerType: 0
   ControllerSlot: 0
   isBot: 0
-  reviveCollider: {fileID: 4141003162576322384}
+  AICompanion: {fileID: 0}
   MaxHealth: 100
   Health: 100
   MaxEnergy: 100
@@ -294,7 +293,6 @@ MonoBehaviour:
   EnergyType: 1
   speed: 50
   EnergyRegenRate: 10
-  reviver: {fileID: 7414737263110267811}
   PickupCD: 0
   iFrames: 0
   iAmount: 0.5

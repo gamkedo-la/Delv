@@ -20,24 +20,29 @@ public class Fireball : MonoBehaviour
         Owner = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    void OnCollisionEnter2D(Collision2D coll)
     {
         Debug.Log("Fireball made contact with" + coll.gameObject);
         if (coll.gameObject.tag == "Enemy")
         {
             Debug.Log(coll.gameObject + "has been struck by projectile");
-            coll.SendMessage("DamageHealth", rawDMG);
+            coll.gameObject.SendMessage("DamageHealth", rawDMG);
             // Above is the damage send value, below is where I'm working on knockback. //results inconclusive.
-            GameObject EnemyHit = coll.gameObject;
-            Rigidbody2D EnemyRB = EnemyHit.GetComponent<Rigidbody2D>();
-            Vector3 offset;
-            float magsqr;
-            offset = Owner.transform.position - EnemyHit.transform.position;
-            magsqr = offset.sqrMagnitude;
-            if (magsqr > 0f)
+            Vector3 offset = Owner.transform.position - coll.gameObject.transform.position;
+            float magsqr = offset.sqrMagnitude;
+
+            if (magsqr > 0.0f)
             {
-                EnemyRB.AddForce((KnockbackForce * offset.normalized / magsqr) * 10);
+                Debug.LogWarning("woot we are doing pushback!");
+                Vector3 newPOS = coll.gameObject.transform.position;
+                Vector2 tempV2 = (Vector2)coll.gameObject.transform.position;
+                tempV2 += coll.GetContact(0).normal * (KnockbackForce * offset.normalized / magsqr);
+                Debug.LogWarning("old POS " + coll.gameObject.transform.position + " new POS " + tempV2);
+                newPOS.x = tempV2.x;
+                newPOS.y = tempV2.y;
+                coll.gameObject.transform.position = newPOS;
             }
+
             //EnemyRB.AddExplosionForce2D(KnockbackForce, kbvector, expRadius, 3.0F); //This is a 3D function, now I have to think about how to pull it off in 2D
             Die();
         }
