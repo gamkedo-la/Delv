@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     // These vars are related to figuring out who it's coming from. Directors really.
     public float PlayerIndex = 1;
+    public GameObject Alive;
+    public GameObject Dead;
     public GameObject EquippedWeapon;
     public Transform PotentialWeapon;
     private SpriteRenderer SR;
@@ -162,7 +164,7 @@ public class PlayerController : MonoBehaviour
         initLayer = gameObject.layer;
         Aimer = transform.GetChild(0);
         _rb = GetComponent<Rigidbody2D>();
-        SR = GetComponent<SpriteRenderer>();
+        SR = Alive.GetComponent<SpriteRenderer>();
         SP = GameObject.FindGameObjectWithTag("StartZone");
         TimeManager = GameManagerScript.instance.GetComponent<TimeManager>();
         MainCam = Camera.main;
@@ -564,10 +566,16 @@ public class PlayerController : MonoBehaviour
         enabled = false;
 
         reviver.SendMessage("PlayerDied");
+
+        Alive.SetActive(false);
+        Dead.SetActive(true);
     }
 
     void Revive()
     {
+        Alive.SetActive(true);
+        Dead.SetActive(false);
+
         enabled = true;
     }
 }
