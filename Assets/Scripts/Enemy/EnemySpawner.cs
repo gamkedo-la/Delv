@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public GameObject EnemyPrefab;
+    public Animator Animator;
+    public EnemyManager spawner;
+    public Transform Eye;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Animator = GetComponent<Animator>();
+        Eye = this.transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    void SpawnEnemy()
     {
-        
+        GameObject EnemyInstance = Instantiate(EnemyPrefab, Eye.position, Eye.rotation);
+        EnemyHealth EH = EnemyInstance.GetComponent<EnemyHealth>();
+        EH.spawner = spawner;
+        Die();
     }
+    void Die()
+    {
+        new WaitForSeconds(1);
+        Destroy(gameObject);
+    }
+
 }

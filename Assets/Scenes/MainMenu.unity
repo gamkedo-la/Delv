@@ -348,7 +348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e366cfccc8c241c42b463716e17edf23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GM: {fileID: 950072697}
 --- !u!1 &57963346
 GameObject:
   m_ObjectHideFlags: 0
@@ -3946,6 +3945,9 @@ MonoBehaviour:
   ScreenTrans: {fileID: 52599969}
   CAM: {fileID: 1198672395}
   P2CAM: {fileID: 1016369406}
+  ParticleIntensity: 3
+  Screenshake: 1
+  DamageText: 1
   PlayerCount: 1
   isAIBot: 0
   Player1GO: {fileID: 115479090}
@@ -4254,7 +4256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e83e8d0c5e94a9449bde064f7352042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GM: {fileID: 950072697}
   P1: {fileID: 0}
   P2: {fileID: 0}
 --- !u!4 &1016369408
@@ -5153,7 +5154,6 @@ MonoBehaviour:
   lookAheadFactor: 2
   lookAheadReturnSpeed: 0.7
   lookAheadMoveThreshold: 0.2
-  GM: {fileID: 950072697}
 --- !u!1 &1213780953
 GameObject:
   m_ObjectHideFlags: 0
@@ -6827,7 +6827,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb02e395b19cee41ad21f86d218f01f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GM: {fileID: 950072697}
+  currentScene:
+    m_Handle: 0
   dialogueBox: {fileID: 470205024}
 --- !u!1 &1627980735
 GameObject:

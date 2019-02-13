@@ -9587,5 +9587,5 @@ MonoBehaviour:
   Owner: {fileID: 0}
   DeathParticle: {fileID: 1818785470270938, guid: 319cd2b410174c245b4e87d2f1f5c2d6,
     type: 3}
-  KnockbackForce: 100
+  KnockbackForce: 3
   kbvector: {x: 2, y: 2, z: 0}

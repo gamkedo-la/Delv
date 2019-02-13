@@ -93,9 +93,9 @@ public class EnemyManager : MonoBehaviour
             int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
 
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-            GameObject EnemyInstance = Instantiate(enemy, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
-            EnemyHealth EH = EnemyInstance.GetComponent<EnemyHealth>();
-            EH.spawner = this;
+            GameObject EnemySpawnerInstance = Instantiate(enemy, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
+            EnemySpawner ES = EnemySpawnerInstance.GetComponent<EnemySpawner>();
+            ES.spawner = this;
             yield return new WaitForSeconds(TimeBetweenEnemies);
         }
         yield return null;
