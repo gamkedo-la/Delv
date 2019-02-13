@@ -4501,6 +4501,11 @@ PrefabInstance:
       propertyPath: p2
       value: 
       objectReference: {fileID: 8447110967915570375}
+    - target: {fileID: 4141003162576322384, guid: 4701660b7389f2d45b31d611ee0e57a8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4701660b7389f2d45b31d611ee0e57a8, type: 3}
 --- !u!1 &1109784111
@@ -6146,8 +6151,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aa3764c1ae74a519891fbb8f7c4648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vertDistance: 0
+  hortDistance: 0
   vertNow: 0
   hortNow: 0
+  AIController: {fileID: 8447110967915570375}
+  BotGO: {fileID: 6300180896068623075}
+  PlayerGO: {fileID: 115479090}
 --- !u!4 &1334943454
 Transform:
   m_ObjectHideFlags: 0

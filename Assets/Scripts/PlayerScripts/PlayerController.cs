@@ -357,7 +357,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _rb.AddForce(gameObject.transform.up * speed * Vinput);
-        _rb.AddForce(gameObject.transform.right * (speed) * Hinput);
+        _rb.AddForce(gameObject.transform.right * speed * Hinput);
 
 
         /// SPRITE SIDE FLIPPER (PLAN TO POSSIBLY DEPRECATE FOR A STATE MACHINE AND ANIMATIONS)
