@@ -19,6 +19,7 @@ TagManager:
   - Items
   - NPC
   - Activatable
+  - BGGround
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - RoomLocks
   - Items
   - NPC
-  - 
+  - BGGround
   - 
   - 
   - 

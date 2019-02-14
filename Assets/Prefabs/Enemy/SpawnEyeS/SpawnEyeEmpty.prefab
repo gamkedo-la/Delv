@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 32767
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f5d46e2ce1e08d54794b2d59889a7f18, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -115,3 +115,6 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 0}
   Animator: {fileID: 0}
   spawner: {fileID: 0}
+  SpawnerParticle: {fileID: 1773426128119523, guid: 8b91300f4e3b2114a9eac57be2144ee7,
+    type: 3}
+  Eye: {fileID: 0}
