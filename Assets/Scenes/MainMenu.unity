@@ -6146,8 +6146,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aa3764c1ae74a519891fbb8f7c4648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vertDistance: 0
+  hortDistance: 0
   vertNow: 0
   hortNow: 0
+  aimCursorX: 0
+  aimCursorY: 0
+  AIController: {fileID: 8447110967915570375}
+  BotGO: {fileID: 6300180896068623075}
+  PlayerGO: {fileID: 115479090}
+  testing: 0
 --- !u!4 &1334943454
 Transform:
   m_ObjectHideFlags: 0

@@ -36,8 +36,8 @@ public class ControllerAimer : MonoBehaviour {
     {
         if (PC.isBot)
         {
-            RightStickVInput = PC.AICompanion.VertAxisNow();
-            RightStickHInput = PC.AICompanion.HortAxisNow();
+            RightStickVInput = PC.AICompanion.AimCursorX();
+            RightStickHInput = PC.AICompanion.AimCursorY();
         } 
         else
         {

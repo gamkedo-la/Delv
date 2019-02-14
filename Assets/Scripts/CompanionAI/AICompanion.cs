@@ -8,12 +8,15 @@ public class AICompanion : MonoBehaviour
     public float hortDistance;
     public float vertNow;
     public float hortNow;
+    public float aimCursorX;
+    public float aimCursorY;
 
     public PlayerController AIController;
     public GameObject BotGO;
 
     public GameObject PlayerGO;
     private Collider playerCollider;
+    public bool testing;
 
     private Transform TargetPos;
 
@@ -26,10 +29,18 @@ public class AICompanion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hortDistance = PlayerGO.transform.position.x - BotGO.transform.position.x;
-        vertDistance = PlayerGO.transform.position.y - BotGO.transform.position.y;
-        hortNow = Mathf.Clamp(hortDistance, -1, 1);
-        vertNow = Mathf.Clamp(vertDistance, -1, 1);
+        if (testing)
+        {
+            hortDistance = PlayerGO.transform.position.x - BotGO.transform.position.x;
+            vertDistance = PlayerGO.transform.position.y - BotGO.transform.position.y;
+            hortNow = Mathf.Clamp(hortDistance, -1, 1);
+            vertNow = Mathf.Clamp(vertDistance, -1, 1);
+            return;
+        }
+        hortNow = 0.0f;
+        vertNow = 0.0f;
+        aimCursorX = Mathf.Cos(Time.timeSinceLevelLoad);
+        aimCursorY = Mathf.Sin(Time.timeSinceLevelLoad);
     }
 
     void ShootAtTarget()
@@ -54,9 +65,19 @@ public class AICompanion : MonoBehaviour
         return hortNow;
     }
 
+    public float AimCursorX()
+    {
+        return aimCursorX;
+    }
+    public float AimCursorY()
+    {
+        //OnTriggerEnter(playerCollider);
+        return aimCursorY;
+    }
+
     public void CursorAim()
     {
-        // TODO
+
     }
 
     public void OnTriggerEnter(Collider collider2D)
