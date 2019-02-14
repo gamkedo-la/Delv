@@ -6148,7 +6148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertNow: 0
   hortNow: 0
-  AIController: {fileID: 0}
 --- !u!4 &1334943454
 Transform:
   m_ObjectHideFlags: 0

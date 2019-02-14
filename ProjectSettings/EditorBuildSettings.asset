@@ -23,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StarterVillage.unity
     guid: d546e0e9b57ff7d4e94987273ee3aadf
-  - enabled: 1
-    path: Assets/Scenes/ForestDungeon1/ForestFloor1.unity
-    guid: ca7cb3cba717ddd419370cd835665f89
   m_configObjects: {}
