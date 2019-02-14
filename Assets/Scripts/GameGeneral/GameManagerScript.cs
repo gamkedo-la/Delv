@@ -100,7 +100,6 @@ public class GameManagerScript : MonoBehaviour
         Player2GO.SetActive(true);
         if (PC2.isBot)
         {
-            PC2.AICompanion.Awake();
             return;
         }
         P2CAM.SetActive(true);
