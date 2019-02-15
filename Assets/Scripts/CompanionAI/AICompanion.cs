@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AICompanion : MonoBehaviour
 {
+    public PlayerController AIController;
+    public GameObject BotGO;
+
+    public PlayerController Player;
+    public GameObject PlayerGO;
+
     public float vertDistance;
     public float hortDistance;
     public float vertNow;
@@ -13,14 +19,9 @@ public class AICompanion : MonoBehaviour
     public float aimCursorY;
 
     public float distanceBetween;
-    public int distanceToBeginFollow = 4;
-
-    public PlayerController AIController;
-    public GameObject BotGO;
-
-    public GameObject PlayerGO;
-
+    public int distanceToBeginFollow = 2;
     public bool following;
+    public int step = 0;
 
     private Transform TargetPos;
 
@@ -44,6 +45,8 @@ public class AICompanion : MonoBehaviour
         {
             StopCoroutine(DistanceCheck());
             following = false;
+            Player.PlayerSteps.Clear();
+            step = 0;
         }
 
         if (following)
@@ -62,10 +65,17 @@ public class AICompanion : MonoBehaviour
 
     public void FollowPlayer()
     {
-        hortDistance = PlayerGO.transform.position.x - BotGO.transform.position.x;
-        vertDistance = PlayerGO.transform.position.y - BotGO.transform.position.y;
-        hortNow = Mathf.Clamp(hortDistance, -1, 1);
-        vertNow = Mathf.Clamp(vertDistance, -1, 1);
+        if (step < Player.PlayerSteps.Count)
+        { 
+            if (BotGO.transform.position == Player.PlayerSteps[step].transform.position)
+            {
+                step++;
+            }
+            hortDistance = Player.PlayerSteps[step].position.x - BotGO.transform.position.x;
+            vertDistance = Player.PlayerSteps[step].position.y - BotGO.transform.position.y;
+            hortNow = Mathf.Clamp(hortDistance, -1, 1);
+            vertNow = Mathf.Clamp(vertDistance, -1, 1);
+        }
         return;
     }
 
@@ -74,7 +84,6 @@ public class AICompanion : MonoBehaviour
         float timeToWait = DiceRoll();
         timeToWait = timeToWait/100;
         yield return new WaitForSeconds(timeToWait);
-        Debug.Log("This is from the coroutine");
         following = true;
         yield break;
     }

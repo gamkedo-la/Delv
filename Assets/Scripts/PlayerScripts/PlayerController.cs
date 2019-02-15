@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class PlayerController : MonoBehaviour
     ///
 
     // These vars are related to figuring out who it's coming from. Directors really.
-    public float PlayerIndex = 1;
+    public int PlayerIndex = 1;
     public GameObject Alive;
     public GameObject Dead;
     public GameObject EquippedWeapon;
@@ -51,6 +50,7 @@ public class PlayerController : MonoBehaviour
     // Companion AI
     public bool isBot;
     public AICompanion AICompanion;
+    public List<Transform> PlayerSteps = new List<Transform>();
     [Space]
 
     // Player Stats
@@ -359,6 +359,10 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(gameObject.transform.up * speed * Vinput);
         _rb.AddForce(gameObject.transform.right * speed * Hinput);
 
+        if (AICompanion.following == true)
+        {
+            PlayerSteps.Add(gameObject.transform);
+        }
 
         /// SPRITE SIDE FLIPPER (PLAN TO POSSIBLY DEPRECATE FOR A STATE MACHINE AND ANIMATIONS)
 
