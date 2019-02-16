@@ -28,7 +28,7 @@ public class AICompanion : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
-        StartCoroutine(DistanceCheck());
+
     }
 
     // Update is called once per frame
@@ -39,7 +39,8 @@ public class AICompanion : MonoBehaviour
         distanceBetween = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
         if (Mathf.Abs(distanceBetween) > distanceToBeginFollow)
         {
-            StartCoroutine(DistanceCheck());
+            following = true;
+            DistanceCheck();
         }
         else
         {
@@ -48,7 +49,6 @@ public class AICompanion : MonoBehaviour
             Player.PlayerSteps.Clear();
             step = 0;
         }
-
         if (following)
         {
             FollowPlayer();
@@ -67,16 +67,17 @@ public class AICompanion : MonoBehaviour
     {
         if (step < Player.PlayerSteps.Count)
         { 
-            if (BotGO.transform.position == Player.PlayerSteps[step].transform.position)
+            if (Mathf.Abs(Vector3.Distance(BotGO.transform.position, 
+                Player.PlayerSteps[step])) 
+                < 0.2f)
             {
                 step++;
             }
-            hortDistance = Player.PlayerSteps[step].position.x - BotGO.transform.position.x;
-            vertDistance = Player.PlayerSteps[step].position.y - BotGO.transform.position.y;
+            hortDistance = Player.PlayerSteps[step].x - BotGO.transform.position.x;
+            vertDistance = Player.PlayerSteps[step].y - BotGO.transform.position.y;
             hortNow = Mathf.Clamp(hortDistance, -1, 1);
             vertNow = Mathf.Clamp(vertDistance, -1, 1);
         }
-        return;
     }
 
     IEnumerator DistanceCheck()
@@ -84,7 +85,6 @@ public class AICompanion : MonoBehaviour
         float timeToWait = DiceRoll();
         timeToWait = timeToWait/100;
         yield return new WaitForSeconds(timeToWait);
-        following = true;
         yield break;
     }
 

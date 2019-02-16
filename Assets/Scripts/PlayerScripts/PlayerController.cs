@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     // Companion AI
     public bool isBot;
     public AICompanion AICompanion;
-    public List<Transform> PlayerSteps = new List<Transform>();
+    public List<Vector3> PlayerSteps = new List<Vector3>();
     [Space]
 
     // Player Stats
@@ -359,9 +359,17 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(gameObject.transform.up * speed * Vinput);
         _rb.AddForce(gameObject.transform.right * speed * Hinput);
 
-        if (AICompanion.following == true)
+        if (AICompanion.following == true && !isBot)
         {
-            PlayerSteps.Add(gameObject.transform);
+            Vector3 currentStep = gameObject.transform.position;
+            int currentStepIndex = PlayerSteps.Count;
+            if (PlayerSteps.Count == 0) {
+                PlayerSteps.Add(currentStep);
+            }
+            else if (Mathf.Abs(Vector3.Distance(currentStep, PlayerSteps[currentStepIndex - 1])) > 2.0f)
+            {
+                PlayerSteps.Add(currentStep);
+            }
         }
 
         /// SPRITE SIDE FLIPPER (PLAN TO POSSIBLY DEPRECATE FOR A STATE MACHINE AND ANIMATIONS)
