@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public Animator Animator;
     public EnemyManager spawner;
     public Transform Eye;
+    public GameObject Particle;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,13 @@ public class EnemySpawner : MonoBehaviour
         EnemyHealth EH = EnemyInstance.GetComponent<EnemyHealth>();
         EH.spawner = spawner;
         Die();
+    }
+    void SpawnParticle()
+    {
+        if (GameManagerScript.instance.ParticleIntensity >= 2)
+        {
+            Instantiate(Particle, transform.position, transform.rotation);
+        }
     }
     void Die()
     {

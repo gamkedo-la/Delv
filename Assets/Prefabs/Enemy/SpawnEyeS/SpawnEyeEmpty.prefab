@@ -115,3 +115,5 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 0}
   Animator: {fileID: 0}
   spawner: {fileID: 0}
+  Eye: {fileID: 0}
+  Particle: {fileID: 1818785470270938, guid: 962eb29b125d6754b951a1a38af9f3fd, type: 3}
