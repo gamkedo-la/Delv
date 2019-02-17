@@ -22,6 +22,7 @@ public class AICompanion : MonoBehaviour
     public int distanceToBeginFollow = 2;
     public bool following;
     public int step = 0;
+    private float stepDistanceRange = 0.2f;
 
     private Transform TargetPos;
 
@@ -68,16 +69,31 @@ public class AICompanion : MonoBehaviour
         if (step < Player.PlayerSteps.Count)
         { 
             if (Mathf.Abs(Vector3.Distance(BotGO.transform.position, 
-                Player.PlayerSteps[step])) 
-                < 0.2f)
+                Player.PlayerSteps[step])) < 0.2f)
             {
                 step++;
             }
+
             hortDistance = Player.PlayerSteps[step].x - BotGO.transform.position.x;
             vertDistance = Player.PlayerSteps[step].y - BotGO.transform.position.y;
-            hortNow = Mathf.Clamp(hortDistance, -1, 1);
-            vertNow = Mathf.Clamp(vertDistance, -1, 1);
+
+            hortNow = SetAxisInput(hortDistance);
+            vertNow = SetAxisInput(vertDistance);
         }
+    }
+
+    public float SetAxisInput(float AxisDistance)
+    {
+        if (AxisDistance > stepDistanceRange)
+        {
+            return 1.0f;
+        }
+        else if (AxisDistance < -stepDistanceRange)
+        {
+            return -1.0f;
+        }
+        // AxisDistance is > -0.1 and < 0.1 so set to 0;
+        return 0.0f;
     }
 
     IEnumerator DistanceCheck()
