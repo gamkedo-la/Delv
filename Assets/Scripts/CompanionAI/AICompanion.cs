@@ -69,9 +69,9 @@ public class AICompanion : MonoBehaviour
         if (step < Player.PlayerSteps.Count)
         { 
             if (Mathf.Abs(Vector3.Distance(BotGO.transform.position, 
-                Player.PlayerSteps[step])) < 0.2f)
+                Player.PlayerSteps[step])) < 0.3f)
             {
-                step++;
+                Player.PlayerSteps.RemoveAt(step);
             }
 
             hortDistance = Player.PlayerSteps[step].x - BotGO.transform.position.x;

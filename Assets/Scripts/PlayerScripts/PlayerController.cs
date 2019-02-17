@@ -361,12 +361,14 @@ public class PlayerController : MonoBehaviour
 
         if (AICompanion.following == true && !isBot)
         {
+            float stepDistanceCheck = 3.0f;
             Vector3 currentStep = gameObject.transform.position;
             int currentStepIndex = PlayerSteps.Count;
             if (PlayerSteps.Count == 0) {
                 PlayerSteps.Add(currentStep);
             }
-            else if (Mathf.Abs(Vector3.Distance(currentStep, PlayerSteps[currentStepIndex - 1])) > 2.0f)
+            else if (Mathf.Abs(Vector3.Distance(currentStep, 
+            PlayerSteps[currentStepIndex - 1])) > stepDistanceCheck)
             {
                 PlayerSteps.Add(currentStep);
             }
