@@ -6155,6 +6155,7 @@ MonoBehaviour:
   BotGO: {fileID: 6300180896068623075}
   Player: {fileID: 115479092}
   PlayerGO: {fileID: 115479090}
+  GameManager: {fileID: 950072697}
   vertDistance: 0
   hortDistance: 0
   vertNow: 0
