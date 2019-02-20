@@ -22,7 +22,7 @@ public class AICompanion : MonoBehaviour
     public float aimCursorY;
 
     public float distanceBetween;
-    public int distanceToBeginFollow = 2;
+    public int BeginFollowDist = 2;
     public bool following;
     public int step = 0;
     private float stepDistanceRange = 0.2f;
@@ -46,17 +46,19 @@ public class AICompanion : MonoBehaviour
             return;
         }
 
+        TargetGOs = GameObject.FindGameObjectsWithTag("Enemy");
+
         CursorAim();
 
         distanceBetween = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
-        if (Mathf.Abs(distanceBetween) > distanceToBeginFollow)
+        if (Mathf.Abs(distanceBetween) > BeginFollowDist)
         {
-            StartCoroutine(DistanceCheck());
+            StartCoroutine(WaitBeforeFollow());
             following = true;
         }
         else
         {
-            StopCoroutine(DistanceCheck());
+            StopCoroutine(WaitBeforeFollow());
             following = false;
             Player.PlayerSteps.Clear();
         }
@@ -111,11 +113,11 @@ public class AICompanion : MonoBehaviour
         {
             return -1.0f;
         }
-        // AxisDistance is > -0.1 and < 0.1 so set to 0;
+        // AxisDistance is > -0.2 and < 0.2 so set to 0;
         return 0.0f;
     }
 
-    IEnumerator DistanceCheck()
+    IEnumerator WaitBeforeFollow()
     {
         float timeToWait = DiceRoll();
         timeToWait = timeToWait/100;
@@ -135,27 +137,30 @@ public class AICompanion : MonoBehaviour
 
     public void CursorAim()
     {
-        if (!hasTarget)
+        AquireTarget();
+        if (clostestTarget != null)
         {
-            AquireTarget();
+            float DistBetween = Mathf.Abs(Vector2.Distance(BotGO.transform.position,
+                                            clostestTarget.transform.position));
+            if (DistBetween < AimDistance && TargetGOs.Length > 0)
+            {
+                AimBasedOnAtan2(clostestTarget);
+            }
             return;
         }
 
-        if (Mathf.Abs(Vector2.Distance(BotGO.transform.position, clostestTarget.transform.position)) 
-            < AimDistance && clostestTarget != null)
-        {
-            float XTargetDistDiff = Mathf.Atan2(
-                clostestTarget.transform.position.y - BotGO.transform.position.y,
-                BotGO.transform.position.x -clostestTarget.transform.position.x);
-            //float YTargetDistDiff = BotGO.transform.position.y - clostestTarget.transform.position.y;
-            aimCursorX = Mathf.Cos(XTargetDistDiff);
-            aimCursorY = Mathf.Sin(XTargetDistDiff);
-        }
+        AimBasedOnAtan2(PlayerGO);
     }
 
     public void AquireTarget()
     {
-        FindTargetEnemy();
+        FindClosestTargetEnemy();
+
+        if (clostestTarget == null)
+        {
+            hasTarget = false;
+            return;
+        }
 
         if (Mathf.Abs(Vector2.Distance(BotGO.transform.position, clostestTarget.transform.position)) > AimDistance)
         {
@@ -163,13 +168,25 @@ public class AICompanion : MonoBehaviour
             hasTarget = false;
             return;
         }
-
         hasTarget = true;
     }
 
-    private void FindTargetEnemy()
+    public void AimBasedOnAtan2(GameObject Target)
     {
-        TargetGOs = GameObject.FindGameObjectsWithTag("Enemy");
+        float angle = Mathf.Atan2(
+                    Target.transform.position.y - BotGO.transform.position.y,
+                    BotGO.transform.position.x - Target.transform.position.x);
+        aimCursorX = Mathf.Cos(angle);
+        aimCursorY = Mathf.Sin(angle);
+    }
+
+    private void FindClosestTargetEnemy()
+    {
+        clostestTarget = null;
+        if (TargetGOs.Length == 0)
+        {
+            return;
+        }
         float distance = Mathf.Infinity;
         foreach (GameObject target in TargetGOs)
         {
@@ -191,25 +208,6 @@ public class AICompanion : MonoBehaviour
     {
         return aimCursorY;
     }
-
-    //void OnTriggerEnter(Collider other)
-    //{
-
-    //    if (other.tag == "Player")
-    //    {
-    //        following = false;
-    //        Debug.Log("Close to player - don't move");
-    //    }
-    //}
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag == "Player") 
-    //    {
-    //        following = true;
-    //        Debug.Log("Player moving - follow player");
-    //    }
-    //}
 
     public int DiceRoll()
     {
