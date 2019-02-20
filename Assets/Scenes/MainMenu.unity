@@ -6166,6 +6166,7 @@ MonoBehaviour:
   distanceToBeginFollow: 2
   following: 0
   step: 0
+  TargetGOs: []
 --- !u!4 &1334943454
 Transform:
   m_ObjectHideFlags: 0
