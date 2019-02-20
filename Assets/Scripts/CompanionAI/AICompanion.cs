@@ -27,10 +27,9 @@ public class AICompanion : MonoBehaviour
     public int step = 0;
     private float stepDistanceRange = 0.2f;
 
-    private bool hasTarget;
     public GameObject[] TargetGOs;
-    private GameObject clostestTarget;
-    private float AimDistance = 4.0f;
+    private GameObject closestTarget;
+    private float AimDistance = 4.5f;
 
     // Start is called before the first frame update
     public void Awake()
@@ -138,17 +137,18 @@ public class AICompanion : MonoBehaviour
     public void CursorAim()
     {
         AquireTarget();
-        if (clostestTarget != null)
+        if (closestTarget != null)
         {
             float DistBetween = Mathf.Abs(Vector2.Distance(BotGO.transform.position,
-                                            clostestTarget.transform.position));
+                                            closestTarget.transform.position));
             if (DistBetween < AimDistance && TargetGOs.Length > 0)
             {
-                AimBasedOnAtan2(clostestTarget);
+                AimBasedOnAtan2(closestTarget);
             }
             return;
         }
-
+        // current idle cursor script, may be useful when the player is dead 
+        // to show intent to revive
         AimBasedOnAtan2(PlayerGO);
     }
 
@@ -156,19 +156,18 @@ public class AICompanion : MonoBehaviour
     {
         FindClosestTargetEnemy();
 
-        if (clostestTarget == null)
+        if (closestTarget == null)
         {
-            hasTarget = false;
             return;
         }
-
-        if (Mathf.Abs(Vector2.Distance(BotGO.transform.position, clostestTarget.transform.position)) > AimDistance)
+        Debug.Log(closestTarget);
+        float DistBetween = Mathf.Abs(Vector2.Distance(BotGO.transform.position,
+                                            closestTarget.transform.position));
+        if (DistBetween > AimDistance)
         {
-            clostestTarget = null;
-            hasTarget = false;
+            closestTarget = null;
             return;
         }
-        hasTarget = true;
     }
 
     public void AimBasedOnAtan2(GameObject Target)
@@ -182,7 +181,7 @@ public class AICompanion : MonoBehaviour
 
     private void FindClosestTargetEnemy()
     {
-        clostestTarget = null;
+        closestTarget = null;
         if (TargetGOs.Length == 0)
         {
             return;
@@ -191,10 +190,11 @@ public class AICompanion : MonoBehaviour
         foreach (GameObject target in TargetGOs)
         {
             Vector2 distDiff = target.transform.position - BotGO.transform.position;
-            float diagonalDistBetween = distDiff.sqrMagnitude;           
+            float diagonalDistBetween = distDiff.sqrMagnitude;
             if (diagonalDistBetween < distance)
             {
-                clostestTarget = target;
+                distance = diagonalDistBetween;
+                closestTarget = target;
             }
         }
     }
