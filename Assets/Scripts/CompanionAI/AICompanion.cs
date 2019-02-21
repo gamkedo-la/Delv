@@ -11,8 +11,6 @@ public class AICompanion : MonoBehaviour
     public PlayerController Player;
     public GameObject PlayerGO;
 
-    public GameManagerScript GameManager;
-
     public float vertDistance;
     public float hortDistance;
     public float vertNow;
@@ -22,9 +20,10 @@ public class AICompanion : MonoBehaviour
     public float aimCursorY;
 
     public float distanceBetween;
-    public int BeginFollowDist = 2;
+    private int BeginFollowDist = 2;
     public bool following;
-    public int step = 0;
+    private int step;
+    private int containerLayer = 18;
     private float stepDistanceRange = 0.2f;
 
     public GameObject[] TargetGOs;
@@ -40,7 +39,7 @@ public class AICompanion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.isAIBot || SceneManager.GetActiveScene().name == "MainMenu")
+        if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             return;
         }
@@ -70,9 +69,18 @@ public class AICompanion : MonoBehaviour
         vertNow = 0.0f;
     }
 
-    void Shoot()
+    public bool Shoot() // TODO
     {
-        // TODO
+        if (closestTarget.layer == containerLayer || closestTarget == null) 
+        {
+            return false;
+        }
+
+        if (DiceRoll() == 100)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void FollowPlayer()
@@ -160,7 +168,6 @@ public class AICompanion : MonoBehaviour
         {
             return;
         }
-        Debug.Log(closestTarget);
         float DistBetween = Mathf.Abs(Vector2.Distance(BotGO.transform.position,
                                             closestTarget.transform.position));
         if (DistBetween > AimDistance)
@@ -191,6 +198,12 @@ public class AICompanion : MonoBehaviour
         {
             Vector2 distDiff = target.transform.position - BotGO.transform.position;
             float diagonalDistBetween = distDiff.sqrMagnitude;
+
+            if (target.layer == containerLayer)
+            {
+                diagonalDistBetween += 10.0f;
+            }
+
             if (diagonalDistBetween < distance)
             {
                 distance = diagonalDistBetween;

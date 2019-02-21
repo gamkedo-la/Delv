@@ -9,6 +9,7 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField]
     private Scene currentScene;
     public GameObject dialogueBox;
+    public GameObject CompanionManager;
 
     // Use this for initialization
     void Start()
@@ -24,6 +25,12 @@ public class MainMenuScript : MonoBehaviour
     {
         GameManagerScript.instance.isAIBot = isOn;
         Debug.Log("AI bot is on? " + GameManagerScript.instance.isAIBot);
+        if (GameManagerScript.instance.isAIBot)
+        {
+            CompanionManager.SetActive(true);
+            return;
+        }
+        CompanionManager.SetActive(false);
     }
 
     public void Singleplayer()

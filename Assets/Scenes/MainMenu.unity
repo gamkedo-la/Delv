@@ -6163,7 +6163,7 @@ MonoBehaviour:
   aimCursorX: 0
   aimCursorY: 0
   distanceBetween: 0
-  distanceToBeginFollow: 2
+  BeginFollowDist: 2
   following: 0
   step: 0
   TargetGOs: []
@@ -6849,6 +6849,7 @@ MonoBehaviour:
   currentScene:
     m_Handle: 0
   dialogueBox: {fileID: 470205024}
+  CompanionManager: {fileID: 1334943452}
 --- !u!1 &1627980735
 GameObject:
   m_ObjectHideFlags: 0

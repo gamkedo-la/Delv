@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
 
         if (isBot)
         {
-            if (AICompanion.DiceRoll() == 100)
+            if (AICompanion.Shoot())
             {
                 FireWeapon1();
             }
