@@ -54,7 +54,10 @@ public class EnemyHealth : MonoBehaviour
     void Update()
     {
         //This handles iFrames, probably won't use them for most enemies, maybe bosses. Will leave it in for melee type enemies, since they might use it. 
-        iFrames -= Time.deltaTime;
+        if (iFrames >= -1)
+        {
+            iFrames -= Time.deltaTime;
+        }
         if (iFrames <= 0)
             gameObject.layer = initLayer;
         if (Health <= 0)
