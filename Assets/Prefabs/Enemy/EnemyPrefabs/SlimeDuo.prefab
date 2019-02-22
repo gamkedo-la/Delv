@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 114196920484282430}
   - component: {fileID: 114774876567671870}
   - component: {fileID: 96749287533897774}
+  - component: {fileID: 7052739303206092115}
   m_Layer: 10
   m_Name: BabySlime
   m_TagString: Enemy
@@ -181,8 +182,6 @@ MonoBehaviour:
   - {fileID: 0}
   AlertDistance: 0
   alerted: 1
-  rawDMG: 5
-  DMGtype: normal
   target: {fileID: 0}
   DistToTarget: 0
   DistToP1: 0
@@ -315,6 +314,22 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &7052739303206092115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762091421436492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05468f871a292a42bde129bdeba0259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawDMG: 5
+  DamageDealt: 0
+  TimeTilRedamage: 0
+  RedamageClock: 0.3
 --- !u!1 &1965333660290618
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +345,7 @@ GameObject:
   - component: {fileID: 114732450328240046}
   - component: {fileID: 114797106120097908}
   - component: {fileID: 96883939697185264}
+  - component: {fileID: 7216579129087804193}
   m_Layer: 10
   m_Name: BabySlime (1)
   m_TagString: Enemy
@@ -464,8 +480,6 @@ MonoBehaviour:
   - {fileID: 0}
   AlertDistance: 0
   alerted: 1
-  rawDMG: 5
-  DMGtype: normal
   target: {fileID: 0}
   DistToTarget: 0
   DistToP1: 0
@@ -598,3 +612,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &7216579129087804193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965333660290618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05468f871a292a42bde129bdeba0259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawDMG: 5
+  DamageDealt: 0
+  TimeTilRedamage: 0
+  RedamageClock: 0.3
