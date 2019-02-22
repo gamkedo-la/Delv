@@ -19,6 +19,7 @@ TagManager:
   - Items
   - NPC
   - Activatable
+  - canvas
   layers:
   - Default
   - TransparentFX
