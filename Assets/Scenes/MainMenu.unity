@@ -667,22 +667,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ffca214045fc0241ac219dd36b654ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &115479094
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115479090}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &115858607
 GameObject:
   m_ObjectHideFlags: 0
@@ -6162,9 +6146,8 @@ MonoBehaviour:
   aimCursorX: 0
   aimCursorY: 0
   distanceBetween: 0
-  distanceToBeginFollow: 2
   following: 0
-  step: 0
+  TargetGOs: []
 --- !u!4 &1334943454
 Transform:
   m_ObjectHideFlags: 0
@@ -6847,6 +6830,7 @@ MonoBehaviour:
   currentScene:
     m_Handle: 0
   dialogueBox: {fileID: 470205024}
+  CompanionManager: {fileID: 1334943452}
 --- !u!1 &1627980735
 GameObject:
   m_ObjectHideFlags: 0

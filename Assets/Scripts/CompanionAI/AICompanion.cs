@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class AICompanion : MonoBehaviour
@@ -19,12 +20,15 @@ public class AICompanion : MonoBehaviour
     public float aimCursorY;
 
     public float distanceBetween;
-    public int distanceToBeginFollow = 2;
+    private int BeginFollowDist = 2;
     public bool following;
-    public int step = 0;
+    private int step;
+    private int containerLayer = 18;
     private float stepDistanceRange = 0.2f;
 
-    private Transform TargetPos;
+    public GameObject[] TargetGOs;
+    private GameObject closestTarget;
+    private float AimDistance = 4.5f;
 
     // Start is called before the first frame update
     public void Awake()
@@ -35,20 +39,26 @@ public class AICompanion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        aimCursorX = Mathf.Cos(Time.timeSinceLevelLoad);
-        aimCursorY = Mathf.Sin(Time.timeSinceLevelLoad);
-        distanceBetween = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
-        if (Mathf.Abs(distanceBetween) > distanceToBeginFollow)
+        if (SceneManager.GetActiveScene().name == "MainMenu")
         {
+            return;
+        }
+
+        TargetGOs = GameObject.FindGameObjectsWithTag("Enemy");
+
+        CursorAim();
+
+        distanceBetween = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
+        if (Mathf.Abs(distanceBetween) > BeginFollowDist)
+        {
+            StartCoroutine(WaitBeforeFollow());
             following = true;
-            DistanceCheck();
         }
         else
         {
-            StopCoroutine(DistanceCheck());
+            StopCoroutine(WaitBeforeFollow());
             following = false;
             Player.PlayerSteps.Clear();
-            step = 0;
         }
         if (following)
         {
@@ -59,19 +69,37 @@ public class AICompanion : MonoBehaviour
         vertNow = 0.0f;
     }
 
-    void ShootAtTarget()
+    public bool Shoot() // TODO
     {
-        // TODO
+        if (closestTarget.layer == containerLayer || closestTarget == null) 
+        {
+            return false;
+        }
+
+        if (DiceRoll() == 100)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void FollowPlayer()
     {
+        if (Player.PlayerSteps.Count == step)
+        {
+            return;
+        }
+
         if (step < Player.PlayerSteps.Count)
         { 
             if (Mathf.Abs(Vector3.Distance(BotGO.transform.position, 
                 Player.PlayerSteps[step])) < 0.3f)
             {
                 Player.PlayerSteps.RemoveAt(step);
+                if (Player.PlayerSteps.Count == step)
+                {
+                    return;
+                }
             }
 
             hortDistance = Player.PlayerSteps[step].x - BotGO.transform.position.x;
@@ -88,15 +116,15 @@ public class AICompanion : MonoBehaviour
         {
             return 1.0f;
         }
-        else if (AxisDistance < -stepDistanceRange)
+        if (AxisDistance < -stepDistanceRange)
         {
             return -1.0f;
         }
-        // AxisDistance is > -0.1 and < 0.1 so set to 0;
+        // AxisDistance is > -0.2 and < 0.2 so set to 0;
         return 0.0f;
     }
 
-    IEnumerator DistanceCheck()
+    IEnumerator WaitBeforeFollow()
     {
         float timeToWait = DiceRoll();
         timeToWait = timeToWait/100;
@@ -116,7 +144,72 @@ public class AICompanion : MonoBehaviour
 
     public void CursorAim()
     {
-        // TODO
+        AquireTarget();
+        if (closestTarget != null)
+        {
+            float DistBetween = Mathf.Abs(Vector2.Distance(BotGO.transform.position,
+                                            closestTarget.transform.position));
+            if (DistBetween < AimDistance && TargetGOs.Length > 0)
+            {
+                AimBasedOnAtan2(closestTarget);
+            }
+            return;
+        }
+        // current idle cursor script, may be useful when the player is dead 
+        // to show intent to revive
+        AimBasedOnAtan2(PlayerGO);
+    }
+
+    public void AquireTarget()
+    {
+        FindClosestTargetEnemy();
+
+        if (closestTarget == null)
+        {
+            return;
+        }
+        float DistBetween = Mathf.Abs(Vector2.Distance(BotGO.transform.position,
+                                            closestTarget.transform.position));
+        if (DistBetween > AimDistance)
+        {
+            closestTarget = null;
+            return;
+        }
+    }
+
+    public void AimBasedOnAtan2(GameObject Target)
+    {
+        float angle = Mathf.Atan2(
+                    Target.transform.position.y - BotGO.transform.position.y,
+                    BotGO.transform.position.x - Target.transform.position.x);
+        aimCursorX = Mathf.Cos(angle);
+        aimCursorY = Mathf.Sin(angle);
+    }
+
+    private void FindClosestTargetEnemy()
+    {
+        closestTarget = null;
+        if (TargetGOs.Length == 0)
+        {
+            return;
+        }
+        float distance = Mathf.Infinity;
+        foreach (GameObject target in TargetGOs)
+        {
+            Vector2 distDiff = target.transform.position - BotGO.transform.position;
+            float diagonalDistBetween = distDiff.sqrMagnitude;
+
+            if (target.layer == containerLayer)
+            {
+                diagonalDistBetween += 10.0f;
+            }
+
+            if (diagonalDistBetween < distance)
+            {
+                distance = diagonalDistBetween;
+                closestTarget = target;
+            }
+        }
     }
 
     public float AimCursorX()
@@ -128,25 +221,6 @@ public class AICompanion : MonoBehaviour
     {
         return aimCursorY;
     }
-
-    //void OnTriggerEnter(Collider other)
-    //{
-
-    //    if (other.tag == "Player")
-    //    {
-    //        following = false;
-    //        Debug.Log("Close to player - don't move");
-    //    }
-    //}
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag == "Player") 
-    //    {
-    //        following = true;
-    //        Debug.Log("Player moving - follow player");
-    //    }
-    //}
 
     public int DiceRoll()
     {

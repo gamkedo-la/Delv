@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
 
         if (isBot)
         {
-            if (AICompanion.DiceRoll() == 100)
+            if (AICompanion.Shoot())
             {
                 FireWeapon1();
             }
@@ -522,7 +522,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(LightlyDamaged, transform.position, transform.rotation);
         }
 
-        if (DMG >= 10)
+        if (DMG >= 5)
         {
             TimeManager.SlowMo();
             iFrames = iAmount;
@@ -532,10 +532,10 @@ public class PlayerController : MonoBehaviour
             {
                 Instantiate(DamagedParticle, transform.position, transform.rotation);
             }
-            CameraShake shaker = MainCam.GetComponent<CameraShake>();
 
             if (GameManagerScript.instance.Screenshake)
             {
+                CameraShake shaker = MainCam.GetComponent<CameraShake>();
                 shaker.Shake(.2f, 3, 15);
             }
         }

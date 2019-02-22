@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Reviver : MonoBehaviour
 {
     [SerializeField] private CircleCollider2D reviveCollider;
+
+    [SerializeField] private GameObject hintCanvas;
 
     private PlayerController player;
 
@@ -32,14 +35,29 @@ public class Reviver : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player") {
-            revivablePlayer = other.gameObject;
+        if (other.gameObject.tag != "Player") {
+            return;
         }
+
+        PlayerController otherPlayer = other.gameObject.GetComponent<PlayerController>();
+        if (otherPlayer == null || !otherPlayer.isDead) {
+            return;
+        }
+
+        revivablePlayer = other.gameObject;
+
+        // @todo replace with SendMessage or something to a hint-script?
+        hintCanvas.SetActive(true);
+
+        Text t = hintCanvas.GetComponentInChildren<Text>();
+        t.text = "Press R to revive the other player";
     }
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player") {
             revivablePlayer = null;
+
+            hintCanvas.SetActive(false);
         }
     }
 
@@ -54,6 +72,7 @@ public class Reviver : MonoBehaviour
             return;
         }
 
+        hintCanvas.SetActive(false);
         reviveCollider.enabled = false;
         revivablePlayer.SendMessage("Revive");
     }
