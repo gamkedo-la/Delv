@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AICompanion : MonoBehaviour
 {
-    public PlayerController AIController;
+    public PlayerController AI;
     public GameObject BotGO;
 
     public PlayerController Player;
@@ -20,20 +20,24 @@ public class AICompanion : MonoBehaviour
     public float aimCursorY;
 
     public float distanceBetween;
-    private int BeginFollowDist = 2;
-    public bool following;
+    private int BeginFollowDist = 3;
     private int step;
-    private int containerLayer = 18;
     private float stepDistanceRange = 0.2f;
 
     public GameObject[] TargetGOs;
     private GameObject closestTarget;
     private float AimDistance = 4.5f;
 
+    private int containerLayer;
+    private int itemLayer;
+    ContactFilter2D itemLayerFilter;
+
     // Start is called before the first frame update
     public void Awake()
     {
-
+        containerLayer = LayerMask.NameToLayer("Container");
+        itemLayer = LayerMask.NameToLayer("Container");
+        itemLayerFilter.SetLayerMask(itemLayer);
     }
 
     // Update is called once per frame
@@ -47,26 +51,26 @@ public class AICompanion : MonoBehaviour
         TargetGOs = GameObject.FindGameObjectsWithTag("Enemy");
 
         CursorAim();
+        AIMoveBasedOnState();
+    }
 
+    public bool FollowPlayerCheck()
+    {
         distanceBetween = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
         if (Mathf.Abs(distanceBetween) > BeginFollowDist)
         {
             StartCoroutine(WaitBeforeFollow());
-            following = true;
+            return true;
         }
-        else
+
+        if (Mathf.Abs(distanceBetween) < (BeginFollowDist - 2.5f))
         {
             StopCoroutine(WaitBeforeFollow());
-            following = false;
             Player.PlayerSteps.Clear();
+            return false;
         }
-        if (following)
-        {
-            FollowPlayer();
-            return;
-        }
-        hortNow = 0.0f;
-        vertNow = 0.0f;
+
+        return false;
     }
 
     public bool Shoot() // TODO
@@ -81,6 +85,43 @@ public class AICompanion : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    //public bool ResourceManager()
+    //{
+    //    int mana = 1;
+    //    Collider2D[] itemArray = new Collider2D[1];
+    //    Physics2D.OverlapCircle(BotGO.transform.position, 5.0f, itemLayerFilter, itemArray);
+    //    if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy/10) < Player.Energy)
+    //    {
+    //        foreach (Collider2D item in itemArray)
+    //        {
+    //            Sprite itemDisplay = item.gameObject.GetComponentInParent<Sprite>();
+    //            if (itemDisplay.name == "ManaPotion")
+    //            {
+    //                return true;
+    //            }
+    //        }
+    //    }
+    //    return false;
+    //}
+
+    public void AIMoveBasedOnState()
+    {
+        //if (ResourceManager())
+        //{
+        //    Debug.Log("I need mana and I see mana");
+        //    return;
+        //}
+
+        if (FollowPlayerCheck())
+        {
+            FollowPlayer();
+            return;
+        }
+        // TODO Meander
+        hortNow = 0.0f;
+        vertNow = 0.0f;
     }
 
     public void FollowPlayer()

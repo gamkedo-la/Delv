@@ -359,7 +359,7 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(gameObject.transform.up * speed * Vinput);
         _rb.AddForce(gameObject.transform.right * speed * Hinput);
 
-        if (AICompanion.following == true && !isBot)
+        if (AICompanion.isActiveAndEnabled && !isBot)
         {
             float stepDistanceCheck = 3.0f;
             Vector3 currentStep = gameObject.transform.position;
