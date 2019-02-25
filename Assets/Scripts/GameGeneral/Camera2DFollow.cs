@@ -45,8 +45,11 @@ namespace UnityStandardAssets._2D
         }
         public void Cutscene(Transform targ)
         {
-            lastTarget = target;
             target = targ;
+        }
+        public void SaveTarget()
+        {
+            lastTarget = target;
         }
 
 

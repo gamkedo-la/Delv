@@ -3,14 +3,6 @@ using System.Collections.Generic;
 using UnityStandardAssets._2D;
 using UnityEngine;
 
-[System.Serializable]
-public class Event
-{
-    public Transform target;
-    public int timer; 
-    public bool skippable;
-}
-
 public class CameraEvents : MonoBehaviour
 {
     public Event[] Events;
@@ -42,13 +34,16 @@ public class CameraEvents : MonoBehaviour
         activated = true;
         _currentEvent++;
 
-        if (_currentEvent > _totalEvents)
+        if (_currentEvent >= _totalEvents)
         {
             CutsceneComplete();
             return;
         }
-        
-        StartCoroutine(RunEvent());
+        if (_currentEvent < _totalEvents)
+        {
+            StartCoroutine(RunEvent());
+        }
+
         
     }
 
@@ -56,6 +51,7 @@ public class CameraEvents : MonoBehaviour
     {
         Debug.Log("Cutscene Complete");
         C2D.SendMessage("Unlock");
+        StopAllCoroutines();
 
     }
 
@@ -70,13 +66,21 @@ public class CameraEvents : MonoBehaviour
         //Add animator activator here later
         yield return new WaitForSeconds(currentTimer);
         Debug.Log("EventComplete");
-        StartNextEvent();
+        if (_currentEvent < _totalEvents)
+        {
+            StartNextEvent();
+        }
+        if (_currentEvent >= _totalEvents)
+        {
+            CutsceneComplete();
+        }
     }
 
     void Activate()
     {
         if (!activated)
         {
+            C2D.SendMessage("SaveTarget");
             StartNextEvent();
 
         }
@@ -84,4 +88,12 @@ public class CameraEvents : MonoBehaviour
     }
 
 
+}
+
+[System.Serializable]
+public class Event
+{
+    public Transform target;
+    public int timer;
+    public bool skippable;
 }
