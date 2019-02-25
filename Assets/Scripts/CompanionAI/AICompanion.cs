@@ -30,13 +30,13 @@ public class AICompanion : MonoBehaviour
 
     private int containerLayer;
     private int itemLayer;
-    ContactFilter2D itemLayerFilter;
+    private ContactFilter2D itemLayerFilter;
 
     // Start is called before the first frame update
     public void Awake()
     {
         containerLayer = LayerMask.NameToLayer("Container");
-        itemLayer = LayerMask.NameToLayer("Container");
+        itemLayer = LayerMask.NameToLayer("Items");
         itemLayerFilter.SetLayerMask(itemLayer);
     }
 
@@ -75,44 +75,52 @@ public class AICompanion : MonoBehaviour
 
     public bool Shoot() // TODO
     {
-        if (closestTarget.layer == containerLayer || closestTarget == null) 
-        {
-            return false;
-        }
+        //if (closestTarget == null || closestTarget.layer == containerLayer) 
+        //{
+        //    return false;
+        //}
 
-        if (DiceRoll() == 100)
+        if (DiceRoll() < 100)
         {
             return true;
         }
         return false;
     }
 
-    //public bool ResourceManager()
-    //{
-    //    int mana = 1;
-    //    Collider2D[] itemArray = new Collider2D[1];
-    //    Physics2D.OverlapCircle(BotGO.transform.position, 5.0f, itemLayerFilter, itemArray);
-    //    if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy/10) < Player.Energy)
-    //    {
-    //        foreach (Collider2D item in itemArray)
-    //        {
-    //            Sprite itemDisplay = item.gameObject.GetComponentInParent<Sprite>();
-    //            if (itemDisplay.name == "ManaPotion")
-    //            {
-    //                return true;
-    //            }
-    //        }
-    //    }
-    //    return false;
-    //}
+    public bool ResourceManager()
+    {
+        int mana = 1;
+        if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy/10) < Player.Energy)
+        {
+            Collider2D[] itemArray = new Collider2D[5];
+            Physics2D.OverlapCircle(BotGO.transform.position, 10.0f, itemLayerFilter, itemArray);
+            foreach (Collider2D item in itemArray)
+            {
+                Debug.Log(item);
+                if (item == null) 
+                {
+                    continue;
+                }
+                GameObject itemGO = item.GetComponent<GameObject>();
+                SpriteRenderer itemSprite = itemGO.GetComponent<SpriteRenderer>();
+                if (itemSprite.sprite.name == "ManaPotion")
+                {
+                    Debug.Log("Mana Potion near me");
+                    return true;
+                }
+            }
+        }
+        Debug.Log("no items near me");
+        return false;
+    }
 
     public void AIMoveBasedOnState()
     {
-        //if (ResourceManager())
-        //{
-        //    Debug.Log("I need mana and I see mana");
-        //    return;
-        //}
+        if (ResourceManager())
+        {
+            Debug.Log("I need mana and I see mana");
+            return;
+        }
 
         if (FollowPlayerCheck())
         {
