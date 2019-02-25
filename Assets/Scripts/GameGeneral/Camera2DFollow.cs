@@ -6,6 +6,7 @@ namespace UnityStandardAssets._2D
     public class Camera2DFollow : MonoBehaviour
     {
         public Transform target;
+        public Transform lastTarget;
         public GameObject PlayerGO;
         public float InitialZ;
         public float damping = 1;
@@ -35,13 +36,19 @@ namespace UnityStandardAssets._2D
 
         public void RoomLock(Transform Room)
         {
+            lastTarget = target;
             target = Room;
         }
         public void Unlock()
         {
-            PlayerGO = GameManagerScript.instance.Player1GO;
-            target = PlayerGO.transform;
+            target = lastTarget;
         }
+        public void Cutscene(Transform targ)
+        {
+            lastTarget = target;
+            target = targ;
+        }
+
 
 
         // Update is called once per frame
