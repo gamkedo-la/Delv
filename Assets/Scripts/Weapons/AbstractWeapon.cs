@@ -52,6 +52,7 @@ abstract public class AbstractWeapon : MonoBehaviour
             CA = this.GetComponentInParent<ControllerAimer>();
             Player = CA.PlayerGO;
             PC = Player.GetComponent<PlayerController>();
+            Playerrb = Player.GetComponent<Rigidbody2D>();
             ManaPing();
 
             if (pickupCollider)
@@ -72,6 +73,7 @@ abstract public class AbstractWeapon : MonoBehaviour
             CA = null;
             Player = null;
             PC = null;
+            Playerrb = null;
 
             if (pickupCollider)
             {
