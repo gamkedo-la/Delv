@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AICompanion : MonoBehaviour
 {
+    private bool DEBUGAI = true; // if true, spam the debug console
+
     public PlayerController AI;
     public GameObject BotGO;
 
@@ -93,6 +95,9 @@ public class AICompanion : MonoBehaviour
     public bool ResourceManager()
     {
         int mana = 1;
+        Collider2D item;
+
+        // should we bother looking for potions?
         if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy/10) < Player.Energy)
         {
             // search for nearby potions - spritey way
@@ -101,14 +106,21 @@ public class AICompanion : MonoBehaviour
             // nah that sounds slow and old fashioned
 
             // search for nearby potions - physicsy way:
+            if (DEBUGAI) Debug.Log("AI Companion item mask is: " + itemLayer);
             int count = Physics2D.OverlapCircle(BotGO.transform.position, 10.0f, itemLayerFilter, itemArray);
             
-            Debug.Log(count + " colliders are overlapping a circle near the AI!");
-            foreach (Collider2D item in itemArray)
+            if (DEBUGAI) Debug.Log(count + " item colliders near " + BotGO.name + " at " + BotGO.transform.position);
+            if (count==0) {
+                return false;
+            }
+
+            for (int num=0; num<count; num++)
             {
-                Debug.Log(item); // awals null
+                item = itemArray[num];
+                //if (DEBUGAI) Debug.Log(item); // aways null? FIXME
                 if (item == null) 
                 {
+                    if (DEBUGAI) Debug.Log("Nearby item is null! That seems wrong.");
                     continue;
                 }
                 //GameObject itemGO = item.GetComponent<GameObject>();
@@ -116,18 +128,18 @@ public class AICompanion : MonoBehaviour
                 SpriteRenderer itemSprite = item.transform.parent.gameObject.GetComponent<SpriteRenderer>();
                 if (itemSprite && (itemSprite.sprite.name == "ManaPotion"))
                 {
-                    Debug.Log("Mana Potion near me");
+                    if (DEBUGAI) Debug.Log("Mana Potion near me");
                     return true;
                 }
                 else {
-                    Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! that seems wrong!");
+                    if (DEBUGAI) Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! That seems wrong!");
                 }
 
-                Debug.Log("no items near " + BotGO.name + " at " + BotGO.transform.position);
+                if (DEBUGAI) Debug.Log("no items near " + BotGO.name + " at " + BotGO.transform.position);
 
             }
         }
-        Debug.Log("AI did not bother looking for potions");
+        if (DEBUGAI) Debug.Log("AI did not bother looking for potions");
         return false;
     }
 
@@ -135,7 +147,7 @@ public class AICompanion : MonoBehaviour
     {
         if (ResourceManager())
         {
-            Debug.Log("I need mana and I see mana");
+            if (DEBUGAI) Debug.Log("I need mana and I see mana");
             return;
         }
 
