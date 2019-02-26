@@ -169,4 +169,9 @@ public class EnemyManager : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    void Activate()
+    {
+        StartNextWave();
+    }
 }
