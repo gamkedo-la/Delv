@@ -87,30 +87,47 @@ public class AICompanion : MonoBehaviour
         return false;
     }
 
+    // so we don't create a new array every frame
+    private Collider2D[] itemArray = new Collider2D[5]; 
+
     public bool ResourceManager()
     {
         int mana = 1;
         if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy/10) < Player.Energy)
         {
-            Collider2D[] itemArray = new Collider2D[5];
-            Physics2D.OverlapCircle(BotGO.transform.position, 10.0f, itemLayerFilter, itemArray);
+            // search for nearby potions - spritey way
+            // idea: what if we just do Vector2.Distance(a,b)
+            // on an array of potion sprites?
+            // nah that sounds slow and old fashioned
+
+            // search for nearby potions - physicsy way:
+            int count = Physics2D.OverlapCircle(BotGO.transform.position, 10.0f, itemLayerFilter, itemArray);
+            
+            Debug.Log(count + " colliders are overlapping a circle near the AI!");
             foreach (Collider2D item in itemArray)
             {
-                Debug.Log(item);
+                Debug.Log(item); // awals null
                 if (item == null) 
                 {
                     continue;
                 }
-                GameObject itemGO = item.GetComponent<GameObject>();
-                SpriteRenderer itemSprite = itemGO.GetComponent<SpriteRenderer>();
-                if (itemSprite.sprite.name == "ManaPotion")
+                //GameObject itemGO = item.GetComponent<GameObject>();
+                //GameObject itemGO = item.transform.parent.gameObject;
+                SpriteRenderer itemSprite = item.transform.parent.gameObject.GetComponent<SpriteRenderer>();
+                if (itemSprite && (itemSprite.sprite.name == "ManaPotion"))
                 {
                     Debug.Log("Mana Potion near me");
                     return true;
                 }
+                else {
+                    Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! that seems wrong!");
+                }
+
+                Debug.Log("no items near " + BotGO.name + " at " + BotGO.transform.position);
+
             }
         }
-        Debug.Log("no items near me");
+        Debug.Log("AI did not bother looking for potions");
         return false;
     }
 
