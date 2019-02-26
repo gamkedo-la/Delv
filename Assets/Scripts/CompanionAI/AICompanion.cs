@@ -40,6 +40,8 @@ public class AICompanion : MonoBehaviour
         containerLayer = LayerMask.NameToLayer("Container");
         itemLayer = LayerMask.NameToLayer("Items");
         itemLayerFilter.SetLayerMask(itemLayer);
+        itemLayerFilter.useLayerMask = true;
+        itemLayerFilter.useTriggers = true;
     }
 
     // Update is called once per frame
@@ -96,6 +98,7 @@ public class AICompanion : MonoBehaviour
     {
         int mana = 1;
         Collider2D item;
+        GameObject itemGO;
 
         // should we bother looking for potions?
         if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy/10) < Player.Energy)
@@ -106,7 +109,7 @@ public class AICompanion : MonoBehaviour
             // nah that sounds slow and old fashioned
 
             // search for nearby potions - physicsy way:
-            if (DEBUGAI) Debug.Log("AI Companion item mask is: " + itemLayer);
+            if (DEBUGAI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
             int count = Physics2D.OverlapCircle(BotGO.transform.position, 10.0f, itemLayerFilter, itemArray);
             
             if (DEBUGAI) Debug.Log(count + " item colliders near " + BotGO.name + " at " + BotGO.transform.position);
@@ -124,8 +127,8 @@ public class AICompanion : MonoBehaviour
                     continue;
                 }
                 //GameObject itemGO = item.GetComponent<GameObject>();
-                //GameObject itemGO = item.transform.parent.gameObject;
-                SpriteRenderer itemSprite = item.transform.parent.gameObject.GetComponent<SpriteRenderer>();
+                itemGO = item.transform.parent.gameObject;
+                SpriteRenderer itemSprite = itemGO.GetComponent<SpriteRenderer>();
                 if (itemSprite && (itemSprite.sprite.name == "ManaPotion"))
                 {
                     if (DEBUGAI) Debug.Log("Mana Potion near me");
