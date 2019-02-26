@@ -417,7 +417,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Cancel" + ControllerSlot)) //REMEMBER TO CHANGE THIS BUTTON
             {
                 Debug.Log("Player Hit Cancel button");
-                ActivateTarget.SendMessage("DeactivateDialogue");
+                ActivateTarget.SendMessage("Deactivate");
             }
         }
 
@@ -447,7 +447,7 @@ public class PlayerController : MonoBehaviour
         if ((coll.gameObject.tag == "Activatable"))
         {
             Debug.Log("Player walked away from" + ActivateTarget);
-            ActivateTarget.SendMessage("DeactivateDialogue");
+            ActivateTarget.SendMessage("Deactivate");
             ActivateTarget = null;
         }
     }

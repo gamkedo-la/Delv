@@ -15,6 +15,8 @@ public class CameraEvents : MonoBehaviour
     public bool currentSkippable;
     [Space]
     public bool activated;
+    public bool repeatable;
+    public bool timerbased;
     [Space]
     public GameObject CamParent;
     public Camera2DFollow C2D;
@@ -60,24 +62,30 @@ public class CameraEvents : MonoBehaviour
         Debug.Log("Event Running...");
         currentTimer = Events[_currentEvent].timer;
         currentTarget = Events[_currentEvent].target;
+        currentSkippable = Events[_currentEvent].skippable;
         C2D.SendMessage("Cutscene", currentTarget);
-
-
-        //Add animator activator here later
+        if (timerbased)
+        {
         yield return new WaitForSeconds(currentTimer);
-        Debug.Log("EventComplete");
-        if (_currentEvent < _totalEvents)
-        {
-            StartNextEvent();
-        }
-        if (_currentEvent >= _totalEvents)
-        {
-            CutsceneComplete();
+            if (_currentEvent < _totalEvents)
+            {
+                StartNextEvent();
+            }
+            if (_currentEvent >= _totalEvents)
+            {
+                CutsceneComplete();
+            }
+            Debug.Log("EventComplete");
         }
     }
 
     void Activate()
     {
+        if ((activated) && (currentSkippable))
+        {
+            Skip();
+        }
+
         if (!activated)
         {
             C2D.SendMessage("SaveTarget");
@@ -85,6 +93,22 @@ public class CameraEvents : MonoBehaviour
 
         }
         //Set up skippable here when you get a chance.
+    }
+    void Deactivate()
+    {
+        CutsceneComplete();
+        _currentEvent = -1;
+        if (repeatable)
+        {
+            activated = false;
+        }
+        
+    }
+
+    void Skip()
+    {
+        StopAllCoroutines();
+        StartNextEvent();
     }
 
 

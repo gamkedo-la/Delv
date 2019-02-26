@@ -28,7 +28,7 @@ public class NPCTalkTrigger : MonoBehaviour
             IsActive = true;
         }
     }
-    void DeactivateDialogue()
+    void Deactivate()
     {
         IsActive = false;
         DM.EndDialogue();
