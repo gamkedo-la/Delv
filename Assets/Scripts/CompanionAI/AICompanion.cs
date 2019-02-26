@@ -33,13 +33,20 @@ public class AICompanion : MonoBehaviour
     private int containerLayer;
     private int itemLayer;
     private ContactFilter2D itemLayerFilter;
+    private float itemSeekRadius = 10.0f;
 
     // Start is called before the first frame update
     public void Awake()
     {
         containerLayer = LayerMask.NameToLayer("Container");
         itemLayer = LayerMask.NameToLayer("Items");
-        itemLayerFilter.SetLayerMask(itemLayer);
+        // the item layer is number 16
+        // but the function below wants a BITMASK
+        // so it wants the 16th bit to be a 1
+        // which is two to the power of whatever bit we want to set
+        // eg 00000000000000001000000000000000 // Mathf.Pow(2f,16f)
+        //itemLayerFilter.SetLayerMask(itemLayer);
+        itemLayerFilter.layerMask.value = 65536; // 2^16 (16==items layer)
         itemLayerFilter.useLayerMask = true;
         itemLayerFilter.useTriggers = true;
     }
@@ -110,7 +117,7 @@ public class AICompanion : MonoBehaviour
 
             // search for nearby potions - physicsy way:
             if (DEBUGAI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
-            int count = Physics2D.OverlapCircle(BotGO.transform.position, 10.0f, itemLayerFilter, itemArray);
+            int count = Physics2D.OverlapCircle(BotGO.transform.position, itemSeekRadius, itemLayerFilter, itemArray);
             
             if (DEBUGAI) Debug.Log(count + " item colliders near " + BotGO.name + " at " + BotGO.transform.position);
             if (count==0) {
@@ -126,12 +133,13 @@ public class AICompanion : MonoBehaviour
                     if (DEBUGAI) Debug.Log("Nearby item is null! That seems wrong.");
                     continue;
                 }
-                //GameObject itemGO = item.GetComponent<GameObject>();
-                itemGO = item.transform.parent.gameObject;
-                SpriteRenderer itemSprite = itemGO.GetComponent<SpriteRenderer>();
+                //itemGO = item.GetComponent<GameObject>(); // not the collider, the parent sprite
+                //itemGO = item.transform.parent.gameObject; // no need to traverse hierarchy
+                //SpriteRenderer itemSprite = itemGO.GetComponent<SpriteRenderer>(); // errors out
+                SpriteRenderer itemSprite = item.GetComponent<SpriteRenderer>();
                 if (itemSprite && (itemSprite.sprite.name == "ManaPotion"))
                 {
-                    if (DEBUGAI) Debug.Log("Mana Potion near me");
+                    if (DEBUGAI) Debug.Log("Mana Potion near me! Woo hoo!");
                     return true;
                 }
                 else {
