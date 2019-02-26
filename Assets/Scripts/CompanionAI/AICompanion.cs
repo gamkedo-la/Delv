@@ -46,7 +46,7 @@ public class AICompanion : MonoBehaviour
         // which is two to the power of whatever bit we want to set
         // eg 00000000000000001000000000000000 // Mathf.Pow(2f,16f)
         //itemLayerFilter.SetLayerMask(itemLayer);
-        itemLayerFilter.layerMask.value = 65536; // 2^16 (16==items layer)
+        itemLayerFilter.layerMask.value = 1<<itemLayer; //65536; WORKS!!! // 2^16 (16==items layer)
         itemLayerFilter.useLayerMask = true;
         itemLayerFilter.useTriggers = true;
     }
