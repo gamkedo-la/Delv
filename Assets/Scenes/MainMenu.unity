@@ -5137,6 +5137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  lastTarget: {fileID: 0}
   PlayerGO: {fileID: 0}
   InitialZ: 0
   damping: 0.3
@@ -6135,17 +6136,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aa3764c1ae74a519891fbb8f7c4648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DEBUGAI: 0
   AI: {fileID: 8447110967915570375}
   BotGO: {fileID: 6300180896068623075}
   Player: {fileID: 115479092}
   PlayerGO: {fileID: 115479090}
+  distanceBetween: 0
   vertDistance: 0
   hortDistance: 0
   vertNow: 0
   hortNow: 0
   aimCursorX: 0
   aimCursorY: 0
-  distanceBetween: 0
   TargetGOs: []
 --- !u!4 &1334943454
 Transform:

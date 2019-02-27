@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
         {
             if (AICompanion.Shoot())
             {
-                FireWeapon1();
+               FireWeapon1();
             }
         }
         if (Input.GetButton("Primary" + ControllerSlot))

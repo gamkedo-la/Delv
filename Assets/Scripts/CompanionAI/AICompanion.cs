@@ -5,27 +5,39 @@ using UnityEngine;
 
 public class AICompanion : MonoBehaviour
 {
-    private bool DEBUGAI = true; // if true, spam the debug console
-
+    [Header("Debug")]
+    public bool DEBUG_AI = true; // if true, spam the debug console
+    [Space]
+    [Header("Main AI Components")]
     public PlayerController AI;
     public GameObject BotGO;
-
+    [Space]
+    [Header("Main Player Components")]
     public PlayerController Player;
     public GameObject PlayerGO;
-
+    [Space]
+    [Header("Distance From Player")]
+    public bool following;
+    public float distanceFromPlayer;
+    [Space]
+    [Header("Distance From Player Step")]
     public float vertDistance;
     public float hortDistance;
+    [Space]
+    [Header("Controller Axis Input")]
     public float vertNow;
     public float hortNow;
-
+    [Space]
+    [Header("Cursor Position")]
     public float aimCursorX;
     public float aimCursorY;
 
-    public float distanceBetween;
-    private int BeginFollowDist = 3;
+    private float BeginFollowDist = 3.0f;
+    private float StopFollowDist = 0.5f;
     private int step;
     private float stepDistanceRange = 0.2f;
-
+    [Space]
+    [Header("Level Targets")]
     public GameObject[] TargetGOs;
     private GameObject closestTarget;
     private float AimDistance = 4.5f;
@@ -33,7 +45,10 @@ public class AICompanion : MonoBehaviour
     private int containerLayer;
     private int itemLayer;
     private ContactFilter2D itemLayerFilter;
-    private float itemSeekRadius = 10.0f;
+    private float itemSeekRadius = 5.0f;
+    private float distanceToResource;
+
+    private int mana = 1;
 
     // Start is called before the first frame update
     public void Awake()
@@ -45,7 +60,7 @@ public class AICompanion : MonoBehaviour
         // so it wants the 16th bit to be a 1
         // which is two to the power of whatever bit we want to set
         // eg 00000000000000001000000000000000 // Mathf.Pow(2f,16f)
-        //itemLayerFilter.SetLayerMask(itemLayer);
+        //itemLayerFilter.SetLayerMask(itemLayer); << How I tried to make this work ~~ vv solution
         itemLayerFilter.layerMask.value = 1<<itemLayer; //65536; WORKS!!! // 2^16 (16==items layer)
         itemLayerFilter.useLayerMask = true;
         itemLayerFilter.useTriggers = true;
@@ -67,20 +82,21 @@ public class AICompanion : MonoBehaviour
 
     public bool FollowPlayerCheck()
     {
-        distanceBetween = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
-        if (Mathf.Abs(distanceBetween) > BeginFollowDist)
+        distanceFromPlayer = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
+        if (Mathf.Abs(distanceFromPlayer) > BeginFollowDist && !following)
         {
             StartCoroutine(WaitBeforeFollow());
+            following = true;
             return true;
         }
 
-        if (Mathf.Abs(distanceBetween) < (BeginFollowDist - 2.5f))
+        if (Mathf.Abs(distanceFromPlayer) < StopFollowDist && following)
         {
             StopCoroutine(WaitBeforeFollow());
             Player.PlayerSteps.Clear();
+            following = false;
             return false;
         }
-
         return false;
     }
 
@@ -99,66 +115,110 @@ public class AICompanion : MonoBehaviour
     }
 
     // so we don't create a new array every frame
-    private Collider2D[] itemArray = new Collider2D[5]; 
+    private Collider2D[] itemArray = new Collider2D[10];
+    [Space]
+    [Header("Resource States")]
+    public bool FoundHealth;
+    public bool FoundMana;
+    public Collider2D nearestResource;
 
-    public bool ResourceManager()
+    public void ResourceManager()
     {
-        int mana = 1;
-        Collider2D item;
-        GameObject itemGO;
-
         // should we bother looking for potions?
-        if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy/10) < Player.Energy)
+        if ((AI.Health + AI.MaxHealth / 2) < Player.Health)
         {
-            // search for nearby potions - spritey way
-            // idea: what if we just do Vector2.Distance(a,b)
-            // on an array of potion sprites?
-            // nah that sounds slow and old fashioned
-
-            // search for nearby potions - physicsy way:
-            if (DEBUGAI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
-            int count = Physics2D.OverlapCircle(BotGO.transform.position, itemSeekRadius, itemLayerFilter, itemArray);
-            
-            if (DEBUGAI) Debug.Log(count + " item colliders near " + BotGO.name + " at " + BotGO.transform.position);
-            if (count==0) {
-                return false;
-            }
-
-            for (int num=0; num<count; num++)
+            if (FindNearestResource("HealthPotion"))
             {
-                item = itemArray[num];
-                //if (DEBUGAI) Debug.Log(item); // aways null? FIXME
-                if (item == null) 
-                {
-                    if (DEBUGAI) Debug.Log("Nearby item is null! That seems wrong.");
-                    continue;
-                }
-                //itemGO = item.GetComponent<GameObject>(); // not the collider, the parent sprite
-                //itemGO = item.transform.parent.gameObject; // no need to traverse hierarchy
-                //SpriteRenderer itemSprite = itemGO.GetComponent<SpriteRenderer>(); // errors out
-                SpriteRenderer itemSprite = item.GetComponent<SpriteRenderer>();
-                if (itemSprite && (itemSprite.sprite.name == "ManaPotion"))
-                {
-                    if (DEBUGAI) Debug.Log("Mana Potion near me! Woo hoo!");
-                    return true;
-                }
-                else {
-                    if (DEBUGAI) Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! That seems wrong!");
-                }
-
-                if (DEBUGAI) Debug.Log("no items near " + BotGO.name + " at " + BotGO.transform.position);
-
+                FoundHealth = true;
+                return;
             }
         }
-        if (DEBUGAI) Debug.Log("AI did not bother looking for potions");
+
+        if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy / 2) < Player.Energy)
+        {
+            if (FindNearestResource("ManaPotion"))
+            {
+                FoundMana = true;
+                return;
+            }
+        }
+            FoundHealth = false;
+            FoundMana = false;
+            // not found because AI doesn't need it
+    }
+
+    public bool FindNearestResource(string potionName)
+    {
+        // search for nearby potions - spritey way
+        // idea: what if we just do Vector2.Distance(a,b)
+        // on an array of potion sprites?
+        // nah that sounds slow and old fashioned
+
+        // search for nearby potions - physicsy way:
+        Collider2D item;
+
+        //if (DEBUG_AI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
+        int count = Physics2D.OverlapCircle(BotGO.transform.position, itemSeekRadius, itemLayerFilter, itemArray);
+        if (count == 0)
+        {
+            if (DEBUG_AI) Debug.Log("AI: 'no " + potionName + " near me'");
+            return false;
+        }
+        if (DEBUG_AI) Debug.Log(count + " item colliders near " + BotGO.name + " at " + BotGO.transform.position);
+
+        for (int num = 0; num < count; num++)
+        {
+            item = itemArray[num];
+            if (DEBUG_AI) Debug.Log(item); // always null? FIXME
+            if (item == null)
+            {
+                if (DEBUG_AI) Debug.Log("Nearby item is null! That seems wrong.");
+                continue;
+            }
+            //itemGO = item.GetComponent<GameObject>(); // not the collider, the parent sprite
+            //itemGO = item.transform.parent.gameObject; // no need to traverse hierarchy
+            //SpriteRenderer itemSprite = itemGO.GetComponent<SpriteRenderer>(); // errors out
+            SpriteRenderer itemSprite = item.GetComponent<SpriteRenderer>();
+            if (itemSprite && (itemSprite.sprite.name == potionName))
+            {
+                nearestResource = item;
+                return true;
+            }
+            else
+            {
+                if (DEBUG_AI) Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! That seems wrong!");
+            }
+
+            if (DEBUG_AI) Debug.Log("no items near " + BotGO.name + " at " + BotGO.transform.position);
+
+        }
+        if (DEBUG_AI) Debug.Log("AI did not bother looking for potions");
         return false;
     }
 
+
     public void AIMoveBasedOnState()
     {
-        if (ResourceManager())
+        ResourceManager();
+        if (DEBUG_AI) Debug.Log("nearestResource: " + nearestResource);
+        if (nearestResource != null && (FoundHealth || FoundMana))
         {
-            if (DEBUGAI) Debug.Log("I need mana and I see mana");
+            if (DEBUG_AI && FoundMana && FoundHealth)
+            {
+                Debug.Log("AI: 'Need mana/health and found both types of potions'");
+            }
+            else
+            {
+                if (DEBUG_AI && FoundMana)
+                {
+                    Debug.Log("AI: 'Need mana and found mana'");
+                }
+                if (DEBUG_AI && FoundHealth)
+                {
+                    Debug.Log("AI: 'Need health and found health'");
+                }
+            }
+            GoTowardNeededResource();
             return;
         }
 
@@ -170,6 +230,15 @@ public class AICompanion : MonoBehaviour
         // TODO Meander
         hortNow = 0.0f;
         vertNow = 0.0f;
+    }
+
+    public void GoTowardNeededResource()
+    {
+        hortDistance = nearestResource.transform.position.x - BotGO.transform.position.x;
+        vertDistance = nearestResource.transform.position.y - BotGO.transform.position.y;
+        hortNow = SetAxisInput(hortDistance);
+        vertNow = SetAxisInput(vertDistance);
+        if (DEBUG_AI) Debug.Log("AI: 'I need a potion but nothing is near me'");
     }
 
     public void FollowPlayer()
