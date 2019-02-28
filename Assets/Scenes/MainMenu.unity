@@ -2610,6 +2610,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611133889}
   m_CullTransparentMesh: 0
+--- !u!1 &614232984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 614232985}
+  m_Layer: 0
+  m_Name: MeanderDestination
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &614232985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614232984}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -328.01404, y: -184.54219, z: -5.947175}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1334943454}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &615985696
 GameObject:
   m_ObjectHideFlags: 0
@@ -6141,7 +6171,6 @@ MonoBehaviour:
   BotGO: {fileID: 6300180896068623075}
   Player: {fileID: 115479092}
   PlayerGO: {fileID: 115479090}
-  following: 0
   distanceFromPlayer: 0
   vertDistance: 0
   hortDistance: 0
@@ -6149,7 +6178,10 @@ MonoBehaviour:
   hortNow: 0
   aimCursorX: 0
   aimCursorY: 0
+  following: 0
+  meandering: 0
   TargetGOs: []
+  meanderDestination: {fileID: 614232984}
   FoundHealth: 0
   FoundMana: 0
   nearestResource: {fileID: 0}
@@ -6163,7 +6195,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 332.6166, y: 184.40398, z: 7.354702}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 614232985}
   m_Father: {fileID: 950072698}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
