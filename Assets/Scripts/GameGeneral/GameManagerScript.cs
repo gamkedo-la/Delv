@@ -57,12 +57,6 @@ public class GameManagerScript : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Use this for initialization
-    void Start()
-    {
-        //Sends player to the start as soon as the GM is starting
-    }
-
 
     public void InitializeGame()
     {

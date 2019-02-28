@@ -17,7 +17,7 @@ public class ActivateOnCollision : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D col)
     {
-        if ((col.gameObject.tag == "Player") && (fired == false))
+        if ((col.gameObject.tag == "Player") && (fired == true))
         {
             activateTarget.SendMessage("Deactivate");
         }

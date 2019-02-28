@@ -31,6 +31,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject CamParent;
     public Transform CamCenter;
     [Space]
+    public bool DestroyType = true;
     public bool LockType;
     public GameObject RoomLockGO;
     public Transform[] RoomLockPoints;
@@ -167,7 +168,10 @@ public class EnemyManager : MonoBehaviour
         {
             UnlockRoom();
         }
+        if (DestroyType)
+        {
         Destroy(gameObject);
+        }
     }
 
     void Activate()
