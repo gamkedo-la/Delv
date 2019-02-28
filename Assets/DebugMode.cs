@@ -16,7 +16,7 @@ public class DebugMode : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             enemy = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemies in enemy)
