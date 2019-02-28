@@ -17,12 +17,15 @@ public class AICompanion : MonoBehaviour
     public GameObject PlayerGO;
     [Space]
     [Header("Distance From Player")]
-    public bool following;
     public float distanceFromPlayer;
     [Space]
     [Header("Distance From Player Step")]
     public float vertDistance;
     public float hortDistance;
+    private float BeginFollowDist = 3.0f;
+    private float StopFollowDist = 1.3f;
+    private int step;
+    private float stepDistanceRange = 0.2f;
     [Space]
     [Header("Controller Axis Input")]
     public float vertNow;
@@ -31,15 +34,18 @@ public class AICompanion : MonoBehaviour
     [Header("Cursor Position")]
     public float aimCursorX;
     public float aimCursorY;
-
-    private float BeginFollowDist = 3.0f;
-    private float StopFollowDist = 0.5f;
-    private int step;
-    private float stepDistanceRange = 0.2f;
+    [Space]
+    [Header("AI States")]
+    [SerializeField]
+    private bool following;
+    [SerializeField]
+    private bool meandering;
     [Space]
     [Header("Level Targets")]
     public GameObject[] TargetGOs;
     private GameObject closestTarget;
+    [SerializeField]
+    private GameObject meanderDestination;
     private float AimDistance = 4.5f;
 
     private int containerLayer;
@@ -85,16 +91,15 @@ public class AICompanion : MonoBehaviour
         distanceFromPlayer = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
         if (Mathf.Abs(distanceFromPlayer) > BeginFollowDist && !following)
         {
-            StartCoroutine(WaitBeforeFollow());
-            following = true;
+            StartCoroutine(WaitRandomTime(following));
             return true;
         }
 
         if (Mathf.Abs(distanceFromPlayer) < StopFollowDist && following)
         {
-            StopCoroutine(WaitBeforeFollow());
-            Player.PlayerSteps.Clear();
+            StopCoroutine(WaitRandomTime(following));
             following = false;
+            Player.PlayerSteps.Clear();
             return false;
         }
         return false;
@@ -102,12 +107,12 @@ public class AICompanion : MonoBehaviour
 
     public bool Shoot() // TODO
     {
-        //if (closestTarget == null || closestTarget.layer == containerLayer) 
-        //{
-        //    return false;
-        //}
+        if (closestTarget == null || closestTarget.layer == containerLayer) 
+        {
+            return false;
+        }
 
-        if (DiceRoll() < 100)
+        if (DiceRoll() == 100)
         {
             return true;
         }
@@ -200,7 +205,7 @@ public class AICompanion : MonoBehaviour
     public void AIMoveBasedOnState()
     {
         ResourceManager();
-        if (DEBUG_AI) Debug.Log("nearestResource: " + nearestResource);
+
         if (nearestResource != null && (FoundHealth || FoundMana))
         {
             if (DEBUG_AI && FoundMana && FoundHealth)
@@ -222,23 +227,57 @@ public class AICompanion : MonoBehaviour
             return;
         }
 
-        if (FollowPlayerCheck())
+        if (FollowPlayerCheck() || following)
         {
             FollowPlayer();
             return;
         }
-        // TODO Meander
-        hortNow = 0.0f;
-        vertNow = 0.0f;
+        hortNow = 0;
+        vertNow = 0;
+        //StartCoroutine(WaitRandomTime(meandering));
+        //Meander();
     }
+
+    //public void Meander()
+    //{
+    //    //Debug.Log("We meandering now everyone");
+    //    Vector2 randomPointInCircle = Random.insideUnitCircle * 2.8f;
+    //    if (meanderDestination == null)
+    //    {
+    //        meanderDestination.transform.position = new Vector2(randomPointInCircle.x + BotGO.transform.position.x,
+    //                                                            randomPointInCircle.y + BotGO.transform.position.y);
+                                                        
+    //    }
+
+    //    if (!meandering)
+    //    {
+    //        Collider2D meanderZone = Physics2D.OverlapCircle(PlayerGO.transform.position, 3.0f);
+    //        if (meanderZone.OverlapPoint(meanderDestination.transform.position))
+    //        {
+    //            hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
+    //            vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
+    //            hortNow = SetAxisInput(hortDistance, 0.1f);
+    //            vertNow = SetAxisInput(vertDistance, 0.1f);
+    //        }
+    //        meandering = true;
+    //    } // end of if meandering bool true
+
+    //    if (Vector2.Distance(BotGO.transform.position,
+    //        meanderDestination.transform.position) < 0.1f)
+    //    {
+    //        hortNow = SetAxisInput(0, 0.0f);
+    //        vertNow = SetAxisInput(0, 0.0f);
+    //        meanderDestination = null;
+    //        StartCoroutine(WaitRandomTime(meandering));
+    //    } // end of if distance check is < .2
+    //} // end of Meander function
 
     public void GoTowardNeededResource()
     {
         hortDistance = nearestResource.transform.position.x - BotGO.transform.position.x;
         vertDistance = nearestResource.transform.position.y - BotGO.transform.position.y;
-        hortNow = SetAxisInput(hortDistance);
-        vertNow = SetAxisInput(vertDistance);
-        if (DEBUG_AI) Debug.Log("AI: 'I need a potion but nothing is near me'");
+        hortNow = SetAxisInput(hortDistance, 1.0f);
+        vertNow = SetAxisInput(vertDistance, 1.0f);
     }
 
     public void FollowPlayer()
@@ -263,30 +302,32 @@ public class AICompanion : MonoBehaviour
             hortDistance = Player.PlayerSteps[step].x - BotGO.transform.position.x;
             vertDistance = Player.PlayerSteps[step].y - BotGO.transform.position.y;
 
-            hortNow = SetAxisInput(hortDistance);
-            vertNow = SetAxisInput(vertDistance);
+            hortNow = SetAxisInput(hortDistance, 1.0f);
+            vertNow = SetAxisInput(vertDistance, 1.0f);
         }
     }
 
-    public float SetAxisInput(float AxisDistance)
+    public float SetAxisInput(float AxisDistance, float AxisIntensity)
     {
         if (AxisDistance > stepDistanceRange)
         {
-            return 1.0f;
+            return AxisIntensity;
         }
         if (AxisDistance < -stepDistanceRange)
         {
-            return -1.0f;
+            return -AxisIntensity;
         }
         // AxisDistance is > -0.2 and < 0.2 so set to 0;
         return 0.0f;
     }
 
-    IEnumerator WaitBeforeFollow()
+    IEnumerator WaitRandomTime(bool flag)
     {
         float timeToWait = DiceRoll();
-        timeToWait = timeToWait/100;
+        timeToWait = (timeToWait/60) + 60;
         yield return new WaitForSeconds(timeToWait);
+        flag = !flag;
+        StopCoroutine(WaitRandomTime(flag));
         yield break;
     }
 

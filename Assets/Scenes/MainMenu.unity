@@ -6136,12 +6136,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aa3764c1ae74a519891fbb8f7c4648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUGAI: 0
+  DEBUG_AI: 0
   AI: {fileID: 8447110967915570375}
   BotGO: {fileID: 6300180896068623075}
   Player: {fileID: 115479092}
   PlayerGO: {fileID: 115479090}
-  distanceBetween: 0
+  following: 0
+  distanceFromPlayer: 0
   vertDistance: 0
   hortDistance: 0
   vertNow: 0
@@ -6149,6 +6150,9 @@ MonoBehaviour:
   aimCursorX: 0
   aimCursorY: 0
   TargetGOs: []
+  FoundHealth: 0
+  FoundMana: 0
+  nearestResource: {fileID: 0}
 --- !u!4 &1334943454
 Transform:
   m_ObjectHideFlags: 0
