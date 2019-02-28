@@ -7,7 +7,7 @@ public class ActivateOnCollision : MonoBehaviour
     public GameObject activateTarget;
     public bool fired;
 
-    private void OnTriggerEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         if ((col.gameObject.tag == "player") && (fired == false))
         {
@@ -15,7 +15,7 @@ public class ActivateOnCollision : MonoBehaviour
             fired = true;
         }
     }
-    private void OnTriggerExit2D(Collision2D col)
+    private void OnTriggerExit2D(Collider2D col)
     {
         if ((col.gameObject.tag == "player") && (fired == false))
         {
