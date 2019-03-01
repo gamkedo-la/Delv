@@ -1853,6 +1853,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UxMainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 9181125757547651190, guid: a0b617cbe66d1406f871ff56d6146d42,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9181125757547651191, guid: a0b617cbe66d1406f871ff56d6146d42,
         type: 3}
       propertyPath: m_LocalPosition.x
