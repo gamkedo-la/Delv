@@ -37,7 +37,7 @@ public class AICompanion : MonoBehaviour
     [Space]
     [Header("AI States")]
     [SerializeField]
-    private bool following;
+    public bool following;
     [SerializeField]
     private bool meandering;
     [Space]
@@ -91,13 +91,12 @@ public class AICompanion : MonoBehaviour
         distanceFromPlayer = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
         if (Mathf.Abs(distanceFromPlayer) > BeginFollowDist && !following)
         {
-            StartCoroutine(WaitRandomTime(following));
+            following = true;
             return true;
         }
 
-        if (Mathf.Abs(distanceFromPlayer) < StopFollowDist && following)
+        if (Mathf.Abs(distanceFromPlayer) <= StopFollowDist)
         {
-            StopCoroutine(WaitRandomTime(following));
             following = false;
             Player.PlayerSteps.Clear();
             return false;
@@ -223,54 +222,61 @@ public class AICompanion : MonoBehaviour
                     Debug.Log("AI: 'Need health and found health'");
                 }
             }
+            meandering = false;
             GoTowardNeededResource();
             return;
         }
 
         if (FollowPlayerCheck() || following)
         {
+            meandering = false;
             FollowPlayer();
             return;
         }
-        hortNow = 0;
-        vertNow = 0;
-        //StartCoroutine(WaitRandomTime(meandering));
-        //Meander();
+        ZeroOutInput();
     }
 
-    //public void Meander()
+    //public void startMeandering()
     //{
-    //    //Debug.Log("We meandering now everyone");
-    //    Vector2 randomPointInCircle = Random.insideUnitCircle * 2.8f;
-    //    if (meanderDestination == null)
-    //    {
-    //        meanderDestination.transform.position = new Vector2(randomPointInCircle.x + BotGO.transform.position.x,
-    //                                                            randomPointInCircle.y + BotGO.transform.position.y);
-                                                        
-    //    }
-
+    //    Collider2D meanderZone = Physics2D.OverlapCircle(PlayerGO.transform.position, 3.0f);
+    //    float Distance = 0.0f;
+    //    Debug.Log("Start Meandering");
     //    if (!meandering)
     //    {
-    //        Collider2D meanderZone = Physics2D.OverlapCircle(PlayerGO.transform.position, 3.0f);
-    //        if (meanderZone.OverlapPoint(meanderDestination.transform.position))
+    //        SetMeanderingDestination();
+    //        if (!meanderZone.OverlapPoint(meanderDestination.transform.position))
     //        {
-    //            hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
-    //            vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
-    //            hortNow = SetAxisInput(hortDistance, 0.1f);
-    //            vertNow = SetAxisInput(vertDistance, 0.1f);
+    //            // TODO for all Debug.Logs -> if (DEBUG_AI)
+    //            Debug.Log("Meandering Destination not within radius near player");
+    //            return;
     //        }
+    //        //Vector2 Heading = BotGO.transform.position - meanderDestination.transform.position;
+    //        //Distance = Heading.magnitude;
+    //        //Vector2 direction = Heading / Distance;
+    //        //Debug.Log("distance :" + Distance);
+    //        //Debug.Log("direction :" + direction);
+    //        hortDistance = BotGO.transform.position.x - meanderDestination.transform.position.x;
+    //        vertDistance = BotGO.transform.position.y - meanderDestination.transform.position.y;
+    //        hortNow = SetAxisInput(hortDistance, 0.12f);
+    //        vertNow = SetAxisInput(vertDistance, 0.12f);
     //        meandering = true;
-    //    } // end of if meandering bool true
+    //        Debug.Log("Meandering input set, moving to target");
+    //    }
 
-    //    if (Vector2.Distance(BotGO.transform.position,
-    //        meanderDestination.transform.position) < 0.1f)
+    //    if (Distance < 0.3f && meandering)
     //    {
-    //        hortNow = SetAxisInput(0, 0.0f);
-    //        vertNow = SetAxisInput(0, 0.0f);
-    //        meanderDestination = null;
+    //        ZeroOutInput();
     //        StartCoroutine(WaitRandomTime(meandering));
-    //    } // end of if distance check is < .2
+    //        Debug.Log("At target, stopped and waiting to meander again");
+    //    }
     //} // end of Meander function
+
+    //public void SetMeanderingDestination()
+    //{
+    //    Vector2 randomPointInCircle = Random.insideUnitCircle * 2.5f;
+    //    meanderDestination.transform.position = new Vector2(PlayerGO.transform.position.x + randomPointInCircle.x,
+    //                                                        PlayerGO.transform.position.y + randomPointInCircle.y);
+    //}
 
     public void GoTowardNeededResource()
     {
@@ -284,6 +290,7 @@ public class AICompanion : MonoBehaviour
     {
         if (Player.PlayerSteps.Count == step)
         {
+            ZeroOutInput();
             return;
         }
 
@@ -295,6 +302,7 @@ public class AICompanion : MonoBehaviour
                 Player.PlayerSteps.RemoveAt(step);
                 if (Player.PlayerSteps.Count == step)
                 {
+                    ZeroOutInput();
                     return;
                 }
             }
@@ -321,13 +329,19 @@ public class AICompanion : MonoBehaviour
         return 0.0f;
     }
 
+    public void ZeroOutInput() // perhaps lerp/something to a stop?
+    {
+        hortNow = 0;
+        vertNow = 0;
+    }
+
     IEnumerator WaitRandomTime(bool flag)
     {
-        float timeToWait = DiceRoll();
-        timeToWait = (timeToWait/60) + 60;
+        int timeToWait = DiceRoll();
+        int timeDivisor = 200;
+        timeToWait = timeToWait/timeDivisor;
         yield return new WaitForSeconds(timeToWait);
         flag = !flag;
-        StopCoroutine(WaitRandomTime(flag));
         yield break;
     }
 
