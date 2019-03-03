@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowAimer : MonoBehaviour {
+public class SlowAimer : MonoBehaviour
+{
 
 
     public Transform Target;
@@ -14,19 +15,23 @@ public class SlowAimer : MonoBehaviour {
     [Space]
     public float TimeBetweenShots = 1;
     public float TimeBetweenBursts = 3;
+    public float staggerTimer = 3;
+
+    private bool staggered = false;
+    private Coroutine fireSequence;
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(FireSequence());
-		
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate ()
+        fireSequence = StartCoroutine(FireSequence());
+
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
     {
         if ((Target) && (alert))
         {
@@ -35,15 +40,34 @@ public class SlowAimer : MonoBehaviour {
             float RotateAmount = Vector3.Cross(direction, transform.right).z;
             rb.angularVelocity = RotateAmount * RotationSpeed;
         }
-	}
+    }
 
     private void Update()
     {
-        if (!Target)
+        if (!Target && !staggered)
         {
             Target = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
+
+    public void EnableStagger()
+    {
+        staggered = true;
+        StartCoroutine(StaggerCountdown());
+        StopCoroutine(fireSequence);
+        Debug.LogWarning("Stagger enabled for " + staggerTimer + "!");
+    }
+
+    IEnumerator StaggerCountdown()
+    {
+        Target = null;
+        yield return new WaitForSeconds(staggerTimer);
+        staggered = false;
+        Target = GameObject.FindGameObjectWithTag("Player").transform;
+        Debug.LogWarning("Stagger done restarting firing");
+        fireSequence = StartCoroutine(FireSequence());
+    }
+
     IEnumerator FireSequence()
     {
         Instantiate(Projectile, transform.position + offset, transform.rotation);
@@ -52,7 +76,6 @@ public class SlowAimer : MonoBehaviour {
         yield return new WaitForSeconds(TimeBetweenShots);
         Instantiate(Projectile, transform.position + offset, transform.rotation);
         yield return new WaitForSeconds(TimeBetweenBursts);
-        StartCoroutine(FireSequence());
-
+        fireSequence = StartCoroutine(FireSequence());
     }
 }

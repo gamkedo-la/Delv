@@ -22,13 +22,17 @@ public class EnemyHealth : MonoBehaviour
 
     public EnemyManager spawner;
 
+    private DumbFollowAI meleeEnemy;
+    private SlowAimer rangedEnemy;
+
     void Awake()
     {
         initLayer = gameObject.layer;
     }
     void Start()
     {
-
+        meleeEnemy = GetComponentInChildren<DumbFollowAI>();
+        rangedEnemy = GetComponentInChildren<SlowAimer>();
     }
     // This is deprecated from the old script, just keeping it as reference.
     //void OnTriggerEnter2D()
@@ -80,6 +84,10 @@ public class EnemyHealth : MonoBehaviour
         if ((DMG > 10) && (GameManagerScript.instance.ParticleIntensity > 0))
         {
             Instantiate(ScrapeParticle, transform.position, transform.rotation);
+            if (rangedEnemy != null)
+            {
+                rangedEnemy.gameObject.SendMessage("EnableStagger");
+            }
         }
         if ((DMG < 10) && (GameManagerScript.instance.ParticleIntensity > 1))
         {

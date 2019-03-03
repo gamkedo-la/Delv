@@ -33,11 +33,9 @@ public class Fireball : MonoBehaviour
 
             if (magsqr > 0.0f)
             {
-                Debug.LogWarning("woot we are doing pushback!");
                 Vector3 newPOS = coll.gameObject.transform.position;
                 Vector2 tempV2 = (Vector2)coll.gameObject.transform.position;
                 tempV2 += coll.GetContact(0).normal * (KnockbackForce * offset.normalized / magsqr);
-                Debug.LogWarning("old POS " + coll.gameObject.transform.position + " new POS " + tempV2);
                 newPOS.x = tempV2.x;
                 newPOS.y = tempV2.y;
                 coll.gameObject.transform.position = newPOS;
