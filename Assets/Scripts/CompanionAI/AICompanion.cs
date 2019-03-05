@@ -233,50 +233,50 @@ public class AICompanion : MonoBehaviour
             FollowPlayer();
             return;
         }
-        ZeroOutInput();
+        if (!meandering)
+        {
+            startMeandering();
+        }
+        else
+        {
+            float Distance = 0.0f;
+            Vector2 Heading = BotGO.transform.position - meanderDestination.transform.position;
+            Distance = Heading.magnitude;
+
+            hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
+            vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
+            hortNow = SetAxisInput(hortDistance, 0.12f);
+            vertNow = SetAxisInput(vertDistance, 0.12f);
+            Debug.Log("Meandering input set, moving to target");
+
+            if (Distance < 0.3f && meandering)
+            {
+                SetMeanderingDestination();
+                meandering = false;
+            }
+        }
     }
 
-    //public void startMeandering()
-    //{
-    //    Collider2D meanderZone = Physics2D.OverlapCircle(PlayerGO.transform.position, 3.0f);
-    //    float Distance = 0.0f;
-    //    Debug.Log("Start Meandering");
-    //    if (!meandering)
-    //    {
-    //        SetMeanderingDestination();
-    //        if (!meanderZone.OverlapPoint(meanderDestination.transform.position))
-    //        {
-    //            // TODO for all Debug.Logs -> if (DEBUG_AI)
-    //            Debug.Log("Meandering Destination not within radius near player");
-    //            return;
-    //        }
-    //        //Vector2 Heading = BotGO.transform.position - meanderDestination.transform.position;
-    //        //Distance = Heading.magnitude;
-    //        //Vector2 direction = Heading / Distance;
-    //        //Debug.Log("distance :" + Distance);
-    //        //Debug.Log("direction :" + direction);
-    //        hortDistance = BotGO.transform.position.x - meanderDestination.transform.position.x;
-    //        vertDistance = BotGO.transform.position.y - meanderDestination.transform.position.y;
-    //        hortNow = SetAxisInput(hortDistance, 0.12f);
-    //        vertNow = SetAxisInput(vertDistance, 0.12f);
-    //        meandering = true;
-    //        Debug.Log("Meandering input set, moving to target");
-    //    }
+    public void startMeandering()
+    {
+        Collider2D meanderZone = Physics2D.OverlapCircle(PlayerGO.transform.position, 3.0f);
+        Debug.Log("Start Meandering");
+        meandering = true;
+        SetMeanderingDestination();
+        if (meanderZone.OverlapPoint(meanderDestination.transform.position))
+        {
+            // TODO for all Debug.Logs -> if (DEBUG_AI)
+            Debug.Log("Meandering Destination not within radius near player");
+            return;
+        }
+    } // end of Meander function
 
-    //    if (Distance < 0.3f && meandering)
-    //    {
-    //        ZeroOutInput();
-    //        StartCoroutine(WaitRandomTime(meandering));
-    //        Debug.Log("At target, stopped and waiting to meander again");
-    //    }
-    //} // end of Meander function
-
-    //public void SetMeanderingDestination()
-    //{
-    //    Vector2 randomPointInCircle = Random.insideUnitCircle * 2.5f;
-    //    meanderDestination.transform.position = new Vector2(PlayerGO.transform.position.x + randomPointInCircle.x,
-    //                                                        PlayerGO.transform.position.y + randomPointInCircle.y);
-    //}
+    public void SetMeanderingDestination()
+    {
+        Vector2 randomPointInCircle = Random.insideUnitCircle * 2.5f;
+        meanderDestination.transform.position = new Vector2(PlayerGO.transform.position.x + randomPointInCircle.x,
+                                                            PlayerGO.transform.position.y + randomPointInCircle.y);
+    }
 
     public void GoTowardNeededResource()
     {
