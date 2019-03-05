@@ -5192,7 +5192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8326915504889176791
 Transform:
   m_ObjectHideFlags: 0
@@ -5200,7 +5200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6300180896068623075}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.31998, y: -0.6630376, z: 0.05178339}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5344,7 +5344,7 @@ MonoBehaviour:
   Aimer: {fileID: 0}
   ConCursorGO: {fileID: 8703353638757592938}
   ControllerType: 1
-  ControllerSlot: 2
+  ControllerSlot: 1
   isBot: 0
   AICompanion: {fileID: 0}
   PlayerSteps: []

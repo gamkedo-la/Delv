@@ -88,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4810588144668864
 Transform:
   m_ObjectHideFlags: 0
@@ -245,7 +245,7 @@ MonoBehaviour:
   AICompanion: {fileID: 0}
   PlayerSteps: []
   MaxHealth: 100
-  Health: 100
+  Health: 1000000
   MaxEnergy: 100
   Energy: 100
   EnergyType: 1

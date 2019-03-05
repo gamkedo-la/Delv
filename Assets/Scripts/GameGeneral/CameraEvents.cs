@@ -26,9 +26,28 @@ public class CameraEvents : MonoBehaviour
         _currentEvent = -1;
         _totalEvents = Events.Length;
         CamParent = GameObject.Find("CamParent");
-        C2D = CamParent.GetComponent<Camera2DFollow>();
+        if (CamParent) 
+        {
+            C2D = CamParent.GetComponent<Camera2DFollow>();
+        }
+        else
+        {
+            StartCoroutine(retryCamHookUp());
+        }
     }
 
+    IEnumerator retryCamHookUp()
+    {
+        while(CamParent == null)
+        {
+            yield return new WaitForSeconds(0.1f);
+            CamParent = GameObject.Find("CamParent");
+            if (CamParent)
+            {
+                C2D = CamParent.GetComponent<Camera2DFollow>();
+            }
+        }
+    }
 
     void StartNextEvent()
     {
