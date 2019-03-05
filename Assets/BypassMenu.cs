@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class ByPassMenu : MonoBehaviour
+public class BypassMenu : MonoBehaviour
 {
     public GameObject gameManagerPrefab;
     public bool AIEnabled = true;
@@ -28,15 +28,22 @@ public class ByPassMenu : MonoBehaviour
             BypassScript = GetComponent<MainMenuScript>();
             AI = GetComponent<AICompanion>();
             Instantiate(gameManagerPrefab);
+
+            // workaround to ensure player2 GO is always assessible
+            GameManagerScript.instance.isAIBot = false;
+            GameManagerScript.instance.PlayerCount = 2;
+            GameManagerScript.instance.InitializeGame();
+
+            player2 = GameManagerScript.instance.Player2GO;
+
+            changeGameManagerBasedOnNumberOfPlayers();
+            previousNumberOfPlayers = numberOfPlayers;
+            previousAIOnState = AIEnabled;
             GameManagerScript.instance.isAIBot = AIEnabled;
             GameManagerScript.instance.PlayerCount = numberOfPlayers;
-            previousNumberOfPlayers = numberOfPlayers;
-            previousAIOnState = AIEnabled; 
+
             GameManagerScript.instance.InitializeGame();
-            if (numberOfPlayers == 2) 
-            {
-                player2 = GameManagerScript.instance.Player2GO;
-            }
+
             BypassScript.dialogueBox = GameObject.Find("DialogueManager");
             BypassScript.CompanionManager = GameObject.Find("CompanionManager");
         }
@@ -52,21 +59,31 @@ public class ByPassMenu : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         if (previousAIOnState != AIEnabled || previousNumberOfPlayers != numberOfPlayers)
         {
+            changeGameManagerBasedOnNumberOfPlayers();
+
             previousAIOnState = AIEnabled;
             previousNumberOfPlayers = numberOfPlayers;
             GameManagerScript.instance.isAIBot = AIEnabled;
             GameManagerScript.instance.PlayerCount = numberOfPlayers;
-            if (numberOfPlayers == 1)
-            {
-                player2.SetActive(false);
-                previousAIOnState = AIEnabled = false;
-                GameManagerScript.instance.isAIBot = AIEnabled;
-            }
-            else
-            {
-                player2.SetActive(true);
-            }
+
             GameManagerScript.instance.InitializeGame();
+        }
+    }
+
+    public void changeGameManagerBasedOnNumberOfPlayers()
+    {
+        if (numberOfPlayers == 1)
+        {
+            player2.SetActive(false);
+            if (AIEnabled) 
+            {
+                Debug.Log("AI not enabled because there is only one player");
+                previousAIOnState = AIEnabled = false;
+            }
+        }
+        else
+        {
+            player2.SetActive(true);
         }
     }
 }
