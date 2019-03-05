@@ -411,8 +411,11 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Pickup" + ControllerSlot) && ActivateCD <= 0) //REMEMBER TO CHANGE THIS BUTTON
             {
                 Debug.Log("Player Hit Pickup/Activate button");
+                if (AICompanion.isActiveAndEnabled)
+                {
+                    AICompanion.inCutScene = true;
+                }
                 Activate();
-
             }
             if (Input.GetButtonDown("Cancel" + ControllerSlot)) //REMEMBER TO CHANGE THIS BUTTON
             {
@@ -444,11 +447,15 @@ public class PlayerController : MonoBehaviour
         {
             PotentialWeapon = null;
         }
-        if ((coll.gameObject.tag == "Activatable"))
+        if ((coll.gameObject.tag == "Activatable") && !isBot)
         {
             Debug.Log("Player walked away from" + ActivateTarget);
             ActivateTarget.SendMessage("Deactivate");
             ActivateTarget = null;
+            if (AICompanion.isActiveAndEnabled)
+            {
+                AICompanion.inCutScene = false;
+            }
         }
     }
 

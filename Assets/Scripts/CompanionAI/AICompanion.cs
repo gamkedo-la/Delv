@@ -38,8 +38,8 @@ public class AICompanion : MonoBehaviour
     [Header("AI States")]
     [SerializeField]
     public bool following;
-    [SerializeField]
-    private bool meandering;
+    public bool meandering;
+    public bool inCutScene;
     [Space]
     [Header("Level Targets")]
     public GameObject[] TargetGOs;
@@ -203,6 +203,12 @@ public class AICompanion : MonoBehaviour
 
     public void AIMoveBasedOnState()
     {
+        if (inCutScene)
+        {
+            ZeroOutInput();
+            return;
+        }
+
         ResourceManager();
 
         if (nearestResource != null && (FoundHealth || FoundMana))
@@ -233,6 +239,7 @@ public class AICompanion : MonoBehaviour
             FollowPlayer();
             return;
         }
+
         if (!meandering)
         {
             startMeandering();
