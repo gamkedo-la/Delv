@@ -87,6 +87,7 @@ public class GameManagerScript : MonoBehaviour
         LinkPlayers();
         Player1UI.SetActive(true);
         Player1GO.SetActive(true);
+        CAM.target = Player1GO.transform;
     }
     public void EnablePlayer2()
     {
