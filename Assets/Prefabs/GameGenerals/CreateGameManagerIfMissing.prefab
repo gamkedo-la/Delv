@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerPrefab: {fileID: 950072695, guid: d38ebff77834f41629b083b08339d580, type: 3}
+  AIEnabled: 1
+  numberOfPlayers: 2
+  previousAIOnState: 0
+  previousNumberOfPlayers: 0
 --- !u!114 &1398992335977194649
 MonoBehaviour:
   m_ObjectHideFlags: 0

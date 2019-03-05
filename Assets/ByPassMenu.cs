@@ -6,7 +6,15 @@ using UnityEngine;
 public class ByPassMenu : MonoBehaviour
 {
     public GameObject gameManagerPrefab;
+    public bool AIEnabled = true;
+    public int numberOfPlayers = 2;
+    private bool previousAIOnState;
+    private int previousNumberOfPlayers;
+
     private MainMenuScript BypassScript;
+    private AICompanion AI;
+    private GameObject player2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +26,47 @@ public class ByPassMenu : MonoBehaviour
         {
             Debug.Log("No camera detected, started from editor");
             BypassScript = GetComponent<MainMenuScript>();
+            AI = GetComponent<AICompanion>();
             Instantiate(gameManagerPrefab);
-            GameManagerScript.instance.PlayerCount = 2;
+            GameManagerScript.instance.isAIBot = AIEnabled;
+            GameManagerScript.instance.PlayerCount = numberOfPlayers;
+            previousNumberOfPlayers = numberOfPlayers;
+            previousAIOnState = AIEnabled; 
             GameManagerScript.instance.InitializeGame();
-            //SceneManager.LoadScene(1);
+            if (numberOfPlayers == 2) 
+            {
+                player2 = GameManagerScript.instance.Player2GO;
+            }
             BypassScript.dialogueBox = GameObject.Find("DialogueManager");
             BypassScript.CompanionManager = GameObject.Find("CompanionManager");
-            //dialogueBox.SetActive(true);
+        }
+    }
+
+    private void Update()
+    {
+        StartCoroutine(checkSceneVariables());
+    }
+
+    IEnumerator checkSceneVariables()
+    {
+        yield return new WaitForSeconds(2.0f);
+        if (previousAIOnState != AIEnabled || previousNumberOfPlayers != numberOfPlayers)
+        {
+            previousAIOnState = AIEnabled;
+            previousNumberOfPlayers = numberOfPlayers;
+            GameManagerScript.instance.isAIBot = AIEnabled;
+            GameManagerScript.instance.PlayerCount = numberOfPlayers;
+            if (numberOfPlayers == 1)
+            {
+                player2.SetActive(false);
+                previousAIOnState = AIEnabled = false;
+                GameManagerScript.instance.isAIBot = AIEnabled;
+            }
+            else
+            {
+                player2.SetActive(true);
+            }
+            GameManagerScript.instance.InitializeGame();
         }
     }
 }
