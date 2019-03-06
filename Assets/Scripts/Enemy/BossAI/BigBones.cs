@@ -8,7 +8,8 @@ public class BigBones : MonoBehaviour
     //Boss Stats
     public float MaxHP;
     public float HP;
-    public int Phase;
+    public int CurrentPhase;
+    public int PhaseCount;
     public bool isShielding;
     public bool isVulnerable;
     public bool isActive;
@@ -53,16 +54,18 @@ public class BigBones : MonoBehaviour
             Debug.Log(gameObject + " health damaged by " + DMG);
             HP -= DMG;
             Debug.Log(gameObject + " health is now " + HP);
+            //Play Hurt Sound Here
             if ((DMG > 10) && (GameManagerScript.instance.ParticleIntensity > 0))
             {
                 Instantiate(DamagedParticle, transform.position, transform.rotation);
-
+                
             }
 
         }
         if (isShielding == true)
         {
             FloatingTextController.CreateFloatingText("0", transform, 0);
+            //Play Ting sound here
         }
 
 
