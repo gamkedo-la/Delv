@@ -5114,6 +5114,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 671084470, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 7844c54473f54e84da984f1989a66828,
+        type: 3}
+    - target: {fileID: 871660839, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 7844c54473f54e84da984f1989a66828,
+        type: 3}
     - target: {fileID: 465405479, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_Color.r
       value: 0.13725491
