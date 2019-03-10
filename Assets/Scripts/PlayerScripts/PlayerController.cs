@@ -356,9 +356,14 @@ public class PlayerController : MonoBehaviour
             Hinput = Input.GetAxis(LstickH);
         }
 
-        _rb.AddForce(gameObject.transform.up * speed * Vinput);
-        _rb.AddForce(gameObject.transform.right * speed * Hinput);
-
+        //_rb.AddForce(gameObject.transform.up * speed * Vinput);
+        //_rb.AddForce(gameObject.transform.right * speed * Hinput);
+		
+		Vector2 velocity = _rb.velocity;
+		velocity.y = (speed/6f) * Vinput;
+		velocity.x = (speed/6f) * Hinput;
+		_rb.velocity = velocity;
+		
         if (AICompanion.isActiveAndEnabled && !isBot && AICompanion.following)
         {
             float stepDistanceCheck = 3.0f;
