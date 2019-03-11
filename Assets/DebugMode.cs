@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// First git commit using Git Bash -- will remove
 public class DebugMode : MonoBehaviour
 {
     public GameObject[] player;
