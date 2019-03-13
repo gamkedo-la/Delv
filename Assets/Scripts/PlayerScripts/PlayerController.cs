@@ -358,12 +358,12 @@ public class PlayerController : MonoBehaviour
 
         //_rb.AddForce(gameObject.transform.up * speed * Vinput);
         //_rb.AddForce(gameObject.transform.right * speed * Hinput);
-		
+
 		Vector2 velocity = _rb.velocity;
 		velocity.y = (speed/6f) * Vinput;
 		velocity.x = (speed/6f) * Hinput;
 		_rb.velocity = velocity;
-		
+
         if (AICompanion.isActiveAndEnabled && !isBot && AICompanion.following)
         {
             float stepDistanceCheck = 3.0f;
@@ -372,7 +372,7 @@ public class PlayerController : MonoBehaviour
             if (PlayerSteps.Count == 0) {
                 PlayerSteps.Add(currentStep);
             }
-            else if (Mathf.Abs(Vector3.Distance(currentStep, 
+            else if (Mathf.Abs(Vector3.Distance(currentStep,
             PlayerSteps[currentStepIndex - 1])) > stepDistanceCheck)
             {
                 PlayerSteps.Add(currentStep);
