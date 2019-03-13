@@ -40,6 +40,7 @@ public class AICompanion : MonoBehaviour
     public bool following;
     public bool meandering;
     public bool inCutScene;
+    public bool inCombat;
     [Space]
     [Header("Level Targets")]
     public GameObject[] TargetGOs;
@@ -122,9 +123,106 @@ public class AICompanion : MonoBehaviour
     private Collider2D[] itemArray = new Collider2D[10];
     [Space]
     [Header("Resource States")]
-    public bool FoundHealth;
-    public bool FoundMana;
+    public bool foundHealth;
+    public bool foundMana;
     public Collider2D nearestResource;
+
+    public void AIMoveBasedOnState()
+    {
+        if (inCutScene)
+        {
+            meandering = false;
+            following = false;
+            ZeroOutInput();
+            return;
+        }
+
+        if (Player.isDead)
+        {
+            meandering = false;
+            following = false;
+            getToPlayerToRevive();
+            return;
+        }
+
+        ResourceManager();
+
+        if (nearestResource != null && (foundHealth || foundMana))
+        {
+            meandering = false;
+            following = false;
+            GoTowardNeededResource();
+            if (DEBUG_AI)
+            {
+                if (foundMana && foundHealth)
+                {
+                    Debug.Log("AI: 'Need mana/health and found both types of potions'");
+                }
+                else if (foundMana)
+                {
+                    Debug.Log("AI: 'Need mana and found mana'");
+                }
+                else if (foundHealth)
+                {
+                    Debug.Log("AI: 'Need health and found health'");
+                }
+            }
+        }
+
+        if (closestTarget != null && closestTarget.layer != containerLayer) 
+        {
+            // MORTAL KOMBAT!!!
+            meandering = false;
+            following = false; 
+            combatManeuvers();
+        }
+
+        if (FollowPlayerCheck() || following)
+        {
+            meandering = false;
+            FollowPlayer();
+            return;
+        }
+
+        if (!meandering)
+        {
+            startMeandering();
+        }
+        else
+        {
+            float Distance = 0.0f;
+            Vector2 Heading = BotGO.transform.position - meanderDestination.transform.position;
+            Distance = Heading.magnitude;
+
+            hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
+            vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
+            hortNow = SetAxisInput(hortDistance, 0.12f);
+            vertNow = SetAxisInput(vertDistance, 0.12f);
+            if (DEBUG_AI) Debug.Log("Meandering input set, moving to target");
+
+            if (Distance < 0.3f && meandering)
+            {
+                SetMeanderingDestination();
+                meandering = false;
+            }
+        }
+    }
+
+    public void getToPlayerToRevive()
+    {
+        //if (DEBUG_AI) 
+        //Debug.Log("AI going to player to revive");
+        if (Mathf.Abs(Vector3.Distance(BotGO.transform.position,
+                PlayerGO.transform.position)) > 0.6f)
+        {
+            hortDistance = PlayerGO.transform.position.x - BotGO.transform.position.x;
+            vertDistance = PlayerGO.transform.position.y - BotGO.transform.position.y;
+            hortNow = SetAxisInput(hortDistance, 1.0f);
+            vertNow = SetAxisInput(vertDistance, 1.0f);
+            return;
+        }
+        ZeroOutInput();
+    }
 
     public void ResourceManager()
     {
@@ -133,7 +231,7 @@ public class AICompanion : MonoBehaviour
         {
             if (FindNearestResource("HealthPotion"))
             {
-                FoundHealth = true;
+                foundHealth = true;
                 return;
             }
         }
@@ -142,13 +240,13 @@ public class AICompanion : MonoBehaviour
         {
             if (FindNearestResource("ManaPotion"))
             {
-                FoundMana = true;
+                foundMana = true;
                 return;
             }
         }
-            FoundHealth = false;
-            FoundMana = false;
-            // not found because AI doesn't need it
+        foundHealth = false;
+        foundMana = false;
+        // not found because AI doesn't need it
     }
 
     public bool FindNearestResource(string potionName)
@@ -200,68 +298,24 @@ public class AICompanion : MonoBehaviour
         return false;
     }
 
-
-    public void AIMoveBasedOnState()
+    public void combatManeuvers()
     {
-        if (inCutScene)
+        if (Vector2.Distance(BotGO.transform.position, closestTarget.transform.position) 
+            < (AimDistance - 0.5))
         {
-            ZeroOutInput();
-            return;
+            hortDistance = BotGO.transform.position.x - closestTarget.transform.position.x;
+            vertDistance = BotGO.transform.position.y - closestTarget.transform.position.y;
+
+        }
+        if (Vector2.Distance(BotGO.transform.position, closestTarget.transform.position)
+            > (AimDistance + 0.5))
+        {
+            hortDistance = closestTarget.transform.position.x - BotGO.transform.position.x;
+            vertDistance = closestTarget.transform.position.y - BotGO.transform.position.y;
         }
 
-        ResourceManager();
-
-        if (nearestResource != null && (FoundHealth || FoundMana))
-        {
-            if (DEBUG_AI && FoundMana && FoundHealth)
-            {
-                Debug.Log("AI: 'Need mana/health and found both types of potions'");
-            }
-            else
-            {
-                if (DEBUG_AI && FoundMana)
-                {
-                    Debug.Log("AI: 'Need mana and found mana'");
-                }
-                if (DEBUG_AI && FoundHealth)
-                {
-                    Debug.Log("AI: 'Need health and found health'");
-                }
-            }
-            meandering = false;
-            GoTowardNeededResource();
-            return;
-        }
-
-        if (FollowPlayerCheck() || following)
-        {
-            meandering = false;
-            FollowPlayer();
-            return;
-        }
-
-        if (!meandering)
-        {
-            startMeandering();
-        }
-        else
-        {
-            float Distance = 0.0f;
-            Vector2 Heading = BotGO.transform.position - meanderDestination.transform.position;
-            Distance = Heading.magnitude;
-
-            hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
-            vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
-            hortNow = SetAxisInput(hortDistance, 0.12f);
-            vertNow = SetAxisInput(vertDistance, 0.12f);
-            Debug.Log("Meandering input set, moving to target");
-
-            if (Distance < 0.3f && meandering)
-            {
-                SetMeanderingDestination();
-                meandering = false;
-            }
-        }
+        hortNow = SetAxisInput(hortDistance, 0.50f);
+        vertNow = SetAxisInput(vertDistance, 0.50f);
     }
 
     public void startMeandering()

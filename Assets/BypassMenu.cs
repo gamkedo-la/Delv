@@ -21,6 +21,7 @@ public class BypassMenu : MonoBehaviour
         if (Camera.main)
         {
             Debug.Log("There is a main camera, therefore we got here from main menu");
+            return;
         } 
         else 
         {
@@ -51,6 +52,11 @@ public class BypassMenu : MonoBehaviour
 
     private void Update()
     {
+        if (Camera.main)
+        {
+            //Debug.Log("There is a main camera, therefore we got here from main menu");
+            return;
+        }
         StartCoroutine(checkSceneVariables());
     }
 

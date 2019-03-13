@@ -434,6 +434,10 @@ public class PlayerController : MonoBehaviour
             PlayerController other = coll.gameObject.GetComponent<PlayerController>();
             if (other && other.isDead)
             {
+                if (isBot && AICompanion.hortNow == 0)
+                {
+                    other.SendMessage("Revive");
+                }
                 Debug.Log(gameObject.name + " is touching other dead player: " + coll.gameObject.name);
             }
         }
