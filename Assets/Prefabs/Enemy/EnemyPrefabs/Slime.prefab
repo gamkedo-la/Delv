@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 50990727269765176}
   - component: {fileID: 61264192399106346}
   - component: {fileID: 114054869863383562}
+  - component: {fileID: 5510341121092790855}
   - component: {fileID: 114582559482160304}
   - component: {fileID: 415042515711866636}
   - component: {fileID: 1668601175}
@@ -154,6 +155,19 @@ MonoBehaviour:
   DistToTarget: 0
   DistToP1: 0
   DistToP2: 0
+--- !u!114 &5510341121092790855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353985058766602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d886439c21c932b45b8faf7379a0282c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetBehavior: {fileID: 114054869863383562}
 --- !u!114 &114582559482160304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +218,7 @@ Animator:
   m_GameObject: {fileID: 1353985058766602}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6809d5771356c55478d63946cf4bf78a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4c7c5034cb73f4006b94411807156f17, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
