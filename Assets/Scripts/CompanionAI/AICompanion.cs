@@ -39,6 +39,9 @@ public class AICompanion : MonoBehaviour
     [SerializeField]
     public bool following;
     public bool meandering;
+    private int idleTimerFull = 45;
+    private int idleTimer = 45;
+    public int idleTimeLeft = 0;
     public bool inCutScene;
     public bool inCombat;
     [Space]
@@ -193,25 +196,32 @@ public class AICompanion : MonoBehaviour
             float Distance = 0.0f;
             Vector2 Heading = BotGO.transform.position - meanderDestination.transform.position;
             Distance = Heading.magnitude;
-
+            if (DEBUG_AI) Debug.Log("AI: I am " + Distance + " away from meander point");
+            if (Distance < 0.3f)
+            {
+                if (DEBUG_AI) Debug.Log("AI: Got to meander point, waiting");
+                ZeroOutInput();
+                idleTimer--;
+                idleTimeLeft = idleTimer;
+                if (idleTimer <= 0)
+                {
+                    int randomOffset = DiceRoll();
+                    idleTimer = idleTimerFull + Mathf.CeilToInt(idleTimerFull * (randomOffset/100));
+                    meandering = false;
+                }
+                return;
+            }
             hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
             vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
             hortNow = SetAxisInput(hortDistance, 0.12f);
             vertNow = SetAxisInput(vertDistance, 0.12f);
-            if (DEBUG_AI) Debug.Log("Meandering input set, moving to target");
-
-            if (Distance < 0.3f && meandering)
-            {
-                SetMeanderingDestination();
-                meandering = false;
-            }
-        }
-    }
+            if (DEBUG_AI) Debug.Log("AI: Meandering input set, moving to target");
+        } // end of meandering = true 
+    } // end of AIMoveBasedOnState():
 
     public void getToPlayerToRevive()
     {
-        //if (DEBUG_AI) 
-        //Debug.Log("AI going to player to revive");
+        if (DEBUG_AI) Debug.Log("AI going to player to revive");
         if (Mathf.Abs(Vector3.Distance(BotGO.transform.position,
                 PlayerGO.transform.position)) > 0.6f)
         {
@@ -320,23 +330,31 @@ public class AICompanion : MonoBehaviour
 
     public void startMeandering()
     {
-        Collider2D meanderZone = Physics2D.OverlapCircle(PlayerGO.transform.position, 3.0f);
         Debug.Log("Start Meandering");
-        meandering = true;
         SetMeanderingDestination();
-        if (meanderZone.OverlapPoint(meanderDestination.transform.position))
-        {
-            // TODO for all Debug.Logs -> if (DEBUG_AI)
-            Debug.Log("Meandering Destination not within radius near player");
-            return;
-        }
-    } // end of Meander function
+    } 
 
     public void SetMeanderingDestination()
     {
         Vector2 randomPointInCircle = Random.insideUnitCircle * 2.5f;
         meanderDestination.transform.position = new Vector2(PlayerGO.transform.position.x + randomPointInCircle.x,
                                                             PlayerGO.transform.position.y + randomPointInCircle.y);
+        Collider2D meanderZone = Physics2D.OverlapCircle(PlayerGO.transform.position, 3.0f);
+        Vector2 meanderingPoint = meanderDestination.transform.position;
+        if (PlayerGO.gameObject.GetComponent<Collider2D>().OverlapPoint(meanderingPoint))
+        {
+            Debug.Log("AI: Meandering Destination inside player");
+            return;
+        }
+        //Ray testPathRay = new Ray(BotGO.transform.position, meanderDestination.transform.position);
+        //Debug.DrawRay(BotGO.transform.position, meanderDestination.transform.position, Color.red, 3);
+        //bool rayHit = Physics.Raycast(testPathRay.origin, testPathRay.direction, 2.5f);
+        //if (rayHit)
+        //{
+        //    Debug.Log("AI: Meandering path goes through object");
+        //    return;
+        //}
+        meandering = true;
     }
 
     public void GoTowardNeededResource()

@@ -23,31 +23,29 @@ public class BypassMenu : MonoBehaviour
             Debug.Log("There is a main camera, therefore we got here from main menu");
             return;
         } 
-        else 
-        {
-            Debug.Log("No camera detected, started from editor");
-            BypassScript = GetComponent<MainMenuScript>();
-            AI = GetComponent<AICompanion>();
-            Instantiate(gameManagerPrefab);
 
-            // workaround to ensure player2 GO is always assessible
-            GameManagerScript.instance.isAIBot = false;
-            GameManagerScript.instance.PlayerCount = 2;
-            GameManagerScript.instance.InitializeGame();
+        Debug.Log("No camera detected, started from editor");
+        BypassScript = GetComponent<MainMenuScript>();
+        AI = GetComponent<AICompanion>();
+        Instantiate(gameManagerPrefab);
 
-            player2 = GameManagerScript.instance.Player2GO;
+        // workaround to ensure player2 GO is always assessible
+        GameManagerScript.instance.isAIBot = false;
+        GameManagerScript.instance.PlayerCount = 2;
+        GameManagerScript.instance.InitializeGame();
 
-            changeGameManagerBasedOnNumberOfPlayers();
-            previousNumberOfPlayers = numberOfPlayers;
-            previousAIOnState = AIEnabled;
-            GameManagerScript.instance.isAIBot = AIEnabled;
-            GameManagerScript.instance.PlayerCount = numberOfPlayers;
+        player2 = GameManagerScript.instance.Player2GO;
 
-            GameManagerScript.instance.InitializeGame();
+        changeGameManagerBasedOnNumberOfPlayers();
+        previousNumberOfPlayers = numberOfPlayers;
+        previousAIOnState = AIEnabled;
+        GameManagerScript.instance.isAIBot = AIEnabled;
+        GameManagerScript.instance.PlayerCount = numberOfPlayers;
 
-            BypassScript.dialogueBox = GameObject.Find("DialogueManager");
-            BypassScript.CompanionManager = GameObject.Find("CompanionManager");
-        }
+        GameManagerScript.instance.InitializeGame();
+
+        BypassScript.dialogueBox = GameObject.Find("DialogueManager");
+        BypassScript.CompanionManager = GameObject.Find("CompanionManager");
     }
 
     private void Update()
