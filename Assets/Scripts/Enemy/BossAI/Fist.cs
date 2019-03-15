@@ -21,18 +21,12 @@ public class Fist : MonoBehaviour
     public GameObject[] players;
 
     // Start is called before the first frame update
-    void OnEnable()
-    {
 
-        CheckTargets();
-        ActivateFist();
-
-    }
 
     void ActivateFist()
     {
-        StartChase();
         CheckTargets();
+        StartChase();
         StartCoroutine(SlamLoop());
     }
 

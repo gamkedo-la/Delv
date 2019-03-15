@@ -4979,7 +4979,7 @@ ParticleSystem:
 --- !u!199 &8519024982298761856
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -5368,7 +5368,7 @@ MonoBehaviour:
   MaxEnergy: 100
   Energy: 100
   EnergyType: 1
-  speed: 50
+  speed: 40
   EnergyRegenRate: 10
   PickupCD: 0
   iFrames: 0
