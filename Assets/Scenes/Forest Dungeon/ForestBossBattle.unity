@@ -4310,13 +4310,34 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 929622326}
+  - component: {fileID: 929622325}
+  - component: {fileID: 929622327}
   m_Layer: 0
   m_Name: Fist1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &929622325
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929622324}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a94e3a1546024e4fb607c41b071c848, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &929622326
 Transform:
   m_ObjectHideFlags: 0
@@ -4325,7 +4346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929622324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9725113, y: -0.77207756, z: 0}
+  m_LocalPosition: {x: 1.972511, y: -0.77207756, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1847867246}
@@ -4333,6 +4354,30 @@ Transform:
   m_Father: {fileID: 801902031}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &929622327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929622324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9660664dbe4ae2949971e3aabd41d54d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartPos: {fileID: 0}
+  BigBones: {fileID: 801902032}
+  target: {fileID: 0}
+  Ani: {fileID: 929622325}
+  ActualFist: {fileID: 1847867245}
+  DMGcollider: {fileID: 1847867247}
+  isChasing: 1
+  isSlammed: 0
+  isLifting: 0
+  speed: 3
+  timeBetweenSlams: 5
+  players: []
 --- !u!1 &971619733
 GameObject:
   m_ObjectHideFlags: 0
@@ -158241,9 +158286,10 @@ GameObject:
   - component: {fileID: 1847867248}
   - component: {fileID: 1847867247}
   - component: {fileID: 1847867249}
-  m_Layer: 0
+  - component: {fileID: 1847867250}
+  m_Layer: 10
   m_Name: FistCol
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158324,7 +158370,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: baf19a87c8c6ea74297531eb89789d32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -158336,25 +158382,46 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &1847867249
-Animator:
-  serializedVersion: 3
+--- !u!114 &1847867249
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1847867245}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f51699a9b54a8a444aef8cac46f22c01, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05468f871a292a42bde129bdeba0259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawDMG: 25
+  DamageDealt: 0
+  TimeTilRedamage: 0.5
+  RedamageClock: 0
+--- !u!114 &1847867250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847867245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f055b0fd7b3757349849b1e880f45d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 100
+  Armor: 0
+  Shields: 0
+  iFrames: 0
+  iAmount: 0
+  DeathParticle: {fileID: 1785378511647156, guid: 83f4455bfc1a8274aa1ee3441ee2be51,
+    type: 3}
+  ScrapeParticle: {fileID: 1785378511647156, guid: 83f4455bfc1a8274aa1ee3441ee2be51,
+    type: 3}
+  TinyScrapeParticle: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
+    type: 3}
+  spawner: {fileID: 0}
 --- !u!1 &1955227324
 GameObject:
   m_ObjectHideFlags: 0
@@ -158422,7 +158489,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 378d62632058d83418350f829241bb47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

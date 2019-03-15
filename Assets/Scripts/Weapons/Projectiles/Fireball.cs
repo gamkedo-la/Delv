@@ -49,8 +49,18 @@ public class Fireball : MonoBehaviour
             Die();
         }
     }
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        Debug.Log("Fireball made contact with" + coll.gameObject);
+        if (coll.gameObject.tag == "Enemy")
+        {
+            Debug.Log(coll.gameObject + "has been struck by projectile");
+            coll.gameObject.SendMessage("DamageHealth", rawDMG);
+            Die();
+        }
+    }
 
-    void Die()
+            void Die()
     {
         if (GameManagerScript.instance.ParticleIntensity > 1)
         {

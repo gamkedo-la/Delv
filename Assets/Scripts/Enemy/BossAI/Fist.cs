@@ -8,6 +8,7 @@ public class Fist : MonoBehaviour
     public BigBones BigBones;
     public Transform target;
     public Animator Ani;
+    public GameObject ActualFist;
 
     public Collider2D DMGcollider;
 
@@ -15,11 +16,24 @@ public class Fist : MonoBehaviour
     public bool isSlammed;
     public bool isLifting;
     public float speed;
+    public float timeBetweenSlams;
+
+    public GameObject[] players;
 
     // Start is called before the first frame update
     void OnEnable()
     {
-        
+
+        CheckTargets();
+        ActivateFist();
+
+    }
+
+    void ActivateFist()
+    {
+        StartChase();
+        CheckTargets();
+        StartCoroutine(SlamLoop());
     }
 
     // Update is called once per frame
@@ -31,14 +45,34 @@ public class Fist : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target.position, step);
 
         }
+        if (target == null)
+        {
+            CheckTargets();
+
+        }
+        if (ActualFist == null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator Slam()
     {
-        DMGcollider.enabled = true;
+        Debug.Log("Slamming now...");
+        StopChase();
+        Ani.SetTrigger("StartSlam");
         yield return new WaitForSeconds(.5f);
-        DMGcollider.enabled = false;
-        isLifting = true;
+        Debug.Log("Lifting now...");
+        Ani.SetTrigger("StartLift");
+        CheckTargets();
+
+    }
+
+    IEnumerator SlamLoop()
+    {
+        StartCoroutine(Slam());
+        yield return new WaitForSeconds(timeBetweenSlams);
+        StartCoroutine(SlamLoop());
     }
 
     void StartChase()
@@ -49,5 +83,23 @@ public class Fist : MonoBehaviour
     void StopChase()
     {
         isChasing = false;
+    }
+
+    void RandTarget()
+    {
+        target = players[Random.Range(0, 1)].transform;
+    }
+    void CheckTargets()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length > 1)
+        {
+            RandTarget();
+
+        }
+        if (players.Length == 1)
+        {
+            target = players[0].transform;
+        }
     }
 }
