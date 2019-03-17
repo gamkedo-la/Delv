@@ -117,6 +117,11 @@ public class PlayerController : MonoBehaviour
     public GameObject CursorGO;
     [Space]
     public bool isDead = false;
+	[Space]
+	public AudioClip stepClip;
+	public float stepDelay = 0.2f;
+	private float stepTimer = 0f;
+	private AudioSource audSrc;
 
 
     private void OnEnable()
@@ -171,6 +176,7 @@ public class PlayerController : MonoBehaviour
         HealthBar = healthdirector.HealthBar;
         EnergyBar = healthdirector.EnergyBar;
         reviver = GetComponent<Reviver>();
+		audSrc = GetComponent<AudioSource>();
     }
 
     // Use this for initialization
@@ -355,6 +361,23 @@ public class PlayerController : MonoBehaviour
         {
             Hinput = Input.GetAxis(LstickH);
         }
+		
+		if(_rb.velocity != Vector2.zero)
+		{
+			if(stepTimer <= 0f)
+			{
+				audSrc.PlayOneShot(stepClip, 0.3f);
+				stepTimer = stepDelay;
+			}
+			else
+			{
+				stepTimer -= Time.deltaTime;
+			}
+		}
+		else
+		{
+			stepTimer = 0f;
+		}
 
         //_rb.AddForce(gameObject.transform.up * speed * Vinput);
         //_rb.AddForce(gameObject.transform.right * speed * Hinput);
@@ -363,7 +386,7 @@ public class PlayerController : MonoBehaviour
 		velocity.y = (speed/6f) * Vinput;
 		velocity.x = (speed/6f) * Hinput;
 		_rb.velocity = velocity;
-
+		
         if (AICompanion.isActiveAndEnabled && !isBot && AICompanion.following)
         {
             float stepDistanceCheck = 3.0f;
