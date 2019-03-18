@@ -49,7 +49,6 @@ public class EnemyManager : MonoBehaviour
     {
         if ((col.gameObject.name == "Player1") && !RoomActive)
         {
-
             RoomActive = true;
             if (LockType)
             {
