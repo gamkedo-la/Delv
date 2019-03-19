@@ -31,13 +31,15 @@ public class ButtonToScene : MonoBehaviour, IPointerClickHandler
 		}
 		else if ( sceneName == "Reset" )
 		{
-			Time.timeScale = 1f;
-			SceneManager.LoadScene( gameObject.scene.name );
+      if (startTime)
+        Time.timeScale = 1f;
+      SceneManager.LoadScene( gameObject.scene.name );
 		}
 		else
 		{
-			Time.timeScale = 1f;
-			OnButtonPress.Invoke( );
+      if (startTime)
+        Time.timeScale = 1f;
+      OnButtonPress.Invoke( );
 			SceneManager.LoadScene( sceneName );
 		}
 	}
