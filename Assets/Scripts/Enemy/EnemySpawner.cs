@@ -15,6 +15,9 @@ public class EnemySpawner : MonoBehaviour
     {
         Animator = GetComponent<Animator>();
         Eye = this.transform;
+
+		if (spawner == null)
+			spawner = FindObjectOfType<EnemyManager>();
     }
 
     void SpawnEnemy()

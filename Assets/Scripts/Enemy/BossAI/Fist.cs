@@ -25,7 +25,7 @@ public class Fist : MonoBehaviour
     // Start is called before the first frame update
 
 
-    void Activate()
+    public void Activate()
     {
         CheckTargets();
         StartChase();
@@ -53,7 +53,6 @@ public class Fist : MonoBehaviour
             if (target == null)
             {
                 CheckTargets();
-
             }
             if (ActualFist == null)
             {
@@ -72,7 +71,6 @@ public class Fist : MonoBehaviour
         Debug.Log("Lifting now...");
         Ani.SetTrigger("StartLift");
         CheckTargets();
-
     }
 
     IEnumerator SlamLoop()
@@ -94,7 +92,7 @@ public class Fist : MonoBehaviour
 
     void RandTarget()
     {
-        target = players[Random.Range(0, 1)].transform;
+        target = players[Random.Range(0, 2)].transform;
     }
     void CheckTargets()
     {
@@ -102,7 +100,6 @@ public class Fist : MonoBehaviour
         if (players.Length > 1)
         {
             RandTarget();
-
         }
         if (players.Length == 1)
         {

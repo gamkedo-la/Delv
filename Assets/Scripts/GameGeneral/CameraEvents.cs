@@ -144,4 +144,6 @@ public class Event
     public int timer;
     public bool skippable;
     public GameObject activateOnEventEnd;
+	public Animator anim;
+	public string state;
 }
