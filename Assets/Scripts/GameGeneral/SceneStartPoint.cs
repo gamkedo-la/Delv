@@ -7,7 +7,6 @@ public class SceneStartPoint : MonoBehaviour {
     public GameObject[] Player;
     public bool HasPlayerBeenBrought = false;
 
-
 	// Use this for initialization
 	void Start ()
     {
@@ -26,8 +25,7 @@ public class SceneStartPoint : MonoBehaviour {
         {
             foreach (GameObject pl in Player)
             {
-            pl.SendMessage("GoToStart");
-
+                pl.SendMessage("GoToStart");
             }
         }
 	}

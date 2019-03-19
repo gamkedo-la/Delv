@@ -362,7 +362,7 @@ public class PlayerController : MonoBehaviour
             Hinput = Input.GetAxis(LstickH);
         }
 		
-		if(_rb.velocity != Vector2.zero)
+		if(_rb.velocity != Vector2.zero && !isBot)
 		{
 			if(stepTimer <= 0f)
 			{
@@ -547,6 +547,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = SP.transform.position;
             Debug.Log("Player Received GoToStart command");
+            if (isBot) 
+            {
+                AICompanion.meanderDestination.transform.position =
+                AICompanion.BotGO.transform.position;
+            }
         }
     }
 

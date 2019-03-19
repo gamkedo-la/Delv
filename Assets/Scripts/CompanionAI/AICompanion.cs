@@ -48,8 +48,11 @@ public class AICompanion : MonoBehaviour
     [Header("Level Targets")]
     public GameObject[] TargetGOs;
     private GameObject closestTarget;
-    [SerializeField]
-    private GameObject meanderDestination;
+    [Space]
+    public GameObject meanderDestination;
+
+    private Collider2D AICollider;
+
     private float AimDistance = 4.5f;
 
     private int containerLayer;
@@ -63,6 +66,7 @@ public class AICompanion : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
+        AICollider = BotGO.GetComponent<Collider2D>();
         containerLayer = LayerMask.NameToLayer("Container");
         itemLayer = LayerMask.NameToLayer("Items");
         // the item layer is number 16
@@ -189,34 +193,12 @@ public class AICompanion : MonoBehaviour
 
         if (!meandering)
         {
-            startMeandering();
+            SetMeanderingDestination();
         }
         else
         {
-            float Distance = 0.0f;
-            Vector2 Heading = BotGO.transform.position - meanderDestination.transform.position;
-            Distance = Heading.magnitude;
-            if (DEBUG_AI) Debug.Log("AI: I am " + Distance + " away from meander point");
-            if (Distance < 0.3f)
-            {
-                if (DEBUG_AI) Debug.Log("AI: Got to meander point, waiting");
-                ZeroOutInput();
-                idleTimer--;
-                idleTimeLeft = idleTimer;
-                if (idleTimer <= 0)
-                {
-                    int randomOffset = DiceRoll();
-                    idleTimer = idleTimerFull + Mathf.CeilToInt(idleTimerFull * (randomOffset/100));
-                    meandering = false;
-                }
-                return;
-            }
-            hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
-            vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
-            hortNow = SetAxisInput(hortDistance, 0.12f);
-            vertNow = SetAxisInput(vertDistance, 0.12f);
-            if (DEBUG_AI) Debug.Log("AI: Meandering input set, moving to target");
-        } // end of meandering = true 
+            Meander();
+        }
     } // end of AIMoveBasedOnState():
 
     public void getToPlayerToRevive()
@@ -328,33 +310,59 @@ public class AICompanion : MonoBehaviour
         vertNow = SetAxisInput(vertDistance, 0.50f);
     }
 
-    public void startMeandering()
-    {
-        Debug.Log("Start Meandering");
-        SetMeanderingDestination();
-    } 
+    public RaycastHit2D[] hitArray = new RaycastHit2D[10];
 
     public void SetMeanderingDestination()
     {
         Vector2 randomPointInCircle = Random.insideUnitCircle * 2.5f;
-        meanderDestination.transform.position = new Vector2(PlayerGO.transform.position.x + randomPointInCircle.x,
-                                                            PlayerGO.transform.position.y + randomPointInCircle.y);
-        Collider2D meanderZone = Physics2D.OverlapCircle(PlayerGO.transform.position, 3.0f);
-        Vector2 meanderingPoint = meanderDestination.transform.position;
+        Vector3 meanderingPoint = new Vector3(PlayerGO.transform.position.x + randomPointInCircle.x,
+                                              PlayerGO.transform.position.y + randomPointInCircle.y);
         if (PlayerGO.gameObject.GetComponent<Collider2D>().OverlapPoint(meanderingPoint))
         {
-            Debug.Log("AI: Meandering Destination inside player");
+            if (DEBUG_AI) Debug.Log("AI: Meandering Destination inside player, waiting before trying again");
+            meandering = true;
             return;
         }
-        //Ray testPathRay = new Ray(BotGO.transform.position, meanderDestination.transform.position);
-        //Debug.DrawRay(BotGO.transform.position, meanderDestination.transform.position, Color.red, 3);
-        //bool rayHit = Physics.Raycast(testPathRay.origin, testPathRay.direction, 2.5f);
-        //if (rayHit)
-        //{
-        //    Debug.Log("AI: Meandering path goes through object");
-        //    return;
-        //}
+        int count = AICollider.Cast(meanderingPoint - BotGO.transform.position, hitArray, 3.0f);
+        for (int i = 0; i < count; i++)
+        {
+            if (hitArray[i].collider != null)
+            {
+                if (DEBUG_AI) Debug.Log(hitArray[i].collider.name);
+                if (DEBUG_AI) Debug.Log("AI: Meandering path goes through object, waiting before trying again");
+                meandering = true;
+                return;
+            }
+        }
+        meanderDestination.transform.position = meanderingPoint;
         meandering = true;
+    }
+
+    public void Meander()
+    {
+        float Distance = 0.0f;
+        Vector2 Heading = BotGO.transform.position - meanderDestination.transform.position;
+        Distance = Heading.magnitude;
+        //if (DEBUG_AI) Debug.Log("AI: I am " + Distance + " away from meander point");
+        if (Distance < 0.3f)
+        {
+            if (DEBUG_AI) Debug.Log("AI: Got to meander point, waiting");
+            ZeroOutInput();
+            idleTimer--;
+            idleTimeLeft = idleTimer;
+            if (idleTimer <= 0)
+            {
+                int randomOffset = DiceRoll();
+                idleTimer = idleTimerFull + Mathf.CeilToInt(idleTimerFull * (randomOffset / 100));
+                meandering = false;
+            }
+            return;
+        }
+        hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
+        vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
+        hortNow = SetAxisInput(hortDistance, 0.12f);
+        vertNow = SetAxisInput(vertDistance, 0.12f);
+        if (DEBUG_AI) Debug.Log("AI: Meandering input set, moving to target");
     }
 
     public void GoTowardNeededResource()
