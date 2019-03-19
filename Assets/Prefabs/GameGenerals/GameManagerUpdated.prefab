@@ -1268,7 +1268,7 @@ RectTransform:
   - {fileID: 120062993}
   - {fileID: 168286434}
   m_Father: {fileID: 1224397773}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1604,7 +1604,7 @@ RectTransform:
   - {fileID: 1155206108}
   - {fileID: 425834284}
   m_Father: {fileID: 1224397773}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2854,10 +2854,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 6943234836386729077}
   - {fileID: 827252563}
   - {fileID: 615985697}
   - {fileID: 1939468609}
+  - {fileID: 6943234836386729077}
   m_Father: {fileID: 950072698}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3186,7 +3186,7 @@ MonoBehaviour:
   aimCursorY: 0
   following: 0
   meandering: 0
-  idleTimer: 30
+  idleTimeLeft: 0
   inCutScene: 0
   inCombat: 0
   TargetGOs: []
@@ -3941,7 +3941,7 @@ RectTransform:
   m_Children:
   - {fileID: 1112838917}
   m_Father: {fileID: 1224397773}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4413,6 +4413,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
+        type: 3}
+      propertyPath: healthdirectorGO
+      value: 
+      objectReference: {fileID: 615985696}
+    - target: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
+        type: 3}
+      propertyPath: healthdirector
+      value: 
+      objectReference: {fileID: 615985698}
+    - target: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
+        type: 3}
+      propertyPath: AICompanion
+      value: 
+      objectReference: {fileID: 1334943453}
+    - target: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
+        type: 3}
+      propertyPath: CursorGO
+      value: 
+      objectReference: {fileID: 82391054}
     - target: {fileID: 8326915504889176791, guid: 6da482bb0600384459fc2a158c8b7b13,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4468,28 +4488,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
-        type: 3}
-      propertyPath: healthdirectorGO
-      value: 
-      objectReference: {fileID: 615985696}
-    - target: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
-        type: 3}
-      propertyPath: healthdirector
-      value: 
-      objectReference: {fileID: 615985698}
-    - target: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
-        type: 3}
-      propertyPath: AICompanion
-      value: 
-      objectReference: {fileID: 1334943453}
-    - target: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
-        type: 3}
-      propertyPath: CursorGO
-      value: 
-      objectReference: {fileID: 82391054}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6da482bb0600384459fc2a158c8b7b13, type: 3}
+--- !u!4 &5536344756892396437 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8326915504889176791, guid: 6da482bb0600384459fc2a158c8b7b13,
+    type: 3}
+  m_PrefabInstance: {fileID: 4565007015083395394}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5359286967712329093 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
@@ -4505,12 +4511,6 @@ MonoBehaviour:
 --- !u!1 &7508789845094372257 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6300180896068623075, guid: 6da482bb0600384459fc2a158c8b7b13,
-    type: 3}
-  m_PrefabInstance: {fileID: 4565007015083395394}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5536344756892396437 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8326915504889176791, guid: 6da482bb0600384459fc2a158c8b7b13,
     type: 3}
   m_PrefabInstance: {fileID: 4565007015083395394}
   m_PrefabAsset: {fileID: 0}
@@ -4559,7 +4559,7 @@ PrefabInstance:
     - target: {fileID: 224244927678716524, guid: 143dbad9993282b4c8252f560a0246f1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224244927678716524, guid: 143dbad9993282b4c8252f560a0246f1,
         type: 3}
@@ -4637,6 +4637,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
+        type: 3}
+      propertyPath: healthdirectorGO
+      value: 
+      objectReference: {fileID: 827252562}
+    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
+        type: 3}
+      propertyPath: healthdirector
+      value: 
+      objectReference: {fileID: 827252564}
+    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
+        type: 3}
+      propertyPath: AICompanion
+      value: 
+      objectReference: {fileID: 1334943453}
+    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
+        type: 3}
+      propertyPath: CursorGO
+      value: 
+      objectReference: {fileID: 82391054}
     - target: {fileID: 4810588144668864, guid: 4701660b7389f2d45b31d611ee0e57a8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.31998
@@ -4686,26 +4706,6 @@ PrefabInstance:
       propertyPath: p2
       value: 
       objectReference: {fileID: 5359286967712329093}
-    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 3}
-      propertyPath: healthdirectorGO
-      value: 
-      objectReference: {fileID: 827252562}
-    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 3}
-      propertyPath: healthdirector
-      value: 
-      objectReference: {fileID: 827252564}
-    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 3}
-      propertyPath: AICompanion
-      value: 
-      objectReference: {fileID: 1334943453}
-    - target: {fileID: 114375173384209822, guid: 4701660b7389f2d45b31d611ee0e57a8,
-        type: 3}
-      propertyPath: CursorGO
-      value: 
-      objectReference: {fileID: 82391054}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4701660b7389f2d45b31d611ee0e57a8, type: 3}
 --- !u!1 &7152851399633797622 stripped

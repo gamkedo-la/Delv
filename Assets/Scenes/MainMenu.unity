@@ -800,6 +800,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381692286}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &396505229 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 615985696, guid: d38ebff77834f41629b083b08339d580,
+    type: 3}
+  m_PrefabInstance: {fileID: 7153966743116703765}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &420484024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,6 +1745,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749312065}
   m_CullTransparentMesh: 0
+--- !u!1 &779763458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1939468608, guid: d38ebff77834f41629b083b08339d580,
+    type: 3}
+  m_PrefabInstance: {fileID: 7153966743116703765}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &782382604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,7 +2232,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1058258503
@@ -2322,6 +2334,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1086150741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7508789845094372257, guid: d38ebff77834f41629b083b08339d580,
+    type: 3}
+  m_PrefabInstance: {fileID: 7153966743116703765}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1109784111
 GameObject:
   m_ObjectHideFlags: 0
@@ -3167,7 +3185,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7153966743116703765}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 779763458}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cff8df0e9a657584c8b91e54b98d212c, type: 3}
@@ -3195,6 +3213,10 @@ MonoBehaviour:
   - MainMenu
   otherObjects:
   - {fileID: 1319057481}
+  - {fileID: 1554749219}
+  - {fileID: 1086150741}
+  - {fileID: 1856539022}
+  - {fileID: 396505229}
 --- !u!1 &1503956001
 GameObject:
   m_ObjectHideFlags: 0
@@ -3324,6 +3346,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503956001}
   m_CullTransparentMesh: 0
+--- !u!1 &1554749219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7152851399633797622, guid: d38ebff77834f41629b083b08339d580,
+    type: 3}
+  m_PrefabInstance: {fileID: 7153966743116703765}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1555088088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2009646728, guid: d38ebff77834f41629b083b08339d580,
@@ -3475,6 +3503,7 @@ MonoBehaviour:
     m_Handle: 0
   dialogueBox: {fileID: 470205024}
   CompanionManager: {fileID: 1334943452}
+  pauseMenu: {fileID: 779763458}
 --- !u!1 &1627980735
 GameObject:
   m_ObjectHideFlags: 0
@@ -3564,7 +3593,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1627980738
@@ -4007,7 +4036,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1659646167
@@ -4611,6 +4640,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816569437}
   m_CullTransparentMesh: 0
+--- !u!1 &1856539022 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 827252562, guid: d38ebff77834f41629b083b08339d580,
+    type: 3}
+  m_PrefabInstance: {fileID: 7153966743116703765}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1939836516
 GameObject:
   m_ObjectHideFlags: 0
@@ -5201,6 +5236,11 @@ PrefabInstance:
     - target: {fileID: 1730341089, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406016529720810066, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1224397776, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_UiScaleMode

@@ -10,6 +10,7 @@ public class MainMenuScript : MonoBehaviour
     private Scene currentScene;
     public GameObject dialogueBox;
     public GameObject CompanionManager;
+	public GameObject pauseMenu;
 
     // Use this for initialization
     void Start()
@@ -17,7 +18,12 @@ public class MainMenuScript : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         if (currentScene.name == "MainMenu")
         {
-            dialogueBox.SetActive(false);
+			GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
+			dialogueBox = gameManager.transform.GetChild(1).gameObject;
+			CompanionManager = gameManager.transform.GetChild(9).gameObject;
+			pauseMenu = gameManager.transform.GetChild(2).GetChild(2).gameObject;
+
+			dialogueBox.SetActive(false);
         }
     }
 
@@ -35,18 +41,21 @@ public class MainMenuScript : MonoBehaviour
 
     public void Singleplayer()
     {
-        GameManagerScript.instance.PlayerCount = 1;
+		pauseMenu.GetComponent<PauseMenu>().Resume();
+		GameManagerScript.instance.PlayerCount = 1;
         GameManagerScript.instance.InitializeGame();
         SceneManager.LoadScene(1);
         dialogueBox.SetActive(true);
+		
     }
     public void Multiplayer()
     {
-        GameManagerScript.instance.PlayerCount = 2;
+		pauseMenu.GetComponent<PauseMenu>().Resume();
+		GameManagerScript.instance.PlayerCount = 2;
         GameManagerScript.instance.InitializeGame();
         SceneManager.LoadScene(1);
         dialogueBox.SetActive(true);
-    }
+	}
 
     public void Settings()
     {

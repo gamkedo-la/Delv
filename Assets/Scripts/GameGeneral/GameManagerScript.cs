@@ -46,8 +46,6 @@ public class GameManagerScript : MonoBehaviour
 
 	private void Awake()
 	{
-		SceneManager.activeSceneChanged += DisableOnMenu;
-
 		if (instance != null)
 		{
 			Destroy(gameObject);
@@ -173,21 +171,5 @@ public class GameManagerScript : MonoBehaviour
 	//    }
 	//}
 
-	public void DisableOnMenu(Scene oldScene, Scene newScene)
-	{
-		if (oldScene.name != newScene.name
-		&& newScene.name == "MainMenu")
-		{
-			Player1UI.SetActive(false);
-			Player1GO.SetActive(false);
-			Player1GO.transform.position = new Vector3(3.3f, -0.66f, 0.05f);
-			Player2UI.SetActive(false);
-			Player2GO.SetActive(false);
-			Player2GO.transform.position = new Vector3(3.3f, -0.66f, 0.05f);
-			foreach (GameObject things in ThingsToWake)
-			{
-				things.SetActive(true);
-			}
-		}
-	}
+	//new Vector3(3.3f, -0.66f, 0.05f); //<- Player Default Start Position
 }
