@@ -54,6 +54,11 @@ public class CameraEvents : MonoBehaviour
         Debug.Log("StartNextEvent Fired");
         activated = true;
         _currentEvent++;
+        if (Events[_currentEvent].activateOnEventEnd != null)
+        {
+            GameObject ActivateTarget = Events[_currentEvent].activateOnEventEnd;
+            ActivateTarget.SendMessage("Activate");
+        }
 
         if (_currentEvent >= _totalEvents)
         {
@@ -111,7 +116,6 @@ public class CameraEvents : MonoBehaviour
             StartNextEvent();
 
         }
-        //Set up skippable here when you get a chance.
     }
     void Deactivate()
     {
@@ -139,4 +143,5 @@ public class Event
     public Transform target;
     public int timer;
     public bool skippable;
+    public GameObject activateOnEventEnd;
 }

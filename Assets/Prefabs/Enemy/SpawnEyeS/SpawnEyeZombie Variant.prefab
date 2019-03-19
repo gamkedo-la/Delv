@@ -10,12 +10,12 @@ PrefabInstance:
     - target: {fileID: 3203540429559099562, guid: baa336b47c2596142b5557b3df8a3945,
         type: 3}
       propertyPath: m_Name
-      value: SpawnEyeZombie
+      value: SpawnEyeZombie Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1101305155, guid: baa336b47c2596142b5557b3df8a3945, type: 3}
       propertyPath: EnemyPrefab
       value: 
-      objectReference: {fileID: 2537458038797769028, guid: 3f7269b65585dd04ead1d95427bc3d8c,
+      objectReference: {fileID: 2537458038797769028, guid: ab595bc01e15343c2a4ce9f7f30397ba,
         type: 3}
     - target: {fileID: 3203540429559099561, guid: baa336b47c2596142b5557b3df8a3945,
         type: 3}

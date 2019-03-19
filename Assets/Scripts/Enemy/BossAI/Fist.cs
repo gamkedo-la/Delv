@@ -9,6 +9,7 @@ public class Fist : MonoBehaviour
     public Transform target;
     public Animator Ani;
     public GameObject ActualFist;
+    public bool Active;
 
     public Collider2D DMGcollider;
 
@@ -23,30 +24,35 @@ public class Fist : MonoBehaviour
     // Start is called before the first frame update
 
 
-    void ActivateFist()
+    void Activate()
     {
         CheckTargets();
         StartChase();
         StartCoroutine(SlamLoop());
+        Active = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isChasing)
+        if (Active)
         {
-            float step = speed * Time.deltaTime; //just a basic speed setup, plans to make the skeletons shamble with a Sine wave and some math, but my brain hurts.        
-            transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+            if (isChasing)
+            {
+                float step = speed * Time.deltaTime; //just a basic speed setup, plans to make the skeletons shamble with a Sine wave and some math, but my brain hurts.        
+                transform.position = Vector3.MoveTowards(transform.position, target.position, step);
 
-        }
-        if (target == null)
-        {
-            CheckTargets();
+            }
+            if (target == null)
+            {
+                CheckTargets();
 
-        }
-        if (ActualFist == null)
-        {
-            Destroy(gameObject);
+            }
+            if (ActualFist == null)
+            {
+                Destroy(gameObject);
+            }
+
         }
     }
 
