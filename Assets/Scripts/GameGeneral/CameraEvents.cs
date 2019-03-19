@@ -90,7 +90,7 @@ public class CameraEvents : MonoBehaviour
         C2D.SendMessage("Cutscene", currentTarget);
         if (timerbased)
         {
-        yield return new WaitForSeconds(currentTimer);
+          yield return new WaitForSeconds(currentTimer);
             if (_currentEvent < _totalEvents)
             {
                 StartNextEvent();

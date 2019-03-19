@@ -7,6 +7,7 @@ public class Fist : MonoBehaviour
     public Transform StartPos;
     public BigBones BigBones;
     public Transform target;
+    public Vector3 targetOffset;
     public Animator Ani;
     public GameObject ActualFist;
     public bool Active;
@@ -40,9 +41,15 @@ public class Fist : MonoBehaviour
             if (isChasing)
             {
                 float step = speed * Time.deltaTime; //just a basic speed setup, plans to make the skeletons shamble with a Sine wave and some math, but my brain hurts.        
-                transform.position = Vector3.MoveTowards(transform.position, target.position, step);
-
+                transform.position = Vector3.MoveTowards(transform.position, target.position + targetOffset, step);
             }
+            else //for some time
+            {
+                float step = speed * 2.5f * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+            }
+            //then pause to give player opportunity to attack
+
             if (target == null)
             {
                 CheckTargets();
