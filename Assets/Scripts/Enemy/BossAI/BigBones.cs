@@ -43,8 +43,10 @@ public class BigBones : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
+		Vector2 barScale = HealthBar.transform.GetChild(0).localScale;
+		barScale.x = (HP / MaxHP) * 5f; //5f is max scale of health bar
+		HealthBar.transform.GetChild(0).localScale = barScale;
+	}
 
     void NextPhase()
     {

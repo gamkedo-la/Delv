@@ -22,12 +22,16 @@ public class Fist : MonoBehaviour
 
     public GameObject[] players;
 
+	private Vector3 targetSet = Vector3.zero;
+	private int playerIndex = -1;
+
     // Start is called before the first frame update
 
 
-    public void Activate()
+    public void Activate( int pi = -1 )
     {
-        CheckTargets();
+		playerIndex = pi;
+        CheckTargets(playerIndex);
         StartChase();
         StartCoroutine(SlamLoop());
         Active = true;
@@ -43,16 +47,15 @@ public class Fist : MonoBehaviour
                 float step = speed * Time.deltaTime; //just a basic speed setup, plans to make the skeletons shamble with a Sine wave and some math, but my brain hurts.        
                 transform.position = Vector3.MoveTowards(transform.position, target.position + targetOffset, step);
             }
-            else //for some time
+            else
             {
-                float step = speed * 2.5f * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, target.position, step);
-            }
-            //then pause to give player opportunity to attack
+                float step = speed * 2f * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, targetSet, step);
+			}
 
             if (target == null)
             {
-                CheckTargets();
+                CheckTargets(playerIndex);
             }
             if (ActualFist == null)
             {
@@ -70,14 +73,17 @@ public class Fist : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         Debug.Log("Lifting now...");
         Ani.SetTrigger("StartLift");
-        CheckTargets();
-    }
+        CheckTargets(playerIndex);
+	}
 
     IEnumerator SlamLoop()
     {
-        StartCoroutine(Slam());
-        yield return new WaitForSeconds(timeBetweenSlams);
-        StartCoroutine(SlamLoop());
+		while (true)
+		{
+			yield return new WaitForSeconds(timeBetweenSlams);
+			StartCoroutine(Slam());
+		}
+        //StartCoroutine(SlamLoop());
     }
 
     void StartChase()
@@ -88,22 +94,22 @@ public class Fist : MonoBehaviour
     void StopChase()
     {
         isChasing = false;
-    }
-
-    void RandTarget()
+		targetSet = target.position;
+	}
+	
+    void CheckTargets( int playerIndex = -1 )
     {
-        target = players[Random.Range(0, 2)].transform;
-    }
-    void CheckTargets()
-    {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        if (players.Length > 1)
-        {
-            RandTarget();
-        }
-        if (players.Length == 1)
-        {
-            target = players[0].transform;
-        }
+		players = GameObject.FindGameObjectsWithTag("Player");
+		if (players.Length > 1)
+		{
+			if (playerIndex <= -1)
+				target = players[Random.Range(0, 2)].transform;
+			else
+				target = players[playerIndex].transform;
+		}
+		else
+		{
+			target = players[0].transform;
+		}
     }
 }

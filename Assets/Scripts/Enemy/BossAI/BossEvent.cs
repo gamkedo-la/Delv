@@ -8,7 +8,7 @@ public class BossEvent : MonoBehaviour
 	public Transform cutsceneCamTransform;
 	public float camSize = 7f;
 	private float prevCamSize;
-
+	
 	public GameObject CamParent;
 	public Camera2DFollow C2D;
 	private Camera cam;
@@ -21,6 +21,8 @@ public class BossEvent : MonoBehaviour
 
 	public Fist[] fists;
 	public Animator[] fistAnim;
+	public GameObject spawnAttack;
+	public GameObject hpBar;
 
 	void Start()
     {
@@ -73,13 +75,15 @@ public class BossEvent : MonoBehaviour
 	public void CutsceneEnd()
 	{
 		anim.SetBool("Cutscene", false);
+		anim.SetBool("Player1", true);
+
 		cutsceneStarted = false;
 
 		C2D.enabled = true;
 		releaseCamera = false;
 		cutsceneDone = true;
 
-		EnableFists();
+		hpBar.SetActive(true);
 	}
 
 	public void EnableCutsceneSpawn()
@@ -87,15 +91,28 @@ public class BossEvent : MonoBehaviour
 		gameObject.transform.GetChild(0).gameObject.SetActive(true);
 	}
 
-	public void EnableFists()
+	public void EnableFists( int playerIndex = -1 )
 	{
 		fistAnim[0].enabled = true;
 		fistAnim[1].enabled = true;
+		fists[0].Active = true;
+		fists[1].Active = true;
 
 		fists[0].enabled = true;
 		fists[1].enabled = true;
 
-		fists[0].Activate();
-		fists[1].Activate();
+		fists[0].Activate(playerIndex);
+		fists[1].Activate(playerIndex);
+	}
+
+	public void DisableFists()
+	{
+		fists[0].Active = false;
+		fists[1].Active = false;
+	}
+
+	public void SpawnAttack()
+	{
+		spawnAttack.SetActive(true);
 	}
 }
