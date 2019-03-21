@@ -6,7 +6,6 @@ public class HazardSpikes : MonoBehaviour
 {
     [SerializeField] GameObject spikesDown;
     [SerializeField] GameObject spikesUp;
-
     [SerializeField] float triggerDelayInSeconds = 0.7f;
     [SerializeField] float durationInSeconds = 4f;
     [SerializeField] float damageDelayInSeconds = 0.5f;
@@ -88,6 +87,8 @@ public class HazardSpikes : MonoBehaviour
     IEnumerator ActivateSpikes()
     {
         hasTriggered = true;
+        spikesDown.SetActive(true);
+
         yield return new WaitForSeconds(triggerDelayInSeconds);
 
         isUp = true;
@@ -102,5 +103,16 @@ public class HazardSpikes : MonoBehaviour
 
         spikesUp.SetActive(false);
         spikesDown.SetActive(true);
+
+        StartCoroutine("HideSpikeDown");
+    }
+
+    IEnumerator HideSpikeDown()
+    {
+        yield return new WaitForSeconds(triggerDelayInSeconds);
+
+        if (!hasTriggered) {
+            spikesDown.SetActive(false);
+        }
     }
 }
