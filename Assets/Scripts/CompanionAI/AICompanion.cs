@@ -10,7 +10,6 @@ public class AICompanion : MonoBehaviour
     [Space]
     [Header("Main AI Components")]
     public PlayerController AI;
-    public GameObject BotGO;
     [Space]
     [Header("Main Player Components")]
     public PlayerController Player;
@@ -22,10 +21,9 @@ public class AICompanion : MonoBehaviour
     [Header("Distance From Player Step")]
     public float vertDistance;
     public float hortDistance;
-    private float BeginFollowDist = 3.0f;
-    private float StopFollowDist = 1.3f;
-    private int step;
-    private float stepDistanceRange = 0.2f;
+    private readonly float BeginFollowDist = 3.0f;
+    private readonly float StopFollowDist = 1.0f;
+    private readonly int step;
     [Space]
     [Header("Controller Axis Input")]
     public float vertNow;
@@ -39,8 +37,8 @@ public class AICompanion : MonoBehaviour
     [SerializeField]
     public bool following;
     public bool meandering;
-    private int idleTimerFull = 45;
-    public int idleTimer = 45;
+    private readonly int idleTimerFull = 60;
+    public int idleTimer;
     private bool meanderingInputSet;
     public bool inCutScene;
     public bool targetAquired;
@@ -53,6 +51,7 @@ public class AICompanion : MonoBehaviour
 
     private Collider2D[] AIColliders;
     private Collider2D AICollider;
+    private Rigidbody BotRB;
 
     private float AimDistance = 4.5f;
 
@@ -67,7 +66,8 @@ public class AICompanion : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
-        AIColliders = BotGO.GetComponents<BoxCollider2D>();
+        AI = GetComponent<PlayerController>();
+        AIColliders = GetComponents<BoxCollider2D>();
         foreach (BoxCollider2D box in AIColliders) 
         { 
             if (box.isTrigger) 
@@ -75,8 +75,10 @@ public class AICompanion : MonoBehaviour
                 AICollider = box;
             }
         }
+        BotRB = GetComponent<Rigidbody>();
 
         closestTarget = null;
+        idleTimer = idleTimerFull;
         containerLayer = LayerMask.NameToLayer("Container");
         itemLayer = LayerMask.NameToLayer("Items");
         // the item layer is number 16
@@ -122,7 +124,7 @@ public class AICompanion : MonoBehaviour
 
     public bool FollowPlayerCheck()
     {
-        distanceFromPlayer = Vector2.Distance(PlayerGO.transform.position, BotGO.transform.position);
+        distanceFromPlayer = Vector2.Distance(PlayerGO.transform.position, transform.position);
         if (Mathf.Abs(distanceFromPlayer) > BeginFollowDist && !following)
         {
             following = true;
@@ -232,16 +234,25 @@ public class AICompanion : MonoBehaviour
         }
     } // end of AIMoveBasedOnState():
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject == PlayerGO)
+        {
+            Debug.Log("Bumped by Player");
+            ZeroOutInput();
+            meanderDestination.transform.position = transform.position;
+            AIReset();
+        }
+    }
+
     public void getToPlayerToRevive()
     {
         if (DEBUG_AI) Debug.Log("AI going to player to revive");
-        if (Mathf.Abs(Vector3.Distance(BotGO.transform.position,
+        if (Mathf.Abs(Vector3.Distance(transform.position,
                 PlayerGO.transform.position)) > 0.6f)
         {
-            hortDistance = PlayerGO.transform.position.x - BotGO.transform.position.x;
-            vertDistance = PlayerGO.transform.position.y - BotGO.transform.position.y;
-            hortNow = SetAxisInput(hortDistance, 1.0f);
-            vertNow = SetAxisInput(vertDistance, 1.0f);
+            Vector2 direction = ReturnNormalizedVector(PlayerGO.transform.position);
+            SetInputAmount(direction, "fast");
             return;
         }
         ZeroOutInput();
@@ -283,13 +294,13 @@ public class AICompanion : MonoBehaviour
         Collider2D item;
 
         //if (DEBUG_AI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
-        int count = Physics2D.OverlapCircle(BotGO.transform.position, itemSeekRadius, itemLayerFilter, itemArray);
+        int count = Physics2D.OverlapCircle(transform.position, itemSeekRadius, itemLayerFilter, itemArray);
         if (count == 0)
         {
             if (DEBUG_AI) Debug.Log("AI: 'no " + potionName + " near me'");
             return false;
         }
-        if (DEBUG_AI) Debug.Log(count + " item colliders near " + BotGO.name + " at " + BotGO.transform.position);
+        if (DEBUG_AI) Debug.Log(count + " item colliders near " + name + " at " + transform.position);
 
         for (int num = 0; num < count; num++)
         {
@@ -314,7 +325,7 @@ public class AICompanion : MonoBehaviour
                 if (DEBUG_AI) Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! That seems wrong!");
             }
 
-            if (DEBUG_AI) Debug.Log("no items near " + BotGO.name + " at " + BotGO.transform.position);
+            if (DEBUG_AI) Debug.Log("no items near " + name + " at " + transform.position);
 
         }
         if (DEBUG_AI) Debug.Log("AI did not bother looking for potions");
@@ -323,22 +334,20 @@ public class AICompanion : MonoBehaviour
 
     public void combatManeuvers()
     {
-        if (Vector2.Distance(BotGO.transform.position, closestTarget.transform.position) 
+        Vector2 direction = Vector2.zero;
+
+        if (Vector2.Distance(transform.position, closestTarget.transform.position) 
             < (AimDistance - 0.5))
         {
-            hortDistance = BotGO.transform.position.x - closestTarget.transform.position.x;
-            vertDistance = BotGO.transform.position.y - closestTarget.transform.position.y;
-
+            direction = ReturnNormalizedVector(-closestTarget.transform.position);
         }
-        if (Vector2.Distance(BotGO.transform.position, closestTarget.transform.position)
+        if (Vector2.Distance(transform.position, closestTarget.transform.position)
             > (AimDistance + 0.5))
         {
-            hortDistance = closestTarget.transform.position.x - BotGO.transform.position.x;
-            vertDistance = closestTarget.transform.position.y - BotGO.transform.position.y;
+            direction = ReturnNormalizedVector(closestTarget.transform.position);
         }
 
-        hortNow = SetAxisInput(hortDistance, 0.50f);
-        vertNow = SetAxisInput(vertDistance, 0.50f);
+        SetInputAmount(direction, "medium");
     }
 
     private RaycastHit2D[] hitArray = new RaycastHit2D[10];
@@ -348,26 +357,26 @@ public class AICompanion : MonoBehaviour
     {
         Vector2 randomPointInCircle = Random.insideUnitCircle * 2.5f;
         Vector3 meanderingPoint = new Vector3(PlayerGO.transform.position.x + randomPointInCircle.x,
-                                              PlayerGO.transform.position.y + randomPointInCircle.y);
+                                              PlayerGO.transform.position.y + randomPointInCircle.y,
+                                              PlayerGO.transform.position.z);
         if (PlayerGO.gameObject.GetComponent<Collider2D>().OverlapPoint(meanderingPoint))
         {
             if (DEBUG_AI) Debug.Log("AI: Meandering Destination inside player, waiting before trying again");
-            meanderDestination.transform.position = BotGO.transform.position;
+            meanderDestination.transform.position = transform.position;
             meandering = true;
             return;
         }
 
-        Vector2 distanceToMeanderPoint = BotGO.transform.position - meanderingPoint;
+        Vector2 distanceToMeanderPoint = transform.position - meanderingPoint;
         if (distanceToMeanderPoint.magnitude < meanderDistanceCheck)
         {
-            meanderDestination.transform.position = meanderingPoint;
             if (DEBUG_AI) Debug.Log("AI: Meandering Destination is too close, waiting before trying again");
-            meanderDestination.transform.position = BotGO.transform.position;
+            meanderDestination.transform.position = transform.position;
             meandering = true;
             return;
         }
 
-        Vector3 direction = meanderingPoint - BotGO.transform.position;
+        Vector3 direction = meanderingPoint - transform.position;
         int count = AICollider.Cast(direction, hitArray, direction.magnitude + 0.1f);
         for (int i = 0; i < count; i++)
         {
@@ -375,7 +384,7 @@ public class AICompanion : MonoBehaviour
             {
                 if (DEBUG_AI) Debug.Log(hitArray[i].collider.name);
                 if (DEBUG_AI) Debug.Log("AI: Meandering path goes through object, waiting before trying again");
-                meanderDestination.transform.position = BotGO.transform.position;
+                meanderDestination.transform.position = transform.position;
                 meandering = true;
                 return;
             }
@@ -384,31 +393,33 @@ public class AICompanion : MonoBehaviour
         meandering = true;
     }
 
+    bool arrivedAtMeanderDest;
+
     public void Meander()
     {
-        float Distance = 0.0f;
-        Vector2 Heading = meanderDestination.transform.position - BotGO.transform.position;
-        Distance = Heading.magnitude;
+        Vector2 heading = meanderDestination.transform.position - transform.position;
+        float Distance = heading.magnitude;
         //if (DEBUG_AI) Debug.Log("AI: I am " + Distance + " away from meander point");
-        if (Distance < 0.3f)
+        if (Distance < 0.3f || arrivedAtMeanderDest)
         {
+            arrivedAtMeanderDest = true;
             ZeroOutInput();
             idleTimer--;
             if (idleTimer <= 0)
             {
-                int randomOffset = DiceRoll();
-                idleTimer = idleTimerFull + Mathf.CeilToInt(idleTimerFull * (randomOffset / 100));
+                int additionalTime = Random.Range(0, 2500) / 100;
+                idleTimer = idleTimerFull + additionalTime;
                 meandering = false;
                 meanderingInputSet = false;
+                arrivedAtMeanderDest = false;
                 return;
             }
         }
 
         if (!meanderingInputSet) 
         {
-            Vector2 Direction = Heading.normalized;
-            hortNow = Direction.x * 0.12f;
-            vertNow = Direction.y * 0.12f;
+            Vector2 direction = heading.normalized;
+            SetInputAmount(direction, "slow");
             if (DEBUG_AI) Debug.Log("AI: Meandering input set, moving to target");
             meanderingInputSet = true;
         }
@@ -416,10 +427,17 @@ public class AICompanion : MonoBehaviour
 
     public void GoTowardNeededResource()
     {
-        hortDistance = nearestResource.transform.position.x - BotGO.transform.position.x;
-        vertDistance = nearestResource.transform.position.y - BotGO.transform.position.y;
-        hortNow = SetAxisInput(hortDistance, 1.0f);
-        vertNow = SetAxisInput(vertDistance, 1.0f);
+        Vector2 direction = ReturnNormalizedVector(nearestResource.transform.position);
+        SetInputAmount(direction, "medium");
+    }
+
+
+    private Vector3 ReturnNormalizedVector (Vector3 target)
+    {
+        Vector2 heading = target - transform.position;
+        float distance = heading.magnitude;
+        Vector2 direction = heading.normalized;
+        return direction;
     }
 
     public void FollowPlayer()
@@ -432,7 +450,7 @@ public class AICompanion : MonoBehaviour
 
         if (step < Player.PlayerSteps.Count)
         { 
-            if (Mathf.Abs(Vector3.Distance(BotGO.transform.position, 
+            if (Mathf.Abs(Vector3.Distance(transform.position, 
                 Player.PlayerSteps[step])) < 0.3f)
             {
                 Player.PlayerSteps.RemoveAt(step);
@@ -443,26 +461,29 @@ public class AICompanion : MonoBehaviour
                 }
             }
 
-            hortDistance = Player.PlayerSteps[step].x - BotGO.transform.position.x;
-            vertDistance = Player.PlayerSteps[step].y - BotGO.transform.position.y;
-
-            hortNow = SetAxisInput(hortDistance, 1.0f);
-            vertNow = SetAxisInput(vertDistance, 1.0f);
+            Vector2 direction = ReturnNormalizedVector(Player.PlayerSteps[step]);
+            SetInputAmount(direction, "fast");
         }
     }
 
-    public float SetAxisInput(float AxisDistance, float AxisIntensity)
+    public void SetInputAmount(Vector2 direction, string tempo)
     {
-        if (AxisDistance > stepDistanceRange)
+        float inputIntensity = 0f;
+        if (tempo == "slow") 
         {
-            return AxisIntensity;
+            inputIntensity = Random.Range(0.10f, 0.15f);
         }
-        if (AxisDistance < -stepDistanceRange)
+        if (tempo == "medium")
         {
-            return -AxisIntensity;
+            inputIntensity = Random.Range(0.50f, 0.60f);
         }
-        // AxisDistance is > -0.2 and < 0.2 so set to 0;
-        return 0.0f;
+        if (tempo == "fast")
+        {
+            inputIntensity = 1f;
+        }
+
+        hortNow = direction.x * inputIntensity;
+        vertNow = direction.y * inputIntensity;
     }
 
     public void ZeroOutInput() // perhaps lerp/something to a stop?
@@ -486,7 +507,7 @@ public class AICompanion : MonoBehaviour
         AquireTarget();
         if (closestTarget != null)
         {
-            float DistBetween = Mathf.Abs(Vector2.Distance(BotGO.transform.position,
+            float DistBetween = Mathf.Abs(Vector2.Distance(transform.position,
                                             closestTarget.transform.position));
             if (DistBetween < AimDistance && TargetGOs.Length > 0)
             {
@@ -510,7 +531,7 @@ public class AICompanion : MonoBehaviour
             return;
         }
 
-        float DistBetween = Mathf.Abs(Vector2.Distance(BotGO.transform.position,
+        float DistBetween = Mathf.Abs(Vector2.Distance(transform.position,
                                             closestTarget.transform.position));
         if (DistBetween > AimDistance)
         {
@@ -522,8 +543,8 @@ public class AICompanion : MonoBehaviour
     public void AimBasedOnAtan2(GameObject Target)
     {
         float angle = Mathf.Atan2(
-                    Target.transform.position.y - BotGO.transform.position.y,
-                    BotGO.transform.position.x - Target.transform.position.x);
+                    Target.transform.position.y - transform.position.y,
+                    transform.position.x - Target.transform.position.x);
         aimCursorX = Mathf.Cos(angle);
         aimCursorY = Mathf.Sin(angle);
     }
@@ -540,7 +561,7 @@ public class AICompanion : MonoBehaviour
         float distance = Mathf.Infinity;
         foreach (GameObject target in TargetGOs)
         {
-            Vector2 distDiff = target.transform.position - BotGO.transform.position;
+            Vector2 distDiff = target.transform.position - transform.position;
             float diagonalDistBetween = distDiff.sqrMagnitude;
 
             if (target.layer == containerLayer)

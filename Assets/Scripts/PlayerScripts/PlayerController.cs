@@ -549,7 +549,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Player Received GoToStart command");
             if (isBot) 
             {
-                AICompanion.meanderDestination.transform.position = AICompanion.BotGO.transform.position;
+                AICompanion.meanderDestination.transform.position = AICompanion.transform.position;
                 AICompanion.AIReset();
             }
         }

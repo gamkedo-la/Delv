@@ -1220,7 +1220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 784368704}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &595102637
 GameObject:
@@ -3082,12 +3082,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7153966743116703765}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1334943452 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1334943452, guid: d38ebff77834f41629b083b08339d580,
-    type: 3}
-  m_PrefabInstance: {fileID: 7153966743116703765}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1393710333 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1939468610, guid: d38ebff77834f41629b083b08339d580,
@@ -3261,6 +3255,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7153966743116703765}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1554749220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7120658595487725230, guid: d38ebff77834f41629b083b08339d580,
+    type: 3}
+  m_PrefabInstance: {fileID: 7153966743116703765}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554749219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ffca214045fc0241ac219dd36b654ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1555088088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2009646728, guid: d38ebff77834f41629b083b08339d580,
@@ -3411,7 +3417,7 @@ MonoBehaviour:
   currentScene:
     m_Handle: 0
   dialogueBox: {fileID: 470205024}
-  CompanionManager: {fileID: 1334943452}
+  CompanionManager: {fileID: 0}
   pauseMenu: {fileID: 779763458}
 --- !u!1 &1627980735
 GameObject:
@@ -5057,6 +5063,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8718170139581278142, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 950072695, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -5369,6 +5380,21 @@ PrefabInstance:
     - target: {fileID: 4406016529720810066, guid: d38ebff77834f41629b083b08339d580,
         type: 3}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941787407393978432, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1554749220}
+    - target: {fileID: 5941787407393978432, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: PlayerGO
+      value: 
+      objectReference: {fileID: 1554749219}
+    - target: {fileID: 5941787407393978432, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: DEBUG_AI
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

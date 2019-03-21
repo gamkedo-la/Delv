@@ -5202,6 +5202,7 @@ GameObject:
   - component: {fileID: 3728820590036001650}
   - component: {fileID: 4209987193203658507}
   - component: {fileID: 8447110967915570375}
+  - component: {fileID: 7867596800732770562}
   m_Layer: 8
   m_Name: Player2
   m_TagString: Player
@@ -5458,7 +5459,7 @@ MonoBehaviour:
   ControllerType: 1
   ControllerSlot: 1
   isBot: 0
-  AICompanion: {fileID: 0}
+  AICompanion: {fileID: 7867596800732770562}
   PlayerSteps: []
   MaxHealth: 100
   Health: 100
@@ -5493,6 +5494,39 @@ MonoBehaviour:
   isDead: 0
   stepClip: {fileID: 8300000, guid: 3f8af2bda9c110d45a60c2322a0429bc, type: 3}
   stepDelay: 0.2
+--- !u!114 &7867596800732770562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300180896068623075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1aa3764c1ae74a519891fbb8f7c4648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DEBUG_AI: 1
+  AI: {fileID: 0}
+  Player: {fileID: 0}
+  PlayerGO: {fileID: 0}
+  distanceFromPlayer: 0
+  vertDistance: 0
+  hortDistance: 0
+  vertNow: 0
+  hortNow: 0
+  aimCursorX: 0
+  aimCursorY: 0
+  following: 0
+  meandering: 0
+  idleTimer: 0
+  inCutScene: 0
+  targetAquired: 0
+  TargetGOs: []
+  meanderDestination: {fileID: 0}
+  foundHealth: 0
+  foundMana: 0
+  nearestResource: {fileID: 0}
 --- !u!1 &7026832177298054325
 GameObject:
   m_ObjectHideFlags: 0
