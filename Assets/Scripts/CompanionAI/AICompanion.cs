@@ -41,7 +41,7 @@ public class AICompanion : MonoBehaviour
     public bool meandering;
     private int idleTimerFull = 45;
     public int idleTimer = 45;
-   //private bool meanderingInputNotSet;
+    private bool meanderingInputSet;
     public bool inCutScene;
     public bool targetAquired;
     [Space]
@@ -51,6 +51,7 @@ public class AICompanion : MonoBehaviour
     [Space]
     public GameObject meanderDestination;
 
+    private Collider2D[] AIColliders;
     private Collider2D AICollider;
 
     private float AimDistance = 4.5f;
@@ -66,7 +67,15 @@ public class AICompanion : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
-        AICollider = BotGO.GetComponent<Collider2D>();
+        AIColliders = BotGO.GetComponents<BoxCollider2D>();
+        foreach (BoxCollider2D box in AIColliders) 
+        { 
+            if (box.isTrigger) 
+            {
+                AICollider = box;
+            }
+        }
+
         closestTarget = null;
         containerLayer = LayerMask.NameToLayer("Container");
         itemLayer = LayerMask.NameToLayer("Items");
@@ -104,6 +113,7 @@ public class AICompanion : MonoBehaviour
     public void AIReset()
     {
         meandering = false;
+        meanderingInputSet = false;
         following = false;
         targetAquired = false;
         ZeroOutInput();
@@ -331,7 +341,8 @@ public class AICompanion : MonoBehaviour
         vertNow = SetAxisInput(vertDistance, 0.50f);
     }
 
-    public RaycastHit2D[] hitArray = new RaycastHit2D[10];
+    private RaycastHit2D[] hitArray = new RaycastHit2D[10];
+    float meanderDistanceCheck = 1f;
 
     public void SetMeanderingDestination()
     {
@@ -345,6 +356,17 @@ public class AICompanion : MonoBehaviour
             meandering = true;
             return;
         }
+
+        Vector2 distanceToMeanderPoint = BotGO.transform.position - meanderingPoint;
+        if (distanceToMeanderPoint.magnitude < meanderDistanceCheck)
+        {
+            meanderDestination.transform.position = meanderingPoint;
+            if (DEBUG_AI) Debug.Log("AI: Meandering Destination is too close, waiting before trying again");
+            meanderDestination.transform.position = BotGO.transform.position;
+            meandering = true;
+            return;
+        }
+
         Vector3 direction = meanderingPoint - BotGO.transform.position;
         int count = AICollider.Cast(direction, hitArray, direction.magnitude + 0.1f);
         for (int i = 0; i < count; i++)
@@ -365,7 +387,7 @@ public class AICompanion : MonoBehaviour
     public void Meander()
     {
         float Distance = 0.0f;
-        Vector2 Heading = BotGO.transform.position - meanderDestination.transform.position;
+        Vector2 Heading = meanderDestination.transform.position - BotGO.transform.position;
         Distance = Heading.magnitude;
         //if (DEBUG_AI) Debug.Log("AI: I am " + Distance + " away from meander point");
         if (Distance < 0.3f)
@@ -377,25 +399,19 @@ public class AICompanion : MonoBehaviour
                 int randomOffset = DiceRoll();
                 idleTimer = idleTimerFull + Mathf.CeilToInt(idleTimerFull * (randomOffset / 100));
                 meandering = false;
-                //meanderingInputNotSet = false;
+                meanderingInputSet = false;
                 return;
             }
         }
 
-        //if (!meanderingInputNotSet) 
-        //{
-        //    hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
-        //    vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
-        //    hortNow = SetAxisInput(hortDistance, 0.12f);
-        //    vertNow = SetAxisInput(vertDistance, 0.12f);
-        //    if (DEBUG_AI) Debug.Log("AI: Meandering input set, moving to target");
-        //    meanderingInputNotSet = true;
-        //}
-
-        hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
-        vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
-        hortNow = SetAxisInput(hortDistance, 0.12f);
-        vertNow = SetAxisInput(vertDistance, 0.12f);
+        if (!meanderingInputSet) 
+        {
+            Vector2 Direction = Heading.normalized;
+            hortNow = Direction.x * 0.12f;
+            vertNow = Direction.y * 0.12f;
+            if (DEBUG_AI) Debug.Log("AI: Meandering input set, moving to target");
+            meanderingInputSet = true;
+        }
     }
 
     public void GoTowardNeededResource()
