@@ -40,10 +40,10 @@ public class AICompanion : MonoBehaviour
     public bool following;
     public bool meandering;
     private int idleTimerFull = 45;
-    private int idleTimer = 45;
-    public int idleTimeLeft = 0;
+    public int idleTimer = 45;
+   //private bool meanderingInputNotSet;
     public bool inCutScene;
-    public bool inCombat;
+    public bool targetAquired;
     [Space]
     [Header("Level Targets")]
     public GameObject[] TargetGOs;
@@ -67,6 +67,7 @@ public class AICompanion : MonoBehaviour
     public void Awake()
     {
         AICollider = BotGO.GetComponent<Collider2D>();
+        closestTarget = null;
         containerLayer = LayerMask.NameToLayer("Container");
         itemLayer = LayerMask.NameToLayer("Items");
         // the item layer is number 16
@@ -88,10 +89,25 @@ public class AICompanion : MonoBehaviour
             return;
         }
 
+        if (AI.isDead)
+        {
+            AIReset();
+            return;
+        }
+
         TargetGOs = GameObject.FindGameObjectsWithTag("Enemy");
 
         CursorAim();
         AIMoveBasedOnState();
+    }
+
+    public void AIReset()
+    {
+        meandering = false;
+        following = false;
+        targetAquired = false;
+        ZeroOutInput();
+        closestTarget = null;
     }
 
     public bool FollowPlayerCheck()
@@ -112,6 +128,8 @@ public class AICompanion : MonoBehaviour
         return false;
     }
 
+    private float shotTimer = 0;
+
     public bool Shoot() // TODO
     {
         if (closestTarget == null || closestTarget.layer == containerLayer) 
@@ -119,7 +137,9 @@ public class AICompanion : MonoBehaviour
             return false;
         }
 
-        if (DiceRoll() == 100)
+        shotTimer += 1;
+
+        if (Mathf.Approximately(Mathf.Sin(shotTimer * Mathf.PI / 180), -1))
         {
             return true;
         }
@@ -138,9 +158,7 @@ public class AICompanion : MonoBehaviour
     {
         if (inCutScene)
         {
-            meandering = false;
-            following = false;
-            ZeroOutInput();
+            AIReset();
             return;
         }
 
@@ -148,6 +166,8 @@ public class AICompanion : MonoBehaviour
         {
             meandering = false;
             following = false;
+            targetAquired = false;
+            AimBasedOnAtan2(PlayerGO);
             getToPlayerToRevive();
             return;
         }
@@ -182,6 +202,7 @@ public class AICompanion : MonoBehaviour
             meandering = false;
             following = false; 
             combatManeuvers();
+            return;
         }
 
         if (FollowPlayerCheck() || following)
@@ -320,16 +341,19 @@ public class AICompanion : MonoBehaviour
         if (PlayerGO.gameObject.GetComponent<Collider2D>().OverlapPoint(meanderingPoint))
         {
             if (DEBUG_AI) Debug.Log("AI: Meandering Destination inside player, waiting before trying again");
+            meanderDestination.transform.position = BotGO.transform.position;
             meandering = true;
             return;
         }
-        int count = AICollider.Cast(meanderingPoint - BotGO.transform.position, hitArray, 3.0f);
+        Vector3 direction = meanderingPoint - BotGO.transform.position;
+        int count = AICollider.Cast(direction, hitArray, direction.magnitude + 0.1f);
         for (int i = 0; i < count; i++)
         {
             if (hitArray[i].collider != null)
             {
                 if (DEBUG_AI) Debug.Log(hitArray[i].collider.name);
                 if (DEBUG_AI) Debug.Log("AI: Meandering path goes through object, waiting before trying again");
+                meanderDestination.transform.position = BotGO.transform.position;
                 meandering = true;
                 return;
             }
@@ -346,23 +370,32 @@ public class AICompanion : MonoBehaviour
         //if (DEBUG_AI) Debug.Log("AI: I am " + Distance + " away from meander point");
         if (Distance < 0.3f)
         {
-            if (DEBUG_AI) Debug.Log("AI: Got to meander point, waiting");
             ZeroOutInput();
             idleTimer--;
-            idleTimeLeft = idleTimer;
             if (idleTimer <= 0)
             {
                 int randomOffset = DiceRoll();
                 idleTimer = idleTimerFull + Mathf.CeilToInt(idleTimerFull * (randomOffset / 100));
                 meandering = false;
+                //meanderingInputNotSet = false;
+                return;
             }
-            return;
         }
+
+        //if (!meanderingInputNotSet) 
+        //{
+        //    hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
+        //    vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
+        //    hortNow = SetAxisInput(hortDistance, 0.12f);
+        //    vertNow = SetAxisInput(vertDistance, 0.12f);
+        //    if (DEBUG_AI) Debug.Log("AI: Meandering input set, moving to target");
+        //    meanderingInputNotSet = true;
+        //}
+
         hortDistance = meanderDestination.transform.position.x - BotGO.transform.position.x;
         vertDistance = meanderDestination.transform.position.y - BotGO.transform.position.y;
         hortNow = SetAxisInput(hortDistance, 0.12f);
         vertNow = SetAxisInput(vertDistance, 0.12f);
-        if (DEBUG_AI) Debug.Log("AI: Meandering input set, moving to target");
     }
 
     public void GoTowardNeededResource()
@@ -422,16 +455,6 @@ public class AICompanion : MonoBehaviour
         vertNow = 0;
     }
 
-    IEnumerator WaitRandomTime(bool flag)
-    {
-        int timeToWait = DiceRoll();
-        int timeDivisor = 200;
-        timeToWait = timeToWait/timeDivisor;
-        yield return new WaitForSeconds(timeToWait);
-        flag = !flag;
-        yield break;
-    }
-
     public float VertAxisNow()
     {
         return vertNow;
@@ -455,25 +478,28 @@ public class AICompanion : MonoBehaviour
             }
             return;
         }
-        // current idle cursor script, may be useful when the player is dead 
-        // to show intent to revive
-        AimBasedOnAtan2(PlayerGO);
+        // TODO idle aiming
     }
 
     public void AquireTarget()
     {
-        FindClosestTargetEnemy();
+        if (!targetAquired)
+        {
+            FindClosestTargetEnemy();
+        }
 
         if (closestTarget == null)
         {
+            targetAquired = false;
             return;
         }
+
         float DistBetween = Mathf.Abs(Vector2.Distance(BotGO.transform.position,
                                             closestTarget.transform.position));
         if (DistBetween > AimDistance)
         {
+            targetAquired = false; 
             closestTarget = null;
-            return;
         }
     }
 
@@ -489,10 +515,12 @@ public class AICompanion : MonoBehaviour
     private void FindClosestTargetEnemy()
     {
         closestTarget = null;
+
         if (TargetGOs.Length == 0)
         {
             return;
         }
+
         float distance = Mathf.Infinity;
         foreach (GameObject target in TargetGOs)
         {
@@ -508,9 +536,13 @@ public class AICompanion : MonoBehaviour
             {
                 distance = diagonalDistBetween;
                 closestTarget = target;
+                if (closestTarget.tag == "Enemy")
+                {
+                    targetAquired = true;
+                }
             }
-        }
-    }
+        } // end of foreach
+    } // end of FindClosestTargetEnemy()
 
     public float AimCursorX()
     {
