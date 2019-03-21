@@ -45,13 +45,17 @@ public class BigBones : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Vector2 barScale = HealthBar.transform.GetChild(0).localScale;
-		barScale.x = (HP / MaxHP) * 5f; //5f is max scale of health bar
-		HealthBar.transform.GetChild(0).localScale = barScale;
+		if (HealthBar)
+		{
+			Vector2 barScale = HealthBar.transform.GetChild(0).localScale;
+			barScale.x = (HP / MaxHP) * 5f; //5f is max scale of health bar
+			HealthBar.transform.GetChild(0).localScale = barScale;
+		}
 
 		if (HP <= 0f)
 		{
 			HeadAni.SetBool("Dead", true);
+			Destroy(HealthBar);
 			BossEvent.SetupDeathCutscene();
 		}
 		else if (HP <= MaxHP / 3f)

@@ -83,7 +83,8 @@ public class BossEvent : MonoBehaviour
 		releaseCamera = false;
 		cutsceneDone = true;
 
-		hpBar.SetActive(true);
+		if(hpBar)
+			hpBar.SetActive(true);
 
 		if (anim.GetBool("Dead"))
 			Destroy(gameObject);
@@ -123,6 +124,14 @@ public class BossEvent : MonoBehaviour
 	{
 		cutsceneStarted = false; //now it refers to Death Cutscene
 		cutsceneDone = false;
+
+		//Clearing all the zombies!
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		for (int i = 0; i < enemies.Length; i++)
+			if(enemies[i].name.Contains("Skeleton"))
+				Destroy(enemies[i]);
+
+		camSize = prevCamSize;
 
 		releaseCamera = true;
 		C2D.enabled = false;
