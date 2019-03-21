@@ -84,6 +84,9 @@ public class BossEvent : MonoBehaviour
 		cutsceneDone = true;
 
 		hpBar.SetActive(true);
+
+		if (anim.GetBool("Dead"))
+			Destroy(gameObject);
 	}
 
 	public void EnableCutsceneSpawn()
@@ -114,5 +117,14 @@ public class BossEvent : MonoBehaviour
 	public void SpawnAttack()
 	{
 		spawnAttack.SetActive(true);
+	}
+
+	public void SetupDeathCutscene()
+	{
+		cutsceneStarted = false; //now it refers to Death Cutscene
+		cutsceneDone = false;
+
+		releaseCamera = true;
+		C2D.enabled = false;
 	}
 }

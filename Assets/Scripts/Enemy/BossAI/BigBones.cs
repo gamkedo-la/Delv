@@ -24,11 +24,13 @@ public class BigBones : MonoBehaviour
     public EnemyManager Spawner4;
     public SpriteRenderer ShieldVisuals;
 
-    [Space]
-    //Part Directors
+	[Space]
+	//Part Directors
     public GameObject Head;
     public GameObject Fist1;
     public GameObject Fist2;
+
+	private BossEvent BossEvent;
 
 
 
@@ -37,7 +39,7 @@ public class BigBones : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        
+		BossEvent = HeadAni.gameObject.GetComponent<BossEvent>();
     }
 
     // Update is called once per frame
@@ -46,6 +48,16 @@ public class BigBones : MonoBehaviour
 		Vector2 barScale = HealthBar.transform.GetChild(0).localScale;
 		barScale.x = (HP / MaxHP) * 5f; //5f is max scale of health bar
 		HealthBar.transform.GetChild(0).localScale = barScale;
+
+		if (HP <= 0f)
+		{
+			HeadAni.SetBool("Dead", true);
+			BossEvent.SetupDeathCutscene();
+		}
+		else if (HP <= MaxHP / 3f)
+		{
+			HeadAni.SetBool("RainFist", true);
+		}
 	}
 
     void NextPhase()

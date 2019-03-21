@@ -49,7 +49,7 @@ public class Fist : MonoBehaviour
             }
             else
             {
-                float step = speed * 2f * Time.deltaTime;
+                float step = speed * 2.5f * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, targetSet, step);
 			}
 
