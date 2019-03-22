@@ -557,7 +557,7 @@ public class PlayerController : MonoBehaviour
 
     //Will handle damage through sendmessage even though its a bit slow resource wise. Small game should be able to handle it.
     //Will also add Damage type for resistences maybe as a stretch // , string DMGtype
-    void DamageHealth(float DMG)
+    public void DamageHealth(float DMG)
     {
         Debug.Log("Player health damaged for " + DMG + " Damage");
         Health -= DMG;
