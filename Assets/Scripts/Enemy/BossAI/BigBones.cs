@@ -35,7 +35,6 @@ public class BigBones : MonoBehaviour
 
 
 
-
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -54,13 +53,23 @@ public class BigBones : MonoBehaviour
 
 		if (HP <= 0f)
 		{
-			HeadAni.SetBool("Dead", true);
-			Destroy(HealthBar);
-			BossEvent.SetupDeathCutscene();
+			if (!HeadAni.GetBool("Dead"))
+			{
+				BossEvent.stateChanged = true;
+
+				HeadAni.SetBool("Dead", true);
+				Destroy(HealthBar);
+				BossEvent.SetupDeathCutscene();
+			}
 		}
 		else if (HP <= MaxHP / 3f)
 		{
-			HeadAni.SetBool("RainFist", true);
+			if (!HeadAni.GetBool("RainFist"))
+			{
+				BossEvent.stateChanged = true;
+
+				HeadAni.SetBool("RainFist", true);
+			}
 		}
 	}
 

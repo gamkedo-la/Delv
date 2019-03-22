@@ -174,64 +174,67 @@ public class AICompanion : MonoBehaviour
             return;
         }
 
-        if (Player.isDead)
-        {
-            meandering = false;
-            following = false;
-            targetAquired = false;
-            AimBasedOnAtan2(PlayerGO);
-            getToPlayerToRevive();
-            return;
-        }
+		if (Player != null)
+		{
+			if (Player.isDead)
+			{
+				meandering = false;
+				following = false;
+				targetAquired = false;
+				AimBasedOnAtan2(PlayerGO);
+				getToPlayerToRevive();
+				return;
+			}
 
-        ResourceManager();
+			ResourceManager();
 
-        if (nearestResource != null && (foundHealth || foundMana))
-        {
-            meandering = false;
-            following = false;
-            GoTowardNeededResource();
-            if (DEBUG_AI)
-            {
-                if (foundMana && foundHealth)
-                {
-                    Debug.Log("AI: 'Need mana/health and found both types of potions'");
-                }
-                else if (foundMana)
-                {
-                    Debug.Log("AI: 'Need mana and found mana'");
-                }
-                else if (foundHealth)
-                {
-                    Debug.Log("AI: 'Need health and found health'");
-                }
-            }
-        }
+			if (nearestResource != null && (foundHealth || foundMana))
+			{
+				meandering = false;
+				following = false;
+				GoTowardNeededResource();
+				if (DEBUG_AI)
+				{
+					if (foundMana && foundHealth)
+					{
+						Debug.Log("AI: 'Need mana/health and found both types of potions'");
+					}
+					else if (foundMana)
+					{
+						Debug.Log("AI: 'Need mana and found mana'");
+					}
+					else if (foundHealth)
+					{
+						Debug.Log("AI: 'Need health and found health'");
+					}
+				}
+			}
 
-        if (closestTarget != null && closestTarget.layer != containerLayer) 
-        {
-            // MORTAL KOMBAT!!!
-            meandering = false;
-            following = false; 
-            combatManeuvers();
-            return;
-        }
+			if (closestTarget != null && closestTarget.layer != containerLayer)
+			{
+				// MORTAL KOMBAT!!!
+				meandering = false;
+				following = false;
+				combatManeuvers();
+				return;
+			}
 
-        if (FollowPlayerCheck() || following)
-        {
-            meandering = false;
-            FollowPlayer();
-            return;
-        }
+			if (FollowPlayerCheck() || following)
+			{
+				meandering = false;
+				FollowPlayer();
+				return;
+			}
 
-        if (!meandering)
-        {
-            SetMeanderingDestination();
-        }
-        else
-        {
-            Meander();
-        }
+			if (!meandering)
+			{
+				SetMeanderingDestination();
+			}
+			else
+			{
+				Meander();
+			}
+		}
     } // end of AIMoveBasedOnState():
 
     private void OnCollisionEnter2D(Collision2D collision)

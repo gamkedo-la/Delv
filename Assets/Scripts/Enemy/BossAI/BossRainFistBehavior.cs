@@ -67,7 +67,7 @@ public class BossRainFistBehavior : StateMachineBehaviour
 
 		if (timer <= 0f)
 		{
-			animator.SetTrigger("VulnerableSwitch");
+			animator.SetBool("VulnerableSwitch", true);
 
 			timer = delay;
 		}

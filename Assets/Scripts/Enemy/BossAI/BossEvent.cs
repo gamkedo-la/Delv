@@ -24,6 +24,8 @@ public class BossEvent : MonoBehaviour
 	public GameObject spawnAttack;
 	public GameObject hpBar;
 
+	[HideInInspector] public bool stateChanged = false;
+
 	void Start()
     {
 		CamParent = GameObject.Find("CamParent");
@@ -135,5 +137,17 @@ public class BossEvent : MonoBehaviour
 
 		releaseCamera = true;
 		C2D.enabled = false;
+	}
+
+	public void EndVulnerableStateOnStateChange()
+	{
+		if (stateChanged)
+			anim.SetBool("VulnerableSwitch", false);
+		stateChanged = false;
+	}
+
+	public void EndVulnerableState()
+	{
+		anim.SetBool("VulnerableSwitch", false);
 	}
 }

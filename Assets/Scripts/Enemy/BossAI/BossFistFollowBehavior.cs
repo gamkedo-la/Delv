@@ -26,7 +26,7 @@ public class BossFistFollowBehavior : StateMachineBehaviour
 		if (timer <= 0f)
 		{
 			bossEvent.DisableFists();
-			animator.SetTrigger("VulnerableSwitch");
+			animator.SetBool("VulnerableSwitch", true);
 			animator.SetBool("Player1", playerIndex != 0);
 
 			timer = delay;
