@@ -51,7 +51,6 @@ public class AICompanion : MonoBehaviour
 
     private Collider2D[] AIColliders;
     private Collider2D AICollider;
-    private Rigidbody BotRB;
 
     private float AimDistance = 4.5f;
 
@@ -67,15 +66,15 @@ public class AICompanion : MonoBehaviour
     public void Awake()
     {
         AI = GetComponent<PlayerController>();
+
         AIColliders = GetComponents<BoxCollider2D>();
-        foreach (BoxCollider2D box in AIColliders) 
-        { 
-            if (box.isTrigger) 
+        foreach (BoxCollider2D box in AIColliders)
+        {
+            if (box.isTrigger)
             {
                 AICollider = box;
             }
         }
-        BotRB = GetComponent<Rigidbody>();
 
         closestTarget = null;
         idleTimer = idleTimerFull;
@@ -87,7 +86,7 @@ public class AICompanion : MonoBehaviour
         // which is two to the power of whatever bit we want to set
         // eg 00000000000000001000000000000000 // Mathf.Pow(2f,16f)
         //itemLayerFilter.SetLayerMask(itemLayer); << How I tried to make this work ~~ vv solution
-        itemLayerFilter.layerMask.value = 1<<itemLayer; //65536; WORKS!!! // 2^16 (16==items layer)
+        itemLayerFilter.layerMask.value = 1 << itemLayer; //65536; WORKS!!! // 2^16 (16==items layer)
         itemLayerFilter.useLayerMask = true;
         itemLayerFilter.useTriggers = true;
     }
@@ -118,6 +117,8 @@ public class AICompanion : MonoBehaviour
         meanderingInputSet = false;
         following = false;
         targetAquired = false;
+        foundHealth = false;
+        foundMana = false;
         ZeroOutInput();
         closestTarget = null;
     }
@@ -144,7 +145,7 @@ public class AICompanion : MonoBehaviour
 
     public bool Shoot() // TODO
     {
-        if (closestTarget == null || closestTarget.layer == containerLayer) 
+        if (closestTarget == null || closestTarget.layer == containerLayer)
         {
             return false;
         }
@@ -174,77 +175,96 @@ public class AICompanion : MonoBehaviour
             return;
         }
 
-		if (Player != null)
-		{
-			if (Player.isDead)
-			{
-				meandering = false;
-				following = false;
-				targetAquired = false;
-				AimBasedOnAtan2(PlayerGO);
-				getToPlayerToRevive();
-				return;
-			}
+        if (Player != null)
+        {
 
-			ResourceManager();
+            if (Player.isDead)
+            {
+                meandering = false;
+                following = false;
+                targetAquired = false;
+                AimBasedOnAtan2(PlayerGO);
+                getToPlayerToRevive();
+                return;
+            }
 
-			if (nearestResource != null && (foundHealth || foundMana))
-			{
-				meandering = false;
-				following = false;
-				GoTowardNeededResource();
-				if (DEBUG_AI)
-				{
-					if (foundMana && foundHealth)
-					{
-						Debug.Log("AI: 'Need mana/health and found both types of potions'");
-					}
-					else if (foundMana)
-					{
-						Debug.Log("AI: 'Need mana and found mana'");
-					}
-					else if (foundHealth)
-					{
-						Debug.Log("AI: 'Need health and found health'");
-					}
-				}
-			}
+            if (!foundHealth && !foundMana)
+            {
+                ResourceManager();
+            }
 
-			if (closestTarget != null && closestTarget.layer != containerLayer)
-			{
-				// MORTAL KOMBAT!!!
-				meandering = false;
-				following = false;
-				combatManeuvers();
-				return;
-			}
+            if (nearestResource != null)
+            { 
+                GoTowardNeededResource();
+                if (DEBUG_AI)
+                {
+                    if (foundMana && foundHealth)
+                    {
+                        Debug.Log("AI: Need mana/health and found both types of potions");
+                    }
+                    else if (foundMana)
+                    {
+                        Debug.Log("AI: Need mana and found mana");
+                    }
+                    else if (foundHealth)
+                    {
+                        Debug.Log("AI: Need health and found health");
+                    }
+                }
+                return;
+            }
 
-			if (FollowPlayerCheck() || following)
-			{
-				meandering = false;
-				FollowPlayer();
-				return;
-			}
+            if (closestTarget != null && closestTarget.layer != containerLayer)
+            {
+                // MORTAL KOMBAT!!!
+                meandering = false;
+                following = false;
+                combatManeuvers();
+                return;
+            }
 
-			if (!meandering)
-			{
-				SetMeanderingDestination();
-			}
-			else
-			{
-				Meander();
-			}
-		}
+            if (FollowPlayerCheck() || following)
+            {
+                meandering = false;
+                FollowPlayer();
+                return;
+            }
+
+            if (!meandering)
+            {
+                SetMeanderingDestination();
+            }
+            else
+            {
+                Meander();
+            }
+        }
     } // end of AIMoveBasedOnState():
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == PlayerGO)
         {
-            Debug.Log("Bumped by Player");
-            ZeroOutInput();
+            //Debug.Log("Bumped by Player");
             meanderDestination.transform.position = transform.position;
             AIReset();
+        }
+
+        if (nearestResource != null && collision.gameObject == nearestResource)
+        {
+            itemArray = new Collider2D[10];
+            nearestResource = null;
+            foundMana = false;
+            foundHealth = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject == PlayerGO)
+        {
+            //Debug.Log("Player left");
+            return;
         }
     }
 
@@ -264,7 +284,13 @@ public class AICompanion : MonoBehaviour
     public void ResourceManager()
     {
         // should we bother looking for potions?
-        if ((AI.Health + AI.MaxHealth / 2) < Player.Health)
+        if (nearestResource != null) 
+        {
+            return;
+            // AI knows about a potion
+        }
+
+        if (!foundHealth && (AI.Health + AI.MaxHealth / 2) < Player.Health)
         {
             if (FindNearestResource("HealthPotion"))
             {
@@ -273,7 +299,7 @@ public class AICompanion : MonoBehaviour
             }
         }
 
-        if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy / 2) < Player.Energy)
+        if (!foundMana && AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy / 2) < Player.Energy)
         {
             if (FindNearestResource("ManaPotion"))
             {
@@ -294,15 +320,17 @@ public class AICompanion : MonoBehaviour
         // nah that sounds slow and old fashioned
 
         // search for nearby potions - physicsy way:
+
         Collider2D item;
 
         //if (DEBUG_AI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
         int count = Physics2D.OverlapCircle(transform.position, itemSeekRadius, itemLayerFilter, itemArray);
         if (count == 0)
         {
-            if (DEBUG_AI) Debug.Log("AI: 'no " + potionName + " near me'");
+            if (DEBUG_AI) Debug.Log("AI: no " + potionName + " near me");
             return false;
         }
+
         if (DEBUG_AI) Debug.Log(count + " item colliders near " + name + " at " + transform.position);
 
         for (int num = 0; num < count; num++)
@@ -323,15 +351,12 @@ public class AICompanion : MonoBehaviour
                 nearestResource = item;
                 return true;
             }
-            else
-            {
-                if (DEBUG_AI) Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! That seems wrong!");
-            }
-
-            if (DEBUG_AI) Debug.Log("no items near " + name + " at " + transform.position);
-
+            //else
+            //{
+            //    if (DEBUG_AI) Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! That seems wrong!");
+            //}
         }
-        if (DEBUG_AI) Debug.Log("AI did not bother looking for potions");
+        if (DEBUG_AI) Debug.Log("no items near " + name + " at " + transform.position);
         return false;
     }
 
@@ -339,7 +364,7 @@ public class AICompanion : MonoBehaviour
     {
         Vector2 direction = Vector2.zero;
 
-        if (Vector2.Distance(transform.position, closestTarget.transform.position) 
+        if (Vector2.Distance(transform.position, closestTarget.transform.position)
             < (AimDistance - 0.5))
         {
             direction = ReturnNormalizedVector(-closestTarget.transform.position);
@@ -419,7 +444,7 @@ public class AICompanion : MonoBehaviour
             }
         }
 
-        if (!meanderingInputSet) 
+        if (!meanderingInputSet)
         {
             Vector2 direction = heading.normalized;
             SetInputAmount(direction, "slow");
@@ -428,14 +453,32 @@ public class AICompanion : MonoBehaviour
         }
     }
 
+    private float PlayerDistToResource;
+    private float BotDistToResource;
+
     public void GoTowardNeededResource()
     {
+        PlayerDistToResource = Vector2.Distance(Player.transform.position, nearestResource.transform.position);
+        BotDistToResource = Vector2.Distance(transform.position, nearestResource.transform.position);
+        if (PlayerDistToResource < BotDistToResource)
+        {
+            if (DEBUG_AI) Debug.Log("AI: Player is closer to resource, wait to see what happens");
+            ZeroOutInput();
+            return;
+        }
+
+        if (nearestResource == null) 
+        {
+            if (DEBUG_AI) Debug.Log("AI: tracked potion was picked up");
+            return;
+        }
+
         Vector2 direction = ReturnNormalizedVector(nearestResource.transform.position);
         SetInputAmount(direction, "medium");
     }
 
 
-    private Vector3 ReturnNormalizedVector (Vector3 target)
+    private Vector3 ReturnNormalizedVector(Vector3 target)
     {
         Vector2 heading = target - transform.position;
         float distance = heading.magnitude;
@@ -452,8 +495,8 @@ public class AICompanion : MonoBehaviour
         }
 
         if (step < Player.PlayerSteps.Count)
-        { 
-            if (Mathf.Abs(Vector3.Distance(transform.position, 
+        {
+            if (Mathf.Abs(Vector3.Distance(transform.position,
                 Player.PlayerSteps[step])) < 0.3f)
             {
                 Player.PlayerSteps.RemoveAt(step);
@@ -472,7 +515,7 @@ public class AICompanion : MonoBehaviour
     public void SetInputAmount(Vector2 direction, string tempo)
     {
         float inputIntensity = 0f;
-        if (tempo == "slow") 
+        if (tempo == "slow")
         {
             inputIntensity = Random.Range(0.10f, 0.15f);
         }
@@ -538,7 +581,7 @@ public class AICompanion : MonoBehaviour
                                             closestTarget.transform.position));
         if (DistBetween > AimDistance)
         {
-            targetAquired = false; 
+            targetAquired = false;
             closestTarget = null;
         }
     }
