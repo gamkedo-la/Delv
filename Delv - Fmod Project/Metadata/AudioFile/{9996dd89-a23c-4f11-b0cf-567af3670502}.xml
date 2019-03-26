@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{9996dd89-a23c-4f11-b0cf-567af3670502}">
+        <property name="assetPath">
+            <value>Music/Misty Music.mp3</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>140.61714285714285</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{9279d48f-6ff2-4639-a386-b30664485f36}</destination>
+        </relationship>
+    </object>
+</objects>
