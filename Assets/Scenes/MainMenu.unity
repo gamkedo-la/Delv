@@ -1076,6 +1076,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525098824}
   m_CullTransparentMesh: 0
+--- !u!1 &537609762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1502119495, guid: d38ebff77834f41629b083b08339d580,
+    type: 3}
+  m_PrefabInstance: {fileID: 7153966743116703765}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &537609764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537609762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: 0
 --- !u!1 &542170359
 GameObject:
   m_ObjectHideFlags: 0
@@ -5126,14 +5145,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 950072697, guid: d38ebff77834f41629b083b08339d580, type: 3}
-      propertyPath: DebugUIGO
-      value: 
-      objectReference: {fileID: 1811942451}
+    - target: {fileID: 1112838916, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1224397772, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 950072697, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: DebugUIGO
+      value: 
+      objectReference: {fileID: 1811942451}
     - target: {fileID: 470205025, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -5214,10 +5237,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 57963347, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1112838916, guid: d38ebff77834f41629b083b08339d580, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 313260351, guid: d38ebff77834f41629b083b08339d580, type: 3}
