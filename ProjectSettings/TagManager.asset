@@ -20,6 +20,9 @@ TagManager:
   - NPC
   - Activatable
   - canvas
+  - Village
+  - Cave
+  - Forest
   layers:
   - Default
   - TransparentFX

@@ -118,11 +118,14 @@ public class PlayerController : MonoBehaviour
     [Space]
     public bool isDead = false;
 	[Space]
-	public AudioClip stepClip;
+
+    [FMODUnity.EventRef]
+    public string footsteps;
+    FMOD.Studio.EventInstance footstepsEv;
+    float m_Footsteps;
+
 	public float stepDelay = 0.2f;
 	private float stepTimer = 0f;
-	private AudioSource audSrc;
-
 
     private void OnEnable()
     {
@@ -176,7 +179,8 @@ public class PlayerController : MonoBehaviour
         HealthBar = healthdirector.HealthBar;
         EnergyBar = healthdirector.EnergyBar;
         reviver = GetComponent<Reviver>();
-		audSrc = GetComponent<AudioSource>();
+        footstepsEv = FMODUnity.RuntimeManager.CreateInstance(footsteps);
+
     }
 
     // Use this for initialization
@@ -237,6 +241,8 @@ public class PlayerController : MonoBehaviour
         {
             CancelWeapon2();
         }
+
+        footstepsEv.setParameterValue("Material", m_Footsteps);
     }
 
     void FixedUpdate()
@@ -366,8 +372,9 @@ public class PlayerController : MonoBehaviour
 		{
 			if(stepTimer <= 0f)
 			{
-				audSrc.PlayOneShot(stepClip, 0.3f);
-				stepTimer = stepDelay;
+                //audSrc.PlayOneShot(stepClip, 0.3f);
+                footstepsEv.start();
+                stepTimer = stepDelay;
 			}
 			else
 			{
@@ -413,6 +420,24 @@ public class PlayerController : MonoBehaviour
             SR.flipX = true;
         }
     }
+
+    // Control the footsteps parameter
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Village":
+                m_Footsteps = 0;
+                break;
+            case "Forest":
+                m_Footsteps = 1f;
+                break;
+            case "Cave":
+                m_Footsteps = 2f;
+                break;
+        }
+    }
+
 
     /// PICKUP COLLIDER LOGIC
     void OnTriggerStay2D(Collider2D coll)
