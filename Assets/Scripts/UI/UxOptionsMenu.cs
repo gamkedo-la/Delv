@@ -12,6 +12,9 @@ public class UxOptionsMenu : UxPanel {
     public Toggle p2InputAIToggle;
     public Button advancedButton;
     public Button okButton;
+    public Slider masterVolumeSlider;
+    public Slider sfxVolumeSlider;
+    public Slider musicVolumeSlider;
 
     [Header("Prefabs")]
     public GameObject advancedPrefab;
@@ -33,6 +36,9 @@ public class UxOptionsMenu : UxPanel {
             (value)=>{if (value) gameConfig.p2ControllerKind = ControllerKind.DualShock;});
         p2InputAIToggle.onValueChanged.AddListener(
             (value)=>{if (value) gameConfig.p2ControllerKind = ControllerKind.AI;});
+        masterVolumeSlider.onValueChanged.AddListener((value)=>{gameConfig.masterVolume = value;});
+        sfxVolumeSlider.onValueChanged.AddListener((value)=>{gameConfig.sfxVolume = value;});
+        musicVolumeSlider.onValueChanged.AddListener((value)=>{gameConfig.musicVolume = value;});
         advancedButton.onClick.AddListener(OnAdvancedClick);
         okButton.onClick.AddListener(OnOkClick);
         SetState();
@@ -48,6 +54,9 @@ public class UxOptionsMenu : UxPanel {
         p2InputXInputToggle.isOn = gameConfig.p2ControllerKind == ControllerKind.XInput;
         p2InputDualshockToggle.isOn = gameConfig.p2ControllerKind == ControllerKind.DualShock;
         p2InputAIToggle.isOn = gameConfig.p2ControllerKind == ControllerKind.AI;
+	masterVolumeSlider.value = gameConfig.masterVolume;
+	sfxVolumeSlider.value = gameConfig.sfxVolume;
+	musicVolumeSlider.value = gameConfig.musicVolume;
     }
 
     public void OnOkClick() {

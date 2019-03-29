@@ -16,4 +16,7 @@ public class GameConfig : ScriptableObject {
     public int maxParticles = 4;
     public ControllerKind p1ControllerKind = ControllerKind.Keyboard;
     public ControllerKind p2ControllerKind = ControllerKind.AI;
+    public float masterVolume = .5f;
+    public float sfxVolume = .5f;
+    public float musicVolume = .5f;
 }
