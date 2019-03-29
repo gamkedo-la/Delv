@@ -1373,6 +1373,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cce9d1555a461149a100d5cc8cbd315, type: 3}
+--- !u!1 &598042638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1927866337796354, guid: 0cce9d1555a461149a100d5cc8cbd315,
+    type: 3}
+  m_PrefabInstance: {fileID: 598042637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &598042639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598042638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Player/player_stairs
+  PlayEvent: 5
+  StopEvent: 0
+  CollisionTag: Player
+  AllowFadeout: 1
+  TriggerOnce: 1
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &619594858
 GameObject:
   m_ObjectHideFlags: 0
