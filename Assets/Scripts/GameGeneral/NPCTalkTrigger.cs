@@ -13,9 +13,13 @@ public class NPCTalkTrigger : MonoBehaviour
     {
         DM = FindObjectOfType<DialogueManager>();
     }
-    // Update is called once per frame
     void Activate()
     {
+        if (DM == null)
+        {
+            DM = FindObjectOfType<DialogueManager>();
+
+        }
         if (IsActive)
         {
             Debug.Log(this.name + " has received Activate command to go to the next sentence");
