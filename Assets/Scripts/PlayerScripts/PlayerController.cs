@@ -367,7 +367,7 @@ public class PlayerController : MonoBehaviour
         {
             Hinput = Input.GetAxis(LstickH);
         }
-		
+
 		if(_rb.velocity != Vector2.zero && !isBot)
 		{
 			if(stepTimer <= 0f)
@@ -393,7 +393,7 @@ public class PlayerController : MonoBehaviour
 		velocity.y = (speed/6f) * Vinput;
 		velocity.x = (speed/6f) * Hinput;
 		_rb.velocity = velocity;
-		
+
         if (AICompanion.isActiveAndEnabled && !isBot && AICompanion.following)
         {
             float stepDistanceCheck = 3.0f;
@@ -572,7 +572,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = SP.transform.position;
             Debug.Log("Player Received GoToStart command");
-            if (isBot) 
+            if (isBot)
             {
                 AICompanion.meanderDestination.transform.position = AICompanion.transform.position;
                 AICompanion.AIReset();

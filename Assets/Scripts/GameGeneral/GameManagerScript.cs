@@ -42,7 +42,7 @@ public class GameManagerScript : MonoBehaviour
 	public GameObject Player2UI;
 	[Space]
 	public GameObject[] ThingsToWake;
-	/// 
+	///
 
 	private void Awake()
 	{
@@ -56,7 +56,7 @@ public class GameManagerScript : MonoBehaviour
 		}
 		DontDestroyOnLoad(this.gameObject);
 	}
-	
+
 	public void InitializeGame()
 	{
 		EnablePlayer1();
@@ -116,7 +116,7 @@ public class GameManagerScript : MonoBehaviour
 	///  This is the scene swapper area, simple and rudimentary. Will probably update it if project complexity
 	///  increases. For now this is all we need.
 	/// </summary>
-	/// 
+	///
 
 
 
