@@ -15,14 +15,13 @@ public class BypassMenu : MonoBehaviour
     private AICompanion AI;
     private GameObject player2;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (Camera.main)
         {
             Debug.Log("There is a main camera, therefore we got here from main menu");
             return;
-        } 
+        }
 
         Debug.Log("No camera detected, started from editor");
         BypassScript = GetComponent<MainMenuScript>();
@@ -79,7 +78,7 @@ public class BypassMenu : MonoBehaviour
         if (numberOfPlayers == 1)
         {
             player2.SetActive(false);
-            if (AIEnabled) 
+            if (AIEnabled)
             {
                 Debug.Log("AI not enabled because there is only one player");
                 previousAIOnState = AIEnabled = false;

@@ -8,12 +8,13 @@ public class FallingRock : MonoBehaviour
     [SerializeField] Transform shadow;
     [SerializeField] float shadowSizePercentage = 0.6f;
     [SerializeField] float fallSpeed = 5f;
+    [SerializeField] float removeTimeout = 5f;
 
     Vector3 shadowScale;
-
     float maxDistance;
-    public bool fallen = false;
+    [HideInInspector] public bool fallen = false;
     Vector3 orgPos;
+	CircleCollider2D rockCollider;
 
     void Start()
     {
@@ -22,6 +23,8 @@ public class FallingRock : MonoBehaviour
 
         maxDistance = Vector3.Distance(rock.position, shadow.position);
         orgPos = rock.position;
+
+		rockCollider = gameObject.GetComponent<CircleCollider2D>();
     }
 
     void Update()
@@ -35,12 +38,14 @@ public class FallingRock : MonoBehaviour
 
         rock.position = Vector3.MoveTowards(rock.position, shadow.position, fallSpeed * Time.deltaTime);
 
-        fallSpeed *= 1.01f;
+        fallSpeed *= 1.03f;
 
         fallen = (distance < 0.001f);
         if (fallen) {
-            // @todo do damage
-            Destroy(gameObject, 2f);
+            rockCollider.enabled = true;
+            gameObject.transform.parent.gameObject.SendMessage("DoneFalling");
+
+            Destroy(gameObject, removeTimeout);
         }
     }
 }

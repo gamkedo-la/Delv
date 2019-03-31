@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3515846004469062853}
   - component: {fileID: 3515846004469062852}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rock shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,8 +88,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3515846004979184372}
+  - component: {fileID: 927900208497673501}
   - component: {fileID: 3515846004979184373}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FallingRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,6 +113,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &927900208497673501
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515846004979184362}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.45
 --- !u!114 &3515846004979184373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,8 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rock: {fileID: 3515846005382732803}
   shadow: {fileID: 3515846004469062853}
-  shadowSizePercentage: 0.6
-  fallSpeed: 7
+  shadowSizePercentage: 0.3
+  fallSpeed: 9
+  removeTimeout: 20
   fallen: 0
 --- !u!1 &3515846005382732800
 GameObject:
@@ -139,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3515846005382732803}
   - component: {fileID: 3515846005382732802}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3515846005382732800}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalPosition: {x: 0, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3515846004979184372}
