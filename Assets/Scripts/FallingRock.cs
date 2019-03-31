@@ -9,10 +9,12 @@ public class FallingRock : MonoBehaviour
     [SerializeField] float shadowSizePercentage = 0.6f;
     [SerializeField] float fallSpeed = 5f;
     [SerializeField] float removeTimeout = 5f;
+    [SerializeField] float damage = 25f;
 
     Vector3 shadowScale;
     float maxDistance;
-    [HideInInspector] public bool fallen = false;
+    bool fallen = false;
+    bool doneDamage = false;
     Vector3 orgPos;
 	CircleCollider2D rockCollider;
 
@@ -29,7 +31,8 @@ public class FallingRock : MonoBehaviour
 
     void Update()
     {
-        if (fallen) {
+        if (fallen)
+        {
             return;
         }
 
@@ -41,11 +44,27 @@ public class FallingRock : MonoBehaviour
         fallSpeed *= 1.03f;
 
         fallen = (distance < 0.001f);
-        if (fallen) {
+        if (fallen)
+        {
             rockCollider.enabled = true;
             gameObject.transform.parent.gameObject.SendMessage("DoneFalling");
 
             Destroy(gameObject, removeTimeout);
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (doneDamage)
+        {
+            return;
+        }
+
+        if (other.gameObject.tag != "Player") {
+            return;
+        }
+
+        other.gameObject.SendMessage("DamageHealth", damage);
+        doneDamage = true;
     }
 }

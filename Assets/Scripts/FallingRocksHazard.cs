@@ -37,7 +37,6 @@ public class FallingRocksHazard : MonoBehaviour
 	public void DoneFalling()
 	{
 		camShake.Shake(0.5f, 2, 5f);
-		// @todo do damage to players
 	}
 
 	void OnDrawGizmosSelected()
