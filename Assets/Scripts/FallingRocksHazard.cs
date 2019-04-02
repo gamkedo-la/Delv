@@ -39,9 +39,11 @@ public class FallingRocksHazard : MonoBehaviour
 		camShake.Shake(0.5f, 2, 5f);
 	}
 
+#if UNITY_EDITOR
 	void OnDrawGizmosSelected()
 	{
 		UnityEditor.Handles.color = Color.green;
 		UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
 	}
+#endif
 }
