@@ -7,15 +7,14 @@ public class BypassMenu : MonoBehaviour
 {
     public GameObject gameManagerPrefab;
     public bool AIEnabled = true;
+    private bool fromEditor = false;
     public int numberOfPlayers = 2;
     private bool previousAIOnState;
     private int previousNumberOfPlayers;
 
-    //private MainMenuScript BypassScript;
-    private AICompanion AI;
     private GameObject player2;
 
-    void Awake()
+    void Start()
     {
         if (Camera.main)
         {
@@ -24,8 +23,7 @@ public class BypassMenu : MonoBehaviour
         }
 
         Debug.Log("No camera detected, started from editor");
-        //BypassScript = GetComponent<MainMenuScript>();
-        AI = GetComponent<AICompanion>();
+        fromEditor = true;
         Instantiate(gameManagerPrefab);
 
         // workaround to ensure player2 GO is always assessible
@@ -42,9 +40,7 @@ public class BypassMenu : MonoBehaviour
         GameManagerScript.instance.PlayerCount = numberOfPlayers;
 
         GameManagerScript.instance.InitializeGame();
-
-        //BypassScript.dialogueBox = GameObject.Find("DialogueManager");
-        //BypassScript.CompanionManager = GameObject.Find("CompanionManager");
+        StartCoroutine(checkSceneVariables());
     }
 
     private void Update()
@@ -54,22 +50,25 @@ public class BypassMenu : MonoBehaviour
             //Debug.Log("There is a main camera, therefore we got here from main menu");
             return;
         }
-        StartCoroutine(checkSceneVariables());
     }
 
     IEnumerator checkSceneVariables()
     {
-        yield return new WaitForSeconds(2.0f);
-        if (previousAIOnState != AIEnabled || previousNumberOfPlayers != numberOfPlayers)
+        while (fromEditor)
         {
-            changeGameManagerBasedOnNumberOfPlayers();
+            yield return new WaitForSeconds(1.0f);
+            Debug.Log("Checking Vars");
+            if (previousAIOnState != AIEnabled || previousNumberOfPlayers != numberOfPlayers)
+            {
+                changeGameManagerBasedOnNumberOfPlayers();
 
-            previousAIOnState = AIEnabled;
-            previousNumberOfPlayers = numberOfPlayers;
-            GameManagerScript.instance.isAIBot = AIEnabled;
-            GameManagerScript.instance.PlayerCount = numberOfPlayers;
+                previousAIOnState = AIEnabled;
+                previousNumberOfPlayers = numberOfPlayers;
+                GameManagerScript.instance.isAIBot = AIEnabled;
+                GameManagerScript.instance.PlayerCount = numberOfPlayers;
 
-            GameManagerScript.instance.InitializeGame();
+                GameManagerScript.instance.InitializeGame();
+            }
         }
     }
 

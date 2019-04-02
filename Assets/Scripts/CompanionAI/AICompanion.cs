@@ -8,10 +8,10 @@ public class AICompanion : MonoBehaviour
     [Header("Debug")]
     public bool DEBUG_AI = true; // if true, spam the debug console
     [Space]
-    [Header("Main AI Components")]
+    [Header("AI Script")]
     public PlayerController AI;
     [Space]
-    [Header("Main Player Components")]
+    [Header("Player Main Components")]
     public PlayerController Player;
     public GameObject PlayerGO;
     [Space]
@@ -67,6 +67,9 @@ public class AICompanion : MonoBehaviour
     public void Awake()
     {
         AI = GetComponent<PlayerController>();
+
+        PlayerGO = GameObject.FindGameObjectWithTag("Player");
+        Player = PlayerGO.GetComponentInParent<PlayerController>();
 
         AIColliders = GetComponents<BoxCollider2D>();
         foreach (BoxCollider2D box in AIColliders)
@@ -202,21 +205,6 @@ public class AICompanion : MonoBehaviour
             if (nearestResource != null)
             { 
                 GoTowardNeededResource();
-                if (DEBUG_AI)
-                {
-                    if (foundMana && foundHealth)
-                    {
-                        Debug.Log("AI: Need mana/health and found both types of potions");
-                    }
-                    else if (foundMana)
-                    {
-                        Debug.Log("AI: Need mana and found mana");
-                    }
-                    else if (foundHealth)
-                    {
-                        Debug.Log("AI: Need health and found health");
-                    }
-                }
                 return;
             }
 
@@ -423,7 +411,7 @@ public class AICompanion : MonoBehaviour
         int count = AICollider.Cast(direction, hitArray, direction.magnitude + 0.1f);
         for (int i = 0; i < count; i++)
         {
-            if (hitArray[i].collider.name == "FMOD_FootstepsCollider")
+            if (hitArray[i].collider.isTrigger)
             {
                 continue;
             }
