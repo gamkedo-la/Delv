@@ -6,6 +6,9 @@ public class LightningStaff : AbstractWeapon
 {
     public LineRenderer LR;
 
+    [FMODUnity.EventRef]
+    public string lightningSound;
+
     public override void Fire1()
     {
         Debug.Log("Shooting");
@@ -40,6 +43,8 @@ public class LightningStaff : AbstractWeapon
         {
             //return;
         }
+
+        FMODUnity.RuntimeManager.PlayOneShot(lightningSound, transform.position);
     }
 
     IEnumerator LineCD()

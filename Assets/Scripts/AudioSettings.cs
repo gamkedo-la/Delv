@@ -19,25 +19,21 @@ public class AudioSettings : MonoBehaviour
         Master = FMODUnity.RuntimeManager.GetBus("bus:/Master");
     }
 
-    void Update()
-    {
-        Master.setVolume(MasterVolume);
-        Music.setVolume(MusicVolume);
-        SFX.setVolume(SFXVolume);
-    }
-
     public void MasterVolumeLevel(float newMasterVolume)
     {
         MasterVolume = newMasterVolume;
+        Master.setVolume(MasterVolume);
     }
 
     public void MusicVolumeLevel(float newMusicVolume)
     {
         MusicVolume = newMusicVolume;
+        Music.setVolume(MusicVolume);
     }
 
     public void SFXVolumeLevel(float newSFXVolume)
     {
         SFXVolume = newSFXVolume;
+        SFX.setVolume(SFXVolume);
     }
 }
