@@ -25,6 +25,7 @@ public class BypassMenu : MonoBehaviour
 
         Debug.Log("No camera detected, started from editor");
         fromEditor = true;
+
         Instantiate(gameManagerPrefab);
 
         // workaround to ensure player2 GO is always assessible

@@ -4804,11 +4804,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f670dfed5e8d5764899eaef4eb71b6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  Target: {fileID: 6089592599922983553, guid: 79697487094554407962030915fa53b1, type: 3}
   RotationSpeed: 120
   alert: 1
   Projectile: {fileID: 759830379415523666, guid: 9cecab5714518a04399fb4a7e04b9555,
     type: 3}
+  ProjectileCollectorPrefab: {fileID: 0}
+  projectileCollector: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   TimeBetweenShots: 0.5
   TimeBetweenBursts: 2

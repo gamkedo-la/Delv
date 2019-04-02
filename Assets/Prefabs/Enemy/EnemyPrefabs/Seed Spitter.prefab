@@ -98,8 +98,12 @@ MonoBehaviour:
   alert: 1
   Projectile: {fileID: 759830379415523666, guid: 9cecab5714518a04399fb4a7e04b9555,
     type: 3}
+  ProjectileCollectorPrefab: {fileID: 0}
+  projectileCollector: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
-  rotoffset: {x: 0, y: 0, z: 90, w: 0}
+  TimeBetweenShots: 1
+  TimeBetweenBursts: 3
+  staggerTimer: 3
 --- !u!50 &5230798648296687323
 Rigidbody2D:
   serializedVersion: 4

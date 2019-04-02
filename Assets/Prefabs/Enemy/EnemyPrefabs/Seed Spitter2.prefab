@@ -4640,7 +4640,7 @@ ParticleSystem:
 --- !u!199 &8782125202139870953
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4809,10 +4809,12 @@ MonoBehaviour:
   alert: 1
   Projectile: {fileID: 759830379415523666, guid: 9cecab5714518a04399fb4a7e04b9555,
     type: 3}
+  ProjectileCollectorPrefab: {fileID: 0}
+  projectileCollector: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
-  rotoffset: {x: 0, y: 0, z: 90, w: 0}
   TimeBetweenShots: 0.2
   TimeBetweenBursts: 1.5
+  staggerTimer: 3
 --- !u!50 &5230798648296687323
 Rigidbody2D:
   serializedVersion: 4

@@ -11,6 +11,9 @@ public class SlowAimer : MonoBehaviour
     private Rigidbody2D rb;
     public bool alert;
     public GameObject Projectile;
+    [SerializeField]
+    private GameObject ProjectileManager;
+    private Transform ProjectileCollector;
     public Vector3 offset;
     [Space]
     public float TimeBetweenShots = 1;
@@ -28,6 +31,15 @@ public class SlowAimer : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         fireSequence = StartCoroutine(FireSequence());
 
+        ProjectileManager = GameObject.Find("ProjectileManager");
+        if (ProjectileManager == null)
+        {
+            Debug.Log("Projectile Collector is not present - spawning shots in heirarchy");
+            ProjectileCollector = null;
+        } else {
+            Debug.Log("Projectile Collector present");
+            ProjectileCollector = ProjectileManager.transform;
+        }
     }
 
     // Update is called once per frame
@@ -70,11 +82,14 @@ public class SlowAimer : MonoBehaviour
 
     IEnumerator FireSequence()
     {
-        Instantiate(Projectile, transform.position + offset, transform.rotation);
+        GameObject TempGO = Instantiate(Projectile, transform.position + offset, transform.rotation);
+        TempGO.transform.SetParent(ProjectileCollector);
         yield return new WaitForSeconds(TimeBetweenShots);
-        Instantiate(Projectile, transform.position + offset, transform.rotation);
+        TempGO = Instantiate(Projectile, transform.position + offset, transform.rotation);
+        TempGO.transform.SetParent(ProjectileCollector);
         yield return new WaitForSeconds(TimeBetweenShots);
-        Instantiate(Projectile, transform.position + offset, transform.rotation);
+        TempGO = Instantiate(Projectile, transform.position + offset, transform.rotation);
+        TempGO.transform.SetParent(ProjectileCollector);
         yield return new WaitForSeconds(TimeBetweenBursts);
         fireSequence = StartCoroutine(FireSequence());
     }

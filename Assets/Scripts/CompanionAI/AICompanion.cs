@@ -42,6 +42,7 @@ public class AICompanion : MonoBehaviour
     private bool meanderingInputSet;
     public bool inCutScene;
     public bool targetAquired;
+    public bool foundResource;
     [Space]
     [Header("Level Targets")]
     public GameObject[] TargetGOs;
@@ -57,7 +58,7 @@ public class AICompanion : MonoBehaviour
     private int containerLayer;
     private int itemLayer;
     private ContactFilter2D itemLayerFilter;
-    private int count;
+    public int count;
     private float itemSeekRadius = 5.0f;
     private float distanceToResource;
 
@@ -126,8 +127,6 @@ public class AICompanion : MonoBehaviour
         meanderingInputSet = false;
         following = false;
         targetAquired = false;
-        foundHealth = false;
-        foundMana = false;
         ZeroOutInput();
         closestTarget = null;
     }
@@ -172,8 +171,6 @@ public class AICompanion : MonoBehaviour
     private Collider2D[] itemArray = new Collider2D[10];
     [Space]
     [Header("Resource States")]
-    public bool foundHealth;
-    public bool foundMana;
     public Collider2D nearestResource;
 
     public void AIMoveBasedOnState()
@@ -197,12 +194,12 @@ public class AICompanion : MonoBehaviour
                 return;
             }
 
-            if (!foundHealth && !foundMana)
+            if (nearestResource == null)
             {
                 ResourceManager();
             }
 
-            if (nearestResource != null)
+            if (nearestResource != null && foundResource)
             { 
                 GoTowardNeededResource();
                 return;
@@ -248,8 +245,6 @@ public class AICompanion : MonoBehaviour
         {
             itemArray = new Collider2D[10];
             nearestResource = null;
-            foundMana = false;
-            foundHealth = false;
         }
     }
 
@@ -277,47 +272,49 @@ public class AICompanion : MonoBehaviour
 
     public void ResourceManager()
     {
-        // should we bother looking for potions?
-        if (nearestResource != null) 
-        {
-            return;
-            // AI knows about a potion
-        }
+        //// should we bother looking for potions?
+        //if (nearestResource != null) 
+        //{
+        //    return;
+        //    // AI knows about a potion
+        //}
 
         if (count == 0)
         {
-            if (DEBUG_AI) Debug.Log("AI: No potions near me");
+            //if (DEBUG_AI) Debug.Log("AI: No potions near me");
+            foundResource = false;
+            nearestResource = null;
             return;
         }
 
-        if (!foundHealth && (AI.Health + AI.MaxHealth / 2) < Player.Health)
+        if ((AI.Health + AI.MaxHealth / 2) < Player.Health)
         {
             if (FindNearestResource("HealthPotion"))
             {
-                foundHealth = true;
+                foundResource = true;
                 return;
             }
         }
 
-        if (!foundMana && AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy / 2) < Player.Energy)
+        if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy / 2) < Player.Energy)
         {
             if (FindNearestResource("ManaPotion"))
             {
-                foundMana = true;
+                foundResource = true;
                 return;
             }
         }
-        foundHealth = false;
-        foundMana = false;
-        // not found because AI doesn't need it
+        foundResource = false;
+        // not found because AI doesn't need it/didn't find any
     }
 
     IEnumerator checkLevelForPotions()
     {
-        while (true)
+        while (!foundResource)
         {
             count = Physics2D.OverlapCircle(transform.position, itemSeekRadius, itemLayerFilter, itemArray);
-            yield return new WaitForSeconds(0.5f);
+            //Debug.Log("Looking for potions");
+            yield return new WaitForSeconds(0.75f);
         }
     }
 
@@ -332,12 +329,12 @@ public class AICompanion : MonoBehaviour
 
         Collider2D item;
 
-        if (DEBUG_AI) Debug.Log(count + " item colliders near " + name + " at " + transform.position);
+        //if (DEBUG_AI) Debug.Log(count + " item colliders near " + name + " at " + transform.position);
 
         for (int num = 0; num < count; num++)
         {
             item = itemArray[num];
-            if (DEBUG_AI) Debug.Log(item); // always null? FIXME
+            //if (DEBUG_AI) Debug.Log(item);
             if (item == null)
             {
                 if (DEBUG_AI) Debug.Log("Nearby item is null! That seems wrong.");
@@ -357,7 +354,7 @@ public class AICompanion : MonoBehaviour
             //    if (DEBUG_AI) Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! That seems wrong!");
             //}
         }
-        if (DEBUG_AI) Debug.Log("no items near " + name + " at " + transform.position);
+        //if (DEBUG_AI) Debug.Log("no items near " + name + " at " + transform.position);
         return false;
     }
 
@@ -418,8 +415,7 @@ public class AICompanion : MonoBehaviour
 
             if (hitArray[i].collider != null)
             {
-                if (DEBUG_AI) Debug.Log(hitArray[i].collider.name, hitArray[i].collider);
-                if (DEBUG_AI) Debug.Log("AI: Meandering path goes through object, waiting before trying again");
+                if (DEBUG_AI) Debug.Log("AI: Meandering path goes through " + hitArray[i].collider.name + ", waiting before trying again", hitArray[i].collider);
                 meanderDestination.transform.position = transform.position;
                 meanderingInputSet = true;
                 meandering = true;
