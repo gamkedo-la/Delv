@@ -50,9 +50,9 @@ public class GameManagerScript : MonoBehaviour
 	}
 
 	[Space]
-    public float masterVolume = .5f;
-    public float sfxVolume = .5f;
-    public float musicVolume = .5f;
+    //public float masterVolume = .5f;
+    //public float sfxVolume = .5f;
+    //public float musicVolume = .5f;
 
 	[Space]
 	// Player 1 info and controls

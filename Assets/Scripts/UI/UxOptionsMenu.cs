@@ -12,9 +12,9 @@ public class UxOptionsMenu : UxPanel {
     public Toggle p2InputAIToggle;
     public Button advancedButton;
     public Button okButton;
-    public Slider masterVolumeSlider;
-    public Slider sfxVolumeSlider;
-    public Slider musicVolumeSlider;
+    //public Slider masterVolumeSlider;
+    //public Slider sfxVolumeSlider;
+    //public Slider musicVolumeSlider;
 
     [Header("Prefabs")]
     public GameObject advancedPrefab;
@@ -52,9 +52,9 @@ public class UxOptionsMenu : UxPanel {
                         gameManager.isAIBot = true;
                     }
                 });
-            masterVolumeSlider.onValueChanged.AddListener((value)=>{gameManager.masterVolume = value;});
-            sfxVolumeSlider.onValueChanged.AddListener((value)=>{gameManager.sfxVolume = value;});
-            musicVolumeSlider.onValueChanged.AddListener((value)=>{gameManager.musicVolume = value;});
+            //masterVolumeSlider.onValueChanged.AddListener((value)=>{gameManager.masterVolume = value;});
+            //sfxVolumeSlider.onValueChanged.AddListener((value)=>{gameManager.sfxVolume = value;});
+            //musicVolumeSlider.onValueChanged.AddListener((value)=>{gameManager.musicVolume = value;});
         }
         advancedButton.onClick.AddListener(OnAdvancedClick);
         okButton.onClick.AddListener(OnOkClick);
@@ -71,9 +71,9 @@ public class UxOptionsMenu : UxPanel {
         p2InputXInputToggle.isOn = gameManager.p2ControllerKind == ControllerKind.XInput;
         p2InputDualshockToggle.isOn = gameManager.p2ControllerKind == ControllerKind.DualShock;
         p2InputAIToggle.isOn = gameManager.p2ControllerKind == ControllerKind.AI;
-        masterVolumeSlider.value = gameManager.masterVolume;
-        sfxVolumeSlider.value = gameManager.sfxVolume;
-        musicVolumeSlider.value = gameManager.musicVolume;
+        //masterVolumeSlider.value = gameManager.masterVolume;
+        //sfxVolumeSlider.value = gameManager.sfxVolume;
+        //musicVolumeSlider.value = gameManager.musicVolume;
     }
 
     public void OnOkClick() {
