@@ -226,6 +226,7 @@ MonoBehaviour:
   ShotParticle: {fileID: 0}
   ShotParticleSystem: {fileID: 198465538643480682}
   LR: {fileID: 120669494712974826}
+  lightningSound: event:/Player/Weapons/lightning_staff_shot
 --- !u!1 &1685218752560390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4933,7 +4934,7 @@ ParticleSystem:
 --- !u!199 &199579084081173628
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9713,7 +9714,7 @@ ParticleSystem:
 --- !u!199 &199001142066935492
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

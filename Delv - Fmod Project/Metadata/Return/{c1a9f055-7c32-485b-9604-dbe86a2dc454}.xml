@@ -5,7 +5,7 @@
             <value>-80</value>
         </property>
         <property name="name">
-            <value>Cave</value>
+            <value>Reverb_Environments</value>
         </property>
         <relationship name="effectChain">
             <destination>{4fd47821-4020-4efd-afdc-b7270ac095c1}</destination>

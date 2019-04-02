@@ -50,7 +50,7 @@
             <value>volume</value>
         </property>
         <property name="value">
-            <value>0</value>
+            <value>-4.5999999</value>
         </property>
         <relationship name="automatableObject">
             <destination>{c1a9f055-7c32-485b-9604-dbe86a2dc454}</destination>
@@ -94,7 +94,7 @@
             <value>highCut</value>
         </property>
         <property name="value">
-            <value>20000</value>
+            <value>6000</value>
         </property>
         <relationship name="automatableObject">
             <destination>{99c3532e-3eba-4b55-bc09-a039abeaba20}</destination>
@@ -160,7 +160,7 @@
             <value>HFDecayRatio</value>
         </property>
         <property name="value">
-            <value>100</value>
+            <value>50.5</value>
         </property>
         <relationship name="automatableObject">
             <destination>{99c3532e-3eba-4b55-bc09-a039abeaba20}</destination>
@@ -171,7 +171,7 @@
             <value>decayTime</value>
         </property>
         <property name="value">
-            <value>2800</value>
+            <value>2000</value>
         </property>
         <relationship name="automatableObject">
             <destination>{99c3532e-3eba-4b55-bc09-a039abeaba20}</destination>
