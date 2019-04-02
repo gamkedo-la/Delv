@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Forest Dungeon/ForestBossBattle.unity
     guid: 6b642c0ad6e68224fbb13ef8f17b257a
+  - enabled: 1
+    path: Assets/Scenes/Cave Dungeon/CaveFloor1.unity
+    guid: 42139ce6fff5f264b8caaec09bb63886
   m_configObjects: {}
