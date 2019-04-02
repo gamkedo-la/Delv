@@ -14,11 +14,12 @@ public class BypassMenu : MonoBehaviour
 
     private GameObject player2;
 
-    void Start()
+    void Awake()
     {
         if (Camera.main)
         {
             Debug.Log("There is a main camera, therefore we got here from main menu");
+            enabled = false;
             return;
         }
 
@@ -43,21 +44,11 @@ public class BypassMenu : MonoBehaviour
         StartCoroutine(checkSceneVariables());
     }
 
-    private void Update()
-    {
-        if (Camera.main)
-        {
-            //Debug.Log("There is a main camera, therefore we got here from main menu");
-            return;
-        }
-    }
-
     IEnumerator checkSceneVariables()
     {
         while (fromEditor)
         {
             yield return new WaitForSeconds(1.0f);
-            Debug.Log("Checking Vars");
             if (previousAIOnState != AIEnabled || previousNumberOfPlayers != numberOfPlayers)
             {
                 changeGameManagerBasedOnNumberOfPlayers();
