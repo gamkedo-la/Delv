@@ -57,6 +57,7 @@ public class AICompanion : MonoBehaviour
     private int containerLayer;
     private int itemLayer;
     private ContactFilter2D itemLayerFilter;
+    private int count;
     private float itemSeekRadius = 5.0f;
     private float distanceToResource;
 
@@ -76,8 +77,12 @@ public class AICompanion : MonoBehaviour
             }
         }
 
+        StartCoroutine(checkLevelForPotions());
+
         closestTarget = null;
+
         idleTimer = idleTimerFull;
+
         containerLayer = LayerMask.NameToLayer("Container");
         itemLayer = LayerMask.NameToLayer("Items");
         // the item layer is number 16
@@ -87,6 +92,7 @@ public class AICompanion : MonoBehaviour
         // eg 00000000000000001000000000000000 // Mathf.Pow(2f,16f)
         //itemLayerFilter.SetLayerMask(itemLayer); << How I tried to make this work ~~ vv solution
         itemLayerFilter.layerMask.value = 1 << itemLayer; //65536; WORKS!!! // 2^16 (16==items layer)
+        //if (DEBUG_AI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
         itemLayerFilter.useLayerMask = true;
         itemLayerFilter.useTriggers = true;
     }
@@ -290,6 +296,12 @@ public class AICompanion : MonoBehaviour
             // AI knows about a potion
         }
 
+        if (count == 0)
+        {
+            if (DEBUG_AI) Debug.Log("AI: No potions near me");
+            return;
+        }
+
         if (!foundHealth && (AI.Health + AI.MaxHealth / 2) < Player.Health)
         {
             if (FindNearestResource("HealthPotion"))
@@ -312,6 +324,15 @@ public class AICompanion : MonoBehaviour
         // not found because AI doesn't need it
     }
 
+    IEnumerator checkLevelForPotions()
+    {
+        while (true)
+        {
+            count = Physics2D.OverlapCircle(transform.position, itemSeekRadius, itemLayerFilter, itemArray);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
     public bool FindNearestResource(string potionName)
     {
         // search for nearby potions - spritey way
@@ -322,14 +343,6 @@ public class AICompanion : MonoBehaviour
         // search for nearby potions - physicsy way:
 
         Collider2D item;
-
-        //if (DEBUG_AI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
-        int count = Physics2D.OverlapCircle(transform.position, itemSeekRadius, itemLayerFilter, itemArray);
-        if (count == 0)
-        {
-            if (DEBUG_AI) Debug.Log("AI: no " + potionName + " near me");
-            return false;
-        }
 
         if (DEBUG_AI) Debug.Log(count + " item colliders near " + name + " at " + transform.position);
 
@@ -391,6 +404,7 @@ public class AICompanion : MonoBehaviour
         {
             if (DEBUG_AI) Debug.Log("AI: Meandering Destination inside player, waiting before trying again");
             meanderDestination.transform.position = transform.position;
+            meanderingInputSet = true;
             meandering = true;
             return;
         }
@@ -400,6 +414,7 @@ public class AICompanion : MonoBehaviour
         {
             if (DEBUG_AI) Debug.Log("AI: Meandering Destination is too close, waiting before trying again");
             meanderDestination.transform.position = transform.position;
+            meanderingInputSet = true;
             meandering = true;
             return;
         }
@@ -408,11 +423,17 @@ public class AICompanion : MonoBehaviour
         int count = AICollider.Cast(direction, hitArray, direction.magnitude + 0.1f);
         for (int i = 0; i < count; i++)
         {
+            if (hitArray[i].collider.name == "FMOD_FootstepsCollider")
+            {
+                continue;
+            }
+
             if (hitArray[i].collider != null)
             {
-                if (DEBUG_AI) Debug.Log(hitArray[i].collider.name);
+                if (DEBUG_AI) Debug.Log(hitArray[i].collider.name, hitArray[i].collider);
                 if (DEBUG_AI) Debug.Log("AI: Meandering path goes through object, waiting before trying again");
                 meanderDestination.transform.position = transform.position;
+                meanderingInputSet = true;
                 meandering = true;
                 return;
             }
