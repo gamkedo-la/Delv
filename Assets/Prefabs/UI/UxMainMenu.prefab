@@ -1614,10 +1614,31 @@ MonoBehaviour:
   optionsButton: {fileID: 3833084460448809155}
   creditsButton: {fileID: 6216792355335646980}
   quitButton: {fileID: 4029634178578273427}
+  onPlay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onQuit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  gameConfig: {fileID: 11400000, guid: 8d6f85e44434c4b95b2033bae659fa2c, type: 2}
   optionsPrefab: {fileID: 706815079245957212, guid: bba7dc62b5513436da9b86c43fef65c9,
     type: 3}
   creditsPrefab: {fileID: 0}
-  gameConfig: {fileID: 11400000, guid: 8d6f85e44434c4b95b2033bae659fa2c, type: 2}
 --- !u!1 &9181125758021156442
 GameObject:
   m_ObjectHideFlags: 0

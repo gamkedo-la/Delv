@@ -11,7 +11,7 @@ public class BypassMenu : MonoBehaviour
     private bool previousAIOnState;
     private int previousNumberOfPlayers;
 
-    private MainMenuScript BypassScript;
+    //private MainMenuScript BypassScript;
     private AICompanion AI;
     private GameObject player2;
 
@@ -24,7 +24,7 @@ public class BypassMenu : MonoBehaviour
         }
 
         Debug.Log("No camera detected, started from editor");
-        BypassScript = GetComponent<MainMenuScript>();
+        //BypassScript = GetComponent<MainMenuScript>();
         AI = GetComponent<AICompanion>();
         Instantiate(gameManagerPrefab);
 
@@ -43,8 +43,8 @@ public class BypassMenu : MonoBehaviour
 
         GameManagerScript.instance.InitializeGame();
 
-        BypassScript.dialogueBox = GameObject.Find("DialogueManager");
-        BypassScript.CompanionManager = GameObject.Find("CompanionManager");
+        //BypassScript.dialogueBox = GameObject.Find("DialogueManager");
+        //BypassScript.CompanionManager = GameObject.Find("CompanionManager");
     }
 
     private void Update()

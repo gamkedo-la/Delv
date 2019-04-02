@@ -19,26 +19,43 @@ public class UxOptionsMenu : UxPanel {
     [Header("Prefabs")]
     public GameObject advancedPrefab;
 
-    [Header("State Variables")]
-    public GameConfig gameConfig;
+    private GameManagerScript gameManager;
 
     public void Start() {
+        gameManager = GameManagerScript.instance;
         // setup callbacks
-        p1InputXInputToggle.onValueChanged.AddListener(
-            (value)=>{if (value) gameConfig.p1ControllerKind = ControllerKind.XInput;});
-        p1InputDualshockToggle.onValueChanged.AddListener(
-            (value)=>{if (value) gameConfig.p1ControllerKind = ControllerKind.DualShock;});
-        p1InputKeyboardToggle.onValueChanged.AddListener(
-            (value)=>{if (value) gameConfig.p1ControllerKind = ControllerKind.Keyboard;});
-        p2InputXInputToggle.onValueChanged.AddListener(
-            (value)=>{if (value) gameConfig.p2ControllerKind = ControllerKind.XInput;});
-        p2InputDualshockToggle.onValueChanged.AddListener(
-            (value)=>{if (value) gameConfig.p2ControllerKind = ControllerKind.DualShock;});
-        p2InputAIToggle.onValueChanged.AddListener(
-            (value)=>{if (value) gameConfig.p2ControllerKind = ControllerKind.AI;});
-        masterVolumeSlider.onValueChanged.AddListener((value)=>{gameConfig.masterVolume = value;});
-        sfxVolumeSlider.onValueChanged.AddListener((value)=>{gameConfig.sfxVolume = value;});
-        musicVolumeSlider.onValueChanged.AddListener((value)=>{gameConfig.musicVolume = value;});
+        if (gameManager != null) {
+            p1InputXInputToggle.onValueChanged.AddListener(
+                (value)=>{if (value) gameManager.p1ControllerKind = ControllerKind.XInput;});
+            p1InputDualshockToggle.onValueChanged.AddListener(
+                (value)=>{if (value) gameManager.p1ControllerKind = ControllerKind.DualShock;});
+            p1InputKeyboardToggle.onValueChanged.AddListener(
+                (value)=>{if (value) gameManager.p1ControllerKind = ControllerKind.Keyboard;});
+            p2InputXInputToggle.onValueChanged.AddListener(
+                (value)=>{
+                    if (value) {
+                        gameManager.p2ControllerKind = ControllerKind.XInput;
+                        gameManager.isAIBot = false;
+                    }
+                });
+            p2InputDualshockToggle.onValueChanged.AddListener(
+                (value)=>{
+                    if (value) {
+                        gameManager.p2ControllerKind = ControllerKind.DualShock;
+                        gameManager.isAIBot = false;
+                    }
+                });
+            p2InputAIToggle.onValueChanged.AddListener(
+                (value)=>{
+                    if (value) {
+                        gameManager.p2ControllerKind = ControllerKind.AI;
+                        gameManager.isAIBot = true;
+                    }
+                });
+            masterVolumeSlider.onValueChanged.AddListener((value)=>{gameManager.masterVolume = value;});
+            sfxVolumeSlider.onValueChanged.AddListener((value)=>{gameManager.sfxVolume = value;});
+            musicVolumeSlider.onValueChanged.AddListener((value)=>{gameManager.musicVolume = value;});
+        }
         advancedButton.onClick.AddListener(OnAdvancedClick);
         okButton.onClick.AddListener(OnOkClick);
         SetState();
@@ -47,16 +64,16 @@ public class UxOptionsMenu : UxPanel {
 
     // set state of UI elements to match game config settings
     public void SetState() {
-        if (gameConfig == null) return;
-        p1InputXInputToggle.isOn = gameConfig.p1ControllerKind == ControllerKind.XInput;
-        p1InputDualshockToggle.isOn = gameConfig.p1ControllerKind == ControllerKind.DualShock;
-        p1InputKeyboardToggle.isOn = gameConfig.p1ControllerKind == ControllerKind.Keyboard;
-        p2InputXInputToggle.isOn = gameConfig.p2ControllerKind == ControllerKind.XInput;
-        p2InputDualshockToggle.isOn = gameConfig.p2ControllerKind == ControllerKind.DualShock;
-        p2InputAIToggle.isOn = gameConfig.p2ControllerKind == ControllerKind.AI;
-	masterVolumeSlider.value = gameConfig.masterVolume;
-	sfxVolumeSlider.value = gameConfig.sfxVolume;
-	musicVolumeSlider.value = gameConfig.musicVolume;
+        if (gameManager == null) return;
+        p1InputXInputToggle.isOn = gameManager.p1ControllerKind == ControllerKind.XInput;
+        p1InputDualshockToggle.isOn = gameManager.p1ControllerKind == ControllerKind.DualShock;
+        p1InputKeyboardToggle.isOn = gameManager.p1ControllerKind == ControllerKind.Keyboard;
+        p2InputXInputToggle.isOn = gameManager.p2ControllerKind == ControllerKind.XInput;
+        p2InputDualshockToggle.isOn = gameManager.p2ControllerKind == ControllerKind.DualShock;
+        p2InputAIToggle.isOn = gameManager.p2ControllerKind == ControllerKind.AI;
+        masterVolumeSlider.value = gameManager.masterVolume;
+        sfxVolumeSlider.value = gameManager.sfxVolume;
+        musicVolumeSlider.value = gameManager.musicVolume;
     }
 
     public void OnOkClick() {

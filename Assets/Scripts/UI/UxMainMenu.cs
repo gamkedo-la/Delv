@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class UxMainMenu : UxPanel {
     [Header("UI Reference")]
@@ -11,18 +13,18 @@ public class UxMainMenu : UxPanel {
     public Button creditsButton;
     public Button quitButton;
 
+
     [Header("Prefabs")]
     public GameObject optionsPrefab;
     public GameObject creditsPrefab;
 
-    [Header("State Variables")]
-    public GameConfig gameConfig;
+    private GameManagerScript gameManager;
 
     public void Start() {
+        gameManager = GameManagerScript.instance;
         // setup button callbacks
         playButton.onClick.AddListener(OnPlayClick);
         soloToggle.onValueChanged.AddListener(OnSoloChanged);
-        coopToggle.onValueChanged.AddListener(OnCoopChanged);
         optionsButton.onClick.AddListener(OnOptionsClick);
         creditsButton.onClick.AddListener(OnCreditsClick);
         quitButton.onClick.AddListener(OnQuitClick);
@@ -32,9 +34,10 @@ public class UxMainMenu : UxPanel {
 
     // set state of UI elements to match game config settings
     public void SetState() {
-        if (gameConfig == null) return;
-        soloToggle.isOn = gameConfig.soloPlay;
-        coopToggle.isOn = !gameConfig.soloPlay;
+        if (gameManager != null) {
+            soloToggle.isOn = (gameManager.PlayerCount == 1);
+            coopToggle.isOn = (gameManager.PlayerCount != 1);
+        }
     }
 
     public void OnPlayClick() {
@@ -42,16 +45,16 @@ public class UxMainMenu : UxPanel {
         //var panelGo = Instantiate(optionsPrefab, UxUtil.GetCanvas().gameObject.transform);
         //var uxPanel = panelGo.GetComponent<UxPanel>();
         //uxPanel.onDoneEvent.AddListener(OnSubPanelDone);
-        //Hide();
+        Hide();
+        if (gameManager != null) {
+            gameManager.StartTheGame();
+        }
     }
 
     public void OnSoloChanged(bool value) {
-        Debug.Log("OnSoloChanged: " + value);
-        gameConfig.soloPlay = value;
-    }
-
-    public void OnCoopChanged(bool value) {
-        Debug.Log("OnCoopChanged: " + value);
+        if (gameManager != null) {
+            gameManager.PlayerCount = (value) ? 1 : 2;
+        }
     }
 
     public void OnOptionsClick() {
@@ -62,6 +65,7 @@ public class UxMainMenu : UxPanel {
         uxPanel.onDoneEvent.AddListener(Display);
         // now hide the current panel
         Hide();
+        Debug.Log("hiding options");
     }
 
     public void OnCreditsClick() {

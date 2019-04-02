@@ -4,6 +4,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityStandardAssets._2D;
 
+public enum ControllerKind
+{
+    Keyboard,
+    XInput,
+    DualShock,
+    AI
+}
+
 public class GameManagerScript : MonoBehaviour
 {
 
@@ -27,22 +35,42 @@ public class GameManagerScript : MonoBehaviour
 	//PlayerCount
 	[Space]
 	public int PlayerCount = 1;
-	public bool isAIBot = false;
+	public bool isAIBot {
+		get {
+			return (PlayerCount == 2) && (p2ControllerKind == ControllerKind.AI);
+		}
+		set {
+			if (value) {
+				PlayerCount = 2;
+				p2ControllerKind = ControllerKind.AI;
+			} else {
+				p2ControllerKind = ControllerKind.Keyboard;
+			}
+		}
+	}
 
 	[Space]
+    public float masterVolume = .5f;
+    public float sfxVolume = .5f;
+    public float musicVolume = .5f;
 
+	[Space]
 	// Player 1 info and controls
+    public ControllerKind p1ControllerKind = ControllerKind.Keyboard;
 	public GameObject Player1GO;
 	public PlayerController PC1;
 	public GameObject Player1UI;
 	[Space]
 	// Player 2 info and controls
+    public ControllerKind p2ControllerKind = ControllerKind.AI;
 	public GameObject Player2GO;
 	public PlayerController PC2;
 	public GameObject Player2UI;
 	[Space]
 	public GameObject[] ThingsToWake;
 	///
+
+	GameObject dialogueManager;
 
 	private void Awake()
 	{
@@ -55,6 +83,18 @@ public class GameManagerScript : MonoBehaviour
 			instance = this;
 		}
 		DontDestroyOnLoad(this.gameObject);
+	}
+
+	void Start() {
+        dialogueManager = GameObject.Find("DialogueManager");
+	}
+
+	public void StartTheGame() {
+		InitializeGame();
+		if (dialogueManager != null) {
+			dialogueManager.SetActive(true);
+		}
+		SceneManager.LoadScene(1);
 	}
 
 	public void InitializeGame()
@@ -91,6 +131,7 @@ public class GameManagerScript : MonoBehaviour
 	public void EnablePlayer2()
 	{
 		LinkPlayers();
+		Debug.Log("player 2 is bot: " + isAIBot);
 		PC2.isBot = isAIBot;
 		Player2UI.SetActive(true);
 		Player2GO.SetActive(true);
