@@ -119,3 +119,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8118b1bfc0c0f8a43af2d3d26d0f87ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Amount: 25
+  potionPickupSound: event:/Objects/pickup_potion

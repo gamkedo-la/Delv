@@ -19,6 +19,7 @@ public class AudioSettings : MonoBehaviour
         }
 
     }
+
     public float MusicVolume {
         get {
             float currentVolume, finalVolume;

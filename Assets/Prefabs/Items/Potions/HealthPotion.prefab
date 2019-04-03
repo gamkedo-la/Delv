@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Amount: 15
+  potionPickupSound: event:/Objects/pickup_potion
 --- !u!61 &3627631892278017863
 BoxCollider2D:
   m_ObjectHideFlags: 0
