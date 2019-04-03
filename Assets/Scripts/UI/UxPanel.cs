@@ -8,6 +8,7 @@ public class UxPanel : MonoBehaviour {
 
     [HideInInspector]
     public UnityEvent onDoneEvent;
+    public bool hidden=false;
 
     void Awake() {
         onDoneEvent = new UnityEvent();
@@ -15,6 +16,7 @@ public class UxPanel : MonoBehaviour {
     }
 
     public virtual void Display() {
+        hidden = false;
         if (canvasGroup != null) {
             canvasGroup.alpha = 1f; //this makes everything transparent
             canvasGroup.blocksRaycasts = true; //this prevents the UI element to receive input events
@@ -23,6 +25,7 @@ public class UxPanel : MonoBehaviour {
     }
 
     public virtual void Hide() {
+        hidden = true;
         if (canvasGroup != null) {
             canvasGroup.alpha = 0f; //this makes everything transparent
             canvasGroup.blocksRaycasts = false; //this prevents the UI element to receive input events

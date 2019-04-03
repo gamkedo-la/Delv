@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CursorScript : MonoBehaviour
 {
-    public PauseMenu PauseMenu;
     public SpriteRenderer InGameCursor;
+
+    TimeManager timeManager;
 
 	// Use this for initialization
 	void Start ()
     {
+        timeManager = TimeManager.instance;
         Cursor.visible = false;
 	}
 	
@@ -24,7 +26,7 @@ public class CursorScript : MonoBehaviour
 
     void SetCorrectCursor()
     {
-        if (PauseMenu.GameIsPaused ^ Cursor.visible)
+        if (timeManager.gameIsPaused ^ Cursor.visible)
         {
             Cursor.visible = !Cursor.visible;
         }

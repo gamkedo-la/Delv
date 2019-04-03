@@ -190,73 +190,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61011212}
   m_CullTransparentMesh: 0
---- !u!1 &145142416 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 465405476, guid: d38ebff77834f41629b083b08339d580,
-    type: 3}
-  m_PrefabInstance: {fileID: 7153966743116703765}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &145142418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 145142416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2322ba84733124e8213e61be043e99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newScale: {x: 1.2, y: 1.2, z: 1.2}
-  usingWorldSpaceCanvas: 0
-  hoverSound: {fileID: 0}
---- !u!61 &145142421
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 145142416}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 155, y: 26}
-  m_EdgeRadius: 0
---- !u!114 &145142423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 145142416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b0de52069d6e8f4cac1e16bf9b0cd00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Quit
-  startTime: 0
-  clickSound: {fileID: 0}
-  OnButtonPress:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &216646596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,84 +1162,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835837716}
   m_CullTransparentMesh: 0
---- !u!1 &926344330 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2096573930, guid: d38ebff77834f41629b083b08339d580,
-    type: 3}
-  m_PrefabInstance: {fileID: 7153966743116703765}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &926344332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926344330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2322ba84733124e8213e61be043e99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newScale: {x: 1.2, y: 1.2, z: 1.2}
-  usingWorldSpaceCanvas: 0
-  hoverSound: {fileID: 0}
---- !u!61 &926344335
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926344330}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 155, y: 26}
-  m_EdgeRadius: 0
---- !u!114 &926344337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926344330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b0de52069d6e8f4cac1e16bf9b0cd00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: MainMenu
-  startTime: 1
-  clickSound: {fileID: 0}
-  OnButtonPress:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1393710333}
-        m_MethodName: MainMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1058258503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,24 +1572,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307240528}
   m_CullTransparentMesh: 0
---- !u!1 &1319057481 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1112838916, guid: d38ebff77834f41629b083b08339d580,
-    type: 3}
-  m_PrefabInstance: {fileID: 7153966743116703765}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1393710333 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1939468610, guid: d38ebff77834f41629b083b08339d580,
-    type: 3}
-  m_PrefabInstance: {fileID: 7153966743116703765}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff8df0e9a657584c8b91e54b98d212c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1396310029 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1224397772, guid: d38ebff77834f41629b083b08339d580,
@@ -1756,7 +1593,7 @@ MonoBehaviour:
   sceneNames:
   - MainMenu
   otherObjects:
-  - {fileID: 1319057481}
+  - {fileID: 1994130608}
   - {fileID: 1554749219}
   - {fileID: 1086150741}
   - {fileID: 1856539022}
@@ -1902,65 +1739,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7153966743116703765}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1555088088 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2009646728, guid: d38ebff77834f41629b083b08339d580,
-    type: 3}
-  m_PrefabInstance: {fileID: 7153966743116703765}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1555088090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555088088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2322ba84733124e8213e61be043e99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newScale: {x: 1.2, y: 1.2, z: 1.2}
-  usingWorldSpaceCanvas: 0
-  hoverSound: {fileID: 0}
---- !u!61 &1555088093
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555088088}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 155, y: 26}
-  m_EdgeRadius: 0
---- !u!114 &1555088095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555088088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f519ddbb33fe740a1101d76d8539f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1561373210 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 168286435, guid: d38ebff77834f41629b083b08339d580,
@@ -2093,53 +1871,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7153966743116703765}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1997201716 stripped
+--- !u!1 &1994130608 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1324562314, guid: d38ebff77834f41629b083b08339d580,
+  m_CorrespondingSourceObject: {fileID: 7309981095889304611, guid: d38ebff77834f41629b083b08339d580,
     type: 3}
   m_PrefabInstance: {fileID: 7153966743116703765}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1997201718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997201716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2322ba84733124e8213e61be043e99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newScale: {x: 1.2, y: 1.2, z: 1.2}
-  usingWorldSpaceCanvas: 0
-  hoverSound: {fileID: 0}
---- !u!61 &1997201721
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997201716}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 155, y: 26}
-  m_EdgeRadius: 0
 --- !u!1 &2037467193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,11 +2061,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1112838916, guid: d38ebff77834f41629b083b08339d580, type: 3}
+    - target: {fileID: 1224397772, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1224397772, guid: d38ebff77834f41629b083b08339d580, type: 3}
+    - target: {fileID: 1112838916, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
