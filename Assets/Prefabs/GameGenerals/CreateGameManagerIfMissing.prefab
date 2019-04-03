@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerPrefab: {fileID: 950072695, guid: d38ebff77834f41629b083b08339d580, type: 3}
+  AIScript: {fileID: 7867596800732770562, guid: 6da482bb0600384459fc2a158c8b7b13,
+    type: 3}
   AIEnabled: 0
   numberOfPlayers: 1

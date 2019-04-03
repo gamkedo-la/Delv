@@ -6,6 +6,7 @@ using UnityEngine;
 public class BypassMenu : MonoBehaviour
 {
     public GameObject gameManagerPrefab;
+    private GameObject AI;
     public bool AIEnabled = true;
     private bool fromEditor = false;
     public int numberOfPlayers = 2;
@@ -58,8 +59,13 @@ public class BypassMenu : MonoBehaviour
                 previousNumberOfPlayers = numberOfPlayers;
                 GameManagerScript.instance.isAIBot = AIEnabled;
                 GameManagerScript.instance.PlayerCount = numberOfPlayers;
-
                 GameManagerScript.instance.InitializeGame();
+                if (GameManagerScript.instance.isAIBot)
+                {
+                    AI = GameObject.Find("AI Companion");
+                    AI.GetComponent<AICompanion>().enabled = true;
+                    AI.GetComponent<AICompanion>().Awake();
+                }
             }
         }
     }

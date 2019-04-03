@@ -34,35 +34,43 @@ public class AICompanion : MonoBehaviour
     public float aimCursorY;
     [Space]
     [Header("AI States")]
-    [SerializeField]
     public bool following;
     public bool meandering;
     private readonly int idleTimerFull = 60;
     public int idleTimer;
+    public bool arrivedAtMeanderDest;
     private bool meanderingInputSet;
     public bool inCutScene;
     public bool targetAquired;
-    public bool foundResource;
     [Space]
-    [Header("Level Targets")]
+    [Header("Shooting Manager")]
     public GameObject[] TargetGOs;
-    private GameObject closestTarget;
+    public GameObject closestTarget;
+    public float shotTimer = 0;
+    private float AimDistance = 4.5f;
     [Space]
+    [Header("Meandering Destination")]
     public GameObject meanderDestination;
+    private int castCount;
+    private RaycastHit2D[] hitArray = new RaycastHit2D[10];
+    readonly private float meanderDistanceCheck = 1f;
+    [Space]
+    [Header("Resource Manager")]
+    public int itemCount;
+    public Collider2D[] itemArray = new Collider2D[10];
+    public Collider2D nearestResource;
+    private int mana = 1;
+    private float itemSeekRadius = 5.0f;
+    private float distanceToResource;
+    private float PlayerDistToResource;
+    private float BotDistToResource;
 
     private Collider2D[] AIColliders;
     private Collider2D AICollider;
 
-    private float AimDistance = 4.5f;
-
     private int containerLayer;
     private int itemLayer;
     private ContactFilter2D itemLayerFilter;
-    public int count;
-    private float itemSeekRadius = 5.0f;
-    private float distanceToResource;
-
-    private int mana = 1;
 
     // Start is called before the first frame update
     public void Awake()
@@ -81,7 +89,7 @@ public class AICompanion : MonoBehaviour
             }
         }
 
-        StartCoroutine(checkLevelForPotions());
+        StartCoroutine("checkSurroundingsForPotions");
 
         closestTarget = null;
 
@@ -104,6 +112,13 @@ public class AICompanion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManagerScript.instance.isAIBot)
+        {
+            StopCoroutine("checkSurroundingsForPotions");
+            enabled = false;
+            return;
+        }
+
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             return;
@@ -124,11 +139,15 @@ public class AICompanion : MonoBehaviour
     public void AIReset()
     {
         meandering = false;
+        setIdleTimer();
         meanderingInputSet = false;
         following = false;
         targetAquired = false;
         ZeroOutInput();
         closestTarget = null;
+        nearestResource = null;
+        StopCoroutine("checkSurroundingsForPotions");
+        StartCoroutine("checkSurroundingsForPotions");
     }
 
     public bool FollowPlayerCheck()
@@ -149,8 +168,6 @@ public class AICompanion : MonoBehaviour
         return false;
     }
 
-    private float shotTimer = 0;
-
     public bool Shoot() // TODO
     {
         if (closestTarget == null || closestTarget.layer == containerLayer)
@@ -167,12 +184,6 @@ public class AICompanion : MonoBehaviour
         return false;
     }
 
-    // so we don't create a new array every frame
-    private Collider2D[] itemArray = new Collider2D[10];
-    [Space]
-    [Header("Resource States")]
-    public Collider2D nearestResource;
-
     public void AIMoveBasedOnState()
     {
         if (inCutScene)
@@ -183,10 +194,10 @@ public class AICompanion : MonoBehaviour
 
         if (Player != null)
         {
-
             if (Player.isDead)
             {
                 meandering = false;
+                setIdleTimer();
                 following = false;
                 targetAquired = false;
                 AimBasedOnAtan2(PlayerGO);
@@ -199,8 +210,11 @@ public class AICompanion : MonoBehaviour
                 ResourceManager();
             }
 
-            if (nearestResource != null && foundResource)
-            { 
+            if (nearestResource != null)
+            {
+                meandering = false;
+                setIdleTimer();
+                following = false;
                 GoTowardNeededResource();
                 return;
             }
@@ -209,6 +223,7 @@ public class AICompanion : MonoBehaviour
             {
                 // MORTAL KOMBAT!!!
                 meandering = false;
+                setIdleTimer();
                 following = false;
                 combatManeuvers();
                 return;
@@ -217,6 +232,7 @@ public class AICompanion : MonoBehaviour
             if (FollowPlayerCheck() || following)
             {
                 meandering = false;
+                setIdleTimer();
                 FollowPlayer();
                 return;
             }
@@ -236,25 +252,24 @@ public class AICompanion : MonoBehaviour
     {
         if (collision.gameObject == PlayerGO)
         {
-            //Debug.Log("Bumped by Player");
+            Debug.Log("Bumped by Player");
             meanderDestination.transform.position = transform.position;
             AIReset();
         }
 
-        if (nearestResource != null && collision.gameObject == nearestResource)
+        if (nearestResource != null && collision.gameObject == nearestResource.gameObject)
         {
             itemArray = new Collider2D[10];
             nearestResource = null;
+            StartCoroutine("checkSurroundingsForPotions");
+            itemCount = 0;
+            if (DEBUG_AI) Debug.Log("AI: Got Resource");
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject == PlayerGO)
-        {
-            //Debug.Log("Player left");
-            return;
-        }
+        
     }
 
     public void getToPlayerToRevive()
@@ -272,53 +287,48 @@ public class AICompanion : MonoBehaviour
 
     public void ResourceManager()
     {
-        //// should we bother looking for potions?
-        //if (nearestResource != null) 
-        //{
-        //    return;
-        //    // AI knows about a potion
-        //}
+        if (DEBUG_AI)
+        {
+            if (nearestResource != null)
+            {
+                Debug.Log("nearestResource is: " + nearestResource.name, nearestResource);
+            }
+            else if (nearestResource == null)
+            {
+                Debug.Log("nearestResource is: null");
+            }
+        }
 
-        if (count == 0)
+        if (itemCount == 0)
         {
             //if (DEBUG_AI) Debug.Log("AI: No potions near me");
-            foundResource = false;
-            nearestResource = null;
             return;
         }
 
         if ((AI.Health + AI.MaxHealth / 2) < Player.Health)
         {
-            if (FindNearestResource("HealthPotion"))
-            {
-                foundResource = true;
-                return;
-            }
+            FindNearestResource("HealthPotion");
+            return;
         }
 
         if (AI.EnergyType == mana && (AI.Energy + AI.MaxEnergy / 2) < Player.Energy)
         {
-            if (FindNearestResource("ManaPotion"))
-            {
-                foundResource = true;
-                return;
-            }
-        }
-        foundResource = false;
-        // not found because AI doesn't need it/didn't find any
-    }
+            FindNearestResource("ManaPotion");
+            return;
+        } // end of mana type/amount check
+    } // end of ResourceManager();
 
-    IEnumerator checkLevelForPotions()
+    IEnumerator checkSurroundingsForPotions()
     {
-        while (!foundResource)
+        while (nearestResource == null) 
         {
-            count = Physics2D.OverlapCircle(transform.position, itemSeekRadius, itemLayerFilter, itemArray);
-            //Debug.Log("Looking for potions");
+            itemCount = Physics2D.OverlapCircle(transform.position, itemSeekRadius, itemLayerFilter, itemArray);
+            Debug.Log("Looking for potions");
             yield return new WaitForSeconds(0.75f);
         }
     }
 
-    public bool FindNearestResource(string potionName)
+    public void FindNearestResource(string potionName)
     {
         // search for nearby potions - spritey way
         // idea: what if we just do Vector2.Distance(a,b)
@@ -329,12 +339,11 @@ public class AICompanion : MonoBehaviour
 
         Collider2D item;
 
-        //if (DEBUG_AI) Debug.Log(count + " item colliders near " + name + " at " + transform.position);
+        //if (DEBUG_AI) Debug.Log(itemCount + " item colliders near " + name + " at " + transform.position);
 
-        for (int num = 0; num < count; num++)
+        for (int num = 0; num < itemCount; num++)
         {
             item = itemArray[num];
-            //if (DEBUG_AI) Debug.Log(item);
             if (item == null)
             {
                 if (DEBUG_AI) Debug.Log("Nearby item is null! That seems wrong.");
@@ -347,15 +356,8 @@ public class AICompanion : MonoBehaviour
             if (itemSprite && (itemSprite.sprite.name == potionName))
             {
                 nearestResource = item;
-                return true;
             }
-            //else
-            //{
-            //    if (DEBUG_AI) Debug.Log("no sprite on a collider named " + item.transform.parent.gameObject.name + "! That seems wrong!");
-            //}
         }
-        //if (DEBUG_AI) Debug.Log("no items near " + name + " at " + transform.position);
-        return false;
     }
 
     public void combatManeuvers()
@@ -375,9 +377,6 @@ public class AICompanion : MonoBehaviour
 
         SetInputAmount(direction, "medium");
     }
-
-    private RaycastHit2D[] hitArray = new RaycastHit2D[10];
-    float meanderDistanceCheck = 1f;
 
     public void SetMeanderingDestination()
     {
@@ -405,8 +404,8 @@ public class AICompanion : MonoBehaviour
         }
 
         Vector3 direction = meanderingPoint - transform.position;
-        int count = AICollider.Cast(direction, hitArray, direction.magnitude + 0.1f);
-        for (int i = 0; i < count; i++)
+        castCount = AICollider.Cast(direction, hitArray, direction.magnitude + 0.1f);
+        for (int i = 0; i < castCount; i++)
         {
             if (hitArray[i].collider.isTrigger)
             {
@@ -426,8 +425,6 @@ public class AICompanion : MonoBehaviour
         meandering = true;
     }
 
-    bool arrivedAtMeanderDest;
-
     public void Meander()
     {
         Vector2 heading = meanderDestination.transform.position - transform.position;
@@ -440,8 +437,7 @@ public class AICompanion : MonoBehaviour
             idleTimer--;
             if (idleTimer <= 0)
             {
-                int additionalTime = Random.Range(0, 2500) / 100;
-                idleTimer = idleTimerFull + additionalTime;
+                setIdleTimer();
                 meandering = false;
                 meanderingInputSet = false;
                 arrivedAtMeanderDest = false;
@@ -458,11 +454,24 @@ public class AICompanion : MonoBehaviour
         }
     }
 
-    private float PlayerDistToResource;
-    private float BotDistToResource;
+    private void setIdleTimer()
+    {
+        if (idleTimer < idleTimerFull)
+        {
+            int additionalTime = Random.Range(0, 2500) / 100;
+            idleTimer = idleTimerFull + additionalTime;
+        }
+    }
 
     public void GoTowardNeededResource()
     {
+        if (BotDistToResource > itemSeekRadius)
+        {
+            if (DEBUG_AI) Debug.Log("AI: I have moved away from the resource");
+            AIReset();
+            return;
+        }
+
         PlayerDistToResource = Vector2.Distance(Player.transform.position, nearestResource.transform.position);
         BotDistToResource = Vector2.Distance(transform.position, nearestResource.transform.position);
         if (PlayerDistToResource < BotDistToResource)
@@ -472,16 +481,9 @@ public class AICompanion : MonoBehaviour
             return;
         }
 
-        if (nearestResource == null) 
-        {
-            if (DEBUG_AI) Debug.Log("AI: tracked potion was picked up");
-            return;
-        }
-
         Vector2 direction = ReturnNormalizedVector(nearestResource.transform.position);
         SetInputAmount(direction, "medium");
     }
-
 
     private Vector3 ReturnNormalizedVector(Vector3 target)
     {
