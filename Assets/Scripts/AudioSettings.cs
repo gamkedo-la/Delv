@@ -8,9 +8,38 @@ public class AudioSettings : MonoBehaviour
     public static FMOD.Studio.Bus SFX;
     public static FMOD.Studio.Bus Music;
 
-    float MasterVolume = 1f;
-    float MusicVolume = .5f;
-    float SFXVolume = .5f;
+    public float MasterVolume {
+        get {
+            float currentVolume, finalVolume;
+            Master.getVolume(out currentVolume, out finalVolume);
+            return currentVolume;
+        }
+        set {
+            Master.setVolume(value);
+        }
+
+    }
+    public float MusicVolume {
+        get {
+            float currentVolume, finalVolume;
+            Music.getVolume(out currentVolume, out finalVolume);
+            return currentVolume;
+        }
+        set {
+            Music.setVolume(value);
+        }
+    }
+
+    public float SFXVolume {
+        get {
+            float currentVolume, finalVolume;
+            SFX.getVolume(out currentVolume, out finalVolume);
+            return currentVolume;
+        }
+        set {
+            SFX.setVolume(value);
+        }
+    }
 
     void Awake()
     {
@@ -19,6 +48,7 @@ public class AudioSettings : MonoBehaviour
         Master = FMODUnity.RuntimeManager.GetBus("bus:/Master");
     }
 
+/*
     public void MasterVolumeLevel(float newMasterVolume)
     {
         MasterVolume = newMasterVolume;
@@ -36,4 +66,5 @@ public class AudioSettings : MonoBehaviour
         SFXVolume = newSFXVolume;
         SFX.setVolume(SFXVolume);
     }
+    */
 }

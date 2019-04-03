@@ -592,6 +592,9 @@ MonoBehaviour:
   p2InputAIToggle: {fileID: 3529272483264621346}
   advancedButton: {fileID: 706815079899538824}
   okButton: {fileID: 706815078680558857}
+  masterVolumeSlider: {fileID: 4960366718830115013}
+  sfxVolumeSlider: {fileID: 7571794714043853305}
+  musicVolumeSlider: {fileID: 1668926983203068747}
   advancedPrefab: {fileID: 8864462557152621248, guid: 98e8020cb1c454bd485dd1b58d4994be,
     type: 3}
 --- !u!114 &4790542446373262634
