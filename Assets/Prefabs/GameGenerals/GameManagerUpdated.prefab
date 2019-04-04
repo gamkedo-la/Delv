@@ -225,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2ec0148e444bf48854514e1b6cc9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseMenu: {fileID: 0}
   InGameCursor: {fileID: 1149695196}
 --- !u!1 &115858607
 GameObject:
@@ -3332,11 +3331,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7867596800732770562, guid: 6da482bb0600384459fc2a158c8b7b13,
-        type: 3}
-      propertyPath: meanderDestination
-      value: 
-      objectReference: {fileID: 4797281610309966616}
     - target: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13,
         type: 3}
       propertyPath: healthdirectorGO
@@ -3352,6 +3346,11 @@ PrefabInstance:
       propertyPath: CursorGO
       value: 
       objectReference: {fileID: 82391054}
+    - target: {fileID: 7867596800732770562, guid: 6da482bb0600384459fc2a158c8b7b13,
+        type: 3}
+      propertyPath: meanderDestination
+      value: 
+      objectReference: {fileID: 4797281610309966616}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6da482bb0600384459fc2a158c8b7b13, type: 3}
 --- !u!114 &5359286967712329093 stripped

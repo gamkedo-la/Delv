@@ -40,6 +40,7 @@ public class AICompanion : MonoBehaviour
     public int idleTimer;
     public bool arrivedAtMeanderDest;
     private bool meanderingInputSet;
+    public bool idleAiming;
     public bool inCutScene;
     public bool targetAquired;
     [Space]
@@ -90,6 +91,7 @@ public class AICompanion : MonoBehaviour
         }
 
         StartCoroutine("checkSurroundingsForPotions");
+        //StartCoroutine("setIdleAiming");
 
         closestTarget = null;
 
@@ -252,7 +254,7 @@ public class AICompanion : MonoBehaviour
     {
         if (collision.gameObject == PlayerGO)
         {
-            Debug.Log("Bumped by Player");
+            if (DEBUG_AI) Debug.Log("AI: Bumped by Player");
             meanderDestination.transform.position = transform.position;
             AIReset();
         }
@@ -323,7 +325,7 @@ public class AICompanion : MonoBehaviour
         while (nearestResource == null) 
         {
             itemCount = Physics2D.OverlapCircle(transform.position, itemSeekRadius, itemLayerFilter, itemArray);
-            Debug.Log("Looking for potions");
+            if (DEBUG_AI) Debug.Log("Looking for potions");
             yield return new WaitForSeconds(0.75f);
         }
     }
@@ -488,7 +490,6 @@ public class AICompanion : MonoBehaviour
     private Vector3 ReturnNormalizedVector(Vector3 target)
     {
         Vector2 heading = target - transform.position;
-        float distance = heading.magnitude;
         Vector2 direction = heading.normalized;
         return direction;
     }
@@ -560,6 +561,7 @@ public class AICompanion : MonoBehaviour
         AquireTarget();
         if (closestTarget != null)
         {
+            //idleAiming = false;
             float DistBetween = Mathf.Abs(Vector2.Distance(transform.position,
                                             closestTarget.transform.position));
             if (DistBetween < AimDistance && TargetGOs.Length > 0)
@@ -568,7 +570,56 @@ public class AICompanion : MonoBehaviour
             }
             return;
         }
-        // TODO idle aiming
+
+        //if (idleAiming == false) 
+        //{
+        //    idleAiming = true;
+        //    StartCoroutine("setIdleAiming");
+        //}
+    }
+
+    Vector2 randomAimingPoint;
+    Vector2 aimDirection;
+    float oldAngle;
+    float newAngle;
+    float angleDiff;
+    float angleIncrement;
+    float incrementedAngle;
+
+    IEnumerator setIdleAiming()
+    {
+        while (idleAiming)
+        {
+            if (Mathf.Approximately(newAngle, oldAngle))
+            {
+                oldAngle = Mathf.Atan2(
+                    aimCursorY - transform.position.y,
+                    transform.position.x - aimCursorX);
+
+                randomAimingPoint = Random.insideUnitCircle;
+                aimDirection = ReturnNormalizedVector(randomAimingPoint);
+                newAngle = Mathf.Atan2(
+                            aimDirection.y - transform.position.y,
+                            transform.position.x - aimDirection.x);
+                oldAngle *= 180 / Mathf.PI;
+                newAngle *= 180 / Mathf.PI;
+                angleDiff = oldAngle - newAngle;
+                Debug.Log("angleDiff = " + angleDiff);
+                Debug.Log("angleDiff.CompareTo(0) = " + angleDiff.CompareTo(0));
+                angleIncrement = angleDiff.CompareTo(0) / 10;
+            }
+
+            if (!Mathf.Approximately(newAngle, oldAngle))
+            {
+                Debug.Log("incrementing");
+                oldAngle += angleIncrement;
+                incrementedAngle = oldAngle * Mathf.PI / 180;
+                aimCursorX = Mathf.Cos(incrementedAngle);
+                aimCursorY = Mathf.Sin(incrementedAngle);
+            }
+
+            yield return new WaitForSeconds(.2f);
+        }
     }
 
     public void AquireTarget()

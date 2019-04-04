@@ -5409,7 +5409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aa3764c1ae74a519891fbb8f7c4648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG_AI: 1
+  DEBUG_AI: 0
   AI: {fileID: 0}
   Player: {fileID: 0}
   PlayerGO: {fileID: 0}
@@ -5423,12 +5423,25 @@ MonoBehaviour:
   following: 0
   meandering: 0
   idleTimer: 0
+  arrivedAtMeanderDest: 0
   inCutScene: 0
   targetAquired: 0
   TargetGOs: []
+  closestTarget: {fileID: 0}
+  shotTimer: 0
   meanderDestination: {fileID: 0}
-  foundHealth: 0
-  foundMana: 0
+  itemCount: 0
+  itemArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   nearestResource: {fileID: 0}
 --- !u!1 &7026832177298054325
 GameObject:
