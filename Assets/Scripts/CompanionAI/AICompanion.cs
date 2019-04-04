@@ -23,7 +23,7 @@ public class AICompanion : MonoBehaviour
     public float hortDistance;
     private readonly float BeginFollowDist = 3.0f;
     private readonly float StopFollowDist = 1.0f;
-    private readonly int step;
+    private readonly int step = 0;
     [Space]
     [Header("Controller Axis Input")]
     public float vertNow;
@@ -41,6 +41,7 @@ public class AICompanion : MonoBehaviour
     public bool arrivedAtMeanderDest;
     private bool meanderingInputSet;
     public bool idleAiming;
+    private Coroutine idleAimingWait;
     public bool inCutScene;
     public bool targetAquired;
     [Space]
@@ -91,7 +92,6 @@ public class AICompanion : MonoBehaviour
         }
 
         StartCoroutine("checkSurroundingsForPotions");
-        //StartCoroutine("setIdleAiming");
 
         closestTarget = null;
 
@@ -271,7 +271,7 @@ public class AICompanion : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        
+
     }
 
     public void getToPlayerToRevive()
@@ -322,7 +322,7 @@ public class AICompanion : MonoBehaviour
 
     IEnumerator checkSurroundingsForPotions()
     {
-        while (nearestResource == null) 
+        while (nearestResource == null)
         {
             itemCount = Physics2D.OverlapCircle(transform.position, itemSeekRadius, itemLayerFilter, itemArray);
             if (DEBUG_AI) Debug.Log("Looking for potions");
@@ -559,9 +559,10 @@ public class AICompanion : MonoBehaviour
     public void CursorAim()
     {
         AquireTarget();
+
         if (closestTarget != null)
         {
-            //idleAiming = false;
+            idleAimingWait = null;
             float DistBetween = Mathf.Abs(Vector2.Distance(transform.position,
                                             closestTarget.transform.position));
             if (DistBetween < AimDistance && TargetGOs.Length > 0)
@@ -571,55 +572,149 @@ public class AICompanion : MonoBehaviour
             return;
         }
 
-        //if (idleAiming == false) 
-        //{
-        //    idleAiming = true;
-        //    StartCoroutine("setIdleAiming");
-        //}
+        if (!Mathf.Approximately(hortNow, 0))
+        {
+            aimCursorY = 0;
+            angleDiff = 0;
+            idleAimingWait = null;
+
+            if (hortNow > 0)
+            {
+                aimCursorX = -1;
+                currentAngle = Mathf.PI;
+                goalAngle = currentAngle;
+                return;
+            }
+
+            aimCursorX = 1;
+            currentAngle = 0;
+            goalAngle = currentAngle;
+            return;
+        }
+
+        if (idleAimingWait == null)
+        {
+            idleAiming = false;
+            idleAimingWait = StartCoroutine("WaitBeforeIdleAim");
+            return;
+        }
+
+        if (Mathf.Approximately(hortNow, 0))
+        {
+            setIdleAiming();
+        }
     }
 
     Vector2 randomAimingPoint;
-    Vector2 aimDirection;
-    float oldAngle;
-    float newAngle;
-    float angleDiff;
-    float angleIncrement;
-    float incrementedAngle;
+    Vector2 randomDirection;
+    public float currentAngle;
+    public float goalAngle;
+    public float angleDiff;
+    public float angleIncrement;
+    public float incrementedAngle;
+    private bool firstRun = true;
+    private float oneDegreeInRadians = Mathf.PI / 180;
+    private float fullCircleInRadians = 2 * Mathf.PI;
 
-    IEnumerator setIdleAiming()
+    private void setIdleAiming()
     {
-        while (idleAiming)
+        if (idleAiming)
         {
-            if (Mathf.Approximately(newAngle, oldAngle))
-            {
-                oldAngle = Mathf.Atan2(
-                    aimCursorY - transform.position.y,
-                    transform.position.x - aimCursorX);
-
-                randomAimingPoint = Random.insideUnitCircle;
-                aimDirection = ReturnNormalizedVector(randomAimingPoint);
-                newAngle = Mathf.Atan2(
-                            aimDirection.y - transform.position.y,
-                            transform.position.x - aimDirection.x);
-                oldAngle *= 180 / Mathf.PI;
-                newAngle *= 180 / Mathf.PI;
-                angleDiff = oldAngle - newAngle;
-                Debug.Log("angleDiff = " + angleDiff);
-                Debug.Log("angleDiff.CompareTo(0) = " + angleDiff.CompareTo(0));
-                angleIncrement = angleDiff.CompareTo(0) / 10;
-            }
-
-            if (!Mathf.Approximately(newAngle, oldAngle))
-            {
-                Debug.Log("incrementing");
-                oldAngle += angleIncrement;
-                incrementedAngle = oldAngle * Mathf.PI / 180;
-                aimCursorX = Mathf.Cos(incrementedAngle);
-                aimCursorY = Mathf.Sin(incrementedAngle);
-            }
-
-            yield return new WaitForSeconds(.2f);
+            currentAngle += angleIncrement;
+            angleDiff = currentAngle - goalAngle;
+            incrementedAngle = currentAngle;
+            aimCursorX = Mathf.Cos(incrementedAngle);
+            aimCursorY = Mathf.Sin(incrementedAngle);
+            return;
         }
+
+        if (angleDiff <= oneDegreeInRadians && angleDiff >= -oneDegreeInRadians || firstRun)
+        {
+            if (firstRun)
+            {
+                currentAngle = Mathf.PI / 2;
+                firstRun = false;
+            }
+            else
+            {
+                currentAngle = goalAngle;
+            }
+
+            randomAimingPoint = Random.insideUnitCircle;
+            randomDirection = ReturnNormalizedVector(randomAimingPoint);
+            goalAngle = Mathf.Atan2(
+                        randomDirection.y - transform.position.y,
+                        transform.position.x - randomDirection.x);
+
+            currentAngle = makeAnglePositive(currentAngle);
+            goalAngle = makeAnglePositive(goalAngle);
+
+            // converts to degrees
+            currentAngle /= oneDegreeInRadians;
+            goalAngle /= oneDegreeInRadians;
+
+            currentAngle = Mathf.RoundToInt(currentAngle);
+            goalAngle = Mathf.RoundToInt(goalAngle);
+
+            // converts back to radians
+            currentAngle *= oneDegreeInRadians;
+            goalAngle *= oneDegreeInRadians;
+
+            angleDiff = currentAngle - goalAngle;
+
+            //if (angleDiff < oneDegreeInRadians * 40)
+            //{
+            //    Debug.Log("Goal angle too close - not changing aimer because of idle state");
+            //    idleAimingWait = null;
+            //    return;
+            //}
+            //Debug.Log("angleDiff = " + angleDiff);
+            //Debug.Log("angleDiff.CompareTo(0) = " + angleDiff.CompareTo(0));
+            var increment = angleDiff.CompareTo(0);
+            incrementSignCheck(increment);
+            idleAimingWait = null;
+        }
+    }
+
+    IEnumerator WaitBeforeIdleAim() 
+    {
+        if (idleAiming) 
+        {
+            Debug.Log("idleAiming is true! Oops");
+            yield break;
+        }
+
+        while (!idleAiming)
+        {
+            yield return new WaitForSeconds(3.0f);
+            idleAiming = !idleAiming;
+        }
+        //Debug.Log("AI: WaitBeforeIdleAim finished");
+    }
+
+    private float makeAnglePositive(float angleToPos)
+    {
+        if (angleToPos < 0)
+        {
+            angleToPos = fullCircleInRadians + angleToPos;
+            return angleToPos;
+        }
+        return angleToPos;
+    }
+
+    private void incrementSignCheck(float diff)
+    {
+        if (diff > 0)
+        {
+            angleIncrement = -oneDegreeInRadians;
+            return;
+        }
+        if (diff < 0)
+        {
+            angleIncrement = oneDegreeInRadians;
+            return;
+        }
+        angleIncrement = 0;
     }
 
     public void AquireTarget()

@@ -5411,6 +5411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DEBUG_AI: 0
   AI: {fileID: 0}
+  aimCursor: {fileID: 7803608122810891690}
   Player: {fileID: 0}
   PlayerGO: {fileID: 0}
   distanceFromPlayer: 0
@@ -5424,6 +5425,7 @@ MonoBehaviour:
   meandering: 0
   idleTimer: 0
   arrivedAtMeanderDest: 0
+  idleAiming: 0
   inCutScene: 0
   targetAquired: 0
   TargetGOs: []
@@ -5443,6 +5445,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   nearestResource: {fileID: 0}
+  currentAngle: 0
+  goalAngle: 0
+  angleDiff: 0
+  angleIncrement: 0
+  incrementedAngle: 0
 --- !u!1 &7026832177298054325
 GameObject:
   m_ObjectHideFlags: 0
