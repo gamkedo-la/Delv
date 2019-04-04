@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 920197758459599447}
   - component: {fileID: 829506223408888166}
+  - component: {fileID: 4417872874622930885}
   m_Layer: 10
   m_Name: Worm(SolidType)
   m_TagString: Enemy
@@ -51,6 +52,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4417872874622930885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164222166545238705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f055b0fd7b3757349849b1e880f45d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 60
+  Armor: 0
+  Shields: 0
+  iFrames: 0
+  iAmount: 0
+  DeathParticle: {fileID: 1947209405736378, guid: 2f0f6b9a7f4ac84418ebf25c1ad29e68,
+    type: 3}
+  ScrapeParticle: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
+    type: 3}
+  TinyScrapeParticle: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
+    type: 3}
+  spawner: {fileID: 0}
 --- !u!1 &1670548908825089049
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +323,7 @@ GameObject:
   - component: {fileID: 559481122089019793}
   - component: {fileID: 4696647244790989651}
   - component: {fileID: 1977447156644965186}
-  - component: {fileID: 826552454045310498}
+  - component: {fileID: 7897832495776791109}
   m_Layer: 11
   m_Name: WormHead
   m_TagString: EnemyProjectile
@@ -459,7 +484,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7069025, y: 0.4743538}
   m_EdgeRadius: 0
---- !u!114 &826552454045310498
+--- !u!114 &7897832495776791109
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -468,18 +493,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3841100122384209199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f055b0fd7b3757349849b1e880f45d88, type: 3}
+  m_Script: {fileID: 11500000, guid: f6ca461a578b1214198b01d27dfaf350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 60
-  Armor: 0
-  Shields: 0
-  iFrames: 0
-  iAmount: 0
-  DeathParticle: {fileID: 1947209405736378, guid: 2f0f6b9a7f4ac84418ebf25c1ad29e68,
-    type: 3}
-  ScrapeParticle: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
-    type: 3}
-  TinyScrapeParticle: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
-    type: 3}
-  spawner: {fileID: 0}
