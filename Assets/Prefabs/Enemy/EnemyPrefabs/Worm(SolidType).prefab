@@ -324,9 +324,9 @@ GameObject:
   - component: {fileID: 4696647244790989651}
   - component: {fileID: 1977447156644965186}
   - component: {fileID: 7897832495776791109}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: WormHead
-  m_TagString: EnemyProjectile
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -496,3 +496,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ca461a578b1214198b01d27dfaf350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FwdTarget: {fileID: 1164222166545238705}

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class DamageForwarder : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject FwdTarget;
+
+    void DamageHealth(float DMG)
     {
-        
+        FwdTarget.SendMessage("DamageHealth", DMG);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

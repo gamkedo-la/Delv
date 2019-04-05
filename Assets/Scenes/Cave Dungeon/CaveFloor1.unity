@@ -56887,7 +56887,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 68129626}
-  m_Layer: 0
+  - component: {fileID: 68129628}
+  - component: {fileID: 68129627}
+  m_Layer: 17
   m_Name: Blue
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -56910,6 +56912,48 @@ Transform:
   m_Father: {fileID: 700794472}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &68129627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68129625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18706589d036cae47b540e41a8e7a8de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 1119519100}
+  Message: FlipBlue
+  OneShot: 1
+  Activated: 0
+--- !u!61 &68129628
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68129625}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &85426268
 GameObject:
   m_ObjectHideFlags: 0
@@ -56921,7 +56965,7 @@ GameObject:
   - component: {fileID: 85426269}
   - component: {fileID: 85426271}
   - component: {fileID: 85426270}
-  m_Layer: 13
+  m_Layer: 17
   m_Name: ObjectiveWall
   m_TagString: Environment
   m_Icon: {fileID: 0}
@@ -57670,7 +57714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 495219053}
   - component: {fileID: 495219054}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ObeliskGreen (1)
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -59157,7 +59201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 700794472}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ObeliskTriggers
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -59494,7 +59538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 817524028}
   - component: {fileID: 817524029}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ObeliskGreen
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -59803,7 +59847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 853130376}
   - component: {fileID: 853130377}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ObeliskEmptyGreen
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -64120,7 +64164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 978856347}
   - component: {fileID: 978856348}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ObeliskEmptyBlue
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -64363,7 +64407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1119519101}
   - component: {fileID: 1119519102}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: QuestHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64400,11 +64444,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1331e1e5ea6aeaa439aa9dae59c9c678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gate: {fileID: 0}
-  ObeliskBlue: {fileID: 0}
+  Gate: {fileID: 85426268}
+  ObeliskBlue: {fileID: 978856346}
   BlueTalk: {fileID: 0}
-  ObeliskGreen: {fileID: 0}
+  ObeliskGreen: {fileID: 1274949129}
   GreenTalk: {fileID: 0}
+  BlueFlipper: {fileID: 1945278939}
+  GreenFlipper: {fileID: 817524027}
   BlueFlipped: 0
   GreenFlipped: 0
   BlueGate: 0
@@ -64636,7 +64682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1274949130}
   - component: {fileID: 1274949131}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ObeliskEmptyGreen (1)
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -66549,7 +66595,7 @@ GameObject:
   - component: {fileID: 1631409724}
   - component: {fileID: 1631409726}
   - component: {fileID: 1631409725}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Green
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -66586,6 +66632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 1119519100}
   Message: FlipGreen
+  OneShot: 1
   Activated: 0
 --- !u!61 &1631409726
 BoxCollider2D:
@@ -86150,7 +86197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1658106011}
   - component: {fileID: 1658106012}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ObeliskEmptyBlue
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -92455,7 +92502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1919552667}
   - component: {fileID: 1919552668}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ObeliskBlue
   m_TagString: Activatable
   m_Icon: {fileID: 0}
@@ -92534,7 +92581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1945278940}
   - component: {fileID: 1945278941}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: ObeliskBlue
   m_TagString: Activatable
   m_Icon: {fileID: 0}
