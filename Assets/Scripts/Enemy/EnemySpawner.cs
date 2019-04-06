@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     public Transform Eye;
     public GameObject Particle;
 
+    public string spawnSound = "event:/Enemies/enemy_spawn";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,11 @@ public class EnemySpawner : MonoBehaviour
     {
         new WaitForSeconds(1);
         Destroy(gameObject);
+    }
+
+    public void SpawnSoundEffect()
+    {
+        FMODUnity.RuntimeManager.PlayOneShotAttached(spawnSound, gameObject);
     }
 
 }

@@ -5,7 +5,7 @@
             <value>wood_box_break</value>
         </property>
         <property name="outputFormat">
-            <value>0</value>
+            <value>1</value>
         </property>
         <relationship name="folder">
             <destination>{67fc91f8-58a7-4df0-a74c-618ee926fa0b}</destination>
@@ -120,6 +120,9 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{a8aebbb8-2f91-4136-a8a5-277c21e83fed}">
+        <property name="overridingOutputFormat">
+            <value>1</value>
+        </property>
         <property name="outputFormatOverridden">
             <value>true</value>
         </property>
@@ -137,7 +140,13 @@
             <value>1</value>
         </property>
         <property name="maximumDistance">
-            <value>60</value>
+            <value>40</value>
+        </property>
+        <property name="extentMode">
+            <value>1</value>
+        </property>
+        <property name="minimumExtent">
+            <value>70</value>
         </property>
     </object>
     <object class="MixerBusFader" id="{be2c2567-0e69-49e7-9668-35a353c4bfe4}"/>

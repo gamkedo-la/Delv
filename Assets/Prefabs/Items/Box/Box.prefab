@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 61218196146844632}
   - component: {fileID: 50673955684332264}
   - component: {fileID: 114790876949002924}
-  - component: {fileID: 294661603642386456}
   m_Layer: 10
   m_Name: Box
   m_TagString: Enemy
@@ -154,26 +153,3 @@ MonoBehaviour:
   TinyScrapeParticle: {fileID: 1662623705940064, guid: 719b9c5ffec5a024ea23a5bd128b633c,
     type: 3}
   spawner: {fileID: 0}
---- !u!114 &294661603642386456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1827425564834512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: event:/Objects/wood_box_break
-  PlayEvent: 2
-  StopEvent: 0
-  CollisionTag: 
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 0

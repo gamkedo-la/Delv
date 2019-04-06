@@ -14,7 +14,6 @@ public class Fireball : MonoBehaviour
     public Vector3 kbvector;
 
 
-
     void Start()
     {
         Owner = GameObject.FindGameObjectWithTag("Player");
@@ -49,6 +48,7 @@ public class Fireball : MonoBehaviour
             Die();
         }
     }
+
     void OnTriggerEnter2D(Collider2D coll)
     {
         Debug.Log("Fireball made contact with" + coll.gameObject);
