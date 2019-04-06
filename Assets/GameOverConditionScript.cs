@@ -6,9 +6,11 @@ public class GameOverConditionScript : MonoBehaviour
 {
 	public GameObject[] players;
 	public GameObject gameOverUX;
+	TimeManager timeManager;
 
-    void Start()
+	void Start()
     {
+		timeManager = TimeManager.instance;
     }
 	
     void Update()
@@ -17,6 +19,7 @@ public class GameOverConditionScript : MonoBehaviour
 		&& (players[1].activeSelf == false || players[1].GetComponent<PlayerController>().Health <= 0f))
 		{
 			gameOverUX.SetActive(true);
+			timeManager.gameIsPaused = true;
 		}
     }
 }

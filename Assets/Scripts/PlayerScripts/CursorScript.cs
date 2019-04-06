@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CursorScript : MonoBehaviour
 {
@@ -26,10 +27,7 @@ public class CursorScript : MonoBehaviour
 
     void SetCorrectCursor()
     {
-        if (timeManager.gameIsPaused ^ Cursor.visible)
-        {
-            Cursor.visible = !Cursor.visible;
-        }
+		Cursor.visible = timeManager.gameIsPaused || SceneManager.GetActiveScene().name == "MainMenu";
 
         InGameCursor.gameObject.SetActive(!Cursor.visible);
     }
