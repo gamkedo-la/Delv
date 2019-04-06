@@ -21,17 +21,26 @@ public class AICompanion : MonoBehaviour
     [Header("Distance From Player Step")]
     public float vertDistance;
     public float hortDistance;
-    private readonly float BeginFollowDist = 3.0f;
-    private readonly float StopFollowDist = 1.0f;
-    private readonly int step = 0;
+    private float BeginFollowDist = 3.0f;
+    private float StopFollowDist = 1.0f;
+    private int step = 0;
     [Space]
     [Header("Controller Axis Input")]
     public float vertNow;
     public float hortNow;
     [Space]
-    [Header("Cursor Position")]
+    [Header("Aiming Manager")]
     public float aimCursorX;
     public float aimCursorY;
+    Vector2 randomAimingPoint;
+    Vector2 randomDirection;
+    public float currentAngle;
+    public float goalAngle;
+    public float angleDiff;
+    public float lerpAimingAngleDiff;
+    private const float oneDegreeInRadians = Mathf.PI / 180;
+    private const float fullCircleInRadians = 2 * Mathf.PI;
+    private float idleAngleCheckDifference = 30.0f;
     [Space]
     [Header("AI States")]
     public bool following;
@@ -94,6 +103,7 @@ public class AICompanion : MonoBehaviour
         StartCoroutine("checkSurroundingsForPotions");
 
         closestTarget = null;
+        currentAngle = Mathf.PI / 2;
 
         idleTimer = idleTimerFull;
 
@@ -434,10 +444,19 @@ public class AICompanion : MonoBehaviour
         //if (DEBUG_AI) Debug.Log("AI: I am " + Distance + " away from meander point");
         if (Distance < 0.3f || arrivedAtMeanderDest)
         {
-            arrivedAtMeanderDest = true;
-            ZeroOutInput();
-            idleTimer--;
-            if (idleTimer <= 0)
+            if (!arrivedAtMeanderDest)
+            {
+                arrivedAtMeanderDest = true;
+            }
+
+            if (idleTimer > 0)
+            {
+                ZeroOutInput();
+                idleTimer--;
+                return;
+            }
+
+            if (idleTimer <= 0 && !idleAiming)
             {
                 setIdleTimer();
                 meandering = false;
@@ -540,7 +559,7 @@ public class AICompanion : MonoBehaviour
         vertNow = direction.y * inputIntensity;
     }
 
-    public void ZeroOutInput() // perhaps lerp/something to a stop?
+    public void ZeroOutInput()
     {
         hortNow = 0;
         vertNow = 0;
@@ -577,17 +596,17 @@ public class AICompanion : MonoBehaviour
             aimCursorY = 0;
             angleDiff = 0;
             idleAimingWait = null;
-
+            lerpAimingAngleDiff = 0.0f;
             if (hortNow > 0)
             {
-                aimCursorX = -1;
-                currentAngle = Mathf.PI;
+                goalAngle = Mathf.PI;
+                lerpAimingAngle(5);
                 goalAngle = currentAngle;
                 return;
             }
 
-            aimCursorX = 1;
-            currentAngle = 0;
+            goalAngle = 0;
+            lerpAimingAngle(5);
             goalAngle = currentAngle;
             return;
         }
@@ -601,95 +620,107 @@ public class AICompanion : MonoBehaviour
 
         if (Mathf.Approximately(hortNow, 0))
         {
-            setIdleAiming();
+            idleAim();
         }
     }
 
-    Vector2 randomAimingPoint;
-    Vector2 randomDirection;
-    public float currentAngle;
-    public float goalAngle;
-    public float angleDiff;
-    public float angleIncrement;
-    public float incrementedAngle;
-    private bool firstRun = true;
-    private float oneDegreeInRadians = Mathf.PI / 180;
-    private float fullCircleInRadians = 2 * Mathf.PI;
+    private void lerpAimingAngle(float smoothing = 1.0f)
+    {
 
-    private void setIdleAiming()
+        if (Mathf.Approximately(lerpAimingAngleDiff , 0))
+        {
+            lerpAimingAngleDiff = goalAngle - currentAngle;
+
+            if (lerpAimingAngleDiff > Mathf.PI)
+            {
+                //Debug.Log("Greater than PI rads difference, newAngle context");
+                //Debug.Log("goalAngle before break: " + goalAngle);
+                goalAngle = goalAngle - fullCircleInRadians;
+                //Debug.Break();
+            }
+            else if (lerpAimingAngleDiff < -Mathf.PI)
+            {
+                //Debug.Log("less than -PI rads difference, currentAngle context");
+                //Debug.Log("currentAngle before break: " + currentAngle);
+                currentAngle = currentAngle - fullCircleInRadians;
+                //Debug.Break();
+            }
+        }
+
+        currentAngle = Mathf.Lerp(currentAngle, goalAngle, Time.deltaTime * smoothing);
+
+        aimCursorX = Mathf.Cos(currentAngle);
+        aimCursorY = Mathf.Sin(currentAngle);
+    }
+
+    private void idleAim()
     {
         if (idleAiming)
         {
-            currentAngle += angleIncrement;
-            angleDiff = currentAngle - goalAngle;
-            incrementedAngle = currentAngle;
-            aimCursorX = Mathf.Cos(incrementedAngle);
-            aimCursorY = Mathf.Sin(incrementedAngle);
+            angleDiff = goalAngle - currentAngle;
+            lerpAimingAngle(2.5f);
+            if (angleDiff <= oneDegreeInRadians && angleDiff >= -oneDegreeInRadians)
+            {
+                idleAiming = false;
+                setIdleAimAngle();
+            }
+        } // end of if idleAiming
+    } // end of idleAim()
+
+    private void setIdleAimAngle()
+    {
+        currentAngle = goalAngle;
+
+        randomAimingPoint = Random.insideUnitCircle;
+        randomDirection = ReturnNormalizedVector(randomAimingPoint);
+        goalAngle = Mathf.Atan2(
+                    randomDirection.y - transform.position.y,
+                    transform.position.x - randomDirection.x);
+
+        currentAngle = makeAnglePositive(currentAngle);
+        goalAngle = makeAnglePositive(goalAngle);
+
+        // converts to degrees
+        currentAngle /= oneDegreeInRadians;
+        goalAngle /= oneDegreeInRadians;
+
+        currentAngle = Mathf.RoundToInt(currentAngle);
+        goalAngle = Mathf.RoundToInt(goalAngle);
+
+        // converts back to radians
+        currentAngle *= oneDegreeInRadians;
+        goalAngle *= oneDegreeInRadians;
+
+        angleDiff = currentAngle - goalAngle;
+
+        if (angleDiff < oneDegreeInRadians * idleAngleCheckDifference &&
+            angleDiff > -oneDegreeInRadians * idleAngleCheckDifference)
+        {
+            //if (DEBUG_AI) 
+            //Debug.Log("AI: new goalAngle too close, no change to aim");
+            //Debug.Break();
+            //idleAimingWait = null;
             return;
         }
 
-        if (angleDiff <= oneDegreeInRadians && angleDiff >= -oneDegreeInRadians || firstRun)
-        {
-            if (firstRun)
-            {
-                currentAngle = Mathf.PI / 2;
-                firstRun = false;
-            }
-            else
-            {
-                currentAngle = goalAngle;
-            }
-
-            randomAimingPoint = Random.insideUnitCircle;
-            randomDirection = ReturnNormalizedVector(randomAimingPoint);
-            goalAngle = Mathf.Atan2(
-                        randomDirection.y - transform.position.y,
-                        transform.position.x - randomDirection.x);
-
-            currentAngle = makeAnglePositive(currentAngle);
-            goalAngle = makeAnglePositive(goalAngle);
-
-            // converts to degrees
-            currentAngle /= oneDegreeInRadians;
-            goalAngle /= oneDegreeInRadians;
-
-            currentAngle = Mathf.RoundToInt(currentAngle);
-            goalAngle = Mathf.RoundToInt(goalAngle);
-
-            // converts back to radians
-            currentAngle *= oneDegreeInRadians;
-            goalAngle *= oneDegreeInRadians;
-
-            angleDiff = currentAngle - goalAngle;
-
-            //if (angleDiff < oneDegreeInRadians * 40)
-            //{
-            //    Debug.Log("Goal angle too close - not changing aimer because of idle state");
-            //    idleAimingWait = null;
-            //    return;
-            //}
-            //Debug.Log("angleDiff = " + angleDiff);
-            //Debug.Log("angleDiff.CompareTo(0) = " + angleDiff.CompareTo(0));
-            var increment = angleDiff.CompareTo(0);
-            incrementSignCheck(increment);
-            idleAimingWait = null;
-        }
+        idleAimingWait = null;
+        lerpAimingAngleDiff = 0.0f;
     }
+
 
     IEnumerator WaitBeforeIdleAim() 
     {
         if (idleAiming) 
         {
-            Debug.Log("idleAiming is true! Oops");
-            yield break;
+            //Debug.Log("idleAiming is true!");
+            yield return null;
         }
 
         while (!idleAiming)
         {
-            yield return new WaitForSeconds(3.0f);
-            idleAiming = !idleAiming;
+            yield return new WaitForSecondsRealtime(3.0f);
+            idleAiming = true;
         }
-        //Debug.Log("AI: WaitBeforeIdleAim finished");
     }
 
     private float makeAnglePositive(float angleToPos)
@@ -700,21 +731,6 @@ public class AICompanion : MonoBehaviour
             return angleToPos;
         }
         return angleToPos;
-    }
-
-    private void incrementSignCheck(float diff)
-    {
-        if (diff > 0)
-        {
-            angleIncrement = -oneDegreeInRadians;
-            return;
-        }
-        if (diff < 0)
-        {
-            angleIncrement = oneDegreeInRadians;
-            return;
-        }
-        angleIncrement = 0;
     }
 
     public void AquireTarget()
@@ -744,8 +760,10 @@ public class AICompanion : MonoBehaviour
         float angle = Mathf.Atan2(
                     Target.transform.position.y - transform.position.y,
                     transform.position.x - Target.transform.position.x);
-        aimCursorX = Mathf.Cos(angle);
-        aimCursorY = Mathf.Sin(angle);
+        goalAngle = angle;
+        //TODO vvv aim is weird at certain angles. 
+        //how to fix? I am sure I have done it before elsewhere in the code
+        lerpAimingAngle(5);
     }
 
     private void FindClosestTargetEnemy()
