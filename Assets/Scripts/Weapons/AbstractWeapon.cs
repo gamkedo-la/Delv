@@ -11,6 +11,7 @@ abstract public class AbstractWeapon : MonoBehaviour
     public float EnergyCost2 = .1f;
     public float CastRange = 5;
     public float ShockDamage = 15;
+    public int Cost = 0;
 
     private Collider2D pickupCollider;
 

@@ -519,6 +519,14 @@ public class PlayerController : MonoBehaviour
     //This is the method to pickup weapons. It looks like goo, because it is.
     void PickupWeapon()
     {
+        // AbstractWeapon weapon = PotentialWeapon.GetComponent<AbstractWeapon>();
+        // if (weapon.Cost > 0) {
+        //     if (GameManagerScript.instance.Gold < weapon.Cost) {
+        //         return; // no dough, no go
+        //     }
+        //     GameManagerScript.instance.Gold -= weapon.Cost;
+        // }
+
         PickupCD = 1;
         EquippedWeapon.transform.position = PotentialWeapon.transform.position;
         PotentialWeapon.parent = Aimer.transform;
