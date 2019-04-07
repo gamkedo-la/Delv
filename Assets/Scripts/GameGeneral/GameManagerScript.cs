@@ -54,6 +54,9 @@ public class GameManagerScript : MonoBehaviour
     //public float sfxVolume = .5f;
     //public float musicVolume = .5f;
 
+	// Player gold (shared between players)
+	public int Gold = 0;
+
 	[Space]
 	// Player 1 info and controls
     public ControllerKind p1ControllerKind = ControllerKind.Keyboard;
