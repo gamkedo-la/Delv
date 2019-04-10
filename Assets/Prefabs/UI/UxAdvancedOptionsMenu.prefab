@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: 7419194478072194536}
   - component: {fileID: 6382276376911954531}
   - component: {fileID: 299015189338739443}
+  - component: {fileID: 6183194860965333708}
   m_Layer: 0
   m_Name: OkButton
   m_TagString: Untagged
@@ -560,6 +561,37 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &6183194860965333708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3979706012156315177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2220145783952365990}
+          m_MethodName: OnMouseoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &4659412573083607951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,11 +1594,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  hidden: 0
   enableScreenShakeToggle: {fileID: 1313302416008229252}
   showDamageNumbersToggle: {fileID: 3017011261865433613}
   maxParticlesDropdown: {fileID: 8864462557513954861}
   okButton: {fileID: 299015189338739443}
-  gameConfig: {fileID: 11400000, guid: 8d6f85e44434c4b95b2033bae659fa2c, type: 2}
 --- !u!1 &8864462557218390018
 GameObject:
   m_ObjectHideFlags: 0

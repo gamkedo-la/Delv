@@ -13,6 +13,9 @@ public class UxAdvancedOptionsMenu : UxPanel {
     [Header("State Variables")]
     private GameManagerScript gameManager;
 
+    string SelectSound = "event:/UI/Select";
+    string MouseoverSound = "event:/UI/Mouseover";
+
     public void Start() {
         gameManager = GameManagerScript.instance;
         // setup callbacks
@@ -48,7 +51,13 @@ public class UxAdvancedOptionsMenu : UxPanel {
     }
 
     public void OnOkClick() {
+        FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
         Destroy(gameObject);
+    }
+
+    public void OnMouseoverSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(MouseoverSound, transform.position);
     }
 
 }

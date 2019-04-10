@@ -5,8 +5,10 @@ using UnityEngine;
 public class AudioSettings : MonoBehaviour
 {
     public static FMOD.Studio.Bus Master;
-    public static FMOD.Studio.Bus SFX;
+    public static FMOD.Studio.Bus AllSFX;
     public static FMOD.Studio.Bus Music;
+
+
 
     public float MasterVolume {
         get {
@@ -34,38 +36,38 @@ public class AudioSettings : MonoBehaviour
     public float SFXVolume {
         get {
             float currentVolume, finalVolume;
-            SFX.getVolume(out currentVolume, out finalVolume);
+            AllSFX.getVolume(out currentVolume, out finalVolume);
             return currentVolume;
         }
         set {
-            SFX.setVolume(value);
+            AllSFX.setVolume(value);
         }
     }
 
     void Awake()
     {
         Music = FMODUnity.RuntimeManager.GetBus("bus:/Master/Music");
-        SFX = FMODUnity.RuntimeManager.GetBus("bus:/Master/SFX");
+        AllSFX = FMODUnity.RuntimeManager.GetBus("bus:/Master/AllSFX");
         Master = FMODUnity.RuntimeManager.GetBus("bus:/Master");
     }
 
-/*
-    public void MasterVolumeLevel(float newMasterVolume)
-    {
-        MasterVolume = newMasterVolume;
-        Master.setVolume(MasterVolume);
-    }
+    /*
+        public void MasterVolumeLevel(float newMasterVolume)
+        {
+            MasterVolume = newMasterVolume;
+            Master.setVolume(MasterVolume);
+        }
 
-    public void MusicVolumeLevel(float newMusicVolume)
-    {
-        MusicVolume = newMusicVolume;
-        Music.setVolume(MusicVolume);
-    }
+        public void MusicVolumeLevel(float newMusicVolume)
+        {
+            MusicVolume = newMusicVolume;
+            Music.setVolume(MusicVolume);
+        }
 
-    public void SFXVolumeLevel(float newSFXVolume)
-    {
-        SFXVolume = newSFXVolume;
-        SFX.setVolume(SFXVolume);
-    }
-    */
+        public void SFXVolumeLevel(float newSFXVolume)
+        {
+            SFXVolume = newSFXVolume;
+            SFX.setVolume(SFXVolume);
+        }
+        */
 }

@@ -15,8 +15,13 @@ public class UxPauseMenu : UxPanel
     [Header("Prefabs")]
     public GameObject optionsPrefab;
 
+    //FMOD Low Pass Filter
+    private string lowpassfilter_Snapshot = "snapshot:/Main_Menu_LPF";
+    FMOD.Studio.EventInstance lowpassfilter_SnapshotEv;
+
     // game state references
     TimeManager timeManager;
+
     bool _paused = false;
     bool paused {
         get {
@@ -30,12 +35,21 @@ public class UxPauseMenu : UxPanel
         }
     }
 
+    // Fmod UI sounds
+    string SelectSound = "event:/UI/Select";
+    string MouseoverSound = "event:/UI/Mouseover";
+    string CloseMenuSound = "event:/UI/MainMenuClose";
+    string OpenMenuSound = "event:/UI/MainMenuOpen";
+
     // Use this for initialization
     void Start()
     {
         timeManager = TimeManager.instance;
         if (timeManager != null) {
             timeManager.gameIsPaused = true;
+            FMODUnity.RuntimeManager.PlayOneShot(OpenMenuSound, transform.position);
+            lowpassfilter_SnapshotEv = FMODUnity.RuntimeManager.CreateInstance(lowpassfilter_Snapshot);
+            lowpassfilter_SnapshotEv.start();
         }
 
         resumeButton.onClick.AddListener(OnResumeClick);
@@ -43,7 +57,6 @@ public class UxPauseMenu : UxPanel
         mainMenuButton.onClick.AddListener(OnMenuClick);
         quitButton.onClick.AddListener(OnQuitClick);
         Display();
-
     }
 
     // Update is called once per frame
@@ -53,6 +66,9 @@ public class UxPauseMenu : UxPanel
         {
             if (timeManager != null) {
                 timeManager.gameIsPaused = false;
+                FMODUnity.RuntimeManager.PlayOneShot(CloseMenuSound, transform.position);
+                lowpassfilter_SnapshotEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                lowpassfilter_SnapshotEv.release();
             }
             Destroy(gameObject);
         }
@@ -62,6 +78,9 @@ public class UxPauseMenu : UxPanel
     {
         if (timeManager != null) {
             timeManager.gameIsPaused = false;
+            FMODUnity.RuntimeManager.PlayOneShot(CloseMenuSound, transform.position);
+            lowpassfilter_SnapshotEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            lowpassfilter_SnapshotEv.release();
         }
         Destroy(gameObject);
     }
@@ -71,7 +90,10 @@ public class UxPauseMenu : UxPanel
         if (timeManager != null) {
             timeManager.gameIsPaused = false;
         }
+        FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
         Destroy(gameObject);
+        lowpassfilter_SnapshotEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        lowpassfilter_SnapshotEv.release();
         SceneManager.LoadScene(0);
     }
 
@@ -83,10 +105,17 @@ public class UxPauseMenu : UxPanel
         uxPanel.onDoneEvent.AddListener(Display);
         // now hide the current panel
         Hide();
+        FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
+    }
+
+    public void OnMouseoverSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(MouseoverSound, transform.position);
     }
 
     public void OnQuitClick()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
         Application.Quit();
     }
 
