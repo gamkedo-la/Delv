@@ -39,11 +39,14 @@ public class AICompanion : MonoBehaviour
     public float angleDiff;
     public float lerpAimingAngleDiff;
     private const float oneDegreeInRadians = Mathf.PI / 180;
+    private const float quarterCircleInRadians = Mathf.PI / 2;
+    private const float halfCircleInRadians = Mathf.PI;
     private const float fullCircleInRadians = 2 * Mathf.PI;
-    private float idleAngleCheckDifference = 30.0f;
+    private const float idleAngleCheckDifference = 30.0f;
     [Space]
     [Header("AI States")]
     public bool following;
+    public bool combatFollowing;
     public bool meandering;
     private readonly int idleTimerFull = 60;
     public int idleTimer;
@@ -104,7 +107,7 @@ public class AICompanion : MonoBehaviour
         StartCoroutine("checkSurroundingsForPotions");
 
         closestTarget = null;
-        currentAngle = Mathf.PI / 2;
+        currentAngle = quarterCircleInRadians;
 
         idleTimer = idleTimerFull;
 
@@ -154,6 +157,7 @@ public class AICompanion : MonoBehaviour
         meandering = false;
         setIdleTimer();
         meanderingInputSet = false;
+        arrivedAtMeanderDest = false;
         following = false;
         targetAquired = false;
         targetInRange = false;
@@ -192,7 +196,7 @@ public class AICompanion : MonoBehaviour
 
         shotTimer += 1;
 
-        if (Mathf.Approximately(Mathf.Sin(shotTimer * Mathf.PI / 180), -1))
+        if (Mathf.Approximately(Mathf.Sin(shotTimer * oneDegreeInRadians), -1))
         {
             return true;
         }
@@ -213,7 +217,10 @@ public class AICompanion : MonoBehaviour
             {
                 meandering = false;
                 setIdleTimer();
+                meanderingInputSet = false;
+                arrivedAtMeanderDest = false;
                 following = false;
+                combatFollowing = false;
                 targetAquired = false;
                 idleAimingWait = null;
                 goalAngle = AimBasedOnAtan2(PlayerGO);
@@ -230,8 +237,12 @@ public class AICompanion : MonoBehaviour
             if (nearestResource != null)
             {
                 meandering = false;
+                arrivedAtMeanderDest = false;
+                meanderingInputSet = false;
                 setIdleTimer();
                 following = false;
+                combatFollowing = false;
+                idleAimingWait = null;
                 GoTowardNeededResource();
                 return;
             }
@@ -248,6 +259,7 @@ public class AICompanion : MonoBehaviour
                     // MORTAL KOMBAT!!!
                     meandering = false;
                     arrivedAtMeanderDest = false;
+                    meanderingInputSet = false;
                     following = false;
                     idleAimingWait = null;
                     combatManeuvers();
@@ -255,9 +267,12 @@ public class AICompanion : MonoBehaviour
                 }
             }
 
-            if (FollowPlayerCheck() || following)
+            if (following || combatFollowing || FollowPlayerCheck())
             {
                 meandering = false;
+                arrivedAtMeanderDest = false;
+                meanderingInputSet = false;
+                idleAimingWait = null;
                 setIdleTimer();
                 FollowPlayer();
                 return;
@@ -411,16 +426,18 @@ public class AICompanion : MonoBehaviour
 
         if (targetInRange)
         {
-            direction.x = Mathf.Cos(-goalAngle + Mathf.PI / 2);
-            direction.y = Mathf.Sin(-goalAngle + Mathf.PI / 2);
+            direction.x = Mathf.Cos(-goalAngle + quarterCircleInRadians);
+            direction.y = Mathf.Sin(-goalAngle + quarterCircleInRadians);
         }
 
         if (targetDistFromPlayer > BeginFollowDist + 1.0f)
         {
-            following = true;
+            combatFollowing = true;
+            targetDistFromPlayer = 0;
             targetAquired = false;
             targetInRange = false;
             closestTarget = null;
+            Player.PlayerSteps.Clear();
             return;
         }
 
@@ -566,6 +583,7 @@ public class AICompanion : MonoBehaviour
                 Player.PlayerSteps.RemoveAt(step);
                 if (Player.PlayerSteps.Count == step)
                 {
+                    combatFollowing = false;
                     ZeroOutInput();
                     return;
                 }
@@ -647,7 +665,7 @@ public class AICompanion : MonoBehaviour
             lerpAimingAngleDiff = 0f;
             if (hortNow > 0)
             {
-                goalAngle = Mathf.PI;
+                goalAngle = halfCircleInRadians;
             }
             else
             {
@@ -674,11 +692,11 @@ public class AICompanion : MonoBehaviour
     {
         lerpAimingAngleDiff = goalAngle - currentAngle;
 
-        if (lerpAimingAngleDiff > Mathf.PI)
+        if (lerpAimingAngleDiff > halfCircleInRadians)
         {
             goalAngle = goalAngle - fullCircleInRadians;
         }
-        else if (lerpAimingAngleDiff < -Mathf.PI)
+        else if (lerpAimingAngleDiff < -halfCircleInRadians)
         {
             currentAngle = currentAngle - fullCircleInRadians;
         }
@@ -767,6 +785,11 @@ public class AICompanion : MonoBehaviour
 
     public void AquireTarget()
     {
+        if (combatFollowing)
+        {
+            return;
+        }
+
         if (!targetAquired)
         {
             FindClosestTargetEnemy();

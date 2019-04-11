@@ -395,7 +395,7 @@ public class PlayerController : MonoBehaviour
 		velocity.x = (speed/6f) * Hinput;
 		_rb.velocity = velocity;
 
-        if (AICompanion.isActiveAndEnabled && !isBot && AICompanion.following)
+        if (AICompanion.isActiveAndEnabled && !isBot && (AICompanion.following || AICompanion.combatFollowing)) 
         {
             float stepDistanceCheck = 3.0f;
             Vector3 currentStep = gameObject.transform.position;
