@@ -258,6 +258,7 @@ public class PlayerController : MonoBehaviour
             {
                 EquippedWeapon.transform.parent = this.transform;
             }
+            
         }
 
         if (PickupCD > 0) //Cooldown for Pickup Inputs
@@ -541,6 +542,8 @@ public class PlayerController : MonoBehaviour
         EquippedWeapon.SendMessage("PlayerConnect");
         EquippedWeapon.transform.rotation = new Quaternion(0, 0, 0, 0);
         PotentialWeapon = null;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Weapons/weapon_switch");
+        Debug.Log("Weapon Switch!");
     }
 
     //This is the weapon firing mechanism. Just sends a fire message to the weapon if mana allows.
@@ -551,6 +554,7 @@ public class PlayerController : MonoBehaviour
             Energy -= EnergyCost1;
             EquippedWeapon.SendMessage("Fire1");
         }
+        
     }
     void CancelWeapon1()
     {
