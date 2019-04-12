@@ -158,6 +158,7 @@ public class AICompanion : MonoBehaviour
         setIdleTimer();
         meanderingInputSet = false;
         arrivedAtMeanderDest = false;
+        combatFollowing = false;
         following = false;
         targetAquired = false;
         targetInRange = false;
@@ -405,8 +406,9 @@ public class AICompanion : MonoBehaviour
         }
     }
 
-    float distFromTarget;
-    float targetDistFromPlayer;
+    public float distFromTarget;
+    public float targetDistFromPlayer;
+    private float tangentDirection = quarterCircleInRadians;
 
     public void combatManeuvers()
     {
@@ -415,22 +417,30 @@ public class AICompanion : MonoBehaviour
         distFromTarget = Vector2.Distance(transform.position, closestTarget.transform.position);
         targetDistFromPlayer = Vector2.Distance(closestTarget.transform.position, PlayerGO.transform.position);
 
-        if (distFromTarget > (AimDistance - 1.5f) && !targetInRange)
+        if (distFromTarget > (AimDistance - 1f) && !targetInRange)
         {
             direction = ReturnNormalizedVector(closestTarget.transform.position);
+        } else if (distFromTarget < 1f && !targetInRange)
+        {
+            direction = ReturnNormalizedVector(-closestTarget.transform.position);
         }
         else
         {
             targetInRange = true;
         }
 
-        if (targetInRange)
+        if (Random.value > 0.99f)
         {
-            direction.x = Mathf.Cos(-goalAngle + quarterCircleInRadians);
-            direction.y = Mathf.Sin(-goalAngle + quarterCircleInRadians);
+            tangentDirection = -tangentDirection;
         }
 
-        if (targetDistFromPlayer > BeginFollowDist + 1.0f)
+        if (targetInRange)
+        {
+            direction.x = Mathf.Cos(-goalAngle + tangentDirection);
+            direction.y = Mathf.Sin(-goalAngle + tangentDirection);
+        }
+
+        if (targetDistFromPlayer > BeginFollowDist + 2.0f)
         {
             combatFollowing = true;
             targetDistFromPlayer = 0;
