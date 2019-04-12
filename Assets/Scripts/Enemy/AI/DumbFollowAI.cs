@@ -66,7 +66,7 @@ public class DumbFollowAI : MonoBehaviour
 
     void CheckTargets()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        //players = GameObject.FindGameObjectsWithTag("Player");
         DistToP1 = Vector2.Distance(players[0].transform.position, transform.position);
         if (players.Length > 1)
         {

@@ -56,7 +56,6 @@ public class AICompanion : MonoBehaviour
     private Coroutine idleAimingWait;
     public bool inCutScene;
     public bool targetAquired;
-    public bool targetInRange;
     [Space]
     [Header("Shooting Manager")]
     public GameObject[] TargetGOs;
@@ -161,7 +160,6 @@ public class AICompanion : MonoBehaviour
         combatFollowing = false;
         following = false;
         targetAquired = false;
-        targetInRange = false;
         ZeroOutInput();
         closestTarget = null;
         nearestResource = null;
@@ -417,35 +415,18 @@ public class AICompanion : MonoBehaviour
         distFromTarget = Vector2.Distance(transform.position, closestTarget.transform.position);
         targetDistFromPlayer = Vector2.Distance(closestTarget.transform.position, PlayerGO.transform.position);
 
-        if (distFromTarget > (AimDistance - 1f) && !targetInRange)
-        {
-            direction = ReturnNormalizedVector(closestTarget.transform.position);
-        } else if (distFromTarget < 1f && !targetInRange)
-        {
-            direction = ReturnNormalizedVector(-closestTarget.transform.position);
-        }
-        else
-        {
-            targetInRange = true;
-        }
-
         if (Random.value > 0.99f)
         {
             tangentDirection = -tangentDirection;
         }
+        direction.x = Mathf.Cos(-goalAngle + tangentDirection);
+        direction.y = Mathf.Sin(-goalAngle + tangentDirection);
 
-        if (targetInRange)
-        {
-            direction.x = Mathf.Cos(-goalAngle + tangentDirection);
-            direction.y = Mathf.Sin(-goalAngle + tangentDirection);
-        }
-
-        if (targetDistFromPlayer > BeginFollowDist + 2.0f)
+        if (targetDistFromPlayer > BeginFollowDist * 3 || distFromTarget < 1.5f)
         {
             combatFollowing = true;
             targetDistFromPlayer = 0;
             targetAquired = false;
-            targetInRange = false;
             closestTarget = null;
             Player.PlayerSteps.Clear();
             return;
@@ -808,7 +789,6 @@ public class AICompanion : MonoBehaviour
         if (closestTarget == null)
         {
             targetAquired = false;
-            targetInRange = false;
             return;
         }
 
@@ -817,7 +797,6 @@ public class AICompanion : MonoBehaviour
         if (DistBetween > AimDistance)
         {
             targetAquired = false;
-            targetInRange = false;
             closestTarget = null;
         }
     }
