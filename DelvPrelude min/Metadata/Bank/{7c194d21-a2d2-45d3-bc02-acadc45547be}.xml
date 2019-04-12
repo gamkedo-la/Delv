@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<objects serializationModel="Studio.01.10.00">
-    <object class="MasterBank" id="{7c194d21-a2d2-45d3-bc02-acadc45547be}">
-        <relationship name="folder">
-            <destination>{62d0cb4f-e6f4-4909-aef3-4a49b2a33b3b}</destination>
-        </relationship>
-    </object>
-</objects>
