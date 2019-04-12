@@ -13,6 +13,11 @@ public class UxMainMenu : UxPanel {
     public Button creditsButton;
     public Button quitButton;
 
+    // Fmod UI sounds
+    string SelectSound = "event:/UI/Select";
+    string SelectSoundSingle = "event:/UI/Mouseover";
+    FMOD.Studio.EventInstance lowpassfilter_SnapshotEv;
+
 
     [Header("Prefabs")]
     public GameObject optionsPrefab;
@@ -30,6 +35,7 @@ public class UxMainMenu : UxPanel {
         quitButton.onClick.AddListener(OnQuitClick);
         SetState();
         Display();
+
     }
 
     // set state of UI elements to match game config settings
@@ -49,6 +55,9 @@ public class UxMainMenu : UxPanel {
         if (gameManager != null) {
             gameManager.StartTheGame();
         }
+
+        FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
+
     }
 
     public void OnSoloChanged(bool value) {
@@ -66,6 +75,8 @@ public class UxMainMenu : UxPanel {
         // now hide the current panel
         Hide();
         Debug.Log("hiding options");
+        FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
+
     }
 
     public void OnCreditsClick() {
@@ -74,6 +85,7 @@ public class UxMainMenu : UxPanel {
         //var uxPanel = panelGo.GetComponent<UxPanel>();
         //uxPanel.onDoneEvent.AddListener(OnSubPanelDone);
         //Hide();
+        FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
     }
 
     public void OnQuitClick() {

@@ -21,6 +21,9 @@ public class UxOptionsMenu : UxPanel {
 
     private GameManagerScript gameManager;
     private AudioSettings audioSettings;
+    string SelectSound = "event:/UI/Select";
+    string MouseoverSound = "event:/UI/Mouseover";
+
 
     public void Start() {
         audioSettings = GetComponent<AudioSettings>();
@@ -84,7 +87,13 @@ public class UxOptionsMenu : UxPanel {
     }
 
     public void OnOkClick() {
+        FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
         Destroy(gameObject);
+    }
+
+    public void OnMouseoverSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(MouseoverSound, transform.position);
     }
 
     public void OnAdvancedClick() {
@@ -94,6 +103,7 @@ public class UxOptionsMenu : UxPanel {
         var uxPanel = panelGo.GetComponent<UxPanel>();
         uxPanel.onDoneEvent.AddListener(Display);
         // now hide the current panel
+        FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
         Hide();
     }
 

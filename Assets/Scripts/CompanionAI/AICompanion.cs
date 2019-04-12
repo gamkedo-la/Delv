@@ -39,11 +39,14 @@ public class AICompanion : MonoBehaviour
     public float angleDiff;
     public float lerpAimingAngleDiff;
     private const float oneDegreeInRadians = Mathf.PI / 180;
+    private const float quarterCircleInRadians = Mathf.PI / 2;
+    private const float halfCircleInRadians = Mathf.PI;
     private const float fullCircleInRadians = 2 * Mathf.PI;
-    private float idleAngleCheckDifference = 30.0f;
+    private const float idleAngleCheckDifference = 30.0f;
     [Space]
     [Header("AI States")]
     public bool following;
+    public bool combatFollowing;
     public bool meandering;
     private readonly int idleTimerFull = 60;
     public int idleTimer;
@@ -53,12 +56,13 @@ public class AICompanion : MonoBehaviour
     private Coroutine idleAimingWait;
     public bool inCutScene;
     public bool targetAquired;
+    public bool targetInRange;
     [Space]
     [Header("Shooting Manager")]
     public GameObject[] TargetGOs;
     public GameObject closestTarget;
     public float shotTimer = 0;
-    private float AimDistance = 4.5f;
+    private float AimDistance = 5.0f;
     [Space]
     [Header("Meandering Destination")]
     public GameObject meanderDestination;
@@ -103,7 +107,7 @@ public class AICompanion : MonoBehaviour
         StartCoroutine("checkSurroundingsForPotions");
 
         closestTarget = null;
-        currentAngle = Mathf.PI / 2;
+        currentAngle = quarterCircleInRadians;
 
         idleTimer = idleTimerFull;
 
@@ -153,11 +157,14 @@ public class AICompanion : MonoBehaviour
         meandering = false;
         setIdleTimer();
         meanderingInputSet = false;
+        arrivedAtMeanderDest = false;
         following = false;
         targetAquired = false;
+        targetInRange = false;
         ZeroOutInput();
         closestTarget = null;
         nearestResource = null;
+        idleAimingWait = null;
         StopCoroutine("checkSurroundingsForPotions");
         StartCoroutine("checkSurroundingsForPotions");
     }
@@ -180,7 +187,7 @@ public class AICompanion : MonoBehaviour
         return false;
     }
 
-    public bool Shoot() // TODO
+    public bool Shoot()
     {
         if (closestTarget == null || closestTarget.layer == containerLayer)
         {
@@ -189,7 +196,7 @@ public class AICompanion : MonoBehaviour
 
         shotTimer += 1;
 
-        if (Mathf.Approximately(Mathf.Sin(shotTimer * Mathf.PI / 180), -1))
+        if (Mathf.Approximately(Mathf.Sin(shotTimer * oneDegreeInRadians), -1))
         {
             return true;
         }
@@ -210,9 +217,14 @@ public class AICompanion : MonoBehaviour
             {
                 meandering = false;
                 setIdleTimer();
+                meanderingInputSet = false;
+                arrivedAtMeanderDest = false;
                 following = false;
+                combatFollowing = false;
                 targetAquired = false;
-                AimBasedOnAtan2(PlayerGO);
+                idleAimingWait = null;
+                goalAngle = AimBasedOnAtan2(PlayerGO);
+                lerpAimingAngle(5);
                 getToPlayerToRevive();
                 return;
             }
@@ -225,25 +237,42 @@ public class AICompanion : MonoBehaviour
             if (nearestResource != null)
             {
                 meandering = false;
+                arrivedAtMeanderDest = false;
+                meanderingInputSet = false;
                 setIdleTimer();
                 following = false;
+                combatFollowing = false;
+                idleAimingWait = null;
                 GoTowardNeededResource();
                 return;
             }
 
-            if (closestTarget != null && closestTarget.layer != containerLayer)
+            if (closestTarget != null)
             {
-                // MORTAL KOMBAT!!!
-                meandering = false;
-                setIdleTimer();
-                following = false;
-                combatManeuvers();
-                return;
+                if (closestTarget.layer == containerLayer)
+                {
+                    meandering = false;
+                    arrivedAtMeanderDest = false;
+                }
+                else
+                {
+                    // MORTAL KOMBAT!!!
+                    meandering = false;
+                    arrivedAtMeanderDest = false;
+                    meanderingInputSet = false;
+                    following = false;
+                    idleAimingWait = null;
+                    combatManeuvers();
+                    return;
+                }
             }
 
-            if (FollowPlayerCheck() || following)
+            if (following || combatFollowing || FollowPlayerCheck())
             {
                 meandering = false;
+                arrivedAtMeanderDest = false;
+                meanderingInputSet = false;
+                idleAimingWait = null;
                 setIdleTimer();
                 FollowPlayer();
                 return;
@@ -251,7 +280,11 @@ public class AICompanion : MonoBehaviour
 
             if (!meandering)
             {
-                SetMeanderingDestination();
+                if (closestTarget == null)
+                {
+                    setIdleTimer();
+                    SetMeanderingDestination();
+                }
             }
             else
             {
@@ -299,17 +332,17 @@ public class AICompanion : MonoBehaviour
 
     public void ResourceManager()
     {
-        if (DEBUG_AI)
-        {
-            if (nearestResource != null)
-            {
-                Debug.Log("nearestResource is: " + nearestResource.name, nearestResource);
-            }
-            else if (nearestResource == null)
-            {
-                Debug.Log("nearestResource is: null");
-            }
-        }
+        //if (DEBUG_AI)
+        //{
+        //    if (nearestResource != null)
+        //    {
+        //        Debug.Log("nearestResource is: " + nearestResource.name, nearestResource);
+        //    }
+        //    else if (nearestResource == null)
+        //    {
+        //        Debug.Log("nearestResource is: null");
+        //    }
+        //}
 
         if (itemCount == 0)
         {
@@ -372,22 +405,43 @@ public class AICompanion : MonoBehaviour
         }
     }
 
+    float distFromTarget;
+    float targetDistFromPlayer;
+
     public void combatManeuvers()
     {
         Vector2 direction = Vector2.zero;
 
-        if (Vector2.Distance(transform.position, closestTarget.transform.position)
-            < (AimDistance - 0.5))
-        {
-            direction = ReturnNormalizedVector(-closestTarget.transform.position);
-        }
-        if (Vector2.Distance(transform.position, closestTarget.transform.position)
-            > (AimDistance + 0.5))
+        distFromTarget = Vector2.Distance(transform.position, closestTarget.transform.position);
+        targetDistFromPlayer = Vector2.Distance(closestTarget.transform.position, PlayerGO.transform.position);
+
+        if (distFromTarget > (AimDistance - 1.5f) && !targetInRange)
         {
             direction = ReturnNormalizedVector(closestTarget.transform.position);
         }
+        else
+        {
+            targetInRange = true;
+        }
 
-        SetInputAmount(direction, "medium");
+        if (targetInRange)
+        {
+            direction.x = Mathf.Cos(-goalAngle + quarterCircleInRadians);
+            direction.y = Mathf.Sin(-goalAngle + quarterCircleInRadians);
+        }
+
+        if (targetDistFromPlayer > BeginFollowDist + 1.0f)
+        {
+            combatFollowing = true;
+            targetDistFromPlayer = 0;
+            targetAquired = false;
+            targetInRange = false;
+            closestTarget = null;
+            Player.PlayerSteps.Clear();
+            return;
+        }
+
+        SetInputAmount(direction, "combat");
     }
 
     public void SetMeanderingDestination()
@@ -529,6 +583,7 @@ public class AICompanion : MonoBehaviour
                 Player.PlayerSteps.RemoveAt(step);
                 if (Player.PlayerSteps.Count == step)
                 {
+                    combatFollowing = false;
                     ZeroOutInput();
                     return;
                 }
@@ -542,17 +597,23 @@ public class AICompanion : MonoBehaviour
     public void SetInputAmount(Vector2 direction, string tempo)
     {
         float inputIntensity = 0f;
-        if (tempo == "slow")
+        switch (tempo)
         {
-            inputIntensity = Random.Range(0.10f, 0.15f);
-        }
-        if (tempo == "medium")
-        {
-            inputIntensity = Random.Range(0.50f, 0.60f);
-        }
-        if (tempo == "fast")
-        {
-            inputIntensity = 1f;
+            case "slow":
+                inputIntensity = Random.Range(0.10f, 0.15f);
+                break;
+            case "medium":
+                inputIntensity = Random.Range(0.50f, 0.60f);
+                break;
+            case "combat":
+                inputIntensity = Random.Range(0.80f, 0.90f);
+                break;
+            case "fast":
+                inputIntensity = 1f;
+                break;
+            default:
+                ZeroOutInput();
+                return;
         }
 
         hortNow = direction.x * inputIntensity;
@@ -582,11 +643,16 @@ public class AICompanion : MonoBehaviour
         if (closestTarget != null)
         {
             idleAimingWait = null;
+            idleAiming = false;
             float DistBetween = Mathf.Abs(Vector2.Distance(transform.position,
                                             closestTarget.transform.position));
-            if (DistBetween < AimDistance && TargetGOs.Length > 0)
+            if (DistBetween < AimDistance)
             {
-                AimBasedOnAtan2(closestTarget);
+                goalAngle = AimBasedOnAtan2(closestTarget);
+                currentAngle = makeAnglePositiveAndInt(goalAngle);
+                goalAngle = makeAnglePositiveAndInt(goalAngle);
+                lerpAimingAngleDiff = 0f;
+                lerpAimingAngle(5);
             }
             return;
         }
@@ -596,19 +662,17 @@ public class AICompanion : MonoBehaviour
             aimCursorY = 0;
             angleDiff = 0;
             idleAimingWait = null;
-            lerpAimingAngleDiff = 0.0f;
+            lerpAimingAngleDiff = 0f;
             if (hortNow > 0)
             {
-                goalAngle = Mathf.PI;
-                lerpAimingAngle(5);
-                goalAngle = currentAngle;
-                return;
+                goalAngle = halfCircleInRadians;
+            }
+            else
+            {
+                goalAngle = 0;
             }
 
-            goalAngle = 0;
             lerpAimingAngle(5);
-            goalAngle = currentAngle;
-            return;
         }
 
         if (idleAimingWait == null)
@@ -626,25 +690,15 @@ public class AICompanion : MonoBehaviour
 
     private void lerpAimingAngle(float smoothing = 1.0f)
     {
+        lerpAimingAngleDiff = goalAngle - currentAngle;
 
-        if (Mathf.Approximately(lerpAimingAngleDiff , 0))
+        if (lerpAimingAngleDiff > halfCircleInRadians)
         {
-            lerpAimingAngleDiff = goalAngle - currentAngle;
-
-            if (lerpAimingAngleDiff > Mathf.PI)
-            {
-                //Debug.Log("Greater than PI rads difference, newAngle context");
-                //Debug.Log("goalAngle before break: " + goalAngle);
-                goalAngle = goalAngle - fullCircleInRadians;
-                //Debug.Break();
-            }
-            else if (lerpAimingAngleDiff < -Mathf.PI)
-            {
-                //Debug.Log("less than -PI rads difference, currentAngle context");
-                //Debug.Log("currentAngle before break: " + currentAngle);
-                currentAngle = currentAngle - fullCircleInRadians;
-                //Debug.Break();
-            }
+            goalAngle = goalAngle - fullCircleInRadians;
+        }
+        else if (lerpAimingAngleDiff < -halfCircleInRadians)
+        {
+            currentAngle = currentAngle - fullCircleInRadians;
         }
 
         currentAngle = Mathf.Lerp(currentAngle, goalAngle, Time.deltaTime * smoothing);
@@ -677,19 +731,8 @@ public class AICompanion : MonoBehaviour
                     randomDirection.y - transform.position.y,
                     transform.position.x - randomDirection.x);
 
-        currentAngle = makeAnglePositive(currentAngle);
-        goalAngle = makeAnglePositive(goalAngle);
-
-        // converts to degrees
-        currentAngle /= oneDegreeInRadians;
-        goalAngle /= oneDegreeInRadians;
-
-        currentAngle = Mathf.RoundToInt(currentAngle);
-        goalAngle = Mathf.RoundToInt(goalAngle);
-
-        // converts back to radians
-        currentAngle *= oneDegreeInRadians;
-        goalAngle *= oneDegreeInRadians;
+        currentAngle = makeAnglePositiveAndInt(currentAngle);
+        goalAngle = makeAnglePositiveAndInt(goalAngle);
 
         angleDiff = currentAngle - goalAngle;
 
@@ -704,7 +747,7 @@ public class AICompanion : MonoBehaviour
         }
 
         idleAimingWait = null;
-        lerpAimingAngleDiff = 0.0f;
+        lerpAimingAngleDiff = 0f;
     }
 
 
@@ -723,18 +766,30 @@ public class AICompanion : MonoBehaviour
         }
     }
 
-    private float makeAnglePositive(float angleToPos)
+    private float makeAnglePositiveAndInt(float angle)
     {
-        if (angleToPos < 0)
+        if (angle <= 0)
         {
-            angleToPos = fullCircleInRadians + angleToPos;
-            return angleToPos;
+            angle += fullCircleInRadians;
         }
-        return angleToPos;
+
+        // converts to degrees
+        angle /= oneDegreeInRadians;
+
+        angle = Mathf.RoundToInt(angle);
+
+        // converts back to radians
+        angle *= oneDegreeInRadians;
+        return angle;
     }
 
     public void AquireTarget()
     {
+        if (combatFollowing)
+        {
+            return;
+        }
+
         if (!targetAquired)
         {
             FindClosestTargetEnemy();
@@ -743,6 +798,7 @@ public class AICompanion : MonoBehaviour
         if (closestTarget == null)
         {
             targetAquired = false;
+            targetInRange = false;
             return;
         }
 
@@ -751,19 +807,17 @@ public class AICompanion : MonoBehaviour
         if (DistBetween > AimDistance)
         {
             targetAquired = false;
+            targetInRange = false;
             closestTarget = null;
         }
     }
 
-    public void AimBasedOnAtan2(GameObject Target)
+    public float AimBasedOnAtan2(GameObject Target)
     {
         float angle = Mathf.Atan2(
                     Target.transform.position.y - transform.position.y,
                     transform.position.x - Target.transform.position.x);
-        goalAngle = angle;
-        //TODO vvv aim is weird at certain angles. 
-        //how to fix? I am sure I have done it before elsewhere in the code
-        lerpAimingAngle(5);
+        return angle;
     }
 
     private void FindClosestTargetEnemy()
