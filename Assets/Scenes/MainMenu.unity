@@ -2109,6 +2109,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 615985696, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 950072698, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.288992
@@ -2153,19 +2157,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1224397772, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 950072697, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: DebugUIGO
       value: 
       objectReference: {fileID: 1811942451}
-    - target: {fileID: 615985696, guid: d38ebff77834f41629b083b08339d580, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 82391054, guid: d38ebff77834f41629b083b08339d580, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1224397772, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -2493,7 +2493,18 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 1561373210}
-    m_RemovedComponents: []
+    - target: {fileID: 5840968436849045591, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250615041535619572, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: Music
+      value: event:/Music/Music Village
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5175802159871062052, guid: d38ebff77834f41629b083b08339d580, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d38ebff77834f41629b083b08339d580, type: 3}
 --- !u!224 &7153966743116703766 stripped
 RectTransform:
