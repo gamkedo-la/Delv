@@ -422,7 +422,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Control the footsteps parameter
+    // Control FMOD the footsteps parameter
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.gameObject.tag)
