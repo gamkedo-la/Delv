@@ -71,9 +71,9 @@ public class UxMainMenu : UxPanel {
         var panelGo = Instantiate(optionsPrefab, UxUtil.GetCanvas().gameObject.transform);
         // setup a callback, so when the sub menu/panel is done, we display the current panel again
         var uxPanel = panelGo.GetComponent<UxPanel>();
-        uxPanel.onDoneEvent.AddListener(Display);
+        uxPanel.onDoneEvent.AddListener(Enable);
         // now hide the current panel
-        Hide();
+        Disable();
         Debug.Log("hiding options");
         FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
 
