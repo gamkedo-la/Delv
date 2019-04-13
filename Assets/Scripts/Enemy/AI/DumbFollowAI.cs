@@ -6,6 +6,8 @@ public class DumbFollowAI : MonoBehaviour
 {
     public float speed = 25;
     public GameObject[] players;
+    private PlayerController p1Controller;
+    private PlayerController p2Controller;
     private Rigidbody2D rb;
     //Plans to have the dumb AI be alerted to distance and then begin chase. Also maybe a spell that surpresses all enemies alert state.
     public float AlertDistance = 0;
@@ -20,6 +22,11 @@ public class DumbFollowAI : MonoBehaviour
     void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
+        p1Controller = players[0].GetComponent<PlayerController>();
+        if (players.Length > 1)
+        {
+            p2Controller = players[1].GetComponent<PlayerController>();
+        }
         StartCoroutine(TargetCheck());
         rb = GetComponent<Rigidbody2D>(); //defining the rigidbody2D for stuff and things
     }
@@ -59,27 +66,35 @@ public class DumbFollowAI : MonoBehaviour
 
     void CheckTargets()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        //players = GameObject.FindGameObjectsWithTag("Player");
         DistToP1 = Vector2.Distance(players[0].transform.position, transform.position);
         if (players.Length > 1)
         {
             DistToP2 = Vector2.Distance(players[1].transform.position, transform.position);
 
+            if (DistToP1 < DistToP2)
+            {
+                target = players[0].transform;
+            }
+            else
+            {
+                target = players[1].transform;
+            }
+
+            if (!p2Controller.enabled)
+            {
+                target = players[0].transform;
+            }
+            else if (!p1Controller.enabled)
+            {
+                target = players[1].transform;
+            }
         }
-        if ((DistToP1 < DistToP2) && players.Length > 1)
-        {
-            target = players[0].transform;
-        }
-        if ((DistToP2 < DistToP1) && players.Length > 1)
-        {
-            target = players[1].transform;
-        }
+
         if (players.Length == 1)
         {
             target = players[0].transform;
         }
         Debug.Log("Enemy: " + name + "Checked Targets");
-
-
     }
 }
