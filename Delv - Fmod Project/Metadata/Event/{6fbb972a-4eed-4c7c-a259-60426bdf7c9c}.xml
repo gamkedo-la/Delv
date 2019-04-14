@@ -4,7 +4,6 @@
         <property name="name">
             <value>Music Village</value>
         </property>
-        <property name="note"/>
         <property name="outputFormat">
             <value>1</value>
         </property>
