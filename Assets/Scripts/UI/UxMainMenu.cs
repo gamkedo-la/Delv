@@ -47,10 +47,6 @@ public class UxMainMenu : UxPanel {
     }
 
     public void OnPlayClick() {
-        // instantiate options prefab (under canvas)
-        //var panelGo = Instantiate(optionsPrefab, UxUtil.GetCanvas().gameObject.transform);
-        //var uxPanel = panelGo.GetComponent<UxPanel>();
-        //uxPanel.onDoneEvent.AddListener(OnSubPanelDone);
         Hide();
         if (gameManager != null) {
             gameManager.StartTheGame();
@@ -68,7 +64,7 @@ public class UxMainMenu : UxPanel {
 
     public void OnOptionsClick() {
         // instantiate the options panel prefab
-        var panelGo = Instantiate(optionsPrefab, UxUtil.GetCanvas().gameObject.transform);
+        var panelGo = Instantiate(optionsPrefab, GetComponentInParent<Canvas>().gameObject.transform);
         // setup a callback, so when the sub menu/panel is done, we display the current panel again
         var uxPanel = panelGo.GetComponent<UxPanel>();
         uxPanel.onDoneEvent.AddListener(Enable);
@@ -81,7 +77,7 @@ public class UxMainMenu : UxPanel {
 
     public void OnCreditsClick() {
         // instantiate credits prefab (under canvas)
-        //var panelGo = Instantiate(creditsPrefab, UxUtil.GetCanvas().gameObject.transform);
+        //var panelGo = Instantiate(creditsPrefab, GetComponentInParent<Canvas>().gameObject.transform);
         //var uxPanel = panelGo.GetComponent<UxPanel>();
         //uxPanel.onDoneEvent.AddListener(OnSubPanelDone);
         //Hide();

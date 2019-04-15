@@ -62,7 +62,7 @@ public class UxPauseMenu : UxPanel
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Pause"))
+        if (isActive && Input.GetButtonDown("Pause"))
         {
             if (timeManager != null) {
                 timeManager.gameIsPaused = false;
@@ -102,9 +102,9 @@ public class UxPauseMenu : UxPanel
         var panelGo = Instantiate(optionsPrefab, GetComponentInParent<Canvas>().gameObject.transform);
         // setup a callback, so when the sub menu/panel is done, we display the current panel again
         var uxPanel = panelGo.GetComponent<UxPanel>();
-        uxPanel.onDoneEvent.AddListener(Display);
+        uxPanel.onDoneEvent.AddListener(Enable);
         // now hide the current panel
-        Hide();
+        Disable();
         FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
     }
 

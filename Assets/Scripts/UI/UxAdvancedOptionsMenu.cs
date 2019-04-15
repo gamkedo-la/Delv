@@ -50,6 +50,12 @@ public class UxAdvancedOptionsMenu : UxPanel {
         }
     }
 
+    void Update() {
+        if (isActive && Input.GetButtonDown("Pause")) {
+            Destroy(gameObject);
+        }
+    }
+
     public void OnOkClick() {
         FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
         Destroy(gameObject);

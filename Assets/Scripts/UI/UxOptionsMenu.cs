@@ -86,6 +86,12 @@ public class UxOptionsMenu : UxPanel {
         }
     }
 
+    void Update() {
+        if (isActive && Input.GetButtonDown("Pause")) {
+            Destroy(gameObject);
+        }
+    }
+
     public void OnOkClick() {
         FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
         Destroy(gameObject);
@@ -98,13 +104,13 @@ public class UxOptionsMenu : UxPanel {
 
     public void OnAdvancedClick() {
         // instantiate the advanced panel prefab
-        var panelGo = Instantiate(advancedPrefab, UxUtil.GetCanvas().gameObject.transform);
+        var panelGo = Instantiate(advancedPrefab, GetComponentInParent<Canvas>().gameObject.transform);
         // setup a callback, so when the sub menu/panel is done, we display the current panel again
         var uxPanel = panelGo.GetComponent<UxPanel>();
-        uxPanel.onDoneEvent.AddListener(Display);
+        uxPanel.onDoneEvent.AddListener(Enable);
         // now hide the current panel
         FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
-        Hide();
+        Disable();
     }
 
 }

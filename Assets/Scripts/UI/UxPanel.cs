@@ -10,6 +10,11 @@ public class UxPanel : MonoBehaviour {
     public UnityEvent onDoneEvent;
     public bool hidden=false;
     public bool enabled=true;
+    public bool isActive {
+        get {
+            return !hidden && enabled;
+        }
+    }
 
     void Awake() {
         onDoneEvent = new UnityEvent();
