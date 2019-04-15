@@ -44,6 +44,9 @@
         <relationship name="timeline">
             <destination>{dd821a96-2484-4a00-bb6c-6bafa4a5a48b}</destination>
         </relationship>
+        <relationship name="banks">
+            <destination>{7c194d21-a2d2-45d3-bc02-acadc45547be}</destination>
+        </relationship>
     </object>
     <object class="EventMixer" id="{461aa750-dfd5-4667-b428-78fdac7fdca9}">
         <relationship name="masterBus">
@@ -168,9 +171,6 @@
         </property>
         <property name="length">
             <value>52</value>
-        </property>
-        <property name="quantizationInterval">
-            <value>1</value>
         </property>
         <property name="color">
             <value>Yellow</value>

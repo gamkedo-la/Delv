@@ -154,8 +154,11 @@
         <property name="distanceRolloffType">
             <value>1</value>
         </property>
+        <property name="minimumDistance">
+            <value>4</value>
+        </property>
         <property name="maximumDistance">
-            <value>40</value>
+            <value>30</value>
         </property>
         <property name="extentMode">
             <value>1</value>

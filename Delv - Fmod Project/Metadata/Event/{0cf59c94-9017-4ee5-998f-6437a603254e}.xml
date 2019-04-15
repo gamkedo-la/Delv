@@ -69,7 +69,7 @@
     <object class="MarkerTrack" id="{1fde50f2-baef-4a82-9b5a-e0fdfb445c0e}"/>
     <object class="GroupTrack" id="{8591e485-e32c-410c-b8f2-dafcdd359160}">
         <relationship name="modules">
-            <destination>{1752ec16-59e7-4746-be6a-8188247ef391}</destination>
+            <destination>{49568389-2ccf-488b-9d50-fb55d6e80100}</destination>
         </relationship>
         <relationship name="mixerGroup">
             <destination>{09701e2e-caed-4097-9a58-b8fd4224023c}</destination>
@@ -95,7 +95,7 @@
         <relationship name="modules">
             <destination>{81b51f31-d4f0-4636-acd6-f8d672efa390}</destination>
             <destination>{e39138dd-773e-4887-a43a-9a1fb6b6b167}</destination>
-            <destination>{1752ec16-59e7-4746-be6a-8188247ef391}</destination>
+            <destination>{49568389-2ccf-488b-9d50-fb55d6e80100}</destination>
         </relationship>
         <relationship name="markers">
             <destination>{aaa044a6-2bbe-4b09-b6f8-412bf8b13fc6}</destination>
@@ -118,10 +118,22 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{b88165e3-4a65-455a-939b-77e3045f223d}"/>
-    <object class="SingleSound" id="{1752ec16-59e7-4746-be6a-8188247ef391}">
+    <object class="SingleSound" id="{49568389-2ccf-488b-9d50-fb55d6e80100}">
+        <property name="isAsync">
+            <value>true</value>
+        </property>
         <property name="length">
             <value>36</value>
         </property>
+        <property name="startOffset">
+            <value>50.5</value>
+        </property>
+        <property name="looping">
+            <value>true</value>
+        </property>
+        <relationship name="modulators">
+            <destination>{43a44edd-261d-4534-8da2-fd6b6e1b6ff6}</destination>
+        </relationship>
         <relationship name="audioFile">
             <destination>{fc3b16fc-8040-4ed2-8dcf-8f1a5d61f320}</destination>
         </relationship>
@@ -205,6 +217,9 @@
         <property name="length">
             <value>36</value>
         </property>
+        <property name="startOffset">
+            <value>49.5</value>
+        </property>
         <property name="looping">
             <value>true</value>
         </property>
@@ -253,6 +268,14 @@
     </object>
     <object class="MixerBusPanner" id="{783afe8a-1c8e-4467-addf-8116cfed1311}"/>
     <object class="MixerBusFader" id="{efab290d-a631-4325-b1af-4e822ce6a33e}"/>
+    <object class="RandomizerModulator" id="{43a44edd-261d-4534-8da2-fd6b6e1b6ff6}">
+        <property name="nameOfPropertyBeingModulated">
+            <value>startOffset</value>
+        </property>
+        <property name="amount">
+            <value>100</value>
+        </property>
+    </object>
     <object class="ADSRModulator" id="{d7ecd022-4d47-458f-8daa-0348c59fda4b}">
         <property name="nameOfPropertyBeingModulated">
             <value>volume</value>
