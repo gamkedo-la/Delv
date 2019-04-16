@@ -16,7 +16,7 @@ public class PoisonField : MonoBehaviour
 			{
 				PlayerController plCont = collision.gameObject.GetComponent<PlayerController>();
 				plCont.DamageHealth(healthDepletionPerTick);
-
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_damaged_ooze");
 				tickTimer = tickDelay;
 			}
 			else

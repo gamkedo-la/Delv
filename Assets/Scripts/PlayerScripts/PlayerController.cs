@@ -439,7 +439,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     /// PICKUP COLLIDER LOGIC
     void OnTriggerStay2D(Collider2D coll)
     {
@@ -543,7 +542,7 @@ public class PlayerController : MonoBehaviour
         EquippedWeapon.transform.rotation = new Quaternion(0, 0, 0, 0);
         PotentialWeapon = null;
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Weapons/weapon_switch");
-        Debug.Log("Weapon Switch!");
+        //Debug.Log("Weapon Switch!");
     }
 
     //This is the weapon firing mechanism. Just sends a fire message to the weapon if mana allows.
@@ -598,7 +597,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player health damaged for " + DMG + " Damage");
         Health -= DMG;
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_damaged");
+
         if ((GameManagerScript.instance.ParticleIntensity == 3) && (DMG < 10) && (DMG > 0))
         {
             Instantiate(LightlyDamaged, transform.position, transform.rotation);
@@ -613,6 +612,11 @@ public class PlayerController : MonoBehaviour
             if (GameManagerScript.instance.ParticleIntensity > 1)
             {
                 Instantiate(DamagedParticle, transform.position, transform.rotation);
+                // prevents the "damage sound" plays when the player dies
+                if (Health > 0)
+                {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_damaged");
+                }
             }
 
             if (GameManagerScript.instance.Screenshake)

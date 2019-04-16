@@ -2206,6 +2206,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4496883949492243558, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 615985697, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -100
@@ -2258,6 +2263,11 @@ PrefabInstance:
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3319123347703605160, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: Player1
+      value: 
+      objectReference: {fileID: 1554749219}
     - target: {fileID: 1255590158069293565, guid: d38ebff77834f41629b083b08339d580,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -2493,7 +2503,23 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 1561373210}
-    m_RemovedComponents: []
+    - target: {fileID: 4545175444501477437, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545175444501477437, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539785317010450400, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 939177521911433073, guid: d38ebff77834f41629b083b08339d580, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d38ebff77834f41629b083b08339d580, type: 3}
 --- !u!224 &7153966743116703766 stripped
 RectTransform:
