@@ -10,6 +10,11 @@ public class FireProjectileScript : AbstractWeapon
     public GameObject FireSpray;
     public ParticleSystem FSPS;
 
+    string fire = "event:/Player/Weapons/fire_wand/firewand_spray";
+    FMOD.Studio.EventInstance fireEv;
+
+    bool isSprying = false;
+
     protected override void Start()
     {
         FSPS = FireSpray.GetComponent<ParticleSystem>();
@@ -44,10 +49,19 @@ public class FireProjectileScript : AbstractWeapon
     {
         FireSpray.SetActive(true);
         Playerrb.velocity = Playerrb.velocity + new Vector2((CA.RightStickVInput * .5f), -(CA.RightStickHInput * .5f));
+        if(!isSprying)
+        {
+            fireEv = FMODUnity.RuntimeManager.CreateInstance(fire);
+            fireEv.start();
+            isSprying = true;
+        }
     }
 
     public override void CancelWeapon2()
     {
+        isSprying = false;
+        fireEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        fireEv.release();
         FireSpray.SetActive(false);
     }
 }

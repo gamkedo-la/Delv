@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{4153e5f8-e8a1-4f08-a640-fbcd0b7f1753}">
         <property name="name">
-            <value>firewand_oneshot_impact</value>
+            <value>firewand_oneshot</value>
         </property>
         <property name="outputFormat">
             <value>0</value>
