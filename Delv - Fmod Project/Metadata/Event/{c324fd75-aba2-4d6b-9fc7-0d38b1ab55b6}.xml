@@ -237,7 +237,7 @@
             <value>163.19999999999999</value>
         </property>
         <property name="quantizationInterval">
-            <value>1</value>
+            <value>8</value>
         </property>
         <property name="startOffset">
             <value>18.5</value>
@@ -337,7 +337,7 @@
             <value>52</value>
         </property>
         <property name="quantizationInterval">
-            <value>1</value>
+            <value>8</value>
         </property>
         <relationship name="triggerConditions">
             <destination>{00e3615a-73b5-43b7-97f4-df1fe78076ef}</destination>
@@ -388,7 +388,7 @@
             <value>163.19999999999999</value>
         </property>
         <property name="quantizationInterval">
-            <value>1</value>
+            <value>8</value>
         </property>
         <relationship name="triggerConditions">
             <destination>{04d62199-ccb2-42a6-b2a3-1ba245bdba17}</destination>

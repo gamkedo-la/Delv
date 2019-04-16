@@ -439,7 +439,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     /// PICKUP COLLIDER LOGIC
     void OnTriggerStay2D(Collider2D coll)
     {
