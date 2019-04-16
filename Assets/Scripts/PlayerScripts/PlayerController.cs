@@ -598,6 +598,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player health damaged for " + DMG + " Damage");
         Health -= DMG;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_damaged");
         if ((GameManagerScript.instance.ParticleIntensity == 3) && (DMG < 10) && (DMG > 0))
         {
             Instantiate(LightlyDamaged, transform.position, transform.rotation);
@@ -675,6 +676,7 @@ public class PlayerController : MonoBehaviour
 
         Alive.SetActive(false);
         Dead.SetActive(true);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_death");
     }
 
     void Revive()

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{73f968c5-a52a-4578-a413-b6108acf861d}">
+        <property name="assetPath">
+            <value>Environment/Forest/Birds23.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>5.9926303854875282</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{9279d48f-6ff2-4639-a386-b30664485f36}</destination>
+        </relationship>
+    </object>
+</objects>
