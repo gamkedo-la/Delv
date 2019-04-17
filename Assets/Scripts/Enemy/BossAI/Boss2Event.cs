@@ -11,6 +11,12 @@ public class Boss2Event : MonoBehaviour
 	
 	public GameObject CamParent;
 	public Camera2DFollow C2D;
+	
+	public GameObject spawnAttack;
+	public GameObject hpBar;
+
+	public MegaWormBrain[] brains;
+
 	private Camera cam;
 	private CameraShake camShake;
 
@@ -18,9 +24,6 @@ public class Boss2Event : MonoBehaviour
 	private bool releaseCamera = false;
 	private bool cutsceneStarted = false; //sync with animator "Cutscene" bool property
 	private bool cutsceneDone = false;
-
-	public GameObject spawnAttack;
-	public GameObject hpBar;
 
 	[HideInInspector] public bool stateChanged = false;
 
@@ -75,7 +78,14 @@ public class Boss2Event : MonoBehaviour
 	public void CutsceneEnd()
 	{
 		anim.SetBool("Cutscene", false);
-		anim.SetBool("Player1", true);
+		//anim.SetBool("Player1", true);
+
+		for (int i = 0; i < brains.Length; i++)
+			brains[i].enabled = true;
+
+		//TEMP: Put all in state behavior (animator graph) and animator has to be enabled
+		//Without this line, transforms of MegaWorms are not moveable
+		anim.enabled = false;
 
 		cutsceneStarted = false;
 

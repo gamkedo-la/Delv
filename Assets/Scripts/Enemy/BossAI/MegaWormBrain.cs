@@ -42,6 +42,9 @@ public class MegaWormBrain : MonoBehaviour
     {
 		head = transform.GetChild(0).gameObject;
 
+		//To fix the colors that are removed by animator cutscene...
+		head.GetComponent<SpriteRenderer>().color = Color.white;
+
 		transform.GetChild(1).gameObject.SetActive(false); //turning off TiledBody
 
 		bodyTrail = head.GetComponent<TrailRenderer>();
