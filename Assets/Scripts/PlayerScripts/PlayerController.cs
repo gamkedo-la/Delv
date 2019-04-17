@@ -506,6 +506,7 @@ public class PlayerController : MonoBehaviour
         }
         if ((coll.gameObject.tag == "Activatable") && !isBot)
         {
+            ActivateTarget = coll.gameObject;
             Debug.Log("Player walked away from" + ActivateTarget);
             ActivateTarget.SendMessage("Deactivate");
             ActivateTarget = null;

@@ -22,7 +22,8 @@ public class AICompanion : MonoBehaviour
     public float vertDistance;
     public float hortDistance;
     private float BeginFollowDist = 3.0f;
-    private float StopFollowDist = 1.0f;
+    private float StopFollowDist = 1.1f;
+    private float offScreenDist = 15f;
     private int step = 0;
     [Space]
     [Header("Controller Axis Input")]
@@ -164,22 +165,32 @@ public class AICompanion : MonoBehaviour
         closestTarget = null;
         nearestResource = null;
         idleAimingWait = null;
+        Player.PlayerSteps.Clear();
         StopCoroutine("checkSurroundingsForPotions");
         StartCoroutine("checkSurroundingsForPotions");
     }
 
     public bool FollowPlayerCheck()
     {
-        distanceFromPlayer = Vector2.Distance(PlayerGO.transform.position, transform.position);
+        if (combatFollowing)
+        {
+            return false;
+        }
+
         if (Mathf.Abs(distanceFromPlayer) > BeginFollowDist && !following)
         {
             following = true;
             return true;
         }
 
-        if (Mathf.Abs(distanceFromPlayer) <= StopFollowDist)
+        if (Mathf.Abs(distanceFromPlayer) <= StopFollowDist && following)
         {
             following = false;
+            idleAimingWait = null;
+            idleAiming = false;
+            setIdleTimer();
+            meandering = true;
+            meanderDestination.transform.position = transform.position;
             Player.PlayerSteps.Clear();
             return false;
         }
@@ -202,8 +213,32 @@ public class AICompanion : MonoBehaviour
         return false;
     }
 
+    private Vector2 randomPointAroundPlayer;
+    private Vector3 resetPosition;
+
     public void AIMoveBasedOnState()
     {
+        distanceFromPlayer = Vector2.Distance(PlayerGO.transform.position, transform.position);
+        if (distanceFromPlayer > offScreenDist)
+        {
+            for (int check = 0; check < 1; check++)
+            {
+                randomPointAroundPlayer = Random.insideUnitCircle;
+                resetPosition = new Vector3(PlayerGO.transform.position.x + randomPointAroundPlayer.x,
+                                            PlayerGO.transform.position.y + randomPointAroundPlayer.y,
+                                            PlayerGO.transform.position.z);
+                if (PlayerGO.gameObject.GetComponent<Collider2D>().OverlapPoint(resetPosition))
+                {
+                    if (DEBUG_AI) Debug.Log("AI: Reset position blocked - getting a new one");
+                    check = -1;
+                }
+            }
+
+            transform.position = resetPosition;
+            AIReset();
+            return;
+        }
+
         if (inCutScene)
         {
             AIReset();
@@ -266,7 +301,7 @@ public class AICompanion : MonoBehaviour
                 }
             }
 
-            if (following || combatFollowing || FollowPlayerCheck())
+            if (FollowPlayerCheck() || following || combatFollowing)
             {
                 meandering = false;
                 arrivedAtMeanderDest = false;
@@ -299,6 +334,7 @@ public class AICompanion : MonoBehaviour
             if (DEBUG_AI) Debug.Log("AI: Bumped by Player");
             meanderDestination.transform.position = transform.position;
             AIReset();
+            return;
         }
 
         if (nearestResource != null && collision.gameObject == nearestResource.gameObject)
@@ -308,12 +344,46 @@ public class AICompanion : MonoBehaviour
             StartCoroutine("checkSurroundingsForPotions");
             itemCount = 0;
             if (DEBUG_AI) Debug.Log("AI: Got Resource");
+            return;
+        }
+
+        if (!collision.collider.isTrigger)
+        {
+            if (closestTarget != null && closestTarget.layer != containerLayer)
+            {
+                tangentDirection = -tangentDirection;
+            }
+
+            if (DEBUG_AI) Debug.Log("AI: Collided with something", collision.gameObject);
+        }
+    } // end of OnCollisionEnter2D
+
+
+    private bool stuck;
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!collision.collider.isTrigger && collision.gameObject != PlayerGO)
+        {
+            if (!stuck)
+            {
+                if (DEBUG_AI) Debug.Log("AI: Stuck on " + collision.gameObject.name);
+                Player.PlayerSteps.Clear();
+                stuck = true;
+            }
+
+            if (Player.PlayerSteps.Count > 0)
+            {
+                stuck = false;
+            }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-
+        Player.PlayerSteps.Clear();
+        Player.PlayerSteps.Add(PlayerGO.transform.position); 
+        stuck = false;
     }
 
     public void getToPlayerToRevive()
@@ -331,18 +401,6 @@ public class AICompanion : MonoBehaviour
 
     public void ResourceManager()
     {
-        //if (DEBUG_AI)
-        //{
-        //    if (nearestResource != null)
-        //    {
-        //        Debug.Log("nearestResource is: " + nearestResource.name, nearestResource);
-        //    }
-        //    else if (nearestResource == null)
-        //    {
-        //        Debug.Log("nearestResource is: null");
-        //    }
-        //}
-
         if (itemCount == 0)
         {
             //if (DEBUG_AI) Debug.Log("AI: No potions near me");
@@ -374,13 +432,6 @@ public class AICompanion : MonoBehaviour
 
     public void FindNearestResource(string potionName)
     {
-        // search for nearby potions - spritey way
-        // idea: what if we just do Vector2.Distance(a,b)
-        // on an array of potion sprites?
-        // nah that sounds slow and old fashioned
-
-        // search for nearby potions - physicsy way:
-
         Collider2D item;
 
         //if (DEBUG_AI) Debug.Log(itemCount + " item colliders near " + name + " at " + transform.position);
@@ -393,9 +444,6 @@ public class AICompanion : MonoBehaviour
                 if (DEBUG_AI) Debug.Log("Nearby item is null! That seems wrong.");
                 continue;
             }
-            //itemGO = item.GetComponent<GameObject>(); // not the collider, the parent sprite
-            //itemGO = item.transform.parent.gameObject; // no need to traverse hierarchy
-            //SpriteRenderer itemSprite = itemGO.GetComponent<SpriteRenderer>(); // errors out
             SpriteRenderer itemSprite = item.GetComponent<SpriteRenderer>();
             if (itemSprite && (itemSprite.sprite.name == potionName))
             {
@@ -415,10 +463,6 @@ public class AICompanion : MonoBehaviour
         distFromTarget = Vector2.Distance(transform.position, closestTarget.transform.position);
         targetDistFromPlayer = Vector2.Distance(closestTarget.transform.position, PlayerGO.transform.position);
 
-        if (Random.value > 0.99f)
-        {
-            tangentDirection = -tangentDirection;
-        }
         direction.x = Mathf.Cos(-goalAngle + tangentDirection);
         direction.y = Mathf.Sin(-goalAngle + tangentDirection);
 
@@ -730,10 +774,6 @@ public class AICompanion : MonoBehaviour
         if (angleDiff < oneDegreeInRadians * idleAngleCheckDifference &&
             angleDiff > -oneDegreeInRadians * idleAngleCheckDifference)
         {
-            //if (DEBUG_AI) 
-            //Debug.Log("AI: new goalAngle too close, no change to aim");
-            //Debug.Break();
-            //idleAimingWait = null;
             return;
         }
 
@@ -752,7 +792,7 @@ public class AICompanion : MonoBehaviour
 
         while (!idleAiming)
         {
-            yield return new WaitForSecondsRealtime(3.0f);
+            yield return new WaitForSecondsRealtime(2.0f);
             idleAiming = true;
         }
     }
