@@ -418,6 +418,9 @@ MonoBehaviour:
   optionsButton: {fileID: 6655910706151636778}
   creditsButton: {fileID: 4551215293843181805}
   quitButton: {fileID: 6810413955099552634}
+  scrollImagePanel: {fileID: 4437245150850990458}
+  scrollVideoClip: {fileID: 32900000, guid: ac237c0978f9f47f1b4edc4808dbccfb, type: 3}
+  fadeInTime: 2
   optionsPrefab: {fileID: 706815079245957212, guid: bba7dc62b5513436da9b86c43fef65c9,
     type: 3}
   creditsPrefab: {fileID: 0}
