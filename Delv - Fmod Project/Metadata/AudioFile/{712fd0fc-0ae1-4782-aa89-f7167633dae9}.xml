@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="AudioFile" id="{712fd0fc-0ae1-4782-aa89-f7167633dae9}">
         <property name="assetPath">
-            <value>Slime_Movement_Loop v2.wav</value>
+            <value>Enemy/Slime_Movement_Loop v2.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>

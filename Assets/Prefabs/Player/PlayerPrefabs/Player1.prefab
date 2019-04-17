@@ -5506,7 +5506,7 @@ GameObject:
   - component: {fileID: 7633131230057824895}
   - component: {fileID: 8388651294381544981}
   - component: {fileID: 6649406968201024720}
-  m_Layer: 19
+  m_Layer: 0
   m_Name: Music_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -112,6 +112,80 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &31266366 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8477584744991859065, guid: a0b617cbe66d1406f871ff56d6146d42,
+    type: 3}
+  m_PrefabInstance: {fileID: 524367245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &31266367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31266366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2068736017}
+          m_MethodName: OnMouseoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
+--- !u!1 &58661427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3043507050021156094, guid: a0b617cbe66d1406f871ff56d6146d42,
+    type: 3}
+  m_PrefabInstance: {fileID: 524367245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &58661428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58661427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2068736017}
+          m_MethodName: OnMouseoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &61011212
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +1010,43 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7153966743116703765}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &795274446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8630832245584410912, guid: a0b617cbe66d1406f871ff56d6146d42,
+    type: 3}
+  m_PrefabInstance: {fileID: 524367245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &795274447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795274446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2068736017}
+          m_MethodName: OnMouseoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &825880184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,6 +2074,43 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1859212780}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1919970946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7938280700918224515, guid: a0b617cbe66d1406f871ff56d6146d42,
+    type: 3}
+  m_PrefabInstance: {fileID: 524367245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1919970951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919970946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2068736017}
+          m_MethodName: OnMouseoverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1994130608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7309981095889304611, guid: d38ebff77834f41629b083b08339d580,
@@ -2098,6 +2246,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037467193}
   m_CullTransparentMesh: 0
+--- !u!114 &2068736017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9181125757547651195, guid: a0b617cbe66d1406f871ff56d6146d42,
+    type: 3}
+  m_PrefabInstance: {fileID: 524367245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc50f372f71d404f882556e4006ff54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7153966743116703765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2263,6 +2423,16 @@ PrefabInstance:
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4545175444501477437, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545175444501477437, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3319123347703605160, guid: d38ebff77834f41629b083b08339d580,
         type: 3}
       propertyPath: Player1
@@ -2338,6 +2508,11 @@ PrefabInstance:
     - target: {fileID: 2473996672238709623, guid: d38ebff77834f41629b083b08339d580,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539785317010450400, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_UsedByEffector
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9210773110590365240, guid: d38ebff77834f41629b083b08339d580,
@@ -2503,21 +2678,6 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 1561373210}
-    - target: {fileID: 4545175444501477437, guid: d38ebff77834f41629b083b08339d580,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4545175444501477437, guid: d38ebff77834f41629b083b08339d580,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539785317010450400, guid: d38ebff77834f41629b083b08339d580,
-        type: 3}
-      propertyPath: m_UsedByEffector
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 939177521911433073, guid: d38ebff77834f41629b083b08339d580, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d38ebff77834f41629b083b08339d580, type: 3}

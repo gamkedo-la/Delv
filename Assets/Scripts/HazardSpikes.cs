@@ -46,6 +46,7 @@ public class HazardSpikes : MonoBehaviour
 
         if (isUp && damageTick <= 0) {
             other.gameObject.SendMessage("DamageHealth", damage);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_damaged");
         }
     }
 

@@ -15,7 +15,7 @@ public class UxMainMenu : UxPanel {
 
     // Fmod UI sounds
     string SelectSound = "event:/UI/Select";
-    string SelectSoundSingle = "event:/UI/Mouseover";
+    string MouseoverSound = "event:/UI/Mouseover";
     FMOD.Studio.EventInstance lowpassfilter_SnapshotEv;
 
 
@@ -82,6 +82,11 @@ public class UxMainMenu : UxPanel {
         //uxPanel.onDoneEvent.AddListener(OnSubPanelDone);
         //Hide();
         FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
+    }
+
+    public void OnMouseoverSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(MouseoverSound, transform.position);
     }
 
     public void OnQuitClick() {
