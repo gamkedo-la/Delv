@@ -39,6 +39,7 @@ public class FireProjectileScript : AbstractWeapon
         if ((ShotParticle != null) && (GameManagerScript.instance.ParticleIntensity > 1))
         {
             Instantiate(ShotParticle, transform.position + offset, transform.rotation);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Weapons/fire_wand/firewand_oneshot", transform.position);
         }
 
         StopCD1();
