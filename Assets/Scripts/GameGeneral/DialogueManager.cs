@@ -61,6 +61,7 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Dialogue");
             yield return null;
         }
     }
@@ -68,6 +69,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+
     }
 
 }

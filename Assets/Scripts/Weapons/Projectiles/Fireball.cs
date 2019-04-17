@@ -60,11 +60,12 @@ public class Fireball : MonoBehaviour
         }
     }
 
-            void Die()
+    void Die()
     {
         if (GameManagerScript.instance.ParticleIntensity > 1)
         {
             Instantiate(DeathParticle, transform.position, transform.rotation);
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Player/Weapons/fire_wand/firewand_explosion", gameObject);
         }
         Destroy(gameObject);
     }

@@ -8,8 +8,7 @@
             <value>Parameter: 
 0 - Calm Music
 1 - In Combat
-2 - Boss Music (=)
-3 - Player death stinger</value>
+2 - Boss Music (?)</value>
         </property>
         <property name="outputFormat">
             <value>1</value>
