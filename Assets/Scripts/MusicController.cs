@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MusicController : MonoBehaviour
 {
-    [FMODUnity.EventRef]
-    public string Music;
-    private FMOD.Studio.EventInstance musicEv;
+    //[FMODUnity.EventRef]
+    //public string Music;
+    //private FMOD.Studio.EventInstance musicEv;
+    FMODUnity.StudioEventEmitter musicEmitter;
+
     float m_Music;
+
 
     public EnemyCheck enemyCheck;
     public PlayerController playerController;
@@ -17,13 +20,14 @@ public class MusicController : MonoBehaviour
 
     private void Start()
     {
-        musicEv = FMODUnity.RuntimeManager.CreateInstance(Music);
+        musicEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
+        //musicEv = FMODUnity.RuntimeManager.CreateInstance(Music);
         enemyCheck.GetComponent<EnemyCheck>();
     }
 
     private void Update()
     {
-        musicEv.setParameterValue("Music", m_Music);
+        musicEmitter.SetParameter("Music", m_Music);
         m_Scene = SceneManager.GetActiveScene();
         StartMusic();
         StopMusic();
@@ -37,7 +41,8 @@ public class MusicController : MonoBehaviour
             if (m_Scene.name != "MainMenu")
             {
                 gameStarted = true;
-                musicEv.start();
+                musicEmitter.Play();
+                //musicEv.start();
             }
         }
     }
@@ -49,7 +54,8 @@ public class MusicController : MonoBehaviour
             if (m_Scene.name == "MainMenu")
             {
                 gameStarted = false;
-                musicEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                musicEmitter.Stop();
+                //musicEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             }
         }
     }
@@ -70,7 +76,8 @@ public class MusicController : MonoBehaviour
 
         if(playerController.isDead)
         {
-            musicEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            musicEmitter.Stop();
+            //musicEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }

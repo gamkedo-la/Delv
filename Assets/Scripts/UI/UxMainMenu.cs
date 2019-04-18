@@ -43,10 +43,10 @@ public class UxMainMenu : UxPanel {
         quitButton.onClick.AddListener(OnQuitClick);
         SetState();
         Display();
-        if (scrollImagePanel != null && scrollVideoClip != null) {
+        if (scrollImagePanel != null && scrollVideoClip != null)
+        {
             ScrollAnimate();
         }
-
     }
 
     // set state of UI elements to match game config settings
@@ -127,6 +127,7 @@ public class UxMainMenu : UxPanel {
         videoPlayer.clip = scrollVideoClip;
         videoPlayer.targetTexture = renderTexture;
         videoPlayer.loopPointReached += OnVideoClipEnd;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/MenuIntro_Scroll");
     }
 
     void OnVideoClipEnd(VideoPlayer player) {
@@ -139,6 +140,7 @@ public class UxMainMenu : UxPanel {
         Hide();
         ScrollLinkTexture();
         ScrollSetupVideo();
+
     }
 
 }

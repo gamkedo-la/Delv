@@ -17,19 +17,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StarterVillageTiled.unity
     guid: ad111b29bc21d844cb89367ecf8366bf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DungeonFloor1.unity
     guid: 90a49b6c87e0fe746a2a392a6d900d87
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestZones/StarterVillage.unity
     guid: d546e0e9b57ff7d4e94987273ee3aadf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Forest Dungeon/ForestFloor1.unity
     guid: 8276cddab8b159f41bb138bece94f68c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Forest Dungeon/ForestBossBattle.unity
     guid: 6b642c0ad6e68224fbb13ef8f17b257a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cave Dungeon/CaveFloor1.unity
     guid: 42139ce6fff5f264b8caaec09bb63886
   m_configObjects: {}
