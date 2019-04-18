@@ -482,7 +482,7 @@ public class PlayerController : MonoBehaviour
             PlayerController other = coll.gameObject.GetComponent<PlayerController>();
             if (other && other.isDead)
             {
-                if (isBot && AICompanion.hortNow == 0)
+                if (isBot && Mathf.Approximately(AICompanion.hortNow, 0))
                 {
                     other.SendMessage("Revive");
                 }

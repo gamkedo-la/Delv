@@ -23,6 +23,7 @@ TagManager:
   - Village
   - Cave
   - Forest
+  - Breakable
   layers:
   - Default
   - TransparentFX

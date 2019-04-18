@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 114790876949002924}
   m_Layer: 10
   m_Name: Box
-  m_TagString: Enemy
+  m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -26,7 +26,7 @@ public class FireParticleDMG : MonoBehaviour {
 
         while (i < numCollisionEvents)
         {
-            if (other.tag == "Enemy")
+            if (other.tag == "Enemy" || other.tag == "Breakable")
             {
                 other.SendMessage("DamageHealth", DMG);
             }
