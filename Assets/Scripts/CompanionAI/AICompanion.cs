@@ -123,6 +123,7 @@ public class AICompanion : MonoBehaviour
         //if (DEBUG_AI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
         itemLayerFilter.useLayerMask = true;
         itemLayerFilter.useTriggers = true;
+
         resetPositionFilter.NoFilter();
     }
 

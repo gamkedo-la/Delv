@@ -7,10 +7,10 @@ public class TriggerToggle : MonoBehaviour
 	public string colliderTag = "Player";
 	public GameObject[] disable;
 	public GameObject[] enable;
-	
-	private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == colliderTag)
+		if (collision.gameObject.tag == colliderTag && !collision.gameObject.GetComponent<PlayerController>().isBot)
 		{
 			for (int i = 0; i < disable.Length; i++)
 				disable[i].SetActive(false);

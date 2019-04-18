@@ -5,12 +5,29 @@ using UnityEngine;
 public class LightningStaff : AbstractWeapon
 {
     public LineRenderer LR;
+    private ContactFilter2D damagableLayersFilter;
+    private int enemyLayer = 10;
+    private int containerLayer = 18;
+    private int enemyLayerMask;
+    private int containerLayerMask;
+    private int combinedLayerMask;
+    private RaycastHit2D[] lightningHitResults;
 
     [FMODUnity.EventRef]
     public string lightningSound;
 
+    private void Awake()
+    {
+        enemyLayerMask = 1 << enemyLayer;
+        containerLayerMask = 1 << containerLayer;
+        combinedLayerMask = enemyLayerMask | containerLayerMask;
+        damagableLayersFilter.layerMask.value = combinedLayerMask;
+        damagableLayersFilter.useLayerMask = true;
+    }
+
     public override void Fire1()
     {
+        lightningHitResults = new RaycastHit2D[1];
         Debug.Log("Shooting");
         GunCD = fireDelay;
         Vector3 offset = transform.rotation * bulletOffset;
@@ -19,11 +36,11 @@ public class LightningStaff : AbstractWeapon
         {
             ShotParticleSystem.Emit(20);
         }
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position,transform.up, CastRange, 1<<10);
+        /*RaycastHit2D hit =*/ Physics2D.Raycast(gameObject.transform.position,transform.up, damagableLayersFilter, lightningHitResults, CastRange);
         Debug.DrawRay(transform.position, transform.up*5, Color.yellow,3f);
-        if (hit)
+        if (lightningHitResults[0])
         {
-            GameObject HitEnemy = hit.transform.gameObject;
+            GameObject HitEnemy = lightningHitResults[0].transform.gameObject;
             HitEnemy.SendMessage("DamageHealth", ShockDamage);
             Debug.Log("Enemy " + HitEnemy + " Has been hit");
             StartCoroutine("LineCD");
@@ -39,7 +56,7 @@ public class LightningStaff : AbstractWeapon
         StopCD1();
         CDzeroed = false;
 
-        if (!hit)
+        if (!lightningHitResults[0])
         {
             //return;
         }
