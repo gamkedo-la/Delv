@@ -81,17 +81,16 @@ public class UxMainMenu : UxPanel {
         uxPanel.onDoneEvent.AddListener(Enable);
         // now hide the current panel
         Disable();
-        Debug.Log("hiding options");
         FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
 
     }
 
     public void OnCreditsClick() {
         // instantiate credits prefab (under canvas)
-        //var panelGo = Instantiate(creditsPrefab, GetComponentInParent<Canvas>().gameObject.transform);
-        //var uxPanel = panelGo.GetComponent<UxPanel>();
-        //uxPanel.onDoneEvent.AddListener(OnSubPanelDone);
-        //Hide();
+        var panelGo = Instantiate(creditsPrefab, GetComponentInParent<Canvas>().gameObject.transform);
+        var uxPanel = panelGo.GetComponent<UxPanel>();
+        uxPanel.onDoneEvent.AddListener(Enable);
+        Disable();
         FMODUnity.RuntimeManager.PlayOneShot(SelectSound, transform.position);
     }
 

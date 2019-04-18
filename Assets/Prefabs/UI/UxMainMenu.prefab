@@ -1615,7 +1615,8 @@ MonoBehaviour:
   fadeInTime: 1.5
   optionsPrefab: {fileID: 706815079245957212, guid: bba7dc62b5513436da9b86c43fef65c9,
     type: 3}
-  creditsPrefab: {fileID: 0}
+  creditsPrefab: {fileID: 6892409252787516017, guid: b123d7c8e7c88401989a132bda77d508,
+    type: 3}
 --- !u!1 &9181125758021156442
 GameObject:
   m_ObjectHideFlags: 0
