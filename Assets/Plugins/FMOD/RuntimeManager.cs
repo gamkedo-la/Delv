@@ -39,6 +39,11 @@ namespace FMODUnity
             return FMOD.RESULT.OK;
         }
 
+        public static void PlayOneShot(object spikeTrap)
+        {
+            throw new NotImplementedException();
+        }
+
         static RuntimeManager Instance
         {
             get
