@@ -7,6 +7,7 @@ public class Boss2Event : MonoBehaviour
 {
 	public Transform cutsceneCamTransform;
 	public float camSize = 7f;
+	public float camBossPlaySizeAddition = 2f;
 	private float prevCamSize;
 	
 	public GameObject CamParent;
@@ -39,7 +40,7 @@ public class Boss2Event : MonoBehaviour
 		camShake = CamParent.transform.GetChild(0).gameObject.GetComponent<CameraShake>();
 		anim = GetComponent<Animator>();
 
-		prevCamSize = cam.orthographicSize;
+		prevCamSize = cam.orthographicSize + camBossPlaySizeAddition;
 	}
 	
     void Update()
@@ -78,14 +79,11 @@ public class Boss2Event : MonoBehaviour
 	public void CutsceneEnd()
 	{
 		anim.SetBool("Cutscene", false);
-		//anim.SetBool("Player1", true);
-
-		for (int i = 0; i < brains.Length; i++)
-			brains[i].enabled = true;
-
+		anim.SetInteger("AttackPhase", 0);
+		
 		//TEMP: Put all in state behavior (animator graph) and animator has to be enabled
 		//Without this line, transforms of MegaWorms are not moveable
-		anim.enabled = false;
+		//anim.enabled = false;
 
 		cutsceneStarted = false;
 

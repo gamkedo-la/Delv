@@ -32,7 +32,7 @@ Transform:
   - {fileID: 1649854091}
   - {fileID: 1938052025}
   m_Father: {fileID: 5734294884908785154}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &782145494
 MonoBehaviour:
@@ -136,7 +136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1469267824}
   - component: {fileID: 1469267825}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DugTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Time: 4
   m_Parameters:
     serializedVersion: 3
@@ -341,7 +341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1713864266}
   - component: {fileID: 1713864267}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DugTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Time: 4
   m_Parameters:
     serializedVersion: 3
@@ -467,7 +467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1896395602}
   - component: {fileID: 1896395603}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DugTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,7 +525,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Time: 4
   m_Parameters:
     serializedVersion: 3
@@ -721,7 +721,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 5734294884908785154}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &215499335482601953
 SpriteRenderer:
@@ -771,6 +771,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1886618649074829302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6820570571640901423}
+  m_Layer: 0
+  m_Name: WormGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6820570571640901423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886618649074829302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5734294884350805135}
+  - {fileID: 5734294884481808163}
+  - {fileID: 5734294884023920591}
+  m_Father: {fileID: 5734294884908785154}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2393916902704147245
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,7 +978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5734294883272081848}
   - component: {fileID: 5734294883272081849}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TiledBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1024,7 +1057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5734294883345907165}
   - component: {fileID: 5734294883345907164}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TiledBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1105,7 +1138,7 @@ GameObject:
   - component: {fileID: 5734294883632648431}
   - component: {fileID: 5734294883632648432}
   - component: {fileID: 6675694533341360863}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1163,7 +1196,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300006, guid: 613fdc66e1227b94fb1a19a003117b98, type: 3}
   m_Color: {r: 1, g: 0.78431374, b: 0.78431374, a: 1}
   m_FlipX: 0
@@ -1231,7 +1264,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Time: 0.75
   m_Parameters:
     serializedVersion: 3
@@ -1301,7 +1334,7 @@ GameObject:
   - component: {fileID: 5734294883638568922}
   - component: {fileID: 5734294883638568923}
   - component: {fileID: 1419272829}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1359,7 +1392,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300006, guid: 613fdc66e1227b94fb1a19a003117b98, type: 3}
   m_Color: {r: 0.78431374, g: 1, b: 0.78431374, a: 1}
   m_FlipX: 0
@@ -1427,7 +1460,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Time: 0.75
   m_Parameters:
     serializedVersion: 3
@@ -1495,9 +1528,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5734294884023920591}
   - component: {fileID: 368003672}
-  m_Layer: 0
+  - component: {fileID: 1464597177}
+  - component: {fileID: 1464597175}
+  m_Layer: 10
   m_Name: GreenWorm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1515,8 +1550,8 @@ Transform:
   m_Children:
   - {fileID: 5734294883638568921}
   - {fileID: 5734294883272081848}
-  m_Father: {fileID: 5734294884908785154}
-  m_RootOrder: 5
+  m_Father: {fileID: 6820570571640901423}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &368003672
 MonoBehaviour:
@@ -1525,18 +1560,68 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5734294884023920590}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 641605ae0d0b93645b366ba09fd5e5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personality: 0
-  initialDistance: 25
-  speed: 20
-  randomOffsetFactor: 1
-  attackDelay: 0.75
-  playerToAttackIndex: 0
-  alternate: 0
+  personality: 2
+  initialDistance: 20
+  speed: 13
+  startDelay: 0.75
+  attackDelay: 0.5
+  playfulMaxGap: 12
+  playfulMinGap: 6
+  playfulGapTransition: 0.5
+  playfulAngleChange: 0.3
+  playerToAttackIndex: 1
+  alternate: 1
+  main: 0
+  DamagedParticle: {fileID: 0}
+  HeadAni: {fileID: 5961506376143629543}
+  HealthBar: {fileID: 782145492}
+--- !u!61 &1464597177
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294884023920590}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2}
+  m_EdgeRadius: 0
+--- !u!114 &1464597175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294884023920590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05468f871a292a42bde129bdeba0259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawDMG: 25
+  DamageDealt: 0
+  TimeTilRedamage: 0.5
+  RedamageClock: 0
 --- !u!1 &5734294884147538593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1634,7 @@ GameObject:
   - component: {fileID: 5734294884147538595}
   - component: {fileID: 5734294884147538596}
   - component: {fileID: 238681831}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1607,7 +1692,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300006, guid: 613fdc66e1227b94fb1a19a003117b98, type: 3}
   m_Color: {r: 0.78431374, g: 0.78431374, b: 1, a: 1}
   m_FlipX: 0
@@ -1675,7 +1760,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Time: 0.75
   m_Parameters:
     serializedVersion: 3
@@ -1743,9 +1828,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5734294884350805135}
   - component: {fileID: 8857575930160651911}
-  m_Layer: 0
+  - component: {fileID: 135278971}
+  - component: {fileID: 135278969}
+  m_Layer: 10
   m_Name: RedWorm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1763,8 +1850,8 @@ Transform:
   m_Children:
   - {fileID: 5734294883632648430}
   - {fileID: 5734294883345907165}
-  m_Father: {fileID: 5734294884908785154}
-  m_RootOrder: 3
+  m_Father: {fileID: 6820570571640901423}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8857575930160651911
 MonoBehaviour:
@@ -1773,18 +1860,68 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5734294884350805134}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 641605ae0d0b93645b366ba09fd5e5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   personality: 0
-  initialDistance: 25
-  speed: 20
-  randomOffsetFactor: 1
+  initialDistance: 15
+  speed: 17
+  startDelay: 0.25
   attackDelay: 0.25
+  playfulMaxGap: 10
+  playfulMinGap: 5
+  playfulGapTransition: 0.25
+  playfulAngleChange: 0.3
   playerToAttackIndex: 0
-  alternate: 0
+  alternate: 1
+  main: 1
+  DamagedParticle: {fileID: 0}
+  HeadAni: {fileID: 5961506376143629543}
+  HealthBar: {fileID: 782145492}
+--- !u!61 &135278971
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294884350805134}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2}
+  m_EdgeRadius: 0
+--- !u!114 &135278969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294884350805134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05468f871a292a42bde129bdeba0259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawDMG: 40
+  DamageDealt: 0
+  TimeTilRedamage: 0.5
+  RedamageClock: 0
 --- !u!1 &5734294884481808162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,9 +1932,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5734294884481808163}
   - component: {fileID: 2023226917}
-  m_Layer: 0
+  - component: {fileID: 749292275}
+  - component: {fileID: 749292273}
+  m_Layer: 10
   m_Name: BlueWorm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1815,8 +1954,8 @@ Transform:
   m_Children:
   - {fileID: 5734294884147538594}
   - {fileID: 5734294885087321610}
-  m_Father: {fileID: 5734294884908785154}
-  m_RootOrder: 4
+  m_Father: {fileID: 6820570571640901423}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2023226917
 MonoBehaviour:
@@ -1825,18 +1964,68 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5734294884481808162}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 641605ae0d0b93645b366ba09fd5e5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personality: 0
-  initialDistance: 25
-  speed: 20
-  randomOffsetFactor: 1
+  personality: 1
+  initialDistance: 20
+  speed: 13
+  startDelay: 0.25
   attackDelay: 0.5
+  playfulMaxGap: 10
+  playfulMinGap: 5
+  playfulGapTransition: 0.25
+  playfulAngleChange: 0.3
   playerToAttackIndex: 0
-  alternate: 0
+  alternate: 1
+  main: 0
+  DamagedParticle: {fileID: 0}
+  HeadAni: {fileID: 5961506376143629543}
+  HealthBar: {fileID: 782145492}
+--- !u!61 &749292275
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294884481808162}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2}
+  m_EdgeRadius: 0
+--- !u!114 &749292273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294884481808162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05468f871a292a42bde129bdeba0259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawDMG: 25
+  DamageDealt: 0
+  TimeTilRedamage: 0.5
+  RedamageClock: 0
 --- !u!1 &5734294884908785153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,9 +2059,7 @@ Transform:
   - {fileID: 1928905204090455089}
   - {fileID: 3966823355359137166}
   - {fileID: 1301077429039010350}
-  - {fileID: 5734294884350805135}
-  - {fileID: 5734294884481808163}
-  - {fileID: 5734294884023920591}
+  - {fileID: 6820570571640901423}
   - {fileID: 782145493}
   - {fileID: 8195452047485864027}
   m_Father: {fileID: 0}
@@ -1918,6 +2105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutsceneCamTransform: {fileID: 1928905204090455089}
   camSize: 9
+  camBossPlaySizeAddition: 2
   CamParent: {fileID: 0}
   C2D: {fileID: 0}
   spawnAttack: {fileID: 0}
@@ -1956,7 +2144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5734294885087321610}
   - component: {fileID: 5734294885087321611}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TiledBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
