@@ -23,7 +23,7 @@ public class AICompanion : MonoBehaviour
     public float hortDistance;
     private float BeginFollowDist = 3.0f;
     private float StopFollowDist = 1.1f;
-    private float offScreenDist = 15f;
+    private float offScreenDist = 13f;
     private int step = 0;
     [Space]
     [Header("Controller Axis Input")]
@@ -123,6 +123,7 @@ public class AICompanion : MonoBehaviour
         //if (DEBUG_AI) Debug.Log("AI Companion itemLayerFilter.layerMask is: " + itemLayerFilter.layerMask.value);
         itemLayerFilter.useLayerMask = true;
         itemLayerFilter.useTriggers = true;
+        resetPositionFilter.NoFilter();
     }
 
     // Update is called once per frame
@@ -215,25 +216,38 @@ public class AICompanion : MonoBehaviour
 
     private Vector2 randomPointAroundPlayer;
     private Vector3 resetPosition;
+    private Vector3 currentPosition;
+    private ContactFilter2D resetPositionFilter;
+    private Collider2D[] resetPositionCollisionHits;
 
     public void AIMoveBasedOnState()
     {
+        currentPosition = AICollider.transform.position;
         distanceFromPlayer = Vector2.Distance(PlayerGO.transform.position, transform.position);
         if (distanceFromPlayer > offScreenDist)
         {
             for (int check = 0; check < 1; check++)
             {
-                randomPointAroundPlayer = Random.insideUnitCircle;
+                randomPointAroundPlayer = Random.insideUnitCircle * 1.5f;
                 resetPosition = new Vector3(PlayerGO.transform.position.x + randomPointAroundPlayer.x,
                                             PlayerGO.transform.position.y + randomPointAroundPlayer.y,
                                             PlayerGO.transform.position.z);
                 if (PlayerGO.gameObject.GetComponent<Collider2D>().OverlapPoint(resetPosition))
                 {
+                    if (DEBUG_AI) Debug.Log("AI: Reset position on player - getting a new one");
+                    check = -1;
+                }
+                AICollider.transform.position = resetPosition;
+                int count = AICollider.OverlapCollider(resetPositionFilter, resetPositionCollisionHits);
+                if (count > 0)
+                {
+                    AICollider.transform.position = currentPosition;
                     if (DEBUG_AI) Debug.Log("AI: Reset position blocked - getting a new one");
                     check = -1;
                 }
             }
 
+            AICollider.transform.position = currentPosition;
             transform.position = resetPosition;
             AIReset();
             return;
