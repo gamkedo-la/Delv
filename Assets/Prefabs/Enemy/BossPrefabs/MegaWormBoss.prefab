@@ -2149,6 +2149,7 @@ GameObject:
   - component: {fileID: 633531737175874655}
   - component: {fileID: 8670140523867144632}
   - component: {fileID: 5961506376143629543}
+  - component: {fileID: 5296678165165120809}
   m_Layer: 0
   m_Name: MegaWormBoss
   m_TagString: Untagged
@@ -2248,6 +2249,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5296678165165120809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294884908785153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ba810ae9ddcfa8892360863c3a98d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toEnable: {fileID: 0}
 --- !u!1 &5734294885087321609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2413,11 +2427,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1301077429039010350}
     m_Modifications:
-    - target: {fileID: 4022746421643182663, guid: a0923eeab8ae8934e91c522cac5ec084,
-        type: 3}
-      propertyPath: m_Name
-      value: WormHole
-      objectReference: {fileID: 0}
     - target: {fileID: 4022746421643182662, guid: a0923eeab8ae8934e91c522cac5ec084,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2473,6 +2482,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4022746421643182663, guid: a0923eeab8ae8934e91c522cac5ec084,
+        type: 3}
+      propertyPath: m_Name
+      value: WormHole
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0923eeab8ae8934e91c522cac5ec084, type: 3}
 --- !u!4 &7141601904240701554 stripped
@@ -2488,11 +2502,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1301077429039010350}
     m_Modifications:
-    - target: {fileID: 4022746421643182663, guid: a0923eeab8ae8934e91c522cac5ec084,
-        type: 3}
-      propertyPath: m_Name
-      value: WormHole
-      objectReference: {fileID: 0}
     - target: {fileID: 4022746421643182662, guid: a0923eeab8ae8934e91c522cac5ec084,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2548,6 +2557,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4022746421643182663, guid: a0923eeab8ae8934e91c522cac5ec084,
+        type: 3}
+      propertyPath: m_Name
+      value: WormHole
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0923eeab8ae8934e91c522cac5ec084, type: 3}
 --- !u!4 &4948873932674599707 stripped
@@ -2563,11 +2577,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1301077429039010350}
     m_Modifications:
-    - target: {fileID: 4022746421643182663, guid: a0923eeab8ae8934e91c522cac5ec084,
-        type: 3}
-      propertyPath: m_Name
-      value: WormHole
-      objectReference: {fileID: 0}
     - target: {fileID: 4022746421643182662, guid: a0923eeab8ae8934e91c522cac5ec084,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2622,6 +2631,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022746421643182663, guid: a0923eeab8ae8934e91c522cac5ec084,
+        type: 3}
+      propertyPath: m_Name
+      value: WormHole
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0923eeab8ae8934e91c522cac5ec084, type: 3}

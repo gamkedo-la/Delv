@@ -19,7 +19,7 @@ public class MegaWormBrain : MonoBehaviour
 	public float speed = 5f;
 	public float startDelay = 0.25f;
 	public float attackDelay = 0.25f;
-	
+
 	[Header("Playful Settings")]
 	public float playfulMaxGap = 10f;
 	public float playfulMinGap = 5f;
@@ -35,12 +35,12 @@ public class MegaWormBrain : MonoBehaviour
 	public float lineWidthFactor = 0.1f;
 	private float followTimer = 0f;
 	private float lineTimer = 0f;
-	
+
 	[Header("Player Selection")]
 	public int playerToAttackIndex = 0;
 	public bool alternate = false;
 	public bool main = false;
-	
+
 	[Header("Additionals")]
 	public GameObject DamagedParticle = null;
 	public Animator HeadAni;
@@ -60,11 +60,12 @@ public class MegaWormBrain : MonoBehaviour
 	private GameObject head;
 	private TrailRenderer bodyTrail;
 	private TrailRenderer dugSlideTrail;
-	
+
 	private GameObject[] players;
 	private Vector2 target = Vector2.zero;
 
 	private Boss2Event BossEvent;
+	private ReturnToVillageEvent returnToVillageEvent;
 
 	private LineRenderer sharpLineRenderer;
 
@@ -78,6 +79,7 @@ public class MegaWormBrain : MonoBehaviour
 	void OnEnable()
 	{
 		BossEvent = HeadAni.gameObject.GetComponent<Boss2Event>();
+		returnToVillageEvent = HeadAni.gameObject.GetComponent<ReturnToVillageEvent>();
 	}
 
 	private void Update()
@@ -100,6 +102,7 @@ public class MegaWormBrain : MonoBehaviour
 					HeadAni.SetBool("Dead", true);
 					Destroy(HealthBar);
 					BossEvent.SetupDeathCutscene();
+					returnToVillageEvent.Trigger();
 				}
 			}
 			else if (HP <= MaxHP / 1.25f)
@@ -120,7 +123,7 @@ public class MegaWormBrain : MonoBehaviour
 	}
 
 	public void BrainStart()
-    {
+	{
 		head = transform.GetChild(0).gameObject;
 
 		//To fix the colors that are removed by animator cutscene...
@@ -132,7 +135,7 @@ public class MegaWormBrain : MonoBehaviour
 		dugSlideTrail = head.transform.GetChild(0).gameObject.GetComponent<TrailRenderer>();
 
 		bodyTrail.enabled = dugSlideTrail.enabled = true;
-		
+
 		players = GameObject.FindGameObjectsWithTag("Player");
 
 		if (players.Length <= 1)

@@ -9,10 +9,10 @@ public class Boss2Event : MonoBehaviour
 	public float camSize = 7f;
 	public float camBossPlaySizeAddition = 2f;
 	private float prevCamSize;
-	
+
 	public GameObject CamParent;
 	public Camera2DFollow C2D;
-	
+
 	public GameObject spawnAttack;
 	public GameObject hpBar;
 
@@ -31,7 +31,7 @@ public class Boss2Event : MonoBehaviour
 	[HideInInspector] public bool stateChanged = false;
 
 	void Start()
-    {
+	{
 		CamParent = GameObject.Find("CamParent");
 		if (CamParent)
 		{
@@ -44,9 +44,9 @@ public class Boss2Event : MonoBehaviour
 
 		prevCamSize = cam.orthographicSize + camBossPlaySizeAddition;
 	}
-	
-    void Update()
-    {
+
+	void Update()
+	{
 		if (!cutsceneStarted && releaseCamera)
 		{
 			CamParent.transform.position = Vector3.MoveTowards(CamParent.transform.position, cutsceneCamTransform.position, 15f * Time.deltaTime);
@@ -62,7 +62,7 @@ public class Boss2Event : MonoBehaviour
 		{
 			cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, prevCamSize, 2.5f * Time.deltaTime);
 		}
-    }
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -82,7 +82,7 @@ public class Boss2Event : MonoBehaviour
 	{
 		anim.SetBool("Cutscene", false);
 		anim.SetInteger("AttackPhase", 0);
-		
+
 		//TEMP: Put all in state behavior (animator graph) and animator has to be enabled
 		//Without this line, transforms of MegaWorms are not moveable
 		//anim.enabled = false;

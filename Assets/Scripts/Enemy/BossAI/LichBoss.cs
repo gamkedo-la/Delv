@@ -31,6 +31,7 @@ public class LichBoss : MonoBehaviour
     public GameObject Fist2;
 
     private BossEvent BossEvent;
+	private ReturnToVillageEvent returnToVillageEvent;
 
 
 
@@ -39,6 +40,7 @@ public class LichBoss : MonoBehaviour
     void OnEnable()
     {
         BossEvent = HeadAni.gameObject.GetComponent<BossEvent>();
+		returnToVillageEvent = HeadAni.gameObject.GetComponent<ReturnToVillageEvent>();
     }
 
     // Update is called once per frame
@@ -60,6 +62,7 @@ public class LichBoss : MonoBehaviour
                 HeadAni.SetBool("Dead", true);
                 Destroy(HealthBar);
                 BossEvent.SetupDeathCutscene();
+                returnToVillageEvent.Trigger();
             }
         }
         else if (HP <= MaxHP / 3f)

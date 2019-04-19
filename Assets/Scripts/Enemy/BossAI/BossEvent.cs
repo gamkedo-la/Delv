@@ -8,7 +8,7 @@ public class BossEvent : MonoBehaviour
 	public Transform cutsceneCamTransform;
 	public float camSize = 7f;
 	private float prevCamSize;
-	
+
 	public GameObject CamParent;
 	public Camera2DFollow C2D;
 	private Camera cam;
@@ -27,7 +27,7 @@ public class BossEvent : MonoBehaviour
 	[HideInInspector] public bool stateChanged = false;
 
 	void Start()
-    {
+	{
 		CamParent = GameObject.Find("CamParent");
 		if (CamParent)
 		{
@@ -40,9 +40,9 @@ public class BossEvent : MonoBehaviour
 
 		prevCamSize = cam.orthographicSize;
 	}
-	
-    void Update()
-    {
+
+	void Update()
+	{
 		if (!cutsceneStarted && releaseCamera)
 		{
 			CamParent.transform.position = Vector3.MoveTowards(CamParent.transform.position, cutsceneCamTransform.position, 15f * Time.deltaTime);
@@ -58,7 +58,7 @@ public class BossEvent : MonoBehaviour
 		{
 			cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, prevCamSize, 2.5f * Time.deltaTime);
 		}
-    }
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
