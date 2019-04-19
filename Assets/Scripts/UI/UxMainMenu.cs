@@ -32,6 +32,7 @@ public class UxMainMenu : UxPanel {
     public GameObject creditsPrefab;
 
     private GameManagerScript gameManager;
+    private GameObject dialogueCanvasGo;
 
     public void Start() {
         gameManager = GameManagerScript.instance;
@@ -47,6 +48,11 @@ public class UxMainMenu : UxPanel {
         {
             ScrollAnimate();
         }
+        // Ugly hack... disable the dialogue
+        dialogueCanvasGo = GameObject.Find("GameManager/DialogueCanvas");
+        if (dialogueCanvasGo != null) {
+            dialogueCanvasGo.SetActive(false);
+        }
     }
 
     // set state of UI elements to match game config settings
@@ -59,6 +65,11 @@ public class UxMainMenu : UxPanel {
 
     public void OnPlayClick() {
         Hide();
+        // Ugly hack... re-enable the dialogue
+        if (dialogueCanvasGo != null) {
+            dialogueCanvasGo.SetActive(true);
+        }
+        dialogueCanvasGo.SetActive(false);
         if (gameManager != null) {
             gameManager.StartTheGame();
         }
@@ -130,7 +141,6 @@ public class UxMainMenu : UxPanel {
     }
 
     void OnVideoClipEnd(VideoPlayer player) {
-        Debug.Log("OnVideoClipEnd");
         FadeIn(fadeInTime);
     }
 
