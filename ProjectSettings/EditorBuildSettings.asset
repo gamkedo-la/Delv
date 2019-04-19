@@ -26,10 +26,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Forest Dungeon/ForestFloor1.unity
     guid: 8276cddab8b159f41bb138bece94f68c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Forest Dungeon/ForestBossBattle.unity
     guid: 6b642c0ad6e68224fbb13ef8f17b257a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Cave Dungeon/CaveFloor1.unity
     guid: 42139ce6fff5f264b8caaec09bb63886
+  - enabled: 1
+    path: Assets/Scenes/Cave Dungeon/CaveFloorBoss.unity
+    guid: a94813471f4b8cc49aa089da9b50c761
   m_configObjects: {}
