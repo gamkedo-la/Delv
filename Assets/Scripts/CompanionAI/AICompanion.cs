@@ -101,6 +101,7 @@ public class AICompanion : MonoBehaviour
             if (box.isTrigger)
             {
                 AICollider = box;
+                // using the trigger box because it is bigger so better to detect collisions when cast
             }
         }
 

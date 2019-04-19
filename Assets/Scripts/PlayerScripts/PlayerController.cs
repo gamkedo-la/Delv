@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
     public GameObject CursorGO;
     [Space]
     public bool isDead = false;
-	[Space]
+    [Space]
 
     [FMODUnity.EventRef]
     public string footsteps;
@@ -458,7 +458,7 @@ public class PlayerController : MonoBehaviour
         {
             PotentialWeapon = coll.transform;
         }
-        if ((coll.gameObject.tag == "Activatable"))
+        if ((coll.gameObject.tag == "Activatable") && !isBot)
         {
             ActivateTarget = coll.gameObject;
             if (Input.GetButtonDown("Pickup" + ControllerSlot) && ActivateCD <= 0) //REMEMBER TO CHANGE THIS BUTTON
