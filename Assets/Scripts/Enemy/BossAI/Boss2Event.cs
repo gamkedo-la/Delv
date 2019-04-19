@@ -17,6 +17,8 @@ public class Boss2Event : MonoBehaviour
 	public GameObject hpBar;
 
 	public MegaWormBrain[] brains;
+	public GameObject wormHole;
+	public Vector3 holeOffset;
 
 	private Camera cam;
 	private CameraShake camShake;
@@ -135,5 +137,11 @@ public class Boss2Event : MonoBehaviour
 	public void EndVulnerableState()
 	{
 		anim.SetBool("VulnerableSwitch", false);
+	}
+
+	public void WormHoles()
+	{
+		for(int i = 0; i < brains.Length; i++)
+			Instantiate(wormHole, brains[i].gameObject.transform.position + holeOffset, Quaternion.Euler(0f,0f,0f));
 	}
 }

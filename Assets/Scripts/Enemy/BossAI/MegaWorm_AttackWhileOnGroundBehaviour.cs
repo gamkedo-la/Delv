@@ -6,7 +6,13 @@ public class MegaWorm_AttackWhileOnGroundBehaviour : StateMachineBehaviour
 {
 	public bool redActive = false;
 
+	public int switchAfterHits = 5;
+
 	private Boss2Event bossEvent;
+
+	private GameObject redHead;
+	private GameObject blueHead;
+	private GameObject greenHead;
 
 	private SpriteRenderer redHeadRenderer;
 	private SpriteRenderer blueHeadRenderer;
@@ -16,23 +22,37 @@ public class MegaWorm_AttackWhileOnGroundBehaviour : StateMachineBehaviour
 	private BoxCollider2D blueCollider;
 	private BoxCollider2D greenCollider;
 
+	static private bool done = false;
+
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 		bossEvent = animator.gameObject.GetComponent<Boss2Event>();
 
-		redHeadRenderer = bossEvent.brains[0].gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-		blueHeadRenderer = bossEvent.brains[1].gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-		greenHeadRenderer = bossEvent.brains[2].gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+		redHead = bossEvent.brains[0].gameObject.transform.GetChild(0).gameObject;
+		blueHead = bossEvent.brains[1].gameObject.transform.GetChild(0).gameObject;
+		greenHead = bossEvent.brains[2].gameObject.transform.GetChild(0).gameObject;
+
+		redHeadRenderer = redHead.GetComponent<SpriteRenderer>();
+		blueHeadRenderer = blueHead.GetComponent<SpriteRenderer>();
+		greenHeadRenderer = greenHead.GetComponent<SpriteRenderer>();
 
 		redCollider = bossEvent.brains[0].gameObject.GetComponent<BoxCollider2D>();
 		blueCollider = bossEvent.brains[1].gameObject.GetComponent<BoxCollider2D>();
 		greenCollider = bossEvent.brains[2].gameObject.GetComponent<BoxCollider2D>();
+		
+		if (!done)
+		{
+			bossEvent.brains[0].InitHP();
+			done = true;
+		}
 
 		if (redActive)
 		{
 			bossEvent.brains[0].BrainStart();
 
+			redHeadRenderer.enabled = true;
+			redCollider.enabled = true;
 			blueHeadRenderer.enabled = false;
 			blueCollider.enabled = false;
 			greenHeadRenderer.enabled = false;
@@ -45,20 +65,38 @@ public class MegaWorm_AttackWhileOnGroundBehaviour : StateMachineBehaviour
 
 			redHeadRenderer.enabled = false;
 			redCollider.enabled = false;
+			blueHeadRenderer.enabled = true;
+			blueCollider.enabled = true;
+			greenHeadRenderer.enabled = true;
+			greenCollider.enabled = true;
 		}
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+		MegaWormBrain.countDamage = true;
+
 		if (redActive)
 		{
 			bossEvent.brains[0].BrainUpdate();
+
+			redHead.SetActive(true);
 		}
 		else
 		{
 			bossEvent.brains[1].BrainUpdate();
 			bossEvent.brains[2].BrainUpdate();
+
+			greenHead.SetActive(true);
+			blueHead.SetActive(true);
+		}
+
+		if (MegaWormBrain.GetDamageCounter() >= switchAfterHits)
+		{
+			animator.SetTrigger("Damage");
+			MegaWormBrain.ResetDamageCounter();
+			MegaWormBrain.countDamage = false;
 		}
     }
 

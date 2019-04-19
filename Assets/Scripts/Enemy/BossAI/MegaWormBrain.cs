@@ -8,36 +8,46 @@ public class MegaWormBrain : MonoBehaviour
 	public enum PersonalityTraits
 	{
 		Aggressive,
-		Defensive,
+		Sharp,
 		Playful
 	}
+
+	[Header("Essentials")]
 	public PersonalityTraits personality = PersonalityTraits.Aggressive;
-	
-	[Space]
-	static public float MaxHP = 1000f;
-	static public float HP = 1000f;
+	public float hitPoints = 1000f;
 	public float initialDistance = 15f;
 	public float speed = 5f;
 	public float startDelay = 0.25f;
 	public float attackDelay = 0.25f;
-
-	[Space]
+	
+	[Header("Playful Settings")]
 	public float playfulMaxGap = 10f;
 	public float playfulMinGap = 5f;
-	private float playfulGap = 10f;
-	private bool playfulGapBounceback = false;
 	public float playfulGapTransition = 0.25f;
 	public float playfulAngleChange = 0.3f; //in rad
+	private float playfulGap = 10f;
+	private bool playfulGapBounceback = false;
 
-	[Space]
+	[Header("Sharp Settings")]
+	public float targetFollow = 2f;
+	public float lineShowDelay = 0.5f;
+	public float lineMinSize = 0.1f;
+	public float lineWidthFactor = 0.1f;
+	private float followTimer = 0f;
+	private float lineTimer = 0f;
+	
+	[Header("Player Selection")]
 	public int playerToAttackIndex = 0;
 	public bool alternate = false;
 	public bool main = false;
-
-	[Space]
+	
+	[Header("Additionals")]
 	public GameObject DamagedParticle = null;
 	public Animator HeadAni;
 	public GameObject HealthBar;
+
+	static public float MaxHP = 100000;
+	static public float HP = 100000;
 
 	private float attackAngle = 0f;
 	private float attackTimer = 0f;
@@ -50,11 +60,16 @@ public class MegaWormBrain : MonoBehaviour
 	private GameObject head;
 	private TrailRenderer bodyTrail;
 	private TrailRenderer dugSlideTrail;
-
+	
 	private GameObject[] players;
 	private Vector2 target = Vector2.zero;
 
 	private Boss2Event BossEvent;
+
+	private LineRenderer sharpLineRenderer;
+
+	static private int damageCounter = 0;
+	static public bool countDamage = true;
 
 
 
@@ -87,20 +102,21 @@ public class MegaWormBrain : MonoBehaviour
 					BossEvent.SetupDeathCutscene();
 				}
 			}
-			/*
-			 * change phase as hp goes down...
-			 * 
-			else if (HP <= MaxHP / 3f)
+			else if (HP <= MaxHP / 1.25f)
 			{
-				if (!HeadAni.GetBool("RainFist"))
+				if (HeadAni.GetInteger("AttackPhase") != 1)
 				{
 					BossEvent.stateChanged = true;
-
-					HeadAni.SetBool("RainFist", true);
+					HeadAni.SetInteger("AttackPhase", 1);
 				}
 			}
-			*/
 		}
+	}
+
+	public void InitHP()
+	{
+		HP = MaxHP = hitPoints;
+		ResetDamageCounter();
 	}
 
 	public void BrainStart()
@@ -114,17 +130,26 @@ public class MegaWormBrain : MonoBehaviour
 
 		bodyTrail = head.GetComponent<TrailRenderer>();
 		dugSlideTrail = head.transform.GetChild(0).gameObject.GetComponent<TrailRenderer>();
+
+		bodyTrail.enabled = dugSlideTrail.enabled = true;
 		
 		players = GameObject.FindGameObjectsWithTag("Player");
 
 		if (players.Length <= 1)
 		{
 			playerToAttackIndex = 0;
-			alternate = true;
+			alternate = false;
+		}
+		else if (alternate)
+		{
+			playerToAttackIndex = (playerToAttackIndex == 0 ? 1 : 0);
 		}
 
 		playfulGap = playfulMaxGap;
-    }
+
+		if (personality == PersonalityTraits.Sharp)
+			sharpLineRenderer = GetComponent<LineRenderer>();
+	}
 
 	public void BrainUpdate()
 	{
@@ -178,7 +203,7 @@ public class MegaWormBrain : MonoBehaviour
 
 				attackTimer -= Time.deltaTime;
 			}
-			else if (personality == PersonalityTraits.Defensive) //same code as Aggressive for now
+			else if (personality == PersonalityTraits.Sharp)
 			{
 				if (target == Vector2.zero)
 				{
@@ -197,31 +222,60 @@ public class MegaWormBrain : MonoBehaviour
 					}
 
 					attackTimer = attackDelay;
-				}
-				else if (Vector2.Distance(transform.position, target) < minimumDistance)
-				{
-					if (!goneFar)
-					{
-						attackAngle += (Random.Range(-90f, 90f) * Mathf.Deg2Rad);
-
-						if (alternateAngles)
-							target -= new Vector2(initialDistance * Mathf.Cos(attackAngle), initialDistance * Mathf.Sin(attackAngle));
-						else
-							target += new Vector2(initialDistance * Mathf.Cos(attackAngle), initialDistance * Mathf.Sin(attackAngle));
-
-						alternateAngles = !alternateAngles;
-
-						goneFar = true;
-					}
-					else
-					{
-						goneFar = false;
-						target = Vector3.zero;
-					}
+					followTimer = targetFollow;
+					lineTimer = lineShowDelay;
 				}
 				else if (attackTimer <= 0f)
 				{
-					transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+					if (followTimer > 0f)
+					{
+						target = players[playerToAttackIndex].transform.position;
+
+						//float angle = Vector2.Angle(target, transform.position) * Mathf.Deg2Rad;
+
+						Vector2 angleVector = target - new Vector2(transform.position.x, transform.position.y);
+						float angle = Mathf.Atan2(angleVector.y, angleVector.x);
+
+						sharpLineRenderer.startWidth = sharpLineRenderer.endWidth = lineMinSize;
+
+						sharpLineRenderer.SetPosition(0, transform.position);
+
+						sharpLineRenderer.SetPosition(1, transform.position + new Vector3((initialDistance * 2f) * Mathf.Cos(angle), (initialDistance * 2f) * Mathf.Sin(angle), 0f));
+
+						followTimer -= Time.deltaTime;
+
+						if (followTimer <= 0f)
+						{
+							target = new Vector2(
+								transform.position.x + ((initialDistance * 2f) * Mathf.Cos(angle)),
+								transform.position.y + ((initialDistance * 2f) * Mathf.Sin(angle))
+								);
+						}
+
+					}
+					else if (lineTimer > 0f)
+					{
+						sharpLineRenderer.startWidth += lineWidthFactor * Time.deltaTime;
+						sharpLineRenderer.endWidth += lineWidthFactor * Time.deltaTime;
+
+						lineTimer -= Time.deltaTime;
+					}
+					else if (Vector2.Distance(transform.position, target) < minimumDistance)
+					{
+						sharpLineRenderer.startWidth = sharpLineRenderer.endWidth = 0f;
+
+						target = Vector3.zero;
+					}
+					else
+					{
+						if (sharpLineRenderer.startWidth > 0f)
+						{
+							sharpLineRenderer.startWidth -= (lineWidthFactor * 2f) * Time.deltaTime;
+							sharpLineRenderer.endWidth -= (lineWidthFactor * 2f) * Time.deltaTime;
+						}
+
+						transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+					}
 				}
 
 				attackTimer -= Time.deltaTime;
@@ -264,18 +318,18 @@ public class MegaWormBrain : MonoBehaviour
 				if (playfulGapBounceback)
 				{
 					playfulGap += playfulGapTransition * Time.deltaTime;
-					if (playfulGap >= playfulMaxGap) playfulGapBounceback = false;
-				}
-				else
-				{
-					playfulGap -= playfulGapTransition * Time.deltaTime;
-					if (playfulGap <= playfulMinGap)
+					if (playfulGap >= playfulMaxGap)
 					{
-						playfulGapBounceback = true;
+						playfulGapBounceback = false;
 
 						attackTimer = 1f; //any positive value will work
 						//playful worm attacks once before going to shrink the player worm gap
 					}
+				}
+				else
+				{
+					playfulGap -= playfulGapTransition * Time.deltaTime;
+					if (playfulGap <= playfulMinGap) playfulGapBounceback = true;
 				}
 			}
 		}
@@ -298,6 +352,9 @@ public class MegaWormBrain : MonoBehaviour
 					Instantiate(DamagedParticle, transform.position, transform.rotation);
 			}
 		}
-
+		damageCounter++;
 	}
+
+	static public int GetDamageCounter() { return damageCounter; }
+	static public void ResetDamageCounter() { damageCounter = 0; }
 }
