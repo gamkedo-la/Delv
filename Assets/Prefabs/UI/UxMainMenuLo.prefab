@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 1587159037683507091}
   - component: {fileID: 1587159037683507101}
   - component: {fileID: 1587159037683507090}
+  - component: {fileID: 1115804011266016405}
   m_Layer: 0
   m_Name: UxMainMenuLo
   m_TagString: Untagged
@@ -451,12 +452,82 @@ MonoBehaviour:
   creditsButton: {fileID: 4551215293843181805}
   quitButton: {fileID: 6810413955099552634}
   scrollImagePanel: {fileID: 4437245150850990458}
-  scrollVideoClip: {fileID: 32900000, guid: ac237c0978f9f47f1b4edc4808dbccfb, type: 3}
+  scrollAnimator: {fileID: 1115804011266016405}
   fadeInTime: 2
   optionsPrefab: {fileID: 4537608104788900482, guid: 9f0d246eba92747e3bad2027411a4819,
     type: 3}
   creditsPrefab: {fileID: 1004272987881519152, guid: bf21f0fce29c34244802c7979d03cd05,
     type: 3}
+--- !u!114 &1115804011266016405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587159037683507103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd71de7e9425d4fd9b322130be777cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: f79ac155eb31a488fbac0cd54e84949b, type: 3}
+  - {fileID: 21300000, guid: 0044b600180aa4e779e5f279421071db, type: 3}
+  - {fileID: 21300000, guid: ad16fdef72b544a8c9c241a16831e4ae, type: 3}
+  - {fileID: 21300000, guid: e10c65cd662ad4a5d8729a8a60d20428, type: 3}
+  - {fileID: 21300000, guid: 033b748efd2db46819422919217147ca, type: 3}
+  - {fileID: 21300000, guid: ee86b1110a8884c43ac8696f0d2cc68b, type: 3}
+  - {fileID: 21300000, guid: aa04ab88df6f748c683c2c8daf662bbb, type: 3}
+  - {fileID: 21300000, guid: 7d9fc8781c865445fa515af9e3dcf3df, type: 3}
+  - {fileID: 21300000, guid: 5f0a07e6d19b84c63a7a4473c93fa55e, type: 3}
+  - {fileID: 21300000, guid: 6c7875b5b600946489e86c6a03d56607, type: 3}
+  - {fileID: 21300000, guid: cc20ec19b3cd24d46872aac2b784a294, type: 3}
+  - {fileID: 21300000, guid: 87a7d048800904c9eae00a5f789cecea, type: 3}
+  - {fileID: 21300000, guid: 028c0c8cc1aed433c9976053861ed7e8, type: 3}
+  - {fileID: 21300000, guid: 36f01cfc40ca54eb7a1349d852bbbf46, type: 3}
+  - {fileID: 21300000, guid: 49dedfb94681d465f83fed04235d4eef, type: 3}
+  - {fileID: 21300000, guid: 111b8fa518d8e4d05a9445806c902141, type: 3}
+  - {fileID: 21300000, guid: 29cf84ac2c45545bb996a6be6176acac, type: 3}
+  - {fileID: 21300000, guid: 42eae56f026b8429c8e58492df88b439, type: 3}
+  - {fileID: 21300000, guid: 8f3935b82c4aa43d88654cc0f86e1c49, type: 3}
+  - {fileID: 21300000, guid: e234e251369eb47ccb3ddda1c81d421b, type: 3}
+  - {fileID: 21300000, guid: 2c8064dbfe997407eb2560d121d3bfba, type: 3}
+  - {fileID: 21300000, guid: 4a5752a77e29341aaaf2ed6183b7deca, type: 3}
+  - {fileID: 21300000, guid: e50553ebc71fb4f06bd84ca5657ba057, type: 3}
+  - {fileID: 21300000, guid: 35445ec98d8674aa39ecb2acedec3db6, type: 3}
+  - {fileID: 21300000, guid: 318b53ee0aa3c486184f39a0e32980ee, type: 3}
+  - {fileID: 21300000, guid: 5a4bfbe73610344e3b1ff4644bdee7e0, type: 3}
+  - {fileID: 21300000, guid: 53d2d9bdb0fd846d5b0a4091ff1916b3, type: 3}
+  - {fileID: 21300000, guid: 51dda9132b6c74ee0b47d43ed3a6a124, type: 3}
+  - {fileID: 21300000, guid: 2373bf74fecc644fb8089c5574cfae6e, type: 3}
+  - {fileID: 21300000, guid: 0da8751155f2046e3a16f87cc16d2d05, type: 3}
+  - {fileID: 21300000, guid: cc9dc7bef99f44b14a6d6a5103f347dc, type: 3}
+  - {fileID: 21300000, guid: 25037648e76b644c1996437036ddfa51, type: 3}
+  - {fileID: 21300000, guid: c6f65d9c201ad4113a1678ca687a536c, type: 3}
+  - {fileID: 21300000, guid: a10061cf20cc14d3ababfe13be2de467, type: 3}
+  - {fileID: 21300000, guid: 8cc7cc6744d994a71ad80d07fe8a8140, type: 3}
+  - {fileID: 21300000, guid: cf897640ebcce4d4a8c5e2addecc83d9, type: 3}
+  - {fileID: 21300000, guid: 0b0be5e93e92248f9be802e057977c0c, type: 3}
+  - {fileID: 21300000, guid: 48b05c822e8854de6b760e79e746f7c1, type: 3}
+  - {fileID: 21300000, guid: 26450c1aa8cd84e7ea0172e998b9318b, type: 3}
+  - {fileID: 21300000, guid: a93ad0a58821348caa5717135b8f219a, type: 3}
+  - {fileID: 21300000, guid: 5553d2413bdeb4a839bb796f611c2631, type: 3}
+  - {fileID: 21300000, guid: b33be7f87df774e99966e8834068d323, type: 3}
+  - {fileID: 21300000, guid: 4fb4a8c0e16704c808e87a056fc22470, type: 3}
+  - {fileID: 21300000, guid: 28df17002ef4844ba963b7bd6af78431, type: 3}
+  - {fileID: 21300000, guid: 9c9641abb231249a0b985ef09844ecfd, type: 3}
+  - {fileID: 21300000, guid: 7cf169531884d435b93f2764ed13c085, type: 3}
+  - {fileID: 21300000, guid: 81ffd1b78820a43f6aa1d80cb88374a1, type: 3}
+  - {fileID: 21300000, guid: 47351fdc7c2424d78921a7d2b0c0234f, type: 3}
+  - {fileID: 21300000, guid: d7049f48a1d894333b67eb5f8b9e5f79, type: 3}
+  imageToOverwrite: {fileID: 946525667442883718}
+  playOnStart: 0
+  onDoneEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  duration: 2
 --- !u!1 &1587159038418092467
 GameObject:
   m_ObjectHideFlags: 0

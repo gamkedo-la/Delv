@@ -16,7 +16,7 @@ public class UxMainMenu : UxPanel {
 
     [Header("Scroll Animation")]
     public RectTransform scrollImagePanel;
-    public VideoClip scrollVideoClip;
+    public ImageAnimator scrollAnimator;
     public float fadeInTime = 1.5f;
 
     // Fmod UI sounds
@@ -44,7 +44,7 @@ public class UxMainMenu : UxPanel {
         quitButton.onClick.AddListener(OnQuitClick);
         SetState();
         Display();
-        if (scrollImagePanel != null && scrollVideoClip != null)
+        if (scrollAnimator != null)
         {
             ScrollAnimate();
         }
@@ -69,7 +69,6 @@ public class UxMainMenu : UxPanel {
         if (dialogueCanvasGo != null) {
             dialogueCanvasGo.SetActive(true);
         }
-        dialogueCanvasGo.SetActive(false);
         if (gameManager != null) {
             gameManager.StartTheGame();
         }
@@ -114,41 +113,18 @@ public class UxMainMenu : UxPanel {
         Application.Quit();
     }
 
-    public void ScrollLinkTexture() {
-        // destroy any current image linked to the panel
-        var image = scrollImagePanel.GetComponent<Image>();
-        if (image != null) {
-            DestroyImmediate(image);
-        }
-        // create rendertexture, matching size of panel
-        renderTexture = new RenderTexture((int)scrollImagePanel.rect.width, (int)scrollImagePanel.rect.height, 24);
-        // add new raw image
-        var rawImage = scrollImagePanel.gameObject.AddComponent<RawImage>();
-        rawImage.texture = renderTexture;
-        // setup separate canvas group for scroll image
+    public void ScrollAnimate() {
+        // setup image to not follow parent canvas group (i.e.: so it won't get hidden)
         var localCanvasGroup = scrollImagePanel.gameObject.AddComponent<CanvasGroup>();
         localCanvasGroup.ignoreParentGroups = true;
-    }
-
-    public void ScrollSetupVideo() {
-        videoPlayer = gameObject.AddComponent<VideoPlayer>();
-        videoPlayer.isLooping = false;
-        videoPlayer.renderMode = VideoRenderMode.RenderTexture;
-        videoPlayer.clip = scrollVideoClip;
-        videoPlayer.targetTexture = renderTexture;
-        videoPlayer.loopPointReached += OnVideoClipEnd;
-        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/MenuIntro_Scroll");
-    }
-
-    void OnVideoClipEnd(VideoPlayer player) {
-        FadeIn(fadeInTime);
-    }
-
-    public void ScrollAnimate() {
         // Hide the main panel
         Hide();
-        ScrollLinkTexture();
-        ScrollSetupVideo();
+        // setup the scroll animator... when animation is done, fade the main menu back in
+        scrollAnimator.onDoneEvent.AddListener(() => FadeIn(fadeInTime));
+        // queue audio
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/MenuIntro_Scroll");
+        // queue video
+        scrollAnimator.PlayOn(scrollImagePanel.GetComponent<Image>());
 
     }
 
