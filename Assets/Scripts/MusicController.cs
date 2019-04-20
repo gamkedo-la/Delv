@@ -15,6 +15,7 @@ public class MusicController : MonoBehaviour
 
     public EnemyCheck enemyCheck;
     public PlayerController playerController;
+    public GameObject gameOverUX;
     Scene m_Scene;
     private bool gameStarted = false;
 
@@ -23,6 +24,7 @@ public class MusicController : MonoBehaviour
         musicEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
         //musicEv = FMODUnity.RuntimeManager.CreateInstance(Music);
         enemyCheck.GetComponent<EnemyCheck>();
+        //gameOverCondition = GetComponent<GameOverConditionScript>();
     }
 
     private void Update()
@@ -51,7 +53,7 @@ public class MusicController : MonoBehaviour
     {
         if (gameStarted)
         {
-            if (m_Scene.name == "MainMenu")
+            if (m_Scene.name == "MainMenu" || gameOverUX.activeInHierarchy)
             {
                 gameStarted = false;
                 musicEmitter.Stop();
