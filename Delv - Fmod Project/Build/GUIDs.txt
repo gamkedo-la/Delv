@@ -1,0 +1,45 @@
+{fb8fdc7a-a274-4962-99d7-776a220a66bc} event:/Enemies/Slime/Baby_Slime_Death
+{1e2070b6-a59b-47e0-b9f7-a71361f5c1b9} event:/Enemies/Slime/Baby_Slime_Movement
+{d88da07e-0910-4a97-9cce-dfeba5997714} event:/Enemies/Slime/Big_Slime_Death
+{88e628e2-ba95-4291-a124-b29584fdf243} event:/Enemies/Slime/Big_Slime_Movement
+{e2bec99e-bed3-4ace-8473-6e2eb18711b5} event:/Enemies/enemy_spawn
+{637ef6f6-4b21-4528-8956-5beb52fd8803} event:/Environment/Amb_Cave
+{0cf59c94-9017-4ee5-998f-6437a603254e} event:/Environment/Amb_Cemetery
+{1fa393f8-9b5b-4cd3-b6ac-5850980ecfe0} event:/Environment/Amb_Forest
+{37900725-8589-4fa9-b996-cda68ce1fc5b} event:/Environment/Amb_Village
+{148bbcd2-c0d3-4d02-8242-ee21c459260b} event:/Music/GameOver
+{12380457-3291-4ce6-96dc-5750ad590f8d} event:/Music/Misty Music
+{c324fd75-aba2-4d6b-9fc7-0d38b1ab55b6} event:/Music/music test
+{6fbb972a-4eed-4c7c-a259-60426bdf7c9c} event:/Music/Music Village
+{2ed90196-95f3-4b22-b049-46d86f997e27} event:/Objects/pickup_potion
+{0185e5cb-3845-422c-83da-cdba3a9a64ef} event:/Objects/wood_box_break
+{149cbf45-1cdb-4410-8172-f47777a59b17} event:/Player/Weapons/fire_wand/firewand_explosion
+{4153e5f8-e8a1-4f08-a640-fbcd0b7f1753} event:/Player/Weapons/fire_wand/firewand_oneshot
+{26372cef-5908-48f5-8fb2-8ce3002640d1} event:/Player/Weapons/fire_wand/firewand_spray
+{698eda58-cea9-4456-ae11-1f50870503db} event:/Player/Weapons/lightning_staff_shot
+{b2f08277-4ae7-4346-9ce6-d6c8e2228543} event:/Player/Weapons/weapon_switch
+{1bc0dbd3-2bc3-4fa4-8701-2de573c678d3} event:/Player/player_damaged
+{a2d52b70-b288-486f-8feb-367eae1ce715} event:/Player/player_damaged_ooze
+{87f624b6-928c-4c2f-b163-fcd044d023dc} event:/Player/player_death
+{11b2d08a-0044-4429-86c9-cb20efa67e20} event:/Player/player_footsteps
+{e6b2bee7-fc3d-4d89-a438-c14081f6150c} event:/Player/player_stairs
+{be040680-f712-4887-bc36-c92d6cb90295} event:/UI/MainMenuClose
+{f2417f7d-3258-482a-b917-ff5681d13fd9} event:/UI/MainMenuOpen
+{cc6c53d2-6731-48cc-86c5-18a288fb3ac6} event:/UI/MenuIntro_Scroll
+{1f32e041-ed38-4223-a6b9-161ad6e3b484} event:/UI/Mouseover
+{8701d4cf-689c-43c5-b758-736a1a499c9c} event:/UI/Select
+{12439645-95dc-43bd-81a1-c9ab9e5d17dd} event:/Dialogue
+{39f8a300-3222-4729-a022-5497517be20c} event:/Make sure to have the latest version of the project! use 'git pull' to update the entire repository!
+{8a662e76-32f4-48e6-9af0-7b7e11069ffd} bus:/
+{6cc0b4e9-42c2-49f3-9e13-68b22106e81b} bus:/Master
+{8035b52c-b71e-49fd-af7b-4f786eb02ae8} bus:/Master/AllSFX
+{90d15435-24ee-4e38-8ef3-389b622697b1} bus:/Master/AllSFX/SFX
+{6cf44c19-fa20-4117-9a49-403dd49c2413} bus:/Master/AllSFX/SFX/Ambient
+{41f48242-7838-4e47-83e5-2fa56faa2089} bus:/Master/AllSFX/SFX/Player
+{2428b9b2-91a2-4010-8e89-59079d889d82} bus:/Master/AllSFX/UI
+{3fc84e0d-2ed5-440b-8a6f-07715c1b5b37} bus:/Master/Music
+{c1a9f055-7c32-485b-9604-dbe86a2dc454} bus:/Master/Reverb_Environments
+{f1ac4372-39d2-41fc-911e-775fa0064c74} bus:/Master/Village_Forest
+{9eca1c39-f349-4511-93dc-c9422b8c9e37} snapshot:/Snap_Cave_Reverb
+{dad98494-d3ae-4d3e-b568-b594d1e00241} snapshot:/Main_Menu_LPF
+{7c194d21-a2d2-45d3-bc02-acadc45547be} bank:/Master Bank
