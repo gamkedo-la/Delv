@@ -3385,9 +3385,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae01a89be2d317419ed7ee142711346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Music: event:/Music/Music test
   enemyCheck: {fileID: 1670139683367789861}
   playerController: {fileID: 7120658595487725230}
+  gameOverUX: {fileID: 1866606762399114135, guid: 4c4f311ccb2624440a1183a3376bb5ac,
+    type: 3}
 --- !u!114 &7380902546327251592
 MonoBehaviour:
   m_ObjectHideFlags: 0
