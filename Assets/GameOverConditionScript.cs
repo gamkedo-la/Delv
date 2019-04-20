@@ -8,18 +8,25 @@ public class GameOverConditionScript : MonoBehaviour
 	public GameObject gameOverUX;
 	TimeManager timeManager;
 
-	void Start()
+    public const string gameOverMusicEvent = "event:/Music/GameOver";
+
+    void Start()
     {
 		timeManager = TimeManager.instance;
     }
-	
+
     void Update()
     {
-		if ((players[0].activeSelf == false || players[0].GetComponent<PlayerController>().Health <= 0f)
-		&& (players[1].activeSelf == false || players[1].GetComponent<PlayerController>().Health <= 0f))
-		{
-			gameOverUX.SetActive(true);
-			timeManager.gameIsPaused = true;
-		}
+        if(!gameOverUX.active)
+        {
+            if ((players[0].activeSelf == false || players[0].GetComponent<PlayerController>().Health <= 0f)
+            && (players[1].activeSelf == false || players[1].GetComponent<PlayerController>().Health <= 0f))
+            {
+                gameOverUX.SetActive(true);
+                timeManager.gameIsPaused = true;
+                FMODUnity.RuntimeManager.PlayOneShot(gameOverMusicEvent, transform.position);
+            }
+        }
+
     }
 }
