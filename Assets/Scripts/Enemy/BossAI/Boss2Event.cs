@@ -82,11 +82,7 @@ public class Boss2Event : MonoBehaviour
 	{
 		anim.SetBool("Cutscene", false);
 		anim.SetInteger("AttackPhase", 0);
-
-		//TEMP: Put all in state behavior (animator graph) and animator has to be enabled
-		//Without this line, transforms of MegaWorms are not moveable
-		//anim.enabled = false;
-
+		
 		cutsceneStarted = false;
 
 		C2D.enabled = true;

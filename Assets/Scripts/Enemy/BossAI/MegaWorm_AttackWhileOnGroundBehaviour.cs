@@ -40,7 +40,9 @@ public class MegaWorm_AttackWhileOnGroundBehaviour : StateMachineBehaviour
 		redCollider = bossEvent.brains[0].gameObject.GetComponent<BoxCollider2D>();
 		blueCollider = bossEvent.brains[1].gameObject.GetComponent<BoxCollider2D>();
 		greenCollider = bossEvent.brains[2].gameObject.GetComponent<BoxCollider2D>();
-		
+
+		MegaWormBrain.ResetDamageCounter();
+
 		if (!done)
 		{
 			bossEvent.brains[0].InitHP();

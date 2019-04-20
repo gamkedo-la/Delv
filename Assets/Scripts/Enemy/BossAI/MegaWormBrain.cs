@@ -20,6 +20,11 @@ public class MegaWormBrain : MonoBehaviour
 	public float startDelay = 0.25f;
 	public float attackDelay = 0.25f;
 
+	[Header("Aggressive Settings")]
+	public float attackSpeed = 10f;
+	public float variationAngle = 50f;
+	public float maxAttackDelay = 0.25f;
+
 	[Header("Playful Settings")]
 	public float playfulMaxGap = 10f;
 	public float playfulMinGap = 5f;
@@ -102,15 +107,26 @@ public class MegaWormBrain : MonoBehaviour
 					HeadAni.SetBool("Dead", true);
 					Destroy(HealthBar);
 					BossEvent.SetupDeathCutscene();
+					MegaWormDarkMode.TurnOff();
 					returnToVillageEvent.Trigger();
 				}
 			}
-			else if (HP <= MaxHP / 1.25f)
+			else if (HP <= MaxHP / 3f)
+			{
+				if (HeadAni.GetInteger("AttackPhase") != 2)
+				{
+					BossEvent.stateChanged = true;
+					HeadAni.SetInteger("AttackPhase", 2);
+					MegaWormDarkMode.TurnOn();
+				}
+			}
+			else if (HP <= MaxHP / 1.5f)
 			{
 				if (HeadAni.GetInteger("AttackPhase") != 1)
 				{
 					BossEvent.stateChanged = true;
 					HeadAni.SetInteger("AttackPhase", 1);
+					MegaWormDarkMode.TurnOn();
 				}
 			}
 		}
@@ -138,15 +154,7 @@ public class MegaWormBrain : MonoBehaviour
 
 		players = GameObject.FindGameObjectsWithTag("Player");
 
-		if (players.Length <= 1)
-		{
-			playerToAttackIndex = 0;
-			alternate = false;
-		}
-		else if (alternate)
-		{
-			playerToAttackIndex = (playerToAttackIndex == 0 ? 1 : 0);
-		}
+		SwitchPlayerTarget();
 
 		playfulGap = playfulMaxGap;
 
@@ -156,33 +164,34 @@ public class MegaWormBrain : MonoBehaviour
 
 	public void BrainUpdate()
 	{
+		if (players.Length > 1)
+		{
+			if (players[playerToAttackIndex].GetComponent<PlayerController>().Health <= 0f)
+				playerToAttackIndex = (playerToAttackIndex == 0 ? 1 : 0);
+		}
+
 		if (startDelay <= 0f)
 		{
 			if (personality == PersonalityTraits.Aggressive)
 			{
-				if (target == Vector2.zero)
+				if (start)
 				{
-					target = players[playerToAttackIndex].transform.position;
+					attackAngle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+					transform.position = target + new Vector2(initialDistance * Mathf.Cos(attackAngle), initialDistance * Mathf.Sin(attackAngle));
+					head.transform.position = transform.position;
 
-					if (start)
-					{
-						attackAngle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-						transform.position = target + new Vector2(initialDistance * Mathf.Cos(attackAngle), initialDistance * Mathf.Sin(attackAngle));
-						head.transform.position = transform.position;
+					bodyTrail.Clear();
+					dugSlideTrail.Clear();
 
-						bodyTrail.Clear();
-						dugSlideTrail.Clear();
+					start = false;
 
-						start = false;
-					}
-
-					attackTimer = attackDelay;
+					attackTimer = Random.Range(attackDelay, maxAttackDelay);
 				}
 				else if (Vector2.Distance(transform.position, target) < minimumDistance)
 				{
 					if (!goneFar)
 					{
-						attackAngle += (Random.Range(-90f, 90f) * Mathf.Deg2Rad);
+						attackAngle += (Random.Range(-variationAngle, variationAngle) * Mathf.Deg2Rad);
 
 						if (alternateAngles)
 							target -= new Vector2(initialDistance * Mathf.Cos(attackAngle), initialDistance * Mathf.Sin(attackAngle));
@@ -196,12 +205,20 @@ public class MegaWormBrain : MonoBehaviour
 					else
 					{
 						goneFar = false;
-						target = Vector3.zero;
+						target = Vector2.zero;
+
+						attackTimer = Random.Range(attackDelay, maxAttackDelay);
 					}
 				}
 				else if (attackTimer <= 0f)
 				{
-					transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+					if (target == Vector2.zero)
+					{
+						target = players[playerToAttackIndex].transform.position;
+						SwitchPlayerTarget();
+					}
+					
+					transform.position = Vector2.MoveTowards(transform.position, target, (goneFar ? speed : attackSpeed) * Time.deltaTime);
 				}
 
 				attackTimer -= Time.deltaTime;
@@ -356,8 +373,22 @@ public class MegaWormBrain : MonoBehaviour
 			}
 		}
 		damageCounter++;
+		BossEvent.CameraShake();
 	}
 
 	static public int GetDamageCounter() { return damageCounter; }
 	static public void ResetDamageCounter() { damageCounter = 0; }
+
+	public void SwitchPlayerTarget()
+	{
+		if (players.Length <= 1)
+		{
+			playerToAttackIndex = 0;
+			alternate = false;
+		}
+		else if (alternate)
+		{
+			playerToAttackIndex = (playerToAttackIndex == 0 ? 1 : 0);
+		}
+	}
 }

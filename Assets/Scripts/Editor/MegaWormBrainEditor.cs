@@ -21,7 +21,13 @@ public class MegaWormBrainEditor : Editor
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("startDelay"));
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("attackDelay"));
 
-		if (personalityProperty.enumValueIndex == 1)
+		if (personalityProperty.enumValueIndex == 0)
+		{
+			EditorGUILayout.PropertyField(serializedObject.FindProperty("attackSpeed"));
+			EditorGUILayout.PropertyField(serializedObject.FindProperty("variationAngle"));
+			EditorGUILayout.PropertyField(serializedObject.FindProperty("maxAttackDelay"));
+		}
+		else if (personalityProperty.enumValueIndex == 1)
 		{
 			EditorGUILayout.PropertyField(serializedObject.FindProperty("targetFollow"));
 			EditorGUILayout.PropertyField(serializedObject.FindProperty("lineShowDelay"));
