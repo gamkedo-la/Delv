@@ -80858,7 +80858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphaRate: 0.4
-  maxAlphaValue: 0.7
+  maxAlphaValue: 0.6
   minAlphaValue: 0.2
   wormGroup: {fileID: 1887020908}
 --- !u!95 &675520189
@@ -81014,7 +81014,7 @@ GameObject:
   - component: {fileID: 870392686}
   - component: {fileID: 870392690}
   m_Layer: 10
-  m_Name: RedWormTester
+  m_Name: WormTester
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81032,7 +81032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05468f871a292a42bde129bdeba0259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawDMG: 20
+  rawDMG: 25
   DamageDealt: 0
   TimeTilRedamage: 0.5
   RedamageClock: 0
@@ -81075,7 +81075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personality: 0
-  hitPoints: 2400
+  hitPoints: 1800
   initialDistance: 20
   speed: 13
   startDelay: 0.3
@@ -84281,7 +84281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphaRate: 0.4
-  maxAlphaValue: 0.7
+  maxAlphaValue: 0.6
   minAlphaValue: 0.2
   wormGroup: {fileID: 1887020908}
 --- !u!95 &1358978842
@@ -137885,8 +137885,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.78431374}
-      key1: {r: 1, g: 1, b: 1, a: 0.78431374}
+      key0: {r: 1, g: 1, b: 1, a: 0.627451}
+      key1: {r: 1, g: 1, b: 1, a: 0.627451}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -137901,7 +137901,7 @@ TrailRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
+      atime0: 193
       atime1: 55705
       atime2: 65535
       atime3: 0

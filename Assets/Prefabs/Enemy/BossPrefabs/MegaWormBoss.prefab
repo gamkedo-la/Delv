@@ -216,8 +216,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.7058824}
-      key1: {r: 1, g: 1, b: 1, a: 0.7058824}
+      key0: {r: 1, g: 1, b: 1, a: 0.627451}
+      key1: {r: 1, g: 1, b: 1, a: 0.627451}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -421,8 +421,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.7058824}
-      key1: {r: 1, g: 1, b: 1, a: 0.7058824}
+      key0: {r: 1, g: 1, b: 1, a: 0.627451}
+      key1: {r: 1, g: 1, b: 1, a: 0.627451}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -547,8 +547,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.7058824}
-      key1: {r: 1, g: 1, b: 1, a: 0.7058824}
+      key0: {r: 1, g: 1, b: 1, a: 0.627451}
+      key1: {r: 1, g: 1, b: 1, a: 0.627451}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1953,7 +1953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personality: 0
-  hitPoints: 2100
+  hitPoints: 1800
   initialDistance: 20
   speed: 13
   startDelay: 0.3
@@ -2013,7 +2013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05468f871a292a42bde129bdeba0259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawDMG: 20
+  rawDMG: 25
   DamageDealt: 0
   TimeTilRedamage: 0.5
   RedamageClock: 0
@@ -2068,7 +2068,7 @@ MonoBehaviour:
   personality: 1
   hitPoints: 1000
   initialDistance: 34
-  speed: 62
+  speed: 66
   startDelay: 0.5
   attackDelay: 0.5
   attackSpeed: 10
@@ -2319,7 +2319,6 @@ MonoBehaviour:
   wormHole: {fileID: 4022746421643182663, guid: a0923eeab8ae8934e91c522cac5ec084,
     type: 3}
   holeOffset: {x: 0, y: -5.5, z: 0}
-  stateChanged: 0
 --- !u!95 &5961506376143629543
 Animator:
   serializedVersion: 3

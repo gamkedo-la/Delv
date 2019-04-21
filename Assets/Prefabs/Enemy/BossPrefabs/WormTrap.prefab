@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 9a402eacb639b1542a53ae4f601c8a8a, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.5882353}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -121,8 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 7652946447298302813, guid: 310f2a786179b6b4cafce23e07775951,
     type: 3}
-  maxAlpha: 0.5
+  maxAlpha: 0.3
   maxSize: 100
-  alphaRate: 0.2
+  alphaRate: 0.1
   sizeRate: 12
-  deathDelay: 30
+  deathDelay: 20

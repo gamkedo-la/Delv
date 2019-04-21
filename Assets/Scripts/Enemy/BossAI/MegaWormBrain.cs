@@ -102,8 +102,6 @@ public class MegaWormBrain : MonoBehaviour
 			{
 				if (!HeadAni.GetBool("Dead"))
 				{
-					BossEvent.stateChanged = true;
-
 					HeadAni.SetBool("Dead", true);
 					Destroy(HealthBar);
 					BossEvent.SetupDeathCutscene();
@@ -115,7 +113,6 @@ public class MegaWormBrain : MonoBehaviour
 			{
 				if (HeadAni.GetInteger("AttackPhase") != 2)
 				{
-					BossEvent.stateChanged = true;
 					HeadAni.SetInteger("AttackPhase", 2);
 					MegaWormDarkMode.TurnOn();
 				}
@@ -124,7 +121,6 @@ public class MegaWormBrain : MonoBehaviour
 			{
 				if (HeadAni.GetInteger("AttackPhase") != 1)
 				{
-					BossEvent.stateChanged = true;
 					HeadAni.SetInteger("AttackPhase", 1);
 					MegaWormDarkMode.TurnOn();
 				}
@@ -261,17 +257,20 @@ public class MegaWormBrain : MonoBehaviour
 						sharpLineRenderer.SetPosition(0, transform.position);
 
 						sharpLineRenderer.SetPosition(1, transform.position + new Vector3((initialDistance * 2f) * Mathf.Cos(angle), (initialDistance * 2f) * Mathf.Sin(angle), 0f));
+						
+						GetComponent<BoxCollider2D>().enabled = false;
 
 						followTimer -= Time.deltaTime;
 
 						if (followTimer <= 0f)
 						{
+							GetComponent<BoxCollider2D>().enabled = true;
+
 							target = new Vector2(
 								transform.position.x + ((initialDistance * 2f) * Mathf.Cos(angle)),
 								transform.position.y + ((initialDistance * 2f) * Mathf.Sin(angle))
 								);
 						}
-
 					}
 					else if (lineTimer > 0f)
 					{

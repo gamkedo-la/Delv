@@ -27,9 +27,7 @@ public class Boss2Event : MonoBehaviour
 	private bool releaseCamera = false;
 	private bool cutsceneStarted = false; //sync with animator "Cutscene" bool property
 	private bool cutsceneDone = false;
-
-	[HideInInspector] public bool stateChanged = false;
-
+	
 	void Start()
 	{
 		CamParent = GameObject.Find("CamParent");
@@ -122,19 +120,7 @@ public class Boss2Event : MonoBehaviour
 		releaseCamera = true;
 		C2D.enabled = false;
 	}
-
-	public void EndVulnerableStateOnStateChange()
-	{
-		if (stateChanged)
-			anim.SetBool("VulnerableSwitch", false);
-		stateChanged = false;
-	}
-
-	public void EndVulnerableState()
-	{
-		anim.SetBool("VulnerableSwitch", false);
-	}
-
+	
 	public void WormHoles()
 	{
 		for(int i = 0; i < brains.Length; i++)
