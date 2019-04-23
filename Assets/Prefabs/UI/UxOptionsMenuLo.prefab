@@ -955,7 +955,7 @@ RectTransform:
   m_GameObject: {fileID: 4284848275337499145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.4, y: 3.1, z: 1}
+  m_LocalScale: {x: 3.4, y: 2.25, z: 1}
   m_Children: []
   m_Father: {fileID: 4537608104788900483}
   m_RootOrder: 0
@@ -995,7 +995,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 2eeeda60dcb8b44f0b401d7f5996ed60, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3601,6 +3601,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: SFXVolumeSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8978355263898013824, guid: 5218b9c5292d941bfb1172a46e1c3a48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3705,31 +3730,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5218b9c5292d941bfb1172a46e1c3a48, type: 3}
@@ -3763,6 +3763,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainVolumeSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8978355263898013824, guid: 5218b9c5292d941bfb1172a46e1c3a48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3867,31 +3892,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5218b9c5292d941bfb1172a46e1c3a48, type: 3}
@@ -3925,6 +3925,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicVolumeSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8978355263898013824, guid: 5218b9c5292d941bfb1172a46e1c3a48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4029,31 +4054,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918537151379566265, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8357173674911102107, guid: 5218b9c5292d941bfb1172a46e1c3a48,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5218b9c5292d941bfb1172a46e1c3a48, type: 3}
