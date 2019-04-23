@@ -28,7 +28,7 @@ public class ImageAnimator: MonoBehaviour {
 		while (Time.time < endTime) {
 			var index = Mathf.FloorToInt((Time.time - startTime)/duration*numSprites);
 			imageToOverwrite.sprite = sprites[index];
-			imageToOverwrite.preserveAspect = true;
+			//imageToOverwrite.preserveAspect = true;
 			frame++;
 			yield return null;
 		}
