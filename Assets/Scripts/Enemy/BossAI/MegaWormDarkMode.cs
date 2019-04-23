@@ -27,27 +27,33 @@ public class MegaWormDarkMode : MonoBehaviour
 	
     void Update()
     {
-		if (wormGroup.activeSelf && toggleState)
+		if (wormGroup != null)
 		{
-			float alpha = sprRend.color.a;
-			if (alpha < maxAlphaValue)
+			if (wormGroup.activeSelf)
 			{
-				alpha += alphaRate * Time.deltaTime;
-				sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
-			}
-		}
-		else if (wormGroup != null && wormGroup.activeSelf)
-		{
-			float alpha = sprRend.color.a;
-			if (alpha > minAlphaValue)
-			{
-				alpha -= alphaRate * Time.deltaTime;
-				sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
-			}
-			else if (alpha < minAlphaValue)
-			{
-				alpha += alphaRate * Time.deltaTime;
-				sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
+				if (toggleState)
+				{
+					float alpha = sprRend.color.a;
+					if (alpha < maxAlphaValue)
+					{
+						alpha += alphaRate * Time.deltaTime;
+						sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
+					}
+				}
+				else
+				{
+					float alpha = sprRend.color.a;
+					if (alpha > minAlphaValue)
+					{
+						alpha -= alphaRate * Time.deltaTime;
+						sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
+					}
+					else if (alpha < minAlphaValue)
+					{
+						alpha += alphaRate * Time.deltaTime;
+						sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
+					}
+				}
 			}
 		}
 		else
@@ -57,6 +63,12 @@ public class MegaWormDarkMode : MonoBehaviour
 			{
 				alpha -= alphaRate * Time.deltaTime;
 				sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
+			}
+			else
+			{
+				Destroy(gameObject);
+				if (transform.parent.gameObject.name.Contains("Offset"))
+					Destroy(transform.parent.gameObject);
 			}
 		}
     }

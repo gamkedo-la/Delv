@@ -1664,7 +1664,8 @@ MonoBehaviour:
   playerToAttackIndex: 1
   alternate: 1
   main: 0
-  DamagedParticle: {fileID: 0}
+  DamagedParticle: {fileID: 2494620566789650352, guid: 321ac28a0d457264188a8aa239bfee2c,
+    type: 3}
   HeadAni: {fileID: 5961506376143629543}
   HealthBar: {fileID: 782145492}
 --- !u!61 &1464597177
@@ -1953,7 +1954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personality: 0
-  hitPoints: 1800
+  hitPoints: 1500
   initialDistance: 20
   speed: 13
   startDelay: 0.3
@@ -1972,7 +1973,8 @@ MonoBehaviour:
   playerToAttackIndex: 0
   alternate: 1
   main: 1
-  DamagedParticle: {fileID: 0}
+  DamagedParticle: {fileID: 2494620566789650352, guid: 321ac28a0d457264188a8aa239bfee2c,
+    type: 3}
   HeadAni: {fileID: 5961506376143629543}
   HealthBar: {fileID: 782145492}
 --- !u!61 &135278971
@@ -2085,7 +2087,8 @@ MonoBehaviour:
   playerToAttackIndex: 0
   alternate: 1
   main: 0
-  DamagedParticle: {fileID: 0}
+  DamagedParticle: {fileID: 2494620566789650352, guid: 321ac28a0d457264188a8aa239bfee2c,
+    type: 3}
   HeadAni: {fileID: 5961506376143629543}
   HealthBar: {fileID: 782145492}
 --- !u!61 &749292275
@@ -2319,6 +2322,7 @@ MonoBehaviour:
   wormHole: {fileID: 4022746421643182663, guid: a0923eeab8ae8934e91c522cac5ec084,
     type: 3}
   holeOffset: {x: 0, y: -5.5, z: 0}
+  deathCutscene: {fileID: 0}
 --- !u!95 &5961506376143629543
 Animator:
   serializedVersion: 3

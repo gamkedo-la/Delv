@@ -20,6 +20,8 @@ public class Boss2Event : MonoBehaviour
 	public GameObject wormHole;
 	public Vector3 holeOffset;
 
+	public GameObject deathCutscene;
+	
 	private Camera cam;
 	private CameraShake camShake;
 
@@ -27,7 +29,9 @@ public class Boss2Event : MonoBehaviour
 	private bool releaseCamera = false;
 	private bool cutsceneStarted = false; //sync with animator "Cutscene" bool property
 	private bool cutsceneDone = false;
-	
+
+	private float deathCutsceneTimer = -10f;
+
 	void Start()
 	{
 		CamParent = GameObject.Find("CamParent");
@@ -60,6 +64,14 @@ public class Boss2Event : MonoBehaviour
 		{
 			cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, prevCamSize, 2.5f * Time.deltaTime);
 		}
+
+		if (deathCutsceneTimer > -1f)
+		{
+			if (deathCutsceneTimer <= 0f)
+				CutsceneEnd();
+			else
+				deathCutsceneTimer -= Time.deltaTime;
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -87,7 +99,7 @@ public class Boss2Event : MonoBehaviour
 		releaseCamera = false;
 		cutsceneDone = true;
 
-		if(hpBar)
+		if (hpBar)
 			hpBar.SetActive(true);
 
 		if (anim.GetBool("Dead"))
@@ -119,6 +131,9 @@ public class Boss2Event : MonoBehaviour
 
 		releaseCamera = true;
 		C2D.enabled = false;
+
+		deathCutscene.SetActive(true);
+		deathCutsceneTimer = 3f;
 	}
 	
 	public void WormHoles()

@@ -103,9 +103,9 @@ BoxCollider2D:
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
-  m_AutoTiling: 1
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 2}
+  m_Size: {x: 0.0001, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &7476865599162623861
 MonoBehaviour:
@@ -123,6 +123,6 @@ MonoBehaviour:
     type: 3}
   maxAlpha: 0.3
   maxSize: 100
-  alphaRate: 0.1
-  sizeRate: 12
-  deathDelay: 20
+  alphaRate: 0.12
+  sizeRate: 13
+  deathDelay: 16
