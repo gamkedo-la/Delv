@@ -23,6 +23,7 @@ public class BigBones : MonoBehaviour
     public EnemyManager Spawner3;
     public EnemyManager Spawner4;
     public SpriteRenderer ShieldVisuals;
+    public ReturnToVillageEvent RTV;
 
 	[Space]
 	//Part Directors
@@ -60,6 +61,7 @@ public class BigBones : MonoBehaviour
 				HeadAni.SetBool("Dead", true);
 				Destroy(HealthBar);
 				BossEvent.SetupDeathCutscene();
+                RTV.SendMessage("Trigger");
 			}
 		}
 		else if (HP <= MaxHP / 3f)

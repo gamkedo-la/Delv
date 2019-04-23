@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="EffectPreset" id="{b7ac6c08-7b9b-4eb1-b3fd-2b15afebd6e9}">
+        <property name="name">
+            <value>Enemy Distance</value>
+        </property>
+        <relationship name="folder">
+            <destination>{ca542601-f1a9-41b2-89e5-ddda046479e0}</destination>
+        </relationship>
+        <relationship name="effect">
+            <destination>{edbffb64-d7dd-4697-83c3-a27c282d74fa}</destination>
+        </relationship>
+    </object>
+    <object class="SpatialiserEffect" id="{edbffb64-d7dd-4697-83c3-a27c282d74fa}">
+        <property name="minimumDistance">
+            <value>4.20000029</value>
+        </property>
+        <property name="maximumDistance">
+            <value>30</value>
+        </property>
+        <property name="extentMode">
+            <value>1</value>
+        </property>
+        <property name="soundSize">
+            <value>3</value>
+        </property>
+        <property name="minimumExtent">
+            <value>40</value>
+        </property>
+    </object>
+</objects>

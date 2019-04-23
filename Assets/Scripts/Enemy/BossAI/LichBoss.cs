@@ -15,7 +15,7 @@ public class LichBoss : MonoBehaviour
     public bool isDying;
     [Space]
     //General Directors
-    public Animator HeadAni;
+    public Animator LichAni;
     public GameObject HealthBar;
     public GameObject DamagedParticle;
     public EnemyManager Spawner1;
@@ -26,11 +26,8 @@ public class LichBoss : MonoBehaviour
 
     [Space]
     //Part Directors
-    public GameObject Head;
-    public GameObject Fist1;
-    public GameObject Fist2;
 
-    private BossEvent BossEvent;
+    private BossEventLich BossEvent;
 	private ReturnToVillageEvent returnToVillageEvent;
 
 
@@ -39,8 +36,8 @@ public class LichBoss : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        BossEvent = HeadAni.gameObject.GetComponent<BossEvent>();
-		returnToVillageEvent = HeadAni.gameObject.GetComponent<ReturnToVillageEvent>();
+        BossEvent = LichAni.gameObject.GetComponent<BossEventLich>();
+		returnToVillageEvent = LichAni.gameObject.GetComponent<ReturnToVillageEvent>();
     }
 
     // Update is called once per frame
@@ -55,11 +52,11 @@ public class LichBoss : MonoBehaviour
 
         if (HP <= 0f)
         {
-            if (!HeadAni.GetBool("Dead"))
+            if (!LichAni.GetBool("Dead"))
             {
                 BossEvent.stateChanged = true;
 
-                HeadAni.SetBool("Dead", true);
+                LichAni.SetBool("Dead", true);
                 Destroy(HealthBar);
                 BossEvent.SetupDeathCutscene();
                 returnToVillageEvent.Trigger();
@@ -67,12 +64,7 @@ public class LichBoss : MonoBehaviour
         }
         else if (HP <= MaxHP / 3f)
         {
-            if (!HeadAni.GetBool("RainFist"))
-            {
-                BossEvent.stateChanged = true;
-
-                HeadAni.SetBool("RainFist", true);
-            }
+            //rage mode
         }
     }
 
@@ -89,9 +81,6 @@ public class LichBoss : MonoBehaviour
         if (phasenumber == 1)
         {
             Debug.Log("Phase 1 active");
-            Fist1.SendMessage("Activate");
-            Fist2.SendMessage("Activate");
-            Spawner1.SendMessage("Activate");
 
         }
         if (phasenumber == 2)
@@ -217,6 +206,7 @@ public class LichBoss : MonoBehaviour
     void Activate()
     {
         NextPhase();
+        
     }
 
 }

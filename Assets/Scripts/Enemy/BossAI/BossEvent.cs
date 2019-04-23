@@ -150,4 +150,14 @@ public class BossEvent : MonoBehaviour
 	{
 		anim.SetBool("VulnerableSwitch", false);
 	}
+
+
+    public void VulnerableSoundStart()
+    {
+        Debug.Log("VULNERABLE FMOD EVENT START");
+    }
+    public void VulnerableSoundEnd()
+    {
+        Debug.Log("VULNERABLE FMOD EVENT END");
+    }
 }

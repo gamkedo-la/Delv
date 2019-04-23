@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class ReturnToVillageEvent : MonoBehaviour
 {
-    [SerializeField] GameObject toEnable;
+    [SerializeField] GameObject toSpawn;
+    [SerializeField] Transform where;
 
-    void Start()
-    {
-        toEnable.SetActive(false);
-    }
 
     public void Trigger()
     {
-        toEnable.SetActive(true);
+        Instantiate(toSpawn, where.position, where.rotation);
     }
 }
