@@ -150,6 +150,7 @@ public class AICompanion : MonoBehaviour
         }
 
         TargetGOs = GameObject.FindGameObjectsWithTag("Enemy");
+        TargetGOs = GameObject.FindGameObjectsWithTag("Breakable");
 
         CursorAim();
         AIMoveBasedOnState();
