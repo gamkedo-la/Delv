@@ -97,9 +97,6 @@
         </relationship>
     </object>
     <object class="GroupTrack" id="{6e535732-083b-482c-8811-704e036d1852}">
-        <relationship name="modules">
-            <destination>{78c1cced-4c45-486f-8297-58aca779007c}</destination>
-        </relationship>
         <relationship name="mixerGroup">
             <destination>{0ab9212c-17f4-4c6c-8eca-6c580a1ef0bc}</destination>
         </relationship>
@@ -110,7 +107,6 @@
             <destination>{f365ec59-06aa-4cea-a0df-5e403f806f0e}</destination>
             <destination>{fb48a69b-357f-4e4d-8b67-e381469f379b}</destination>
             <destination>{6549c500-8937-4c6b-92f1-bf01969c9c1d}</destination>
-            <destination>{78c1cced-4c45-486f-8297-58aca779007c}</destination>
         </relationship>
         <relationship name="markers">
             <destination>{563cdc1e-1da6-4fbc-933c-2c9da259e6f0}</destination>
@@ -121,7 +117,6 @@
             <destination>{bfd75d43-046d-4ff4-8178-623b977e5be0}</destination>
             <destination>{fbd689b4-3c7c-4c02-bf0c-d3d6baf5eca0}</destination>
             <destination>{92008213-30e7-4c26-8e6c-01c7f8a45fef}</destination>
-            <destination>{205057be-a695-47a4-b510-77ce6b54cee0}</destination>
         </relationship>
     </object>
     <object class="EventMixerMaster" id="{8e9c330f-59dc-486c-bd86-5035f9ecca22}">
@@ -286,20 +281,6 @@
             <destination>{8e9c330f-59dc-486c-bd86-5035f9ecca22}</destination>
         </relationship>
     </object>
-    <object class="SingleSound" id="{78c1cced-4c45-486f-8297-58aca779007c}">
-        <property name="start">
-            <value>320</value>
-        </property>
-        <property name="length">
-            <value>64.000000000000028</value>
-        </property>
-        <property name="color">
-            <value>Red</value>
-        </property>
-        <property name="name">
-            <value>Stinger</value>
-        </property>
-    </object>
     <object class="EventMixerGroup" id="{0ab9212c-17f4-4c6c-8eca-6c580a1ef0bc}">
         <property name="name">
             <value>Death</value>
@@ -336,7 +317,7 @@
             <value>52</value>
         </property>
         <property name="quantizationInterval">
-            <value>8</value>
+            <value>1</value>
         </property>
         <relationship name="triggerConditions">
             <destination>{00e3615a-73b5-43b7-97f4-df1fe78076ef}</destination>
@@ -387,7 +368,7 @@
             <value>163.19999999999999</value>
         </property>
         <property name="quantizationInterval">
-            <value>8</value>
+            <value>1</value>
         </property>
         <relationship name="triggerConditions">
             <destination>{04d62199-ccb2-42a6-b2a3-1ba245bdba17}</destination>
@@ -439,20 +420,6 @@
         </relationship>
         <relationship name="markerTrack">
             <destination>{8778faf7-7669-4fae-8478-e0aa0b4dbe0f}</destination>
-        </relationship>
-    </object>
-    <object class="NamedMarker" id="{205057be-a695-47a4-b510-77ce6b54cee0}">
-        <property name="position">
-            <value>320</value>
-        </property>
-        <property name="name">
-            <value>Player Death</value>
-        </property>
-        <relationship name="timeline">
-            <destination>{dd821a96-2484-4a00-bb6c-6bafa4a5a48b}</destination>
-        </relationship>
-        <relationship name="markerTrack">
-            <destination>{fdd72d2a-eca5-4b19-8e94-a4e8388bed38}</destination>
         </relationship>
     </object>
     <object class="ADSRModulator" id="{9519c8ec-27dd-43df-a4c0-f9ab84c0e593}">
