@@ -155,10 +155,10 @@
             <value>1</value>
         </property>
         <property name="minimumDistance">
-            <value>4</value>
+            <value>10</value>
         </property>
         <property name="maximumDistance">
-            <value>30</value>
+            <value>50</value>
         </property>
         <property name="extentMode">
             <value>1</value>
