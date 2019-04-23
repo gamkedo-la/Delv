@@ -24,6 +24,14 @@ public class DebugMode : MonoBehaviour
                 enemies.SendMessage("DamageHealth", 1000);
             }
         }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            player = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject players in player)
+            {
+                players.SendMessage("DamageHealth", -1000);
+            }
+        }
     }
 
 }
