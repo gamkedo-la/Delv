@@ -121,10 +121,10 @@ public class Boss2Event : MonoBehaviour
 		cutsceneStarted = false; //now it refers to Death Cutscene
 		cutsceneDone = false;
 
-		//Clearing all the zombies!
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		//Clearing all the worm traps!
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag("EnemyProjectile");
 		for (int i = 0; i < enemies.Length; i++)
-			if(enemies[i].name.Contains("Skeleton"))
+			if(enemies[i].name.Contains("WormTrap"))
 				Destroy(enemies[i]);
 
 		camSize = prevCamSize;
