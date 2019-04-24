@@ -95,6 +95,7 @@ public class HazardSpikes : MonoBehaviour
         isUp = true;
         spikesUp.SetActive(true);
         spikesDown.SetActive(false);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Hazards/Trap_spikes");
     }
 
     void DeactivateSpikes()

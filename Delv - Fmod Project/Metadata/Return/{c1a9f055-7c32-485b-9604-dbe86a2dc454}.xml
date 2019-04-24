@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.01.10.00">
     <object class="MixerReturn" id="{c1a9f055-7c32-485b-9604-dbe86a2dc454}">
-        <property name="volume">
-            <value>-80</value>
-        </property>
         <property name="name">
             <value>Reverb_Environments</value>
         </property>
