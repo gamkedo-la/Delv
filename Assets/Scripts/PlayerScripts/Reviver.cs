@@ -9,7 +9,7 @@ public class Reviver : MonoBehaviour
 
     [SerializeField] private GameObject hintCanvas;
 
-    private PlayerController player;
+	[SerializeField] private PlayerController player;
 
     private GameObject revivablePlayer;
 

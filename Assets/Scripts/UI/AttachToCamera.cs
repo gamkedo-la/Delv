@@ -15,8 +15,9 @@ public class AttachToCamera : MonoBehaviour
 	
     void Update()
     {
-		if(camObject == null) camObject = Camera.main.gameObject;
-
-		transform.position = new Vector3(camObject.transform.position.x + offset.x, camObject.transform.position.y + offset.y, transform.position.z);
+		if(camObject == null)
+			camObject = Camera.main.gameObject;
+		else
+			transform.position = new Vector3(camObject.transform.position.x + offset.x, camObject.transform.position.y + offset.y, transform.position.z);
 	}
 }

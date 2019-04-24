@@ -158,6 +158,70 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4578601141306638237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6048157856489367192}
+  - component: {fileID: 5279616202686173972}
+  - component: {fileID: 2178608683027063284}
+  m_Layer: 8
+  m_Name: Reviver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6048157856489367192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578601141306638237}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.019979954, y: 0.003037572, z: -0.0017833896}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8326915504889176791}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &5279616202686173972
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578601141306638237}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.06}
+  serializedVersion: 2
+  m_Radius: 0.6
+--- !u!114 &2178608683027063284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578601141306638237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5f1e71d897f4419acc934090826dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reviveCollider: {fileID: 5279616202686173972}
+  hintCanvas: {fileID: 7026832177298054325}
+  player: {fileID: 8447110967915570375}
+  p2: {fileID: 0}
 --- !u!1 &4989450562245121619
 GameObject:
   m_ObjectHideFlags: 0
@@ -5152,6 +5216,7 @@ MonoBehaviour:
   EnergyCost2: 0.2
   CastRange: 5
   ShockDamage: 15
+  Cost: 0
   ShotParticle: {fileID: 1348283218343394, guid: 34b108bc8446b214aa681d6841acc799,
     type: 3}
   ShotParticleSystem: {fileID: 0}
@@ -5198,7 +5263,6 @@ GameObject:
   - component: {fileID: 6865793445521304039}
   - component: {fileID: 6184906593308164609}
   - component: {fileID: 1286401164103740230}
-  - component: {fileID: 3728820590036001650}
   - component: {fileID: 4209987193203658507}
   - component: {fileID: 8447110967915570375}
   - component: {fileID: 7867596800732770562}
@@ -5208,7 +5272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8326915504889176791
 Transform:
   m_ObjectHideFlags: 0
@@ -5224,6 +5288,7 @@ Transform:
   - {fileID: 2605719790540124611}
   - {fileID: 5131764461234518477}
   - {fileID: 8452425297497726387}
+  - {fileID: 6048157856489367192}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5300,22 +5365,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5052662, y: 0.7664279}
   m_EdgeRadius: 0
---- !u!58 &3728820590036001650
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6300180896068623075}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.06}
-  serializedVersion: 2
-  m_Radius: 0.6
 --- !u!114 &4209987193203658507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5328,8 +5377,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d5f1e71d897f4419acc934090826dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reviveCollider: {fileID: 3728820590036001650}
+  reviveCollider: {fileID: 0}
   hintCanvas: {fileID: 7026832177298054325}
+  player: {fileID: 0}
   p2: {fileID: 0}
 --- !u!114 &8447110967915570375
 MonoBehaviour:
@@ -5411,7 +5461,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DEBUG_AI: 0
   AI: {fileID: 0}
-  aimCursor: {fileID: 7803608122810891690}
   Player: {fileID: 0}
   PlayerGO: {fileID: 0}
   distanceFromPlayer: 0
@@ -5421,7 +5470,12 @@ MonoBehaviour:
   hortNow: 0
   aimCursorX: 0
   aimCursorY: 0
+  currentAngle: 0
+  goalAngle: 0
+  angleDiff: 0
+  lerpAimingAngleDiff: 0
   following: 0
+  combatFollowing: 0
   meandering: 0
   idleTimer: 0
   arrivedAtMeanderDest: 0
@@ -5445,11 +5499,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   nearestResource: {fileID: 0}
-  currentAngle: 0
-  goalAngle: 0
-  angleDiff: 0
-  angleIncrement: 0
-  incrementedAngle: 0
+  distFromTarget: 0
+  targetDistFromPlayer: 0
 --- !u!1 &7026832177298054325
 GameObject:
   m_ObjectHideFlags: 0

@@ -79,7 +79,6 @@ GameObject:
   - component: {fileID: 50875821726787420}
   - component: {fileID: 61998830473389072}
   - component: {fileID: 61173257502566390}
-  - component: {fileID: 4141003162576322384}
   - component: {fileID: 7414737263110267811}
   - component: {fileID: 114375173384209822}
   m_Layer: 8
@@ -88,7 +87,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4810588144668864
 Transform:
   m_ObjectHideFlags: 0
@@ -104,7 +103,7 @@ Transform:
   - {fileID: 5453340515500779729}
   - {fileID: 2571330736216925109}
   - {fileID: 862569193091674863}
-  - {fileID: 7633131230057824895}
+  - {fileID: 5283995270032856042}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -181,22 +180,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5052662, y: 0.7664279}
   m_EdgeRadius: 0
---- !u!58 &4141003162576322384
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1115636747219654}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.06}
-  serializedVersion: 2
-  m_Radius: 0.6
 --- !u!114 &7414737263110267811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,8 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d5f1e71d897f4419acc934090826dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reviveCollider: {fileID: 4141003162576322384}
+  reviveCollider: {fileID: 0}
   hintCanvas: {fileID: 8845129880043249675}
+  player: {fileID: 0}
   p2: {fileID: 0}
 --- !u!114 &114375173384209822
 MonoBehaviour:
@@ -5495,7 +5479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!1 &6653024074337782541
+--- !u!1 &6701282798190924006
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5503,23 +5487,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7633131230057824895}
-  - component: {fileID: 8388651294381544981}
-  - component: {fileID: 6649406968201024720}
-  m_Layer: 0
-  m_Name: Music_Collider
+  - component: {fileID: 5283995270032856042}
+  - component: {fileID: 5733837497843863000}
+  - component: {fileID: 7713165406681283057}
+  m_Layer: 8
+  m_Name: Reviver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7633131230057824895
+--- !u!4 &5283995270032856042
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6653024074337782541}
+  m_GameObject: {fileID: 6701282798190924006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -5527,35 +5511,38 @@ Transform:
   m_Father: {fileID: 4810588144668864}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8388651294381544981
-MonoBehaviour:
+--- !u!58 &5733837497843863000
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6653024074337782541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a582b05a3381d47ad96ebaa4ff64c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyList: []
---- !u!70 &6649406968201024720
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6653024074337782541}
+  m_GameObject: {fileID: 6701282798190924006}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 20}
-  m_Direction: 1
+  m_Offset: {x: 0, y: -0.06}
+  serializedVersion: 2
+  m_Radius: 0.6
+--- !u!114 &7713165406681283057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6701282798190924006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5f1e71d897f4419acc934090826dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reviveCollider: {fileID: 5733837497843863000}
+  hintCanvas: {fileID: 8845129880043249675}
+  player: {fileID: 114375173384209822}
+  p2: {fileID: 0}
 --- !u!1 &8309397591232174056
 GameObject:
   m_ObjectHideFlags: 0

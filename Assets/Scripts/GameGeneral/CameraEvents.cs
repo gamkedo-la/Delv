@@ -54,7 +54,7 @@ public class CameraEvents : MonoBehaviour
         Debug.Log("StartNextEvent Fired");
         activated = true;
         _currentEvent++;
-        if (Events[_currentEvent].activateOnEventEnd != null)
+        if (_currentEvent < Events.Length && Events[_currentEvent].activateOnEventEnd != null)
         {
             GameObject ActivateTarget = Events[_currentEvent].activateOnEventEnd;
             ActivateTarget.SendMessage("Activate");
