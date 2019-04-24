@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour
     public GameObject CursorGO;
     [Space]
     public bool isDead = false;
+    private bool muteKeyPressed = false;
     [Space]
 
     [FMODUnity.EventRef]
@@ -348,10 +349,15 @@ public class PlayerController : MonoBehaviour
             ControllerSlot = 1;
         }
 
-        if (Input.GetKeyUp(KeyCode.M) && musicController != null)
+        if (Input.GetKeyDown(KeyCode.M) && !muteKeyPressed && PlayerIndex == 1)
         {
-            Debug.Log("Mute button pressed");
+            muteKeyPressed = true;
             musicController.changeMute();
+        }
+
+        if (Input.GetKeyUp(KeyCode.M) && PlayerIndex == 1)
+        {
+            muteKeyPressed = false;
         }
 
         /// MOVEMENT ITSELF

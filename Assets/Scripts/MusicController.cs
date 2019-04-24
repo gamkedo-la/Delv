@@ -60,20 +60,20 @@ public class MusicController : MonoBehaviour
         {
             if (mute)
             {
-                Debug.Log("Mute enabled");
                 if (!Mathf.Approximately(audioSettings.MasterVolume, 0))
                 {
                     beforeMuteMasterVolume = audioSettings.MasterVolume;
                     audioSettings.MasterVolumeLevel(0);
+                    Debug.Log("Mute enabled");
+                    Debug.Log("MasterVolume: " + audioSettings.MasterVolume);
                 }
-                Debug.Log("MasterVolume: " + audioSettings.MasterVolume);
             } 
             else
             {
-                Debug.Log("Mute disabled");
                 if (Mathf.Approximately(audioSettings.MasterVolume, 0))
                 {
                     audioSettings.MasterVolumeLevel(beforeMuteMasterVolume);
+                    Debug.Log("Mute disabled");
                     Debug.Log("MasterVolume: " + audioSettings.MasterVolume);
                 }
             }

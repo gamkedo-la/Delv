@@ -87,7 +87,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4810588144668864
 Transform:
   m_ObjectHideFlags: 0
@@ -261,6 +261,7 @@ MonoBehaviour:
   CursorGO: {fileID: 0}
   isDead: 0
   footsteps: event:/Player/player_footsteps
+  musicController: {fileID: 0}
   stepDelay: 0.2
 --- !u!1 &1371710896068110
 GameObject:
