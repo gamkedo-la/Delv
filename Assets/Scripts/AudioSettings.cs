@@ -8,8 +8,6 @@ public class AudioSettings : MonoBehaviour
     public static FMOD.Studio.Bus AllSFX;
     public static FMOD.Studio.Bus Music;
 
-
-
     public float MasterVolume {
         get {
             float currentVolume, finalVolume;
@@ -51,23 +49,21 @@ public class AudioSettings : MonoBehaviour
         Master = FMODUnity.RuntimeManager.GetBus("bus:/Master");
     }
 
-    /*
-        public void MasterVolumeLevel(float newMasterVolume)
-        {
-            MasterVolume = newMasterVolume;
-            Master.setVolume(MasterVolume);
-        }
+    public void MasterVolumeLevel(float newMasterVolume)
+    {
+        MasterVolume = newMasterVolume;
+        Master.setVolume(MasterVolume);
+    }
 
-        public void MusicVolumeLevel(float newMusicVolume)
-        {
-            MusicVolume = newMusicVolume;
-            Music.setVolume(MusicVolume);
-        }
+    public void MusicVolumeLevel(float newMusicVolume)
+    {
+        MusicVolume = newMusicVolume;
+        Music.setVolume(MusicVolume);
+    }
 
-        public void SFXVolumeLevel(float newSFXVolume)
-        {
-            SFXVolume = newSFXVolume;
-            SFX.setVolume(SFXVolume);
-        }
-        */
+    public void SFXVolumeLevel(float newSFXVolume)
+    {
+        SFXVolume = newSFXVolume;
+        AllSFX.setVolume(SFXVolume);
+    }
 }

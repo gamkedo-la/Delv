@@ -86,8 +86,6 @@ public class PlayerController : MonoBehaviour
     public GameObject LightlyDamaged;
     [Space]
 
-
-
     // These are for mana/stamina/will requirements for a skill, these are sent up when the player picks a weapon up.
     public float EnergyCost1;
     public float EnergyCost2;
@@ -124,6 +122,8 @@ public class PlayerController : MonoBehaviour
     FMOD.Studio.EventInstance footstepsEv;
     float m_Footsteps;
 
+    public MusicController musicController;
+
 	public float stepDelay = 0.2f;
 	private float stepTimer = 0f;
 
@@ -157,6 +157,7 @@ public class PlayerController : MonoBehaviour
             isDead = false;
         }
     }
+
 
     void OnDisable()
     {
@@ -345,6 +346,12 @@ public class PlayerController : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Keypad1)) && PlayerIndex == 1)
         {
             ControllerSlot = 1;
+        }
+
+        if (Input.GetKeyUp(KeyCode.M) && musicController != null)
+        {
+            Debug.Log("Mute button pressed");
+            musicController.changeMute();
         }
 
         /// MOVEMENT ITSELF

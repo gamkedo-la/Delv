@@ -12,15 +12,20 @@ public class MusicController : MonoBehaviour
 
     float m_Music;
 
-
     public EnemyCheck enemyCheck;
     public PlayerController playerController;
+
+    private AudioSettings audioSettings;
+    private float beforeMuteMasterVolume;
+    public bool mute;
+
     public GameObject gameOverUX;
     Scene m_Scene;
     private bool gameStarted = false;
 
     private void Start()
     {
+        audioSettings = GetComponent<AudioSettings>();
         musicEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
         //musicEv = FMODUnity.RuntimeManager.CreateInstance(Music);
         enemyCheck.GetComponent<EnemyCheck>();
@@ -48,11 +53,31 @@ public class MusicController : MonoBehaviour
             }
         }
     }
-
+    
     private void StopMusic()
     {
         if (gameStarted)
         {
+            if (mute)
+            {
+                Debug.Log("Mute enabled");
+                if (!Mathf.Approximately(audioSettings.MasterVolume, 0))
+                {
+                    beforeMuteMasterVolume = audioSettings.MasterVolume;
+                    audioSettings.MasterVolumeLevel(0);
+                }
+                Debug.Log("MasterVolume: " + audioSettings.MasterVolume);
+            } 
+            else
+            {
+                Debug.Log("Mute disabled");
+                if (Mathf.Approximately(audioSettings.MasterVolume, 0))
+                {
+                    audioSettings.MasterVolumeLevel(beforeMuteMasterVolume);
+                    Debug.Log("MasterVolume: " + audioSettings.MasterVolume);
+                }
+            }
+
             if (m_Scene.name == "MainMenu" || gameOverUX.activeInHierarchy)
             {
                 gameStarted = false;
@@ -60,6 +85,16 @@ public class MusicController : MonoBehaviour
                 //musicEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             }
         }
+    }
+
+    public void changeMute()
+    {
+        if (mute)
+        {
+            mute = false;
+            return;
+        }
+        mute = true;
     }
 
     public void MusicParameter()
