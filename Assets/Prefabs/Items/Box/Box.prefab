@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 61218196146844632}
   - component: {fileID: 50673955684332264}
   - component: {fileID: 114790876949002924}
-  m_Layer: 10
+  m_Layer: 18
   m_Name: Box
   m_TagString: Breakable
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827425564834512}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5300007, y: 0.017548561, z: 8.869141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -91,7 +91,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1827425564834512}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 384f05d74607ba545ac5b00827607fc0, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 1
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
