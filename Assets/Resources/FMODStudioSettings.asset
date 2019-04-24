@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: Delv - Fmod Project\DelvPrelude.fspro
-  SourceProjectPathUnformatted: Delv - Fmod Project\DelvPrelude.fspro
-  SourceBankPathUnformatted: Delv - Fmod Project\Build
+  sourceProjectPath: Delv - Fmod Project/DelvPrelude.fspro
+  SourceProjectPathUnformatted: Delv - Fmod Project/DelvPrelude.fspro
+  SourceBankPathUnformatted: Delv - Fmod Project/Build
   AutomaticEventLoading: 1
   AutomaticSampleLoading: 0
   ImportType: 0
