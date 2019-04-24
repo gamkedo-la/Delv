@@ -34,6 +34,7 @@ public class HazardSpikes : MonoBehaviour
         deactivateTimeout = durationInSeconds;
 
         if (!hasTriggered) {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Hazards/Trap_active");
             StartCoroutine("ActivateSpikes");
         }
     }
