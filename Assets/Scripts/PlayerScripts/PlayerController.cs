@@ -452,6 +452,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public GameObject speechBubble;
+    private string ActivateTargetName;
+    private string searchForChildGO;
+
     /// PICKUP COLLIDER LOGIC
     void OnTriggerStay2D(Collider2D coll)
     {
@@ -474,6 +478,23 @@ public class PlayerController : MonoBehaviour
         if ((coll.gameObject.tag == "Activatable") && !isBot)
         {
             ActivateTarget = coll.gameObject;
+            ActivateTargetName = ActivateTarget.name;
+            searchForChildGO = "/VillagerPool/" + ActivateTargetName + "/SpeechBubble";
+            //Debug.Log(searchForChildGO);
+            speechBubble = GameObject.Find(searchForChildGO);
+
+            if (speechBubble != null)
+            {
+                if (!speechBubble.activeInHierarchy)
+                {
+                    speechBubble.SetActive(true);
+                }
+            }
+            else
+            {
+                Debug.Log("no speech bubble found");
+            }
+
             if (Input.GetButtonDown("Pickup" + ControllerSlot) && ActivateCD <= 0) //REMEMBER TO CHANGE THIS BUTTON
             {
                 Debug.Log("Player Hit Pickup/Activate button");
@@ -521,6 +542,17 @@ public class PlayerController : MonoBehaviour
         {
             ActivateTarget = coll.gameObject;
             Debug.Log("Player walked away from" + ActivateTarget);
+            if (speechBubble != null)
+            {
+                if (speechBubble.activeInHierarchy)
+                {
+                    speechBubble.SetActive(false);
+                }
+            }
+            else
+            {
+                Debug.Log("no speech bubble found");
+            }
             ActivateTarget.SendMessage("Deactivate");
             ActivateTarget = null;
             if (AICompanion.isActiveAndEnabled)
