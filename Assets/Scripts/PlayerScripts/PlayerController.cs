@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         SR = Alive.GetComponent<SpriteRenderer>();
         SP = GameObject.FindGameObjectWithTag("StartZone");
-        //TimeManager = GameManagerScript.instance.GetComponent<TimeManager>();
+		TimeManager = TimeManager.instance;
         MainCam = Camera.main;
         HealthBar = healthdirector.HealthBar;
         EnergyBar = healthdirector.EnergyBar;
