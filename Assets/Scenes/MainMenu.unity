@@ -2237,5 +2237,18 @@ PrefabInstance:
       propertyPath: DebugUIGO
       value: 
       objectReference: {fileID: 1811942451}
+    - target: {fileID: 7152851399633797622, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470205025, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730341089, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38ebff77834f41629b083b08339d580, type: 3}
