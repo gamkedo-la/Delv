@@ -77,6 +77,7 @@ public class SlowAimer : MonoBehaviour
 
     IEnumerator FireSequence()
     {
+        yield return new WaitForEndOfFrame();
         GameObject TempGO = Instantiate(Projectile, transform.position + offset, transform.rotation);
         FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemies/Plant/Plant_Oneshot", gameObject);
         TempGO.transform.SetParent(ProjectileManager.transform);
