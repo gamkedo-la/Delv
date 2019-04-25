@@ -218,10 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d5f1e71d897f4419acc934090826dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reviveCollider: {fileID: 5279616202686173972}
   hintCanvas: {fileID: 7026832177298054325}
   player: {fileID: 8447110967915570375}
-  p2: {fileID: 0}
 --- !u!1 &4989450562245121619
 GameObject:
   m_ObjectHideFlags: 0
@@ -5263,7 +5261,6 @@ GameObject:
   - component: {fileID: 6865793445521304039}
   - component: {fileID: 6184906593308164609}
   - component: {fileID: 1286401164103740230}
-  - component: {fileID: 4209987193203658507}
   - component: {fileID: 8447110967915570375}
   - component: {fileID: 7867596800732770562}
   m_Layer: 8
@@ -5365,22 +5362,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5052662, y: 0.7664279}
   m_EdgeRadius: 0
---- !u!114 &4209987193203658507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6300180896068623075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5f1e71d897f4419acc934090826dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reviveCollider: {fileID: 0}
-  hintCanvas: {fileID: 7026832177298054325}
-  player: {fileID: 0}
-  p2: {fileID: 0}
 --- !u!114 &8447110967915570375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5444,10 +5425,12 @@ MonoBehaviour:
   RstickV: 
   SP: {fileID: 0}
   CursorGO: {fileID: 0}
+  reviver: {fileID: 0}
   isDead: 0
   footsteps: event:/Player/player_footsteps
   musicController: {fileID: 0}
   stepDelay: 0.2
+  speechBubble: {fileID: 0}
 --- !u!114 &7867596800732770562
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,31 +5,23 @@ using UnityEngine.UI;
 
 public class Reviver : MonoBehaviour
 {
-    [SerializeField] private CircleCollider2D reviveCollider;
-
     [SerializeField] private GameObject hintCanvas;
 
 	[SerializeField] private PlayerController player;
 
-    private GameObject revivablePlayer;
+	private CircleCollider2D coll;
 
-    // @todo DEBUG! remove when completed reviving
-    public PlayerController p2;
-
+    private PlayerController revivablePlayerController;
+	
     void Start()
     {
-        player = GetComponent<PlayerController>();
+		coll = GetComponent<CircleCollider2D>();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R)) {
             RevivePlayer();
-        }
-
-        // @todo DEBUG! remove when completed reviving
-        if (Input.GetKeyDown(KeyCode.K)) {
-            p2.SendMessage("DamageHealth", 110f);
         }
     }
 
@@ -44,7 +36,7 @@ public class Reviver : MonoBehaviour
             return;
         }
 
-        revivablePlayer = other.gameObject;
+		revivablePlayerController = otherPlayer;
 
         // @todo replace with SendMessage or something to a hint-script?
         hintCanvas.SetActive(true);
@@ -55,7 +47,7 @@ public class Reviver : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player") {
-            revivablePlayer = null;
+			revivablePlayerController = null;
 
             hintCanvas.SetActive(false);
         }
@@ -63,17 +55,17 @@ public class Reviver : MonoBehaviour
 
     private void PlayerDied()
     {
-        reviveCollider.enabled = true;
+		coll.enabled = true;
     }
 
     private void RevivePlayer()
     {
-        if (revivablePlayer == null) {
+        if (revivablePlayerController == null) {
             return;
         }
 
         hintCanvas.SetActive(false);
-        reviveCollider.enabled = false;
-        revivablePlayer.SendMessage("Revive");
+		coll.enabled = false;
+		revivablePlayerController.Revive();
     }
 }

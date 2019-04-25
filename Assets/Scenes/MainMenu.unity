@@ -2000,24 +2000,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835997869}
   m_CullTransparentMesh: 0
---- !u!1 &1858079659 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7359968374159017460, guid: d38ebff77834f41629b083b08339d580,
-    type: 3}
-  m_PrefabInstance: {fileID: 7153966743116703765}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1858079663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858079659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74d480af34f8a534dbf06c25a22776f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1919970946 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7938280700918224515, guid: a0b617cbe66d1406f871ff56d6146d42,
@@ -2207,10 +2189,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 950072695, guid: d38ebff77834f41629b083b08339d580, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 950072698, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.288992
@@ -2259,23 +2237,5 @@ PrefabInstance:
       propertyPath: DebugUIGO
       value: 
       objectReference: {fileID: 1811942451}
-    - target: {fileID: 7152851399633797622, guid: d38ebff77834f41629b083b08339d580,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7508789845094372257, guid: d38ebff77834f41629b083b08339d580,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470205025, guid: d38ebff77834f41629b083b08339d580, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1730341089, guid: d38ebff77834f41629b083b08339d580, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38ebff77834f41629b083b08339d580, type: 3}

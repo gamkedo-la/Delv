@@ -64,9 +64,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 25;
     public float EnergyRegenRate;
     [Space]
-
-    private Reviver reviver;
-
+	
     //Player Specific Cooldowns
     [SerializeField]
     private float PickupCD;
@@ -114,7 +112,8 @@ public class PlayerController : MonoBehaviour
     //Cursor for mouse.
     public GameObject CursorGO;
     [Space]
-    public bool isDead = false;
+	public Reviver reviver;
+	public bool isDead = false;
     private bool muteKeyPressed = false;
     [Space]
 
@@ -180,7 +179,6 @@ public class PlayerController : MonoBehaviour
         MainCam = Camera.main;
         HealthBar = healthdirector.HealthBar;
         EnergyBar = healthdirector.EnergyBar;
-        reviver = GetComponent<Reviver>();
         footstepsEv = FMODUnity.RuntimeManager.CreateInstance(footsteps);
 
     }
@@ -651,7 +649,8 @@ public class PlayerController : MonoBehaviour
 
         if (DMG >= 5)
         {
-            TimeManager.SlowMo();
+			if(TimeManager != null)
+				TimeManager.SlowMo();
             iFrames = iAmount;
             gameObject.layer = 12;
 
@@ -729,7 +728,7 @@ public class PlayerController : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_death");
     }
 
-    void Revive()
+    public void Revive()
     {
         Alive.SetActive(true);
         Dead.SetActive(false);
