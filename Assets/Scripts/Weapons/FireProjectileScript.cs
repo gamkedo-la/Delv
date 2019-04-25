@@ -5,6 +5,8 @@ using UnityEngine;
 public class FireProjectileScript : AbstractWeapon
 {
     public GameObject ProjectilePrefab;
+    private GameObject ProjectileManager;
+    private GameObject ParticleManager;
     public Vector2 MoveDir;
 
     public GameObject FireSpray;
@@ -19,6 +21,17 @@ public class FireProjectileScript : AbstractWeapon
     {
         FSPS = FireSpray.GetComponent<ParticleSystem>();
         MainCam = Camera.main;
+        ProjectileManager = GameObject.Find("ProjectileManager");
+        if (ProjectileManager == null)
+        {
+            Debug.Log("ProjectileManager is not present - spawning shots in heirarchy");
+        }
+
+        ParticleManager = GameObject.Find("ParticleManager");
+        if (ParticleManager == null)
+        {
+            Debug.Log("ParticleManager is not present - spawning shots in heirarchy");
+        }
 
         base.Start();
     }
@@ -28,7 +41,9 @@ public class FireProjectileScript : AbstractWeapon
         Debug.Log("Shooting");
         GunCD = fireDelay;
         Vector3 offset = transform.rotation * bulletOffset;
-        Instantiate(ProjectilePrefab, transform.position + offset, transform.rotation);
+        GameObject TempProjectile = Instantiate(ProjectilePrefab, transform.position + offset, transform.rotation);
+        TempProjectile.transform.SetParent(ProjectileManager.transform);
+
         CameraShake shaker = MainCam.GetComponent<CameraShake>();
 
         if (GameManagerScript.instance.Screenshake)
@@ -38,7 +53,9 @@ public class FireProjectileScript : AbstractWeapon
 
         if ((ShotParticle != null) && (GameManagerScript.instance.ParticleIntensity > 1))
         {
-            Instantiate(ShotParticle, transform.position + offset, transform.rotation);
+            GameObject TempParticle = Instantiate(ShotParticle, transform.position + offset, transform.rotation);
+            TempParticle.transform.SetParent(ParticleManager.transform);
+
             FMODUnity.RuntimeManager.PlayOneShot("event:/Player/Weapons/fire_wand/firewand_oneshot", transform.position);
         }
 

@@ -12,11 +12,16 @@ public class Fireball : MonoBehaviour
     //These are for stretch goals/new projectile types. would probably put them in different scripts.
     public float KnockbackForce = 0;
     public Vector3 kbvector;
-
+    private GameObject ParticleManager;
 
     void Start()
     {
         Owner = GameObject.FindGameObjectWithTag("Player");
+        ParticleManager = GameObject.Find("ParticleManager");
+        if (ParticleManager == null)
+        {
+            Debug.Log("ParticleManager is not present - spawning particles in heirarchy");
+        }
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -64,7 +69,14 @@ public class Fireball : MonoBehaviour
     {
         if (GameManagerScript.instance.ParticleIntensity > 1)
         {
-            Instantiate(DeathParticle, transform.position, transform.rotation);
+            if (ParticleManager == null)
+            {
+                Debug.Log("Projectile Collector is not present - spawning shots in heirarchy");
+            }
+
+            GameObject TempParticle = Instantiate(DeathParticle, transform.position, transform.rotation);
+            TempParticle.transform.SetParent(ParticleManager.transform);
+
             FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Player/Weapons/fire_wand/firewand_explosion", gameObject);
         }
         Destroy(gameObject);

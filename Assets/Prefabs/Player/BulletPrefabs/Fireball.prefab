@@ -9589,3 +9589,5 @@ MonoBehaviour:
     type: 3}
   KnockbackForce: 3
   kbvector: {x: 2, y: 2, z: 0}
+  ParticleManager: {fileID: 2987587730645835638, guid: 1b4de9678d9d3468dbe6b0cde36714c5,
+    type: 3}

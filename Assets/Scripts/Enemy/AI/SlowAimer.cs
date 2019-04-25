@@ -13,7 +13,6 @@ public class SlowAimer : MonoBehaviour
     public GameObject Projectile;
     [SerializeField]
     private GameObject ProjectileManager;
-    private Transform ProjectileCollector;
     public Vector3 offset;
     [Space]
     public float TimeBetweenShots = 1;
@@ -34,11 +33,7 @@ public class SlowAimer : MonoBehaviour
         ProjectileManager = GameObject.Find("ProjectileManager");
         if (ProjectileManager == null)
         {
-            Debug.Log("Projectile Collector is not present - spawning shots in heirarchy");
-            ProjectileCollector = null;
-        } else {
-            Debug.Log("Projectile Collector present");
-            ProjectileCollector = ProjectileManager.transform;
+            Debug.Log("ProjectileManager is not present - spawning shots in heirarchy");
         }
     }
 
@@ -84,15 +79,15 @@ public class SlowAimer : MonoBehaviour
     {
         GameObject TempGO = Instantiate(Projectile, transform.position + offset, transform.rotation);
         FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemies/Plant/Plant_Oneshot", gameObject);
-        TempGO.transform.SetParent(ProjectileCollector);
+        TempGO.transform.SetParent(ProjectileManager.transform);
         yield return new WaitForSeconds(TimeBetweenShots);
         TempGO = Instantiate(Projectile, transform.position + offset, transform.rotation);
         FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemies/Plant/Plant_Oneshot", gameObject);
-        TempGO.transform.SetParent(ProjectileCollector);
+        TempGO.transform.SetParent(ProjectileManager.transform);
         yield return new WaitForSeconds(TimeBetweenShots);
         TempGO = Instantiate(Projectile, transform.position + offset, transform.rotation);
         FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemies/Plant/Plant_Oneshot", gameObject);
-        TempGO.transform.SetParent(ProjectileCollector);
+        TempGO.transform.SetParent(ProjectileManager.transform);
         yield return new WaitForSeconds(TimeBetweenBursts);
         fireSequence = StartCoroutine(FireSequence());
     }
