@@ -48,10 +48,15 @@ public class Fireball : MonoBehaviour
             //EnemyRB.AddExplosionForce2D(KnockbackForce, kbvector, expRadius, 3.0F); //This is a 3D function, now I have to think about how to pull it off in 2D
             Die();
         }
-        if (coll.gameObject.tag == "Environment")
+
+        if (coll.gameObject.tag == "Environment"
+        || coll.gameObject.tag == "NPC"
+        || coll.gameObject.layer == LayerMask.NameToLayer("NPC")
+        )
         {
             Die();
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D coll)
