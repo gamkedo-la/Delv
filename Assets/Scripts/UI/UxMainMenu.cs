@@ -17,7 +17,7 @@ public class UxMainMenu : UxPanel {
     [Header("Scroll Animation")]
     public RectTransform scrollImagePanel;
     public ImageAnimator scrollAnimator;
-    public float fadeInTime = 1.5f;
+    public float fadeInTime = 2f;
 
     // Fmod UI sounds
     string SelectSound = "event:/UI/Select";

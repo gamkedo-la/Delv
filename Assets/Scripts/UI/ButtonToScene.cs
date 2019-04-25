@@ -12,38 +12,48 @@ public class ButtonToScene : MonoBehaviour, IPointerClickHandler
 
 	private AudioSource aud = null;
 
+	private TimeManager timeManager;
+
 	void Start( )
 	{
 		aud = GetComponent<AudioSource>( );
 		if ( aud == null )
 			aud = FindObjectOfType<AudioSource>( );
+
+		timeManager = TimeManager.instance;
 	}
 
 	void ClickEvent()
 	{
-		if ( sceneName == "Quit" )
+		if (sceneName == "Quit")
 		{
-			#if UNITY_EDITOR
-				UnityEditor.EditorApplication.isPlaying = false;
-			#else
-				Application.Quit();
-			#endif
+		#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+		#else
+			Application.Quit();
+		#endif
 		}
-		else if ( sceneName == "Reset" )
+		else if (sceneName == "Reset")
 		{
-      if (startTime)
-        Time.timeScale = 1f;
-      SceneManager.LoadScene( gameObject.scene.name );
+			if (startTime)
+			{
+				Time.timeScale = 1f;
+				timeManager.gameIsPaused = false;
+			}
+			SceneManager.LoadScene(gameObject.scene.name);
 		}
 		else
 		{
-      if (startTime)
-        Time.timeScale = 1f;
-      OnButtonPress.Invoke( );
-			SceneManager.LoadScene( sceneName );
+			if (startTime)
+			{
+				Time.timeScale = 1f;
+				timeManager.gameIsPaused = false;
+			}
+			OnButtonPress.Invoke();
+			SceneManager.LoadScene(sceneName);
 		}
 	}
-
+	
 	void OnMouseOver( )
 	{
 		if ( Input.GetMouseButtonDown( 0 ) )
