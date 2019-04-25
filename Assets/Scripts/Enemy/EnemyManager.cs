@@ -16,10 +16,12 @@ public class EnemyManager : MonoBehaviour
     public Wave[] Waves; // class to hold information per wave
     public Transform[] SpawnPoints;
     public float TimeBetweenEnemies = 2f;
+    public bool AvoidReusingSpawnPoint = true;
     [Space]
     private int _totalEnemiesInCurrentWave;
     private int _enemiesInWaveLeft;
     private int _spawnedEnemies;
+    private List<int> _spawnPointIdxBag;
     [Space]
     private int _currentWave;
     private int _totalWaves;
@@ -43,6 +45,8 @@ public class EnemyManager : MonoBehaviour
         _currentWave = -1; // avoid off by 1
         _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         CamParent = GameObject.Find("CamParent");
+        _spawnPointIdxBag = new List<int>();
+        fillSpawnPointIdxBag();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -81,6 +85,14 @@ public class EnemyManager : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
+    private void fillSpawnPointIdxBag()
+    {
+        for (int spawnPointIdx = 0; spawnPointIdx < SpawnPoints.Length; ++spawnPointIdx)
+        {
+            _spawnPointIdxBag.Insert(spawnPointIdx, spawnPointIdx);
+        }
+    }
+
     // Coroutine to spawn all of our enemies
     IEnumerator SpawnEnemies()
     {
@@ -90,7 +102,24 @@ public class EnemyManager : MonoBehaviour
             _spawnedEnemies++;
             _enemiesInWaveLeft++;
 
-            int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
+            int spawnPointIndex = 0;
+
+            if (AvoidReusingSpawnPoint)
+            {
+                if (_spawnPointIdxBag.Count == 0)
+                    fillSpawnPointIdxBag();
+
+                if(_spawnPointIdxBag.Count != 0)
+                {
+                    var randomIdxInBag = Random.Range(0, _spawnPointIdxBag.Count);
+                    spawnPointIndex = _spawnPointIdxBag[randomIdxInBag];
+                    _spawnPointIdxBag.RemoveAt(randomIdxInBag);
+                }
+            }
+            else
+            {
+                spawnPointIndex = Random.Range(0, SpawnPoints.Length);
+            }
 
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
             GameObject EnemySpawnerInstance = Instantiate(enemy, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
