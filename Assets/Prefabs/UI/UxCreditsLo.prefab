@@ -26,13 +26,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004272987881519152}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.01, y: 1.01, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6325861227631236054}
   - {fileID: 2460271150566542181}
   - {fileID: 8305181319982360463}
+  - {fileID: 6517649211015572046}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -424,3 +425,119 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!1 &8863114616213729071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6517649211015572046}
+  - component: {fileID: 1339173258055955217}
+  - component: {fileID: 7145057763601837151}
+  m_Layer: 0
+  m_Name: Credits Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6517649211015572046
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863114616213729071}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.27, y: 0.27, z: 0.2600001}
+  m_Children: []
+  m_Father: {fileID: 1004272987881519153}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -10.309998, y: 0.47000122}
+  m_SizeDelta: {x: 655.9, y: 525.28}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1339173258055955217
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863114616213729071}
+  m_CullTransparentMesh: 0
+--- !u!114 &7145057763601837151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863114616213729071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 23
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 50
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Trenton Pegeas: project lead, core functionality, majority of foundational
+    art (including village / cave / forest environments, player sprites, most enemy
+    sprites), combat room locks, initial menu code, main enemy art and behaviors (flowers,
+    zombies, imp), potions support, Big Boss and Lich code (collaboratively with others
+    on the team), co-op (non-AI), cutscene improvements, cave quest, absolutely wrecked
+    Git but then fixed all his Gistakes\n\nTerrence McDonnell: nearly all aspects
+    of implementation for the co-op companion AI bot, wrestler integration and dialog,
+    green shirt woman, main menu skip (debug functionality), FMOD mute support, speech
+    bubbles activated by NPC proximity, additional bug fixes\n\nBilal A. Cheema: made
+    input more responsive, Big Bones boss (including spawner, phases, health bar),
+    burning village scene, poison tiles, worm boss functionality and related cutscene,
+    sounds (step, bone rattle, heavy impact, fire spray, explosions), cave floor tiling,
+    interior tiling, entry/exit in village buildings, fog animation, dialog font integration,
+    game over functionality, pause menu functionality, UI scaling, NPC behavior improvements,
+    assorted bug fixes\n\nThomas Brandoli: Sound lead, initial FMOD integration, sounds
+    (footsteps, stair, cave reverb, lightnin staff, potions, wooden boxes, enemy spawn,
+    cemetary ambience, UI sounds, forest ambience, boss skeleton ambience, cemetary
+    ambience, player damage, ooze damage, fire weapon, explosions, dialog sound, menu
+    mouseover, menu movement, trap), audio controls, FMOD interactive music scripts,
+    additional sound implementation (skeleton, zombie, plant)\n\nTylor Allison: Main
+    menu (scroll art, opening animation, buttons, font selection, stone background,
+    and related implementation), volume sliders, pause menu improvements, particle
+    options, lore page\n\nCaspar \"SpadXIII\" Dunant: player revival feature and tooltip,
+    spike hazard, boss scene framework, falling rocks and related screenshake, weapon
+    refactoring, game over fixes\n\nChrister \"McFunkypants\" Kaitila: Village music,
+    graveyard ambient music, dungeon music, AI debugging and item detection, archer
+    sprite, door improvements, crates and related physics tuning, additional fixes\n\nCharlene
+    A.: Male and female villagers, two shopkeepers, purchase animation, enemy worm
+    art, burning village animations\n\nMarc Silva: slime creature animations and implementation,
+    litch animations\n\nKlaim (A. Jo\xEBl Lamotte): Battle music, game over music\n\nVismaya
+    Menon (Quenzel201Aliza): Grave art, menu cursor art\n\nFredrik Tyrberg: Sound
+    effects (weapon switch, forest ambience, slime sounds, imp head)\n\nJeremy Kenyon:
+    Fireball knockback, enemy stagger functionality\n\nAvery Pratt: Cursor switching
+    and pause improvements\n\nJeremy Jackson: Gold code and related bag icon, weapon
+    cost implemented (prototyped)\n\nMagnus Mikander: Spike sound effects\n\nHuberth
+    Laurent Ariza Varela: Sound implementation for player damage and player death\n\nJeff
+    \"Axphin\" Hanlon: Fireball related sounds\n\nThis game was created by members
+    of Gamkedo Club - for more information, or to join us, visit Gamkedo.com"
