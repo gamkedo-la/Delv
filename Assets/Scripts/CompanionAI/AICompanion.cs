@@ -59,7 +59,7 @@ public class AICompanion : MonoBehaviour
     public bool targetAquired;
     [Space]
     [Header("Shooting Manager")]
-    public GameObject[] TargetGOs;
+    public List<GameObject> TargetGOs;
     public GameObject closestTarget;
     public float shotTimer = 0;
     private float AimDistance = 5.0f;
@@ -149,8 +149,8 @@ public class AICompanion : MonoBehaviour
             return;
         }
 
-        TargetGOs = GameObject.FindGameObjectsWithTag("Enemy");
-        TargetGOs = GameObject.FindGameObjectsWithTag("Breakable");
+        TargetGOs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        TargetGOs.AddRange(new List<GameObject>(GameObject.FindGameObjectsWithTag("Breakable")));
 
         CursorAim();
         AIMoveBasedOnState();
@@ -870,13 +870,14 @@ public class AICompanion : MonoBehaviour
     {
         closestTarget = null;
 
-        if (TargetGOs.Length == 0)
+        if (TargetGOs.Count == 0)
         {
             return;
         }
 
         float distance = Mathf.Infinity;
-        foreach (GameObject target in TargetGOs)
+        GameObject[] targets = TargetGOs.ToArray();
+        foreach (GameObject target in targets)
         {
             Vector2 distDiff = target.transform.position - transform.position;
             float diagonalDistBetween = distDiff.sqrMagnitude;

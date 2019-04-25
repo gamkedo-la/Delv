@@ -28,7 +28,7 @@ public class TriggerToggle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-        int count = 0;
+        //int count = 0;
 		if (collision.gameObject.tag == colliderTag && !collision.gameObject.GetComponent<PlayerController>().isBot)
 		{
 			for (int i = 0; i < disable.Length; i++)
@@ -40,18 +40,18 @@ public class TriggerToggle : MonoBehaviour
             foreach (Transform child in ParticleManager.transform)
             {
                 Destroy(child.gameObject);
-                count++;
+                //count++;
             }
 
-            Debug.Log(count + " particles destroyed");
-            count = 0;
+            //Debug.Log(count + " particles destroyed");
+            //count = 0;
 
             foreach (Transform child in ProjectileManager.transform)
             {
                 Destroy(child.gameObject);
-                count++;
+                //count++;
             }
-            Debug.Log(count + " projectiles destroyed");
+            //Debug.Log(count + " projectiles destroyed");
         }
     } // end of OnTriggerEnter2D
 } // end of TriggerToggle Script
