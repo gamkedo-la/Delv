@@ -4809,8 +4809,7 @@ MonoBehaviour:
   alert: 1
   Projectile: {fileID: 759830379415523666, guid: 9cecab5714518a04399fb4a7e04b9555,
     type: 3}
-  ProjectileCollectorPrefab: {fileID: 0}
-  projectileCollector: {fileID: 0}
+  ProjectileManager: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   TimeBetweenShots: 0.5
   TimeBetweenBursts: 2
@@ -4849,6 +4848,7 @@ GameObject:
   - component: {fileID: 5259528638177631911}
   - component: {fileID: 5310816122655099563}
   - component: {fileID: 7887908522398667729}
+  - component: {fileID: 8040977634621559264}
   m_Layer: 10
   m_Name: ImpCaster
   m_TagString: Enemy
@@ -4991,3 +4991,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8040977634621559264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5197414586088925793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Enemies/Imp Caster/Imp_Caster_Death
+  PlayEvent: 2
+  StopEvent: 0
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
