@@ -5528,6 +5528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintCanvas: {fileID: 8845129880043249675}
   player: {fileID: 114375173384209822}
+  p2: {fileID: 8447110967915570375, guid: 6da482bb0600384459fc2a158c8b7b13, type: 3}
 --- !u!1 &8309397591232174056
 GameObject:
   m_ObjectHideFlags: 0
@@ -5728,11 +5729,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4810588144668864}
     m_Modifications:
-    - target: {fileID: 8927152427298981850, guid: e37e503ab4e0c41449605ad4dddf3549,
-        type: 3}
-      propertyPath: m_Name
-      value: footsteps
-      objectReference: {fileID: 0}
     - target: {fileID: 8927152427298981829, guid: e37e503ab4e0c41449605ad4dddf3549,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5787,6 +5783,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927152427298981850, guid: e37e503ab4e0c41449605ad4dddf3549,
+        type: 3}
+      propertyPath: m_Name
+      value: footsteps
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e37e503ab4e0c41449605ad4dddf3549, type: 3}

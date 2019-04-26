@@ -7,11 +7,12 @@ public class Reviver : MonoBehaviour
 {
     [SerializeField] private GameObject hintCanvas;
 
-	[SerializeField] private PlayerController player;
+	//[SerializeField] private PlayerController player;
+    public PlayerController p2;
 
 	private CircleCollider2D coll;
 
-    private PlayerController revivablePlayerController;
+    [SerializeField] private PlayerController revivablePlayerController;
 	
     void Start()
     {
@@ -23,6 +24,11 @@ public class Reviver : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) {
             RevivePlayer();
         }
+
+        if (Input.GetKeyUp(KeyCode.K))
+        {
+            p2.SendMessage("DamageHealth", 110f);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -32,11 +38,19 @@ public class Reviver : MonoBehaviour
         }
 
         PlayerController otherPlayer = other.gameObject.GetComponent<PlayerController>();
-        if (otherPlayer == null || !otherPlayer.isDead) {
+        Debug.Log(otherPlayer , otherPlayer);
+        if (otherPlayer == null) {
+            Debug.Log("otherPlayer is null");
             return;
         }
 
-		revivablePlayerController = otherPlayer;
+        if (!otherPlayer.isDead)
+        {
+            Debug.Log("otherPlayer is not dead");
+            return;
+        }
+
+        revivablePlayerController = otherPlayer;
 
         // @todo replace with SendMessage or something to a hint-script?
         hintCanvas.SetActive(true);
@@ -66,6 +80,7 @@ public class Reviver : MonoBehaviour
 
         hintCanvas.SetActive(false);
 		coll.enabled = false;
-		revivablePlayerController.Revive();
+        revivablePlayerController.enabled = true;
+        revivablePlayerController.Revive();
     }
 }
