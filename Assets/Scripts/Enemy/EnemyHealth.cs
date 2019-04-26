@@ -95,12 +95,24 @@ public class EnemyHealth : MonoBehaviour
         }
 
     }
+    
     void Die()
     {
         if (GameManagerScript.instance.ParticleIntensity >= 2)
         {
-            Instantiate(DeathParticle, transform.position, transform.rotation);
+            if (gameObject.tag == "Breakable")
+            {
+                if (Random.Range(0,101) > 60)
+                {
+                    Instantiate(DeathParticle, transform.position, transform.rotation);
+                }
+            }
+            else
+            {
+                Instantiate(DeathParticle, transform.position, transform.rotation);
+            }
         }
+
         if (spawner != null)
         {
             spawner.SendMessage("EnemyDefeated");
