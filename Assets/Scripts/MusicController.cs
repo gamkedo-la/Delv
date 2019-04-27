@@ -11,11 +11,6 @@ public class MusicController : MonoBehaviour
     //private FMOD.Studio.EventInstance musicEv;
     FMODUnity.StudioEventEmitter musicEmitter;
 
-    private FMOD.Studio.EventInstance TitleMusicEventInstance;
-    private FMOD.Studio.PLAYBACK_STATE TitleMusicPlaybackState;
-    private bool TitleMusicCoroutineRunning;
-    private IEnumerator PlayTitleAfterTwoSeconds;
-
     float m_Music;
 
     public EnemyCheck enemyCheck;
@@ -37,9 +32,6 @@ public class MusicController : MonoBehaviour
         enemyCheck.GetComponent<EnemyCheck>();
         //gameOverCondition = GetComponent<GameOverConditionScript>();
 
-        TitleMusicEventInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Title Music");
-        TitleMusicCoroutineRunning = false;
-        PlayTitleAfterTwoSeconds = ExecuteAfterTime(2);
     }
 
     private void Update()
@@ -51,47 +43,14 @@ public class MusicController : MonoBehaviour
         MusicParameter();
     }
 
-    IEnumerator ExecuteAfterTime(float time)
-    {
-        if (TitleMusicCoroutineRunning)
-            yield break;
-        TitleMusicCoroutineRunning = true;
-        yield return new WaitForSeconds(time);
-        Debug.Log("Hello Execute After Time");
-        TitleMusicEventInstance.start();
-        TitleMusicCoroutineRunning = false;
-    }
-
     private void StartMusic()
-    {
-
-        if (!gameStarted)
+    {       
+        if (m_Scene.name != "MainMenu" && !gameStarted)
         {
-            TitleMusicEventInstance.getPlaybackState(out TitleMusicPlaybackState);
-            Debug.Log(TitleMusicPlaybackState);
-        }
-        if (!gameStarted && m_Scene.name == "MainMenu" && TitleMusicPlaybackState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-            {
-
-            StartCoroutine(PlayTitleAfterTwoSeconds);
-            }
-
-        
-            
-        if (m_Scene.name != "MainMenu")
-        {
-            
-            gameStarted = true;
-            StopCoroutine(PlayTitleAfterTwoSeconds);
-            TitleMusicEventInstance.getPlaybackState(out TitleMusicPlaybackState);
-            if (TitleMusicPlaybackState == FMOD.Studio.PLAYBACK_STATE.PLAYING)
-            {
-                TitleMusicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            }
-
             musicEmitter.Play();
-
+            gameStarted = true;
             //musicEv.start();
+            Debug.Log("MUSIC STARTED");
         }
     }
     

@@ -9,7 +9,7 @@ public class ButtonToScene : MonoBehaviour, IPointerClickHandler
 	public bool startTime = false;
 	public AudioClip clickSound;
 	public UnityEvent OnButtonPress;
-
+    public FMODUnity.StudioEventEmitter gameOverSound;
 	private AudioSource aud = null;
 
 	private TimeManager timeManager;
@@ -21,9 +21,10 @@ public class ButtonToScene : MonoBehaviour, IPointerClickHandler
 			aud = FindObjectOfType<AudioSource>( );
 
 		timeManager = TimeManager.instance;
-	}
+        gameOverSound.GetComponent<FMODUnity.StudioEventEmitter>();
+    }
 
-	void ClickEvent()
+    void ClickEvent()
 	{
 		if (sceneName == "Quit")
 		{
@@ -76,4 +77,9 @@ public class ButtonToScene : MonoBehaviour, IPointerClickHandler
 	{
 		SceneManager.LoadScene( sceneName );
 	}
+
+    public void StopGameOverSound()
+    {
+        gameOverSound.Stop();
+    }
 }

@@ -725,7 +725,6 @@ public class PlayerController : MonoBehaviour
 
         Alive.SetActive(false);
         Dead.SetActive(true);
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_death");
     }
 
     public void Revive()

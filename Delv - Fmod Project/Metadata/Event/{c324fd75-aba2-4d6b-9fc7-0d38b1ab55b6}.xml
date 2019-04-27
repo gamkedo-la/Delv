@@ -202,7 +202,7 @@
     </object>
     <object class="EventMixerGroup" id="{04ac7bd5-aaec-440e-a453-c2b5f573e091}">
         <property name="volume">
-            <value>-15</value>
+            <value>-10</value>
         </property>
         <property name="name">
             <value>Calm</value>
@@ -252,7 +252,7 @@
     </object>
     <object class="EventMixerGroup" id="{fca06b6a-fbb7-4899-9098-2aa522b2bb07}">
         <property name="volume">
-            <value>-20.5</value>
+            <value>-15</value>
         </property>
         <property name="name">
             <value>In Combat</value>
