@@ -27,7 +27,7 @@
 {37900725-8589-4fa9-b996-cda68ce1fc5b} event:/Environment/Amb_Village
 {148bbcd2-c0d3-4d02-8242-ee21c459260b} event:/Music/GameOver
 {12380457-3291-4ce6-96dc-5750ad590f8d} event:/Music/Misty Music
-{c324fd75-aba2-4d6b-9fc7-0d38b1ab55b6} event:/Music/music test
+{c324fd75-aba2-4d6b-9fc7-0d38b1ab55b6} event:/Music/Music System
 {6fbb972a-4eed-4c7c-a259-60426bdf7c9c} event:/Music/Music Village
 {84b87d1d-5b90-4ccc-b3c8-80c0a68c0f3b} event:/Music/Title Music
 {2ed90196-95f3-4b22-b049-46d86f997e27} event:/Objects/pickup_potion
@@ -49,6 +49,7 @@
 {8701d4cf-689c-43c5-b758-736a1a499c9c} event:/UI/Select
 {12439645-95dc-43bd-81a1-c9ab9e5d17dd} event:/Dialogue
 {39f8a300-3222-4729-a022-5497517be20c} event:/Make sure to have the latest version of the project! use 'git pull' to update the entire repository!
+{a4f6b710-f177-4b14-90ac-380e7bfcffcf} event:/WormBossStartCutsceneSFX
 {8a662e76-32f4-48e6-9af0-7b7e11069ffd} bus:/
 {6cc0b4e9-42c2-49f3-9e13-68b22106e81b} bus:/Master
 {8035b52c-b71e-49fd-af7b-4f786eb02ae8} bus:/Master/AllSFX

@@ -32,7 +32,10 @@ public class Boss2Event : MonoBehaviour
 
 	private float deathCutsceneTimer = -10f;
 
-	void Start()
+    private FMOD.Studio.EventInstance WormBossStartSFX;
+    FMOD.Studio.PLAYBACK_STATE WormBossStartSFXPlaybackState;
+
+    void Start()
 	{
 		CamParent = GameObject.Find("CamParent");
 		if (CamParent)
@@ -45,13 +48,21 @@ public class Boss2Event : MonoBehaviour
 		anim = GetComponent<Animator>();
 
 		prevCamSize = cam.orthographicSize + camBossPlaySizeAddition;
-	}
+
+        WormBossStartSFX = FMODUnity.RuntimeManager.CreateInstance("event:/WormBossStartCutsceneSFX");
+    }
 
 	void Update()
 	{
 		if (!cutsceneStarted && releaseCamera)
 		{
-			CamParent.transform.position = Vector3.MoveTowards(CamParent.transform.position, cutsceneCamTransform.position, 15f * Time.deltaTime);
+            WormBossStartSFX.getPlaybackState(out WormBossStartSFXPlaybackState);
+            if (WormBossStartSFXPlaybackState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+            {
+                WormBossStartSFX.start();
+            }
+
+            CamParent.transform.position = Vector3.MoveTowards(CamParent.transform.position, cutsceneCamTransform.position, 15f * Time.deltaTime);
 			cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, camSize, 5f * Time.deltaTime);
 
 			if (CamParent.transform.position == cutsceneCamTransform.position)
