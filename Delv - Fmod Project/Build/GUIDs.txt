@@ -1,8 +1,23 @@
+{09ca9087-443b-40f6-89ab-4f1dfb33f10d} event:/Enemies/Imp Caster/Imp_Caster_Death
+{cef1f857-8c05-4c9e-af14-a3b3c9ddac42} event:/Enemies/Imp Caster/Imp_Caster_Shot
+{8ee285a0-5b8d-481c-bc5c-8c8101e89050} event:/Enemies/Imp Head/Imp_Head_Death
+{fdff9e3c-49a6-4e3b-8ae5-7141e5dc1967} event:/Enemies/Imp Head/Imp_Head_Loop
+{dcb0ab90-fc12-4c0b-b6bf-6b7608cbdf91} event:/Enemies/Plant/Plant_Death
+{2da957af-9e4a-47ff-b717-74365ee96fb4} event:/Enemies/Plant/Plant_Oneshot
+{97c05d33-8c64-4a06-918e-b3128104dbbf} event:/Enemies/Skeleton Boss/Skeleton_Boss_Cutscene
+{bb31d8de-975c-47f7-8acf-c55fd8a06368} event:/Enemies/Skeleton Boss/Skeleton_Boss_Punch
+{5702a468-64ca-44dd-b647-c785681e7244} event:/Enemies/Skeleton/Skeleton_Death
+{c63a02b5-a09e-4252-b90a-0bc3c116a827} event:/Enemies/Skeleton/Skeleton_Movement
 {fb8fdc7a-a274-4962-99d7-776a220a66bc} event:/Enemies/Slime/Baby_Slime_Death
 {1e2070b6-a59b-47e0-b9f7-a71361f5c1b9} event:/Enemies/Slime/Baby_Slime_Movement
 {d88da07e-0910-4a97-9cce-dfeba5997714} event:/Enemies/Slime/Big_Slime_Death
 {88e628e2-ba95-4291-a124-b29584fdf243} event:/Enemies/Slime/Big_Slime_Movement
+{b0aad732-ab22-48b3-b4c9-08ea4d247601} event:/Enemies/Zombie/Zombie_Death
+{99762bc9-e981-49d6-b00e-1369903bf365} event:/Enemies/Zombie/Zombie_Movement
 {e2bec99e-bed3-4ace-8473-6e2eb18711b5} event:/Enemies/enemy_spawn
+{65cba042-6da8-4695-9f39-03d790b31448} event:/Environment/Hazards/Trap_active
+{9e2156dc-5abf-414b-8008-76e66ffb812f} event:/Environment/Hazards/Trap_down
+{059cfbd9-0a1b-4cb8-b63f-9baf4b7b8bb2} event:/Environment/Hazards/Trap_spikes
 {637ef6f6-4b21-4528-8956-5beb52fd8803} event:/Environment/Amb_Cave
 {0cf59c94-9017-4ee5-998f-6437a603254e} event:/Environment/Amb_Cemetery
 {1fa393f8-9b5b-4cd3-b6ac-5850980ecfe0} event:/Environment/Amb_Forest
@@ -11,6 +26,7 @@
 {12380457-3291-4ce6-96dc-5750ad590f8d} event:/Music/Misty Music
 {c324fd75-aba2-4d6b-9fc7-0d38b1ab55b6} event:/Music/music test
 {6fbb972a-4eed-4c7c-a259-60426bdf7c9c} event:/Music/Music Village
+{84b87d1d-5b90-4ccc-b3c8-80c0a68c0f3b} event:/Music/Title Music
 {2ed90196-95f3-4b22-b049-46d86f997e27} event:/Objects/pickup_potion
 {0185e5cb-3845-422c-83da-cdba3a9a64ef} event:/Objects/wood_box_break
 {149cbf45-1cdb-4410-8172-f47777a59b17} event:/Player/Weapons/fire_wand/firewand_explosion
@@ -35,6 +51,7 @@
 {8035b52c-b71e-49fd-af7b-4f786eb02ae8} bus:/Master/AllSFX
 {90d15435-24ee-4e38-8ef3-389b622697b1} bus:/Master/AllSFX/SFX
 {6cf44c19-fa20-4117-9a49-403dd49c2413} bus:/Master/AllSFX/SFX/Ambient
+{8aa9cded-cf3d-4f09-a137-24c73fede749} bus:/Master/AllSFX/SFX/Enemies
 {41f48242-7838-4e47-83e5-2fa56faa2089} bus:/Master/AllSFX/SFX/Player
 {2428b9b2-91a2-4010-8e89-59079d889d82} bus:/Master/AllSFX/UI
 {3fc84e0d-2ed5-440b-8a6f-07715c1b5b37} bus:/Master/Music

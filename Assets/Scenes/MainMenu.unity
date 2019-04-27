@@ -920,6 +920,12 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!1 &805107582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 523862017936583018, guid: 489129a075b074cd7991fa8c4ff42c0d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683789500}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &825880184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1810,6 +1816,62 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].eventID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 805107582}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_TypeName
+      value: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI, Version=1.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672829813261863505, guid: 489129a075b074cd7991fa8c4ff42c0d,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 489129a075b074cd7991fa8c4ff42c0d, type: 3}
 --- !u!1 &1811942451
@@ -2248,6 +2310,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1730341089, guid: d38ebff77834f41629b083b08339d580, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380902546327251592, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: Event
+      value: event:/Music/Title Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380902546327251592, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: PlayEvent
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
