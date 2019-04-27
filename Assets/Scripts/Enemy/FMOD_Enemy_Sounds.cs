@@ -16,5 +16,9 @@ public class FMOD_Enemy_Sounds : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Enemies/Skeleton Boss/Skeleton_Boss_Punch", transform.position);
     }
 
+    public void BigSlimeMovement()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Enemies/Slime/Big_Slime_Movement", transform.position);
+    }
 
 }

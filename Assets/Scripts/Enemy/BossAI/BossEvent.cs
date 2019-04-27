@@ -103,9 +103,9 @@ public class BossEvent : MonoBehaviour
 	public void EnableCutsceneSpawn()
 	{
 		gameObject.transform.GetChild(0).gameObject.SetActive(true);
-	}
+    }
 
-	public void EnableFists( int playerIndex = -1 )
+    public void EnableFists( int playerIndex = -1 )
 	{
 		fistAnim[0].enabled = true;
 		fistAnim[1].enabled = true;
@@ -128,9 +128,9 @@ public class BossEvent : MonoBehaviour
 	public void SpawnAttack()
 	{
 		spawnAttack.SetActive(true);
-	}
+    }
 
-	public void SetupDeathCutscene()
+    public void SetupDeathCutscene()
 	{
         VulnerableSoundEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         cutsceneStarted = false; //now it refers to Death Cutscene
@@ -152,14 +152,18 @@ public class BossEvent : MonoBehaviour
     public void EndVulnerableStateOnStateChange()
 	{
 		if (stateChanged)
-			anim.SetBool("VulnerableSwitch", false);
-		stateChanged = false;
-	}
+        {
+            anim.SetBool("VulnerableSwitch", false);
+            VulnerableSoundEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+        stateChanged = false;
+
+    }
 
 	public void EndVulnerableState()
 	{
 		anim.SetBool("VulnerableSwitch", false);
-	}
+    }
 
 
     public void VulnerableSoundStart()
