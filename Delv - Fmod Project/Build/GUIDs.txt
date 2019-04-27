@@ -6,6 +6,9 @@
 {2da957af-9e4a-47ff-b717-74365ee96fb4} event:/Enemies/Plant/Plant_Oneshot
 {97c05d33-8c64-4a06-918e-b3128104dbbf} event:/Enemies/Skeleton Boss/Skeleton_Boss_Cutscene
 {bb31d8de-975c-47f7-8acf-c55fd8a06368} event:/Enemies/Skeleton Boss/Skeleton_Boss_Punch
+{f8376f46-5c81-4f21-9614-d112e37966e6} event:/Enemies/Skeleton Boss/Skeleton_Death
+{e9734d79-b504-45e9-9b7c-200d5ab1c965} event:/Enemies/Skeleton Boss/Skeleton_Voice
+{43436685-d413-498a-9fc6-868a56adf172} event:/Enemies/Skeleton Boss/Skeleton_Vulnerable
 {5702a468-64ca-44dd-b647-c785681e7244} event:/Enemies/Skeleton/Skeleton_Death
 {c63a02b5-a09e-4252-b90a-0bc3c116a827} event:/Enemies/Skeleton/Skeleton_Movement
 {fb8fdc7a-a274-4962-99d7-776a220a66bc} event:/Enemies/Slime/Baby_Slime_Death
@@ -59,4 +62,5 @@
 {f1ac4372-39d2-41fc-911e-775fa0064c74} bus:/Master/Village_Forest
 {9eca1c39-f349-4511-93dc-c9422b8c9e37} snapshot:/Snap_Cave_Reverb
 {dad98494-d3ae-4d3e-b568-b594d1e00241} snapshot:/Main_Menu_LPF
+{007ae42f-a5a1-4c47-8ad7-9ffb0628a3eb} snapshot:/Snap_Forest_Reverb
 {7c194d21-a2d2-45d3-bc02-acadc45547be} bank:/Master Bank
