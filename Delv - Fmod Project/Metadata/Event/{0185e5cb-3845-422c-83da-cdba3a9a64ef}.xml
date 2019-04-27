@@ -92,6 +92,9 @@
         <property name="length">
             <value>0.625</value>
         </property>
+        <property name="maxVoices">
+            <value>2</value>
+        </property>
         <relationship name="audioFile">
             <destination>{9ce25044-4d7a-4f00-a19e-be6d1f8cb95d}</destination>
         </relationship>
@@ -139,11 +142,17 @@
         <property name="distanceRolloffType">
             <value>1</value>
         </property>
+        <property name="minimumDistance">
+            <value>5</value>
+        </property>
         <property name="maximumDistance">
             <value>40</value>
         </property>
         <property name="extentMode">
             <value>1</value>
+        </property>
+        <property name="soundSize">
+            <value>5</value>
         </property>
         <property name="minimumExtent">
             <value>70</value>

@@ -76,7 +76,7 @@ public class EnemyHealth : MonoBehaviour
     {
 
         FloatingTextController.CreateFloatingText(DMG.ToString(), transform, DMG);
-        Debug.Log(gameObject + " health damaged by " + DMG);
+        //Debug.Log(gameObject + " health damaged by " + DMG);
         Health -= DMG;
         iFrames = iAmount;
         gameObject.layer = 12;

@@ -26,7 +26,7 @@ public class Fireball : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log("Fireball made contact with" + coll.gameObject);
+        //Debug.Log("Fireball made contact with" + coll.gameObject);
         if (coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Breakable")
         {
             Debug.Log(coll.gameObject + "has been struck by projectile");

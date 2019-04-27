@@ -47,11 +47,14 @@ public class LightningStaff : AbstractWeapon
             if (!LR)
             {
                 LR = this.GetComponent<LineRenderer>();
-
             }
             LR.enabled = true;
             LR.SetPosition(1, HitEnemy.transform.position);
             LR.SetPosition(0, transform.position);
+            if(lightningHitResults[0].collider.tag == "Breakable")
+            {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Objects/wood_box_break", transform.position);
+            }
         }
         StopCD1();
         CDzeroed = false;
