@@ -147,6 +147,7 @@ public class BossEvent : MonoBehaviour
 		releaseCamera = true;
 		C2D.enabled = false;
         voiceSound.Stop();
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Enemies/Skeleton Boss/Skeleton_Death");
     }
 
     public void EndVulnerableStateOnStateChange()

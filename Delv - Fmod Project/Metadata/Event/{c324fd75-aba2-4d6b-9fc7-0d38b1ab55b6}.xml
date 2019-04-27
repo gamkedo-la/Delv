@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="Event" id="{c324fd75-aba2-4d6b-9fc7-0d38b1ab55b6}">
         <property name="name">
-            <value>music test</value>
+            <value>Music System</value>
         </property>
         <property name="note">
             <value>Parameter: 
@@ -252,7 +252,7 @@
     </object>
     <object class="EventMixerGroup" id="{fca06b6a-fbb7-4899-9098-2aa522b2bb07}">
         <property name="volume">
-            <value>-15</value>
+            <value>-12</value>
         </property>
         <property name="name">
             <value>In Combat</value>
