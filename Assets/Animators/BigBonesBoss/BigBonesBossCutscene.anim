@@ -2527,7 +2527,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: PlaySound
+    functionName: CutSceneSound
     data: event:/Enemies/Skeleton Boss/Skeleton_Boss_Cutscene
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

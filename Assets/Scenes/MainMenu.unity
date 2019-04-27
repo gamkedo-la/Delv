@@ -2315,12 +2315,13 @@ PrefabInstance:
     - target: {fileID: 7380902546327251592, guid: d38ebff77834f41629b083b08339d580,
         type: 3}
       propertyPath: Event
-      value: event:/Music/Title Music
+      value: event:/Music/Music test
       objectReference: {fileID: 0}
     - target: {fileID: 7380902546327251592, guid: d38ebff77834f41629b083b08339d580,
         type: 3}
       propertyPath: PlayEvent
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1858079663, guid: d38ebff77834f41629b083b08339d580, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d38ebff77834f41629b083b08339d580, type: 3}

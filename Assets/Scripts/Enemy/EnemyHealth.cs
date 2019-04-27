@@ -80,7 +80,7 @@ public class EnemyHealth : MonoBehaviour
         Health -= DMG;
         iFrames = iAmount;
         gameObject.layer = 12;
-        Debug.Log(gameObject + " health is now " + Health);
+        //Debug.Log(gameObject + " health is now " + Health);
         if ((DMG > 10) && (GameManagerScript.instance.ParticleIntensity > 0))
         {
             Instantiate(ScrapeParticle, transform.position, transform.rotation);

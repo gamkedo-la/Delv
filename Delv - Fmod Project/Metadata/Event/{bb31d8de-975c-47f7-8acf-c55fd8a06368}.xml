@@ -53,7 +53,7 @@
             <destination>{de3efcf6-373c-4665-a51d-377ac928c73e}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{8a662e76-32f4-48e6-9af0-7b7e11069ffd}</destination>
+            <destination>{41f48242-7838-4e47-83e5-2fa56faa2089}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{53c65873-c5f1-42b0-a622-d934e12ec115}"/>
@@ -92,6 +92,9 @@
         <property name="length">
             <value>0.483265306122449</value>
         </property>
+        <property name="maxVoices">
+            <value>1</value>
+        </property>
         <relationship name="modulators">
             <destination>{5267e613-ad83-42cb-8b29-2b2dfe0424b0}</destination>
             <destination>{6f41f876-3ae7-4fbd-afbb-4021ef325d2e}</destination>
@@ -103,6 +106,9 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{3f578559-83e7-4e76-b7c2-7bc0b7ab2cc2}">
+        <property name="volume">
+            <value>-5</value>
+        </property>
         <property name="name">
             <value>Audio 1</value>
         </property>
@@ -128,7 +134,7 @@
             <value>volume</value>
         </property>
         <property name="amount">
-            <value>1.5</value>
+            <value>3</value>
         </property>
     </object>
     <object class="RandomizerModulator" id="{6f41f876-3ae7-4fbd-afbb-4021ef325d2e}">

@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class FMOD_Enemy_Sounds : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+
+    public void CutSceneSound(string path)
     {
-        
+        FMODUnity.RuntimeManager.PlayOneShot(path, transform.position);
     }
-    void PlaySound(string path)
+
+    public void FirstSlamSound()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(path, GetComponent<Transform>().position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Enemies/Skeleton Boss/Skeleton_Boss_Punch", transform.position);
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }

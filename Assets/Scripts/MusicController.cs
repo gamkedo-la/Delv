@@ -88,9 +88,7 @@ public class MusicController : MonoBehaviour
             {
                 TitleMusicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             }
-            Debug.Log(musicEmitter.EventDescription);
 
-            Debug.Log(m_Music);
             musicEmitter.Play();
 
             //musicEv.start();

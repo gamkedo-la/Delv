@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 5042734482190131313}
   - component: {fileID: 5042734482190131314}
   - component: {fileID: 931378477467806315}
-  - component: {fileID: 6622860049011326532}
+  - component: {fileID: 6938461813158057265}
   m_Layer: 0
   m_Name: FistFall
   m_TagString: Untagged
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 2.01
---- !u!114 &6622860049011326532
+--- !u!114 &6938461813158057265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

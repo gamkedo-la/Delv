@@ -24,7 +24,12 @@ public class BossEvent : MonoBehaviour
 	public GameObject spawnAttack;
 	public GameObject hpBar;
 
-	[HideInInspector] public bool stateChanged = false;
+    [FMODUnity.EventRef]
+    public string VulnerableSound;
+    FMOD.Studio.EventInstance VulnerableSoundEv;
+    FMODUnity.StudioEventEmitter voiceSound;
+
+    [HideInInspector] public bool stateChanged = false;
 
 	void Start()
 	{
@@ -39,7 +44,8 @@ public class BossEvent : MonoBehaviour
 		anim = GetComponent<Animator>();
 
 		prevCamSize = cam.orthographicSize;
-	}
+        voiceSound = GetComponent<FMODUnity.StudioEventEmitter>();
+    }
 
 	void Update()
 	{
@@ -90,6 +96,8 @@ public class BossEvent : MonoBehaviour
 
 		if (anim.GetBool("Dead"))
 			Destroy(gameObject);
+
+        voiceSound.Play();
 	}
 
 	public void EnableCutsceneSpawn()
@@ -124,7 +132,8 @@ public class BossEvent : MonoBehaviour
 
 	public void SetupDeathCutscene()
 	{
-		cutsceneStarted = false; //now it refers to Death Cutscene
+        VulnerableSoundEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        cutsceneStarted = false; //now it refers to Death Cutscene
 		cutsceneDone = false;
 
 		//Clearing all the zombies!
@@ -137,9 +146,10 @@ public class BossEvent : MonoBehaviour
 
 		releaseCamera = true;
 		C2D.enabled = false;
-	}
+        voiceSound.Stop();
+    }
 
-	public void EndVulnerableStateOnStateChange()
+    public void EndVulnerableStateOnStateChange()
 	{
 		if (stateChanged)
 			anim.SetBool("VulnerableSwitch", false);
@@ -154,10 +164,13 @@ public class BossEvent : MonoBehaviour
 
     public void VulnerableSoundStart()
     {
+        VulnerableSoundEv = FMODUnity.RuntimeManager.CreateInstance(VulnerableSound);
+        VulnerableSoundEv.start();
         Debug.Log("VULNERABLE FMOD EVENT START");
     }
     public void VulnerableSoundEnd()
     {
+        VulnerableSoundEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         Debug.Log("VULNERABLE FMOD EVENT END");
     }
 }
