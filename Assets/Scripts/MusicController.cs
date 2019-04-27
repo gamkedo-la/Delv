@@ -14,6 +14,7 @@ public class MusicController : MonoBehaviour
     private FMOD.Studio.EventInstance TitleMusicEventInstance;
     private FMOD.Studio.PLAYBACK_STATE TitleMusicPlaybackState;
     private bool TitleMusicCoroutineRunning;
+    private IEnumerator PlayTitleAfterTwoSeconds;
 
     float m_Music;
 
@@ -38,6 +39,7 @@ public class MusicController : MonoBehaviour
 
         TitleMusicEventInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Title Music");
         TitleMusicCoroutineRunning = false;
+        PlayTitleAfterTwoSeconds = ExecuteAfterTime(2);
     }
 
     private void Update()
@@ -57,7 +59,7 @@ public class MusicController : MonoBehaviour
         yield return new WaitForSeconds(time);
         Debug.Log("Hello Execute After Time");
         TitleMusicEventInstance.start();
-        //TitleMusicCoroutineRunning = false;
+        TitleMusicCoroutineRunning = false;
     }
 
     private void StartMusic()
@@ -68,19 +70,29 @@ public class MusicController : MonoBehaviour
             TitleMusicEventInstance.getPlaybackState(out TitleMusicPlaybackState);
             Debug.Log(TitleMusicPlaybackState);
         }
-        if (m_Scene.name == "MainMenu" && TitleMusicPlaybackState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        if (!gameStarted && m_Scene.name == "MainMenu" && TitleMusicPlaybackState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
             {
-            
-            StartCoroutine(ExecuteAfterTime(2));
+
+            StartCoroutine(PlayTitleAfterTwoSeconds);
             }
 
         
             
         if (m_Scene.name != "MainMenu")
         {
+            
             gameStarted = true;
-            TitleMusicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            StopCoroutine(PlayTitleAfterTwoSeconds);
+            TitleMusicEventInstance.getPlaybackState(out TitleMusicPlaybackState);
+            if (TitleMusicPlaybackState == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+            {
+                TitleMusicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
+            Debug.Log(musicEmitter.EventDescription);
+
+            Debug.Log(m_Music);
             musicEmitter.Play();
+
             //musicEv.start();
         }
     }
