@@ -30,12 +30,14 @@ public class WormUndergroundTrap : MonoBehaviour
 		}
 		else if (deathDelay <= 2f && alpha > 0f)
 		{
-			alpha -= Time.deltaTime / 2f;
+            
+            alpha -= Time.deltaTime / 2f;
 			sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
 		}
 		else if (alpha < maxAlpha)
 		{
-			alpha += alphaRate * Time.deltaTime;
+            Debug.Log("is the laser forming now?");
+            alpha += alphaRate * Time.deltaTime;
 			sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
 		}
 
@@ -53,7 +55,8 @@ public class WormUndergroundTrap : MonoBehaviour
 		{
 			if (collision.gameObject.tag == "Player")
 			{
-				Instantiate(attackPrefab, collision.gameObject.transform.position, Quaternion.Euler(0f, 0f, 0f));
+                
+                Instantiate(attackPrefab, collision.gameObject.transform.position, Quaternion.Euler(0f, 0f, 0f));
 				deathDelay = 2f;
 			}
 		}

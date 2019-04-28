@@ -5,7 +5,10 @@ using UnityEditor;
 
 public class MegaWormBrain : MonoBehaviour
 {
-	public enum PersonalityTraits
+    private FMOD.Studio.EventInstance Laser_Sight_Sound;
+    FMOD.Studio.PLAYBACK_STATE Laser_Sight_Playback_State;
+
+    public enum PersonalityTraits
 	{
 		Aggressive,
 		Sharp,
@@ -87,7 +90,12 @@ public class MegaWormBrain : MonoBehaviour
 		returnToVillageEvent = HeadAni.gameObject.GetComponent<ReturnToVillageEvent>();
 	}
 
-	private void Update()
+    private void Start()
+    {
+        Laser_Sight_Sound = FMODUnity.RuntimeManager.CreateInstance("event:/Laser_Sight");
+    }
+
+    private void Update()
 	{
 		if (main)
 		{
@@ -175,8 +183,8 @@ public class MegaWormBrain : MonoBehaviour
 					attackAngle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
 					transform.position = target + new Vector2(initialDistance * Mathf.Cos(attackAngle), initialDistance * Mathf.Sin(attackAngle));
 					head.transform.position = transform.position;
-
-					bodyTrail.Clear();
+                    
+                    bodyTrail.Clear();
 					dugSlideTrail.Clear();
 
 					start = false;
@@ -210,7 +218,8 @@ public class MegaWormBrain : MonoBehaviour
 				{
 					if (target == Vector2.zero)
 					{
-						target = players[playerToAttackIndex].transform.position;
+                       
+                        target = players[playerToAttackIndex].transform.position;
 						SwitchPlayerTarget();
 					}
 					
@@ -221,31 +230,38 @@ public class MegaWormBrain : MonoBehaviour
 			}
 			else if (personality == PersonalityTraits.Sharp)
 			{
-				if (target == Vector2.zero)
-				{
-					target = players[playerToAttackIndex].transform.position;
+                if (target == Vector2.zero)
+                {
+                    target = players[playerToAttackIndex].transform.position;
 
-					if (start)
-					{
-						attackAngle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-						transform.position = target + new Vector2(initialDistance * Mathf.Cos(attackAngle), initialDistance * Mathf.Sin(attackAngle));
-						head.transform.position = transform.position;
+                    if (start)
+                    {
+                        attackAngle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+                        transform.position = target + new Vector2(initialDistance * Mathf.Cos(attackAngle), initialDistance * Mathf.Sin(attackAngle));
+                        head.transform.position = transform.position;
 
-						bodyTrail.Clear();
-						dugSlideTrail.Clear();
+                        bodyTrail.Clear();
+                        dugSlideTrail.Clear();
 
-						start = false;
-					}
+                        start = false;
+                    }
 
-					attackTimer = attackDelay;
-					followTimer = targetFollow;
-					lineTimer = lineShowDelay;
-				}
-				else if (attackTimer <= 0f)
-				{
+                    attackTimer = attackDelay;
+                    followTimer = targetFollow;
+                    lineTimer = lineShowDelay;
+                }
+                else if (attackTimer <= 0f)
+                
+                {
 					if (followTimer > 0f)
 					{
-						target = players[playerToAttackIndex].transform.position;
+                        Laser_Sight_Sound.getPlaybackState(out Laser_Sight_Playback_State);
+                        Debug.Log(Laser_Sight_Playback_State);
+                        if (Laser_Sight_Playback_State != FMOD.Studio.PLAYBACK_STATE.PLAYING && Laser_Sight_Playback_State != FMOD.Studio.PLAYBACK_STATE.STARTING)
+                        {
+                            Laser_Sight_Sound.start();
+                        }
+                        target = players[playerToAttackIndex].transform.position;
 
 						//float angle = Vector2.Angle(target, transform.position) * Mathf.Deg2Rad;
 
@@ -262,7 +278,9 @@ public class MegaWormBrain : MonoBehaviour
 
 						followTimer -= Time.deltaTime;
 
-						if (followTimer <= 0f)
+                        
+
+                        if (followTimer <= 0f)
 						{
 							GetComponent<BoxCollider2D>().enabled = true;
 
@@ -274,6 +292,7 @@ public class MegaWormBrain : MonoBehaviour
 					}
 					else if (lineTimer > 0f)
 					{
+                       
 						sharpLineRenderer.startWidth += lineWidthFactor * Time.deltaTime;
 						sharpLineRenderer.endWidth += lineWidthFactor * Time.deltaTime;
 
@@ -289,7 +308,8 @@ public class MegaWormBrain : MonoBehaviour
 					{
 						if (sharpLineRenderer.startWidth > 0f)
 						{
-							sharpLineRenderer.startWidth -= (lineWidthFactor * 2f) * Time.deltaTime;
+                            
+                            sharpLineRenderer.startWidth -= (lineWidthFactor * 2f) * Time.deltaTime;
 							sharpLineRenderer.endWidth -= (lineWidthFactor * 2f) * Time.deltaTime;
 						}
 

@@ -13,8 +13,15 @@ public class MegaWorm_AttackWhileUndergroundBehaviour : StateMachineBehaviour
 	private int playerToAttackIndex = 0;
 	private float attackTimer = 0f;
 
-	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    
+
+    void Start()
+    {
+        
+    }
+
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 		players = GameObject.FindGameObjectsWithTag("Player");
 	}
@@ -32,7 +39,9 @@ public class MegaWorm_AttackWhileUndergroundBehaviour : StateMachineBehaviour
 
 		if (attackTimer <= 0f)
 		{
-			float angle = Random.Range(0f, 360f);
+            
+            
+            float angle = Random.Range(0f, 360f);
 			Vector3 position = players[playerToAttackIndex].transform.position
 				+ new Vector3(initialDistance * Mathf.Cos(angle * Mathf.Deg2Rad), initialDistance * Mathf.Sin(angle * Mathf.Deg2Rad), 0f);
 

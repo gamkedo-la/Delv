@@ -15,6 +15,10 @@
 {1e2070b6-a59b-47e0-b9f7-a71361f5c1b9} event:/Enemies/Slime/Baby_Slime_Movement
 {d88da07e-0910-4a97-9cce-dfeba5997714} event:/Enemies/Slime/Big_Slime_Death
 {88e628e2-ba95-4291-a124-b29584fdf243} event:/Enemies/Slime/Big_Slime_Movement
+{4483bb1c-b6c6-4078-94b7-c5e41672db6f} event:/Enemies/Worm Boss/wormboss_death
+{4e196d2e-3418-4d38-8628-b898e0aa0048} event:/Enemies/Worm Boss/wormboss_hit
+{7318a1a0-61f4-42bf-bc45-0f2d2884671b} event:/Enemies/Worm/Worm_Death_Sound
+{5ad76372-8fba-42bd-b6ba-a9e3f3fe0e30} event:/Enemies/Worm/Worm_Movement
 {b0aad732-ab22-48b3-b4c9-08ea4d247601} event:/Enemies/Zombie/Zombie_Death
 {99762bc9-e981-49d6-b00e-1369903bf365} event:/Enemies/Zombie/Zombie_Movement
 {e2bec99e-bed3-4ace-8473-6e2eb18711b5} event:/Enemies/enemy_spawn
@@ -50,6 +54,7 @@
 {12439645-95dc-43bd-81a1-c9ab9e5d17dd} event:/Dialogue
 {39f8a300-3222-4729-a022-5497517be20c} event:/Make sure to have the latest version of the project! use 'git pull' to update the entire repository!
 {a4f6b710-f177-4b14-90ac-380e7bfcffcf} event:/WormBossStartCutsceneSFX
+{56a3d7c8-ecc5-4f9b-8a35-edc458666b44} event:/Laser_Sight
 {8a662e76-32f4-48e6-9af0-7b7e11069ffd} bus:/
 {6cc0b4e9-42c2-49f3-9e13-68b22106e81b} bus:/Master
 {8035b52c-b71e-49fd-af7b-4f786eb02ae8} bus:/Master/AllSFX
