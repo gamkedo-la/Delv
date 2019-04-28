@@ -358,9 +358,6 @@
         <property name="minimumDistance">
             <value>5</value>
         </property>
-        <property name="maximumDistance">
-            <value>15</value>
-        </property>
         <property name="extentMode">
             <value>1</value>
         </property>
