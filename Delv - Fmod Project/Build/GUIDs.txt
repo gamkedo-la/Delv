@@ -17,8 +17,12 @@
 {88e628e2-ba95-4291-a124-b29584fdf243} event:/Enemies/Slime/Big_Slime_Movement
 {4483bb1c-b6c6-4078-94b7-c5e41672db6f} event:/Enemies/Worm Boss/wormboss_death
 {4e196d2e-3418-4d38-8628-b898e0aa0048} event:/Enemies/Worm Boss/wormboss_hit
+{23c2c215-a049-4efa-860e-6379ac89c232} event:/Enemies/Worm Boss/WormBoss_Earthquake_Passby
+{277c47d8-45db-43b3-990f-0ca69db9ab0f} event:/Enemies/Worm Boss/WormBoss_Head_Animation
+{a4f6b710-f177-4b14-90ac-380e7bfcffcf} event:/Enemies/Worm Boss/WormBossStartCutsceneSFX
 {7318a1a0-61f4-42bf-bc45-0f2d2884671b} event:/Enemies/Worm/Worm_Death_Sound
-{5ad76372-8fba-42bd-b6ba-a9e3f3fe0e30} event:/Enemies/Worm/Worm_Movement
+{1888a038-9673-48a0-8055-1815d0bbc844} event:/Enemies/Worm/Worm_Mouth
+{892d1de3-2ac5-4bec-bfd8-0d2523cc0c5e} event:/Enemies/Worm/Worm_Movement
 {b0aad732-ab22-48b3-b4c9-08ea4d247601} event:/Enemies/Zombie/Zombie_Death
 {99762bc9-e981-49d6-b00e-1369903bf365} event:/Enemies/Zombie/Zombie_Movement
 {e2bec99e-bed3-4ace-8473-6e2eb18711b5} event:/Enemies/enemy_spawn
@@ -33,6 +37,7 @@
 {12380457-3291-4ce6-96dc-5750ad590f8d} event:/Music/Misty Music
 {c324fd75-aba2-4d6b-9fc7-0d38b1ab55b6} event:/Music/Music System
 {6fbb972a-4eed-4c7c-a259-60426bdf7c9c} event:/Music/Music Village
+{dfeb2030-89fc-4cb6-8191-fbca27896162} event:/Music/Worm Boss Song
 {84b87d1d-5b90-4ccc-b3c8-80c0a68c0f3b} event:/Music/Title Music
 {2ed90196-95f3-4b22-b049-46d86f997e27} event:/Objects/pickup_potion
 {0185e5cb-3845-422c-83da-cdba3a9a64ef} event:/Objects/wood_box_break
@@ -52,9 +57,8 @@
 {1f32e041-ed38-4223-a6b9-161ad6e3b484} event:/UI/Mouseover
 {8701d4cf-689c-43c5-b758-736a1a499c9c} event:/UI/Select
 {12439645-95dc-43bd-81a1-c9ab9e5d17dd} event:/Dialogue
-{39f8a300-3222-4729-a022-5497517be20c} event:/Make sure to have the latest version of the project! use 'git pull' to update the entire repository!
-{a4f6b710-f177-4b14-90ac-380e7bfcffcf} event:/WormBossStartCutsceneSFX
 {56a3d7c8-ecc5-4f9b-8a35-edc458666b44} event:/Laser_Sight
+{39f8a300-3222-4729-a022-5497517be20c} event:/Make sure to have the latest version of the project! use 'git pull' to update the entire repository!
 {8a662e76-32f4-48e6-9af0-7b7e11069ffd} bus:/
 {6cc0b4e9-42c2-49f3-9e13-68b22106e81b} bus:/Master
 {8035b52c-b71e-49fd-af7b-4f786eb02ae8} bus:/Master/AllSFX
