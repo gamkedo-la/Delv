@@ -46,6 +46,9 @@
         </relationship>
     </object>
     <object class="MixerInput" id="{e412cc4a-cb20-4818-a8ae-eb225bd409cc}">
+        <relationship name="masters">
+            <destination>{036c40e3-659a-44d8-9c9f-96a326ea1f85}</destination>
+        </relationship>
         <relationship name="effectChain">
             <destination>{e043dcac-9e08-4a1e-a714-fff646a32cd9}</destination>
         </relationship>
@@ -101,12 +104,16 @@
         </property>
         <relationship name="modulators">
             <destination>{48377ff0-6441-4c9d-a2e6-a8e09048ab0f}</destination>
+            <destination>{311ea52f-ab6a-41a7-b540-d1af35b48dd7}</destination>
         </relationship>
         <relationship name="audioFile">
             <destination>{2a1b8660-fe23-432d-a50c-4011df3c04d4}</destination>
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{c25c03fe-415a-41ad-8239-87e2714a19de}">
+        <property name="volume">
+            <value>-10</value>
+        </property>
         <property name="name">
             <value>Audio 1</value>
         </property>
@@ -143,6 +150,14 @@
             <value>2.08333349</value>
         </property>
     </object>
+    <object class="RandomizerModulator" id="{311ea52f-ab6a-41a7-b540-d1af35b48dd7}">
+        <property name="nameOfPropertyBeingModulated">
+            <value>volume</value>
+        </property>
+        <property name="amount">
+            <value>3</value>
+        </property>
+    </object>
     <object class="MixerBusEffectChain" id="{02dfa026-c231-491d-a904-4c5fbf40e8a3}">
         <relationship name="effects">
             <destination>{cf467105-4577-404d-82cf-b19b53808e8a}</destination>
@@ -159,7 +174,7 @@
             <value>0</value>
         </property>
         <property name="maximumDistance">
-            <value>40</value>
+            <value>30</value>
         </property>
         <property name="extentMode">
             <value>1</value>
@@ -195,6 +210,9 @@
     <object class="RandomizerModulator" id="{ec566dd1-66f9-4bf5-81f7-c861c8cb33f0}">
         <property name="nameOfPropertyBeingModulated">
             <value>midGain</value>
+        </property>
+        <property name="amount">
+            <value>5.5999999</value>
         </property>
     </object>
 </objects>

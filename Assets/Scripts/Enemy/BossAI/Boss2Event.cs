@@ -21,7 +21,7 @@ public class Boss2Event : MonoBehaviour
 	public Vector3 holeOffset;
 
 	public GameObject deathCutscene;
-	
+
 	private Camera cam;
 	private CameraShake camShake;
 
@@ -32,6 +32,7 @@ public class Boss2Event : MonoBehaviour
 
 	private float deathCutsceneTimer = -10f;
 
+    public WormBossSounds[] wormBossSounds;
     private FMOD.Studio.EventInstance WormBossStartSFX;
     FMOD.Studio.PLAYBACK_STATE WormBossStartSFXPlaybackState;
 
@@ -48,11 +49,10 @@ public class Boss2Event : MonoBehaviour
 		anim = GetComponent<Animator>();
 
 		prevCamSize = cam.orthographicSize + camBossPlaySizeAddition;
-
-        WormBossStartSFX = FMODUnity.RuntimeManager.CreateInstance("event:/WormBossStartCutsceneSFX");
+        WormBossStartSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemies/Worm Boss/WormBossStartCutsceneSFX");
     }
 
-	void Update()
+    void Update()
 	{
 		if (!cutsceneStarted && releaseCamera)
 		{
@@ -117,8 +117,11 @@ public class Boss2Event : MonoBehaviour
 			hpBar.SetActive(true);
 
 		if (anim.GetBool("Dead"))
-			Destroy(gameObject);
-	}
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Enemies/Worm Boss/wormboss_death");
+            Destroy(gameObject);
+        }
+    }
 
 	public void EnableCutsceneSpawn()
 	{
@@ -132,8 +135,12 @@ public class Boss2Event : MonoBehaviour
 
 	public void SetupDeathCutscene()
 	{
+        foreach (var wormsounds in wormBossSounds)
+        {
+            wormsounds.GetComponent<WormBossSounds>().earthquakeSoundEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+
         cutsceneStarted = false; //now it refers to Death Cutscene
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Enemies/Worm Boss/wormboss_death");
         cutsceneDone = false;
 
 		//Clearing all the worm traps!

@@ -786,7 +786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6820570571640901423
 Transform:
   m_ObjectHideFlags: 0
@@ -2374,6 +2374,14 @@ MonoBehaviour:
     type: 3}
   holeOffset: {x: 0, y: -5.5, z: 0}
   deathCutscene: {fileID: 0}
+  megaWormBrain:
+  - {fileID: 8857575930160651911}
+  - {fileID: 2023226917}
+  - {fileID: 368003672}
+  wormBossSounds:
+  - {fileID: 5218546045427064722}
+  - {fileID: 3765890730450669933}
+  - {fileID: 3765890730450669933}
 --- !u!95 &5961506376143629543
 Animator:
   serializedVersion: 3

@@ -5,7 +5,7 @@ using UnityEditor;
 
 public class MegaWormBrain : MonoBehaviour
 {
-    private FMOD.Studio.EventInstance Laser_Sight_Sound;
+    public FMOD.Studio.EventInstance Laser_Sight_Sound;
     FMOD.Studio.PLAYBACK_STATE Laser_Sight_Playback_State;
 
     public enum PersonalityTraits

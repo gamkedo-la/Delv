@@ -11,7 +11,7 @@ public class WormBossSounds : MonoBehaviour
 
     [FMODUnity.EventRef]
     public string earthquakeSound;
-    FMOD.Studio.EventInstance earthquakeSoundEv;
+    public FMOD.Studio.EventInstance earthquakeSoundEv;
 
     public GameObject dugtail;
     public GameObject wormgroup;
@@ -52,7 +52,6 @@ public class WormBossSounds : MonoBehaviour
             earthquakeSoundEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             earthquakeSoundEv.release();
             dugtailIsPlaying = false;
-
         }
     }
 }

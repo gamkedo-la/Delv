@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="UiMixerView" id="{7b8b1191-7f1a-4df4-b2b0-8eb9351e3787}">
+        <property name="name">
+            <value>Ambient</value>
+        </property>
+        <relationship name="assignedStrips">
+            <destination>{16e6f3da-2e62-495c-b887-bc8438076c53}</destination>
+            <destination>{1945667b-3603-4048-b5f9-94a58bf56a10}</destination>
+            <destination>{f2ce0005-750d-4d50-a2a0-37a214e870bf}</destination>
+            <destination>{82e39d46-682a-4028-a3e1-847f5e41c164}</destination>
+        </relationship>
+        <relationship name="mixer">
+            <destination>{bf0da9cc-7fc4-4b44-871b-162a3d502bac}</destination>
+        </relationship>
+    </object>
+</objects>
