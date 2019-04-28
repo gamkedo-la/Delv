@@ -96,7 +96,7 @@ public class MegaWormBrain : MonoBehaviour
 				Vector2 barScale = HealthBar.transform.GetChild(0).localScale;
 				barScale.x = (HP / MaxHP) * 5f; //5f is max scale of health bar
 				HealthBar.transform.GetChild(0).localScale = barScale;
-			}
+            }
 
 			if (HP <= 0f)
 			{

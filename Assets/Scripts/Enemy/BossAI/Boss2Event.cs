@@ -129,8 +129,9 @@ public class Boss2Event : MonoBehaviour
 
 	public void SetupDeathCutscene()
 	{
-		cutsceneStarted = false; //now it refers to Death Cutscene
-		cutsceneDone = false;
+        cutsceneStarted = false; //now it refers to Death Cutscene
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Enemies/Worm Boss/wormboss_death");
+        cutsceneDone = false;
 
 		//Clearing all the worm traps!
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag("EnemyProjectile");

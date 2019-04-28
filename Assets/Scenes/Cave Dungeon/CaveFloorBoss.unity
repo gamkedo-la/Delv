@@ -78278,6 +78278,14 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 8.30932
       objectReference: {fileID: 0}
+    - target: {fileID: 4150982188500968, guid: df36bed0be6701c4ea0688f08f5d3164, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150982188500968, guid: df36bed0be6701c4ea0688f08f5d3164, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.16
+      objectReference: {fileID: 0}
     - target: {fileID: 4301879453330402, guid: df36bed0be6701c4ea0688f08f5d3164, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.31
@@ -78293,14 +78301,6 @@ PrefabInstance:
     - target: {fileID: 4216519334423772, guid: df36bed0be6701c4ea0688f08f5d3164, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4150982188500968, guid: df36bed0be6701c4ea0688f08f5d3164, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4150982188500968, guid: df36bed0be6701c4ea0688f08f5d3164, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -7.16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df36bed0be6701c4ea0688f08f5d3164, type: 3}
@@ -138999,6 +138999,7 @@ GameObject:
   - component: {fileID: 5341825373131614126}
   - component: {fileID: 6273005729582028107}
   - component: {fileID: 5341825373131614127}
+  - component: {fileID: 5341825373131614128}
   m_Layer: 0
   m_Name: MegaWormBoss_DeathCutscene
   m_TagString: Untagged
@@ -139038,6 +139039,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 3
+--- !u!114 &5341825373131614128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5341825373131614125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &5593009862580717383
 GameObject:
   m_ObjectHideFlags: 0
