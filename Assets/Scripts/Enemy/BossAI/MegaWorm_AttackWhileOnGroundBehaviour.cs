@@ -82,7 +82,7 @@ public class MegaWorm_AttackWhileOnGroundBehaviour : StateMachineBehaviour
 		if (redActive)
 		{
 			bossEvent.brains[0].BrainUpdate();
-            Debug.Log("is the laser forming now?");
+            
             redHead.SetActive(true);
 		}
 		else

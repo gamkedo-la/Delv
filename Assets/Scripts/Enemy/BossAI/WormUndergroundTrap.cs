@@ -36,7 +36,7 @@ public class WormUndergroundTrap : MonoBehaviour
 		}
 		else if (alpha < maxAlpha)
 		{
-            Debug.Log("is the laser forming now?");
+            
             alpha += alphaRate * Time.deltaTime;
 			sprRend.color = new Color(sprRend.color.r, sprRend.color.g, sprRend.color.b, alpha);
 		}
