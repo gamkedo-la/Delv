@@ -78,10 +78,13 @@ public class Boss2Event : MonoBehaviour
 
 		if (deathCutsceneTimer > -1f)
 		{
-			if (deathCutsceneTimer <= 0f)
-				CutsceneEnd();
-			else
-				deathCutsceneTimer -= Time.deltaTime;
+            if (deathCutsceneTimer <= 0f)
+            {
+                CutsceneEnd();
+                
+            }
+            else
+                deathCutsceneTimer -= Time.deltaTime;
 		}
 	}
 
