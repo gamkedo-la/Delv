@@ -517,13 +517,13 @@ MonoBehaviour:
     sounds (step, bone rattle, heavy impact, fire spray, explosions), cave floor tiling,
     interior tiling, entry/exit in village buildings, fog animation, dialog font integration,
     game over functionality, pause menu functionality, UI scaling, NPC behavior improvements,
-    assorted bug fixes\n\nThomas Brandoli: Sound lead, initial FMOD integration, sounds
-    (footsteps, stair, cave reverb, lightnin staff, potions, wooden boxes, enemy spawn,
-    cemetary ambience, UI sounds, forest ambience, boss skeleton ambience, cemetary
-    ambience, player damage, ooze damage, fire weapon, explosions, dialog sound, menu
-    mouseover, menu movement, trap), audio controls, FMOD interactive music scripts,
-    additional sound implementation (skeleton, zombie, plant)\n\nTylor Allison: Main
-    menu (scroll art, opening animation, buttons, font selection, stone background,
+    assorted bug fixes\n\nThomas Brandoli: Audio Lead, FMOD integration & implementation,
+    sounds design (footsteps, stair, cave reverb, lightnin staff, wooden boxes, enemy
+    spawn, cemetary ambience, forest ambience, boss skeleton ambience, cemetary ambience,
+    player damage, ooze damage, fire weapon, explosions, dialog sound, menu animation,
+    mega worm), audio controls, FMOD interactive music scripts, additional sound implementation
+    (skeleton, zombie, plants enemies, skeleton boss sounds), mixing\n\nTylor Allison:
+    Main menu (scroll art, opening animation, buttons, font selection, stone background,
     and related implementation), volume sliders, pause menu improvements, particle
     options, lore page\n\nCaspar \"SpadXIII\" Dunant: player revival feature and tooltip,
     spike hazard, boss scene framework, falling rocks and related screenshake, weapon
@@ -534,10 +534,13 @@ MonoBehaviour:
     art, burning village animations\n\nMarc Silva: slime creature animations and implementation,
     litch animations\n\nKlaim (A. Jo\xEBl Lamotte): Battle music, game over music\n\nVismaya
     Menon (Quenzel201Aliza): Grave art, menu cursor art\n\nFredrik Tyrberg: Sound
-    effects (weapon switch, forest ambience, slime sounds, imp head)\n\nJeremy Kenyon:
-    Fireball knockback, enemy stagger functionality\n\nAvery Pratt: Cursor switching
-    and pause improvements\n\nJeremy Jackson: Gold code and related bag icon, weapon
-    cost implemented (prototyped)\n\nMagnus Mikander: Spike sound effects\n\nHuberth
-    Laurent Ariza Varela: Sound implementation for player damage and player death\n\nJeff
-    \"Axphin\" Hanlon: Fireball related sounds\n\nThis game was created by members
+    effects and fmod implementation (weapon switch, forest ambience, slime sounds,
+    imp head, imp caster, worm, potions, UI sfx)\n\nJeremy Kenyon: Fireball knockback,
+    enemy stagger functionality\n\nAvery Pratt: Cursor switching and pause improvements\n\nJeremy
+    Jackson: Gold code and related bag icon, weapon cost implemented (prototyped)\n\nMagnus
+    Mikander: Spike sound effects and implementation, mega worm cutscene, \n\nHuberth
+    Laurent Ariza Varela: Sound effects: player damage and player death, skeleton
+    boss animations and voices, skeleton enemy death and movement\n\nJeff \"Axphin\"
+    Hanlon: Fireball related sounds\n\nSteven Solof: Sound Effects & Implementation:
+    Main Menu Music, mega worm sounds and music\n\nThis game was created by members
     of Gamkedo Club - for more information, or to join us, visit Gamkedo.com"
