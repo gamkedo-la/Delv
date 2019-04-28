@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 829506223408888166}
   - component: {fileID: 4417872874622930885}
   - component: {fileID: 8949746365954000247}
+  - component: {fileID: 8297449304830485511}
   m_Layer: 10
   m_Name: Worm(SolidType)
   m_TagString: Enemy
@@ -100,6 +101,29 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &8297449304830485511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164222166545238705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/Enemies/Worm/Worm_Movement
+  PlayEvent: 1
+  StopEvent: 2
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 4.2000003
+  OverrideMaxDistance: 50
 --- !u!1 &1670548908825089049
 GameObject:
   m_ObjectHideFlags: 0
