@@ -46,6 +46,9 @@
         </relationship>
     </object>
     <object class="MixerInput" id="{dcbaa5d4-9ec5-4a40-8748-1087a0204d74}">
+        <relationship name="masters">
+            <destination>{f672a387-8c4e-4625-a2ba-8524637c8389}</destination>
+        </relationship>
         <relationship name="effectChain">
             <destination>{197550e9-7ccd-4f0d-b039-ff0e508c602c}</destination>
         </relationship>
@@ -112,6 +115,9 @@
         </property>
         <property name="maximumScatterDistance">
             <value>0</value>
+        </property>
+        <property name="volumeRandomization">
+            <value>-6</value>
         </property>
         <relationship name="modulators">
             <destination>{cb81e2dc-bc4d-4cd0-9f0a-fa02a1b9c109}</destination>
