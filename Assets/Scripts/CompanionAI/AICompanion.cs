@@ -407,7 +407,7 @@ public class AICompanion : MonoBehaviour
     {
         if (DEBUG_AI) Debug.Log("AI going to player to revive");
         if (Mathf.Abs(Vector3.Distance(transform.position,
-                PlayerGO.transform.position)) > 0.6f)
+                PlayerGO.transform.position)) > 0.7f)
         {
             Vector2 direction = ReturnNormalizedVector(PlayerGO.transform.position);
             SetInputAmount(direction, "fast");

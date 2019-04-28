@@ -27,9 +27,15 @@ public class Reviver : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.K))
         {
+            if (p2 == null)
+            {
+                return;
+            }
             p2.SendMessage("DamageHealth", 110f);
         }
     }
+
+    PlayerController otherPlayer;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -37,8 +43,8 @@ public class Reviver : MonoBehaviour
             return;
         }
 
-        PlayerController otherPlayer = other.gameObject.GetComponent<PlayerController>();
-        Debug.Log(otherPlayer , otherPlayer);
+        otherPlayer = other.gameObject.GetComponent<PlayerController>();
+
         if (otherPlayer == null) {
             Debug.Log("otherPlayer is null");
             return;
@@ -46,34 +52,37 @@ public class Reviver : MonoBehaviour
 
         if (!otherPlayer.isDead)
         {
-            Debug.Log("otherPlayer is not dead");
+            //Debug.Log("otherPlayer is not dead");
+            // fixme this always logs even though one player is clearly dead and the isDead is true. 
             return;
         }
 
         revivablePlayerController = otherPlayer;
-
         // @todo replace with SendMessage or something to a hint-script?
         hintCanvas.SetActive(true);
 
         Text t = hintCanvas.GetComponentInChildren<Text>();
         t.text = "Press R to revive the other player";
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player") {
-			revivablePlayerController = null;
-
+			//revivablePlayerController = null;
             hintCanvas.SetActive(false);
         }
     }
 
     private void PlayerDied()
     {
+        Debug.Log("PlayerDied function called");
 		coll.enabled = true;
     }
 
     private void RevivePlayer()
     {
+        Debug.Log("Attempting to revive");
+
         if (revivablePlayerController == null) {
             return;
         }
@@ -81,6 +90,7 @@ public class Reviver : MonoBehaviour
         hintCanvas.SetActive(false);
 		coll.enabled = false;
         revivablePlayerController.enabled = true;
-        revivablePlayerController.Revive();
+        revivablePlayerController.SendMessage("Revive");
+        revivablePlayerController = null;
     }
 }
