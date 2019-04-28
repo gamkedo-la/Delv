@@ -49,7 +49,7 @@ public class Boss2Event : MonoBehaviour
 
 		prevCamSize = cam.orthographicSize + camBossPlaySizeAddition;
 
-        WormBossStartSFX = FMODUnity.RuntimeManager.CreateInstance("event:/WormBossStartCutsceneSFX");
+        WormBossStartSFX = FMODUnity.RuntimeManager.CreateInstance("event:/Enemies/Worm Boss/WormBossStartCutsceneSFX");
     }
 
 	void Update()

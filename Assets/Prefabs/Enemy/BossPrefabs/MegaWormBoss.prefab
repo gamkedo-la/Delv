@@ -1217,6 +1217,7 @@ GameObject:
   - component: {fileID: 5734294883632648431}
   - component: {fileID: 5734294883632648432}
   - component: {fileID: 6675694533341360863}
+  - component: {fileID: 5218546045427064722}
   m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
@@ -1401,6 +1402,22 @@ TrailRenderer:
   m_MinVertexDistance: 3
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &5218546045427064722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294883632648429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10f25c92cc8d1140b5da04b36741bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadSound: event:/Enemies/Worm Boss/WormBoss_Head_Animation
+  earthquakeSound: event:/Enemies/Worm Boss/WormBoss_Earthquake_Passby
+  dugtail: {fileID: 1896395601}
+  wormgroup: {fileID: 1886618649074829302}
 --- !u!1 &5734294883638568920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1430,7 @@ GameObject:
   - component: {fileID: 5734294883638568922}
   - component: {fileID: 5734294883638568923}
   - component: {fileID: 1419272829}
+  - component: {fileID: 3765890730450669933}
   m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
@@ -1597,6 +1615,22 @@ TrailRenderer:
   m_MinVertexDistance: 3
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &3765890730450669933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294883638568920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10f25c92cc8d1140b5da04b36741bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadSound: event:/Enemies/Worm Boss/WormBoss_Head_Animation
+  earthquakeSound: event:/Enemies/Worm Boss/WormBoss_Earthquake_Passby
+  dugtail: {fileID: 1469267823}
+  wormgroup: {fileID: 1886618649074829302}
 --- !u!1 &5734294884023920590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,6 +1756,7 @@ GameObject:
   - component: {fileID: 5734294884147538595}
   - component: {fileID: 5734294884147538596}
   - component: {fileID: 238681831}
+  - component: {fileID: 5347732420898804304}
   m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
@@ -1906,6 +1941,22 @@ TrailRenderer:
   m_MinVertexDistance: 3
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &5347732420898804304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734294884147538593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10f25c92cc8d1140b5da04b36741bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadSound: event:/Enemies/Worm Boss/WormBoss_Head_Animation
+  earthquakeSound: event:/Enemies/Worm Boss/WormBoss_Earthquake_Passby
+  dugtail: {fileID: 1713864265}
+  wormgroup: {fileID: 1886618649074829302}
 --- !u!1 &5734294884350805134
 GameObject:
   m_ObjectHideFlags: 0
@@ -2354,7 +2405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ba810ae9ddcfa8892360863c3a98d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toEnable: {fileID: 0}
+  toSpawn: {fileID: 0}
+  where: {fileID: 0}
 --- !u!1 &5734294885087321609
 GameObject:
   m_ObjectHideFlags: 0
