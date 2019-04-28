@@ -459,7 +459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.6, y: 13.34}
+  m_AnchoredPosition: {x: 2.600006, y: 13.339996}
   m_SizeDelta: {x: 751.2, y: 800.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1339173258055955217
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 23
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 50
@@ -502,45 +502,45 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 0.85
   m_Text: "Trenton Pegeas: project lead, core functionality, majority of foundational
     art (including village / cave / forest environments, player sprites, most enemy
     sprites), combat room locks, initial menu code, main enemy art and behaviors (flowers,
     zombies, imp), potions support, Big Boss and Lich code (collaboratively with others
-    on the team), co-op (non-AI), cutscene improvements, cave quest, absolutely wrecked
-    Git but then fixed all his Gistakes\n\nTerrence McDonnell: nearly all aspects
-    of implementation for the co-op companion AI bot, wrestler integration and dialog,
-    green shirt woman, main menu skip (debug functionality), FMOD mute support, speech
-    bubbles activated by NPC proximity, additional bug fixes\n\nBilal A. Cheema: made
-    input more responsive, Big Bones boss (including spawner, phases, health bar),
-    burning village scene, poison tiles, worm boss functionality and related cutscene,
-    sounds (step, bone rattle, heavy impact, fire spray, explosions), cave floor tiling,
-    interior tiling, entry/exit in village buildings, fog animation, dialog font integration,
-    game over functionality, pause menu functionality, UI scaling, NPC behavior improvements,
-    assorted bug fixes\n\nThomas Brandoli: Audio Lead, FMOD integration & implementation,
-    sounds design (footsteps, stair, cave reverb, lightnin staff, wooden boxes, enemy
-    spawn, cemetary ambience, forest ambience, boss skeleton ambience, cemetary ambience,
-    player damage, ooze damage, fire weapon, explosions, dialog sound, menu animation,
-    mega worm), audio controls, FMOD interactive music scripts, additional sound implementation
-    (skeleton, zombie, plants enemies, skeleton boss sounds), mixing\n\nTylor Allison:
-    Main menu (scroll art, opening animation, buttons, font selection, stone background,
-    and related implementation), volume sliders, pause menu improvements, particle
-    options, lore page\n\nCaspar \"SpadXIII\" Dunant: player revival feature and tooltip,
-    spike hazard, boss scene framework, falling rocks and related screenshake, weapon
-    refactoring, game over fixes\n\nChrister \"McFunkypants\" Kaitila: Village music,
-    graveyard ambient music, dungeon music, AI debugging and item detection, archer
-    sprite, door improvements, crates and related physics tuning, additional fixes\n\nCharlene
-    A.: Male and female villagers, two shopkeepers, purchase animation, enemy worm
-    art, burning village animations\n\nMarc Silva: slime creature animations and implementation,
-    litch animations\n\nKlaim (A. Jo\xEBl Lamotte): Battle music, game over music\n\nVismaya
-    Menon (Quenzel201Aliza): Grave art, menu cursor art\n\nFredrik Tyrberg: Sound
-    effects and fmod implementation (weapon switch, forest ambience, slime sounds,
-    imp head, imp caster, worm, potions, UI sfx)\n\nJeremy Kenyon: Fireball knockback,
-    enemy stagger functionality\n\nAvery Pratt: Cursor switching and pause improvements\n\nJeremy
-    Jackson: Gold code and related bag icon, weapon cost implemented (prototyped)\n\nMagnus
-    Mikander: Spike sound effects and implementation, mega worm cutscene, \n\nHuberth
-    Laurent Ariza Varela: Sound effects: player damage and player death, skeleton
-    boss animations and voices, skeleton enemy death and movement\n\nJeff \"Axphin\"
-    Hanlon: Fireball related sounds\n\nSteven Solof: Sound Effects & Implementation:
-    Main Menu Music, mega worm sounds and music\n\nThis game was created by members
-    of Gamkedo Club - for more information, or to join us, visit Gamkedo.com"
+    on the team), co-op (non-AI), cutscene improvements, cave quest\n\nTerrence McDonnell:
+    nearly all aspects of implementation for the co-op companion AI bot, wrestler
+    integration and dialog, green shirt woman, main menu skip (debug functionality),
+    FMOD mute support, speech bubbles activated by NPC proximity, additional bug fixes\n\nBilal
+    A. Cheema: made input more responsive, Big Bones boss (including spawner, phases,
+    health bar), burning village scene, poison tiles, worm boss functionality and
+    related cutscene, sounds (step, bone rattle, heavy impact, fire spray, explosions),
+    cave floor tiling, interior tiling, entry/exit in village buildings, fog animation,
+    dialog font integration, game over functionality, pause menu functionality, UI
+    scaling, NPC behavior improvements, assorted bug fixes\n\nThomas Brandoli: Audio
+    Lead, FMOD integration & implementation, sounds design (footsteps, stair, cave
+    reverb, lightnin staff, wooden boxes, enemy spawn, cemetary ambience, forest ambience,
+    boss skeleton ambience, cemetary ambience, player damage, ooze damage, fire weapon,
+    explosions, dialog sound, menu animation, mega worm), audio controls, FMOD interactive
+    music scripts, additional sound implementation (skeleton, zombie, plants enemies,
+    skeleton boss sounds), mixing\n\nTylor Allison: Main menu (scroll art, opening
+    animation, buttons, font selection, stone background, and related implementation),
+    volume sliders, pause menu improvements, particle options, lore page\n\nCaspar
+    \"SpadXIII\" Dunant: player revival feature and tooltip, spike hazard, boss scene
+    framework, falling rocks and related screenshake, weapon refactoring, game over
+    fixes\n\nChrister \"McFunkypants\" Kaitila: Village music, graveyard ambient music,
+    dungeon music, AI debugging and item detection, archer sprite, door improvements,
+    crates and related physics tuning, additional fixes\n\nCharlene A.: Male and female
+    villagers, two shopkeepers, purchase animation, enemy worm art, burning village
+    animations\n\nMarc Silva: slime creature animations and implementation, lich animations\n\nKlaim
+    (A. Jo\xEBl Lamotte): Battle music, game over music\n\nVismaya Menon (Quenzel201Aliza):
+    Grave art, menu cursor art\n\nFredrik Tyrberg: Sound effects and fmod implementation
+    (weapon switch, forest ambience, slime sounds, imp head, imp caster, worm, potions,
+    UI sfx)\n\nJeremy Kenyon: Fireball knockback, enemy stagger functionality\n\nAvery
+    Pratt: Cursor switching and pause improvements\n\nJeremy Jackson: Gold code and
+    related bag icon, weapon cost implemented (prototyped)\n\nMagnus Mikander: Spike
+    sound effects and implementation, mega worm cutscene, \n\nHuberth Laurent Ariza
+    Varela: Sound effects: player damage and player death, skeleton boss animations
+    and voices, skeleton enemy death and movement\n\nJeff \"Axphin\" Hanlon: Fireball
+    related sounds\n\nStebs: Sound Effects & Implementation: Main Menu Music, mega
+    worm sounds and music\n\nThis game was created by members of Gamkedo Club - for
+    more information, or to join us, visit Gamkedo.com"
