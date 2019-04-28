@@ -59,6 +59,7 @@
 {12439645-95dc-43bd-81a1-c9ab9e5d17dd} event:/Dialogue
 {56a3d7c8-ecc5-4f9b-8a35-edc458666b44} event:/Laser_Sight
 {39f8a300-3222-4729-a022-5497517be20c} event:/Make sure to have the latest version of the project! use 'git pull' to update the entire repository!
+{790e16fb-a23e-4cde-84f6-9a76430636ab} event:/Worm Boss Hit
 {8a662e76-32f4-48e6-9af0-7b7e11069ffd} bus:/
 {6cc0b4e9-42c2-49f3-9e13-68b22106e81b} bus:/Master
 {8035b52c-b71e-49fd-af7b-4f786eb02ae8} bus:/Master/AllSFX

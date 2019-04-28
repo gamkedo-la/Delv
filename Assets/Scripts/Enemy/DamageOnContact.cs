@@ -17,6 +17,7 @@ public class DamageOnContact : MonoBehaviour
             coll.SendMessage("DamageHealth", rawDMG);
             TimeTilRedamage = RedamageClock;
             DamageDealt = true;
+            
 
         }
     }

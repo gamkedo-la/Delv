@@ -96,6 +96,7 @@ public class MegaWorm_AttackWhileOnGroundBehaviour : StateMachineBehaviour
 
 		if (MegaWormBrain.GetDamageCounter() >= switchAfterHits)
 		{
+            
 			animator.SetTrigger("Damage");
 			MegaWormBrain.ResetDamageCounter();
 			MegaWormBrain.countDamage = false;
