@@ -189,31 +189,38 @@ public class GameManagerScript : MonoBehaviour
 		Debug.Log("Player 2 recalled");
 	}
 
-	//IEnumerator LoadNextScene()
-	//{
-	//    //Set the current Scene to be able to unload it later
-	//    Scene currentScene = SceneManager.GetActiveScene();
+    public void GameReset()
+    {
+        Instantiate(m_MyGameObject);
+        instance = null;
+        Destroy(m_MyGameObject);
+    }
 
-	//    // The Application loads the Scene in the background at the same time as the current Scene.
-	//    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(m_Scene, LoadSceneMode.Additive);
+    //IEnumerator LoadNextScene()
+    //{
+    //    //Set the current Scene to be able to unload it later
+    //    Scene currentScene = SceneManager.GetActiveScene();
 
-	//    //Wait until the last operation fully loads to return anything
-	//    while (!asyncLoad.isDone)
-	//    {
-	//        yield return null;
-	//    }
-	//    if (asyncLoad.isDone)
-	//    {
-	//    //SceneManager.MoveGameObjectToScene(m_MyGameObject, SceneManager.GetSceneByName(m_Scene));
-	//    //SceneManager.MoveGameObjectToScene(m_MainCamera, SceneManager.GetSceneByName(m_Scene));
-	//        SceneManager.UnloadSceneAsync(currentScene);
-	//        PC1.SendMessage("GoToStart");
-	//        Debug.Log("Go to start message sent");
-	//        Debug.Log("Scene loaded Successfully");
+    //    // The Application loads the Scene in the background at the same time as the current Scene.
+    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(m_Scene, LoadSceneMode.Additive);
 
-	//    //Unload the previous Scene
-	//    }
-	//}
+    //    //Wait until the last operation fully loads to return anything
+    //    while (!asyncLoad.isDone)
+    //    {
+    //        yield return null;
+    //    }
+    //    if (asyncLoad.isDone)
+    //    {
+    //    //SceneManager.MoveGameObjectToScene(m_MyGameObject, SceneManager.GetSceneByName(m_Scene));
+    //    //SceneManager.MoveGameObjectToScene(m_MainCamera, SceneManager.GetSceneByName(m_Scene));
+    //        SceneManager.UnloadSceneAsync(currentScene);
+    //        PC1.SendMessage("GoToStart");
+    //        Debug.Log("Go to start message sent");
+    //        Debug.Log("Scene loaded Successfully");
 
-	//new Vector3(3.3f, -0.66f, 0.05f); //<- Player Default Start Position
+    //    //Unload the previous Scene
+    //    }
+    //}
+
+    //new Vector3(3.3f, -0.66f, 0.05f); //<- Player Default Start Position
 }

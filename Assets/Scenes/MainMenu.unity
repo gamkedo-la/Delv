@@ -2346,6 +2346,21 @@ PrefabInstance:
       propertyPath: PlayEvent
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8836196800882588835, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: OnButtonPress.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8836196800882588835, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: OnButtonPress.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8836196800882588835, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: OnButtonPress.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1858079663, guid: d38ebff77834f41629b083b08339d580, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d38ebff77834f41629b083b08339d580, type: 3}

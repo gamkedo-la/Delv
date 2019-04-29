@@ -8,7 +8,7 @@ public class Reviver : MonoBehaviour
     [SerializeField] private GameObject hintCanvas;
 
 	//[SerializeField] private PlayerController player;
-    public PlayerController p2;
+    //public PlayerController p2;
 
 	private CircleCollider2D coll;
 
@@ -29,14 +29,14 @@ public class Reviver : MonoBehaviour
             RevivePlayer();
         }
 
-        if (Input.GetKeyUp(KeyCode.K))
-        {
-            if (p2 == null)
-            {
-                return;
-            }
-            p2.SendMessage("DamageHealth", 110f);
-        }
+        //if (Input.GetKeyUp(KeyCode.K))
+        //{
+        //    if (p2 == null)
+        //    {
+        //        return;
+        //    }
+        //    p2.SendMessage("DamageHealth", 110f);
+        //}
     }
 
     PlayerController otherPlayer;
@@ -50,7 +50,7 @@ public class Reviver : MonoBehaviour
         otherPlayer = other.gameObject.GetComponent<PlayerController>();
 
         if (otherPlayer == null) {
-            Debug.Log("otherPlayer is null");
+            //Debug.Log("otherPlayer is null");
             return;
         }
 
@@ -114,7 +114,6 @@ public class Reviver : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player") {
-			//revivablePlayerController = null;
             hintCanvas.SetActive(false);
         }
     }
@@ -134,7 +133,6 @@ public class Reviver : MonoBehaviour
         }
 
         hintCanvas.SetActive(false);
-		//coll.enabled = false;
         revivablePlayerController.enabled = true;
         revivablePlayerController.SendMessage("Revive");
         revivablePlayerController = null;
