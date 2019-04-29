@@ -44,7 +44,7 @@ public class GameManagerScript : MonoBehaviour
 				PlayerCount = 2;
 				p2ControllerKind = ControllerKind.AI;
 			} else {
-				p2ControllerKind = ControllerKind.Keyboard;
+				p2ControllerKind = instance.p2ControllerKind;
 			}
 		}
 	}

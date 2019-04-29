@@ -13,15 +13,19 @@ public class Reviver : MonoBehaviour
 	private CircleCollider2D coll;
 
     [SerializeField] private PlayerController revivablePlayerController;
-	
+    public PlayerController PC;
+    private GameManagerScript GM;
+
     void Start()
     {
 		coll = GetComponent<CircleCollider2D>();
+        PC = GetComponentInParent<PlayerController>();
+        GM = GameManagerScript.instance;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Pickup" + PC.ControllerSlot)) {
             RevivePlayer();
         }
 
@@ -52,6 +56,7 @@ public class Reviver : MonoBehaviour
 
         if (!otherPlayer.isDead)
         {
+            hintCanvas.SetActive(false);
             //Debug.Log("otherPlayer is not dead");
             // fixme this always logs even though one player is clearly dead and the isDead is true. 
             return;
@@ -59,10 +64,51 @@ public class Reviver : MonoBehaviour
 
         revivablePlayerController = otherPlayer;
         // @todo replace with SendMessage or something to a hint-script?
-        hintCanvas.SetActive(true);
+
+        if (!PC.isBot)
+        {
+            hintCanvas.SetActive(true);
+        }
 
         Text t = hintCanvas.GetComponentInChildren<Text>();
-        t.text = "Press R to revive the other player";
+
+        if (PC.PlayerIndex == 1)
+        {
+            if (GM.p1ControllerKind == ControllerKind.Keyboard)
+            {
+                t.text = "Press R to revive the other player";
+            }
+
+            if (GM.p1ControllerKind == ControllerKind.DualShock)
+            {
+                t.text = "Press triangle to revive the other player";
+            }
+
+            //if (GM.p2ControllerKind == ControllerKind.XInput)
+            //{
+            //    //t.text = "Press ??? to revive the other player";
+            // fixme I assume "Y" but have no way to test
+            //}
+        }
+
+        if (PC.PlayerIndex == 2 && !PC.isBot)
+        {
+            if (GM.p2ControllerKind == ControllerKind.Keyboard)
+            {
+                t.text = "Press R to revive the other player";
+            }
+
+            if (GM.p2ControllerKind == ControllerKind.DualShock)
+            {
+                t.text = "Press triangle to revive the other player";
+            }
+
+            //if (GM.p2ControllerKind == ControllerKind.XInput)
+            //{
+            //    //t.text = "Press ??? to revive the other player";
+            // fixme I assume "Y" but have no way to test
+            //}
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -73,11 +119,11 @@ public class Reviver : MonoBehaviour
         }
     }
 
-    private void PlayerDied()
-    {
-        Debug.Log("PlayerDied function called");
-		coll.enabled = true;
-    }
+    //  private void PlayerDied()
+    //  {
+    //      Debug.Log("PlayerDied function called");
+	//	    coll.enabled = true;
+    //}
 
     private void RevivePlayer()
     {
@@ -88,7 +134,7 @@ public class Reviver : MonoBehaviour
         }
 
         hintCanvas.SetActive(false);
-		coll.enabled = false;
+		//coll.enabled = false;
         revivablePlayerController.enabled = true;
         revivablePlayerController.SendMessage("Revive");
         revivablePlayerController = null;

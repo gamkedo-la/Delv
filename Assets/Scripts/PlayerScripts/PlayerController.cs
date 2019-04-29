@@ -516,7 +516,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (isBot && Mathf.Approximately(AICompanion.hortNow, 0))
                 {
-                    other.SendMessage("Revive");
+                    reviver.SendMessage("RevivePlayer");
                 }
                 Debug.Log(gameObject.name + " is touching other dead player: " + coll.gameObject.name);
             }
@@ -721,7 +721,7 @@ public class PlayerController : MonoBehaviour
         isDead = true;
         enabled = false;
 
-        reviver.SendMessage("PlayerDied");
+        //reviver.SendMessage("PlayerDied");
 
         Alive.SetActive(false);
         Dead.SetActive(true);
