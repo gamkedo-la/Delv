@@ -94,7 +94,7 @@ public class UxPauseMenu : UxPanel
         Destroy(gameObject);
         lowpassfilter_SnapshotEv.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         lowpassfilter_SnapshotEv.release();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void OnSettingsClick() {
