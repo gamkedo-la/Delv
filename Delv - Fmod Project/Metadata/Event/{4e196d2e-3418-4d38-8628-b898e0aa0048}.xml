@@ -75,6 +75,9 @@
         </relationship>
     </object>
     <object class="EventMixerMaster" id="{6c3fc3a2-4bd5-4827-8d7f-f555fba911ea}">
+        <property name="volume">
+            <value>2.20000005</value>
+        </property>
         <relationship name="effectChain">
             <destination>{82828040-b14f-4f49-97a1-1048c30bf317}</destination>
         </relationship>
@@ -98,6 +101,12 @@
         <relationship name="modulators">
             <destination>{19bd586d-9d0a-4839-a386-555c5819f56a}</destination>
             <destination>{fb8e071d-91a0-4a60-92c2-0f72abd210d7}</destination>
+        </relationship>
+        <relationship name="fadeInCurve">
+            <destination>{127a4cb1-ff6e-4bb4-8937-1fbc224240a5}</destination>
+        </relationship>
+        <relationship name="fadeOutCurve">
+            <destination>{0a9500b5-364f-4e4b-93b9-ea02c3a745d4}</destination>
         </relationship>
         <relationship name="sounds">
             <destination>{66c4b072-86d2-4f69-987f-a530ca2ea3a9}</destination>
@@ -148,6 +157,22 @@
             <value>2.19999981</value>
         </property>
     </object>
+    <object class="FadeCurve" id="{127a4cb1-ff6e-4bb4-8937-1fbc224240a5}">
+        <relationship name="startPoint">
+            <destination>{f5eff0d0-1d73-485f-a56b-ab34659b6bf0}</destination>
+        </relationship>
+        <relationship name="endPoint">
+            <destination>{2bc5736c-527f-4bc8-b576-7740698c8798}</destination>
+        </relationship>
+    </object>
+    <object class="FadeCurve" id="{0a9500b5-364f-4e4b-93b9-ea02c3a745d4}">
+        <relationship name="startPoint">
+            <destination>{d6d6caa5-e76c-4317-9f3e-92648ae2f0a6}</destination>
+        </relationship>
+        <relationship name="endPoint">
+            <destination>{2f2144bc-e79e-4fe9-8f58-846dc8fa41bf}</destination>
+        </relationship>
+    </object>
     <object class="SingleSound" id="{66c4b072-86d2-4f69-987f-a530ca2ea3a9}">
         <relationship name="audioFile">
             <destination>{0da06a1c-1513-4294-9061-81d7782d9b49}</destination>
@@ -180,10 +205,7 @@
             <value>2</value>
         </property>
         <property name="minimumDistance">
-            <value>1.60000002</value>
-        </property>
-        <property name="maximumDistance">
-            <value>5</value>
+            <value>10</value>
         </property>
         <property name="extentMode">
             <value>1</value>
@@ -192,10 +214,48 @@
             <value>2.5</value>
         </property>
         <property name="minimumExtent">
-            <value>168</value>
+            <value>86</value>
         </property>
         <property name="userPanExtent">
             <value>85.2000122</value>
+        </property>
+    </object>
+    <object class="AutomationPoint" id="{f5eff0d0-1d73-485f-a56b-ab34659b6bf0}">
+        <property name="position">
+            <value>0</value>
+        </property>
+        <property name="value">
+            <value>0</value>
+        </property>
+        <property name="curveShape">
+            <value>-0.2547189</value>
+        </property>
+    </object>
+    <object class="AutomationPoint" id="{2bc5736c-527f-4bc8-b576-7740698c8798}">
+        <property name="position">
+            <value>0.02</value>
+        </property>
+        <property name="value">
+            <value>1</value>
+        </property>
+    </object>
+    <object class="AutomationPoint" id="{d6d6caa5-e76c-4317-9f3e-92648ae2f0a6}">
+        <property name="position">
+            <value>0.73999999999999999</value>
+        </property>
+        <property name="value">
+            <value>1</value>
+        </property>
+        <property name="curveShape">
+            <value>0.25471893</value>
+        </property>
+    </object>
+    <object class="AutomationPoint" id="{2f2144bc-e79e-4fe9-8f58-846dc8fa41bf}">
+        <property name="position">
+            <value>0.76137500000000002</value>
+        </property>
+        <property name="value">
+            <value>0</value>
         </property>
     </object>
     <object class="MixerBusFader" id="{b68e6fc5-0d94-4ca6-8d80-a60aa905192b}"/>

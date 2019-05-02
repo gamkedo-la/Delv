@@ -12,6 +12,8 @@ public class ButtonToScene : MonoBehaviour, IPointerClickHandler
     public FMODUnity.StudioEventEmitter gameOverSound;
 	private AudioSource aud = null;
 
+    FMOD.Studio.Bus Master;
+
 	private TimeManager timeManager;
 
 	void Start( )
@@ -22,6 +24,7 @@ public class ButtonToScene : MonoBehaviour, IPointerClickHandler
 
 		timeManager = TimeManager.instance;
         gameOverSound.GetComponent<FMODUnity.StudioEventEmitter>();
+        Master = FMODUnity.RuntimeManager.GetBus("bus:/Master");
     }
 
     void ClickEvent()
@@ -78,8 +81,8 @@ public class ButtonToScene : MonoBehaviour, IPointerClickHandler
 		SceneManager.LoadScene( sceneName );
 	}
 
-    public void StopGameOverSound()
+    public void StopAllEvents()
     {
-        gameOverSound.Stop();
+        Master.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }
