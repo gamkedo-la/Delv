@@ -459,7 +459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.600006, y: 13.339996}
+  m_AnchoredPosition: {x: 2.5999756, y: 13.339996}
   m_SizeDelta: {x: 751.2, y: 800.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1339173258055955217
@@ -522,25 +522,25 @@ MonoBehaviour:
     boss skeleton ambience, cemetary ambience, player damage, ooze damage, fire weapon,
     explosions, dialog sound, menu animation, mega worm), audio controls, FMOD interactive
     music scripts, additional sound implementation (skeleton, zombie, plants enemies,
-    skeleton boss sounds), mixing\n\nTylor Allison: Main menu (scroll art, opening
-    animation, buttons, font selection, stone background, and related implementation),
-    volume sliders, pause menu improvements, particle options, lore page\n\nCaspar
-    \"SpadXIII\" Dunant: player revival feature and tooltip, spike hazard, boss scene
-    framework, falling rocks and related screenshake, weapon refactoring, game over
-    fixes\n\nChrister \"McFunkypants\" Kaitila: Village music, graveyard ambient music,
-    dungeon music, AI debugging and item detection, archer sprite, door improvements,
-    crates and related physics tuning, additional fixes\n\nCharlene A.: Male and female
-    villagers, two shopkeepers, purchase animation, enemy worm art, burning village
-    animations\n\nMarc Silva: slime creature animations and implementation, lich animations\n\nKlaim
-    (A. Jo\xEBl Lamotte): Battle music, game over music\n\nVismaya Menon (Quenzel201Aliza):
-    Grave art, menu cursor art\n\nFredrik Tyrberg: Sound effects and fmod implementation
-    (weapon switch, forest ambience, slime sounds, imp head, imp caster, worm, potions,
-    UI sfx)\n\nJeremy Kenyon: Fireball knockback, enemy stagger functionality\n\nAvery
-    Pratt: Cursor switching and pause improvements\n\nJeremy Jackson: Gold code and
-    related bag icon, weapon cost implemented (prototyped)\n\nMagnus Mikander: Spike
-    sound effects and implementation, mega worm cutscene, \n\nHuberth Laurent Ariza
-    Varela: Sound effects: player damage and player death, skeleton boss animations
-    and voices, skeleton enemy death and movement\n\nJeff \"Axphin\" Hanlon: Fireball
-    related sounds\n\nStebs: Sound Effects & Implementation: Main Menu Music, mega
-    worm sounds and music\n\nThis game was created by members of Gamkedo Club - for
-    more information, or to join us, visit Gamkedo.com"
+    skeleton boss sounds), mixing, loading screen\n\nTylor Allison: Main menu (scroll
+    art, opening animation, buttons, font selection, stone background, and related
+    implementation), volume sliders, pause menu improvements, particle options, lore
+    page\n\nCaspar \"SpadXIII\" Dunant: player revival feature and tooltip, spike
+    hazard, boss scene framework, falling rocks and related screenshake, weapon refactoring,
+    game over fixes\n\nChrister \"McFunkypants\" Kaitila: Village music, graveyard
+    ambient music, dungeon music, AI debugging and item detection, archer sprite,
+    door improvements, crates and related physics tuning, additional fixes\n\nCharlene
+    A.: Male and female villagers, two shopkeepers, purchase animation, enemy worm
+    art, burning village animations\n\nMarc Silva: slime creature animations and implementation,
+    lich animations\n\nKlaim (A. Jo\xEBl Lamotte): Battle music, game over music\n\nVismaya
+    Menon (Quenzel201Aliza): Grave art, menu cursor art\n\nFredrik Tyrberg: Sound
+    effects and fmod implementation (weapon switch, forest ambience, slime sounds,
+    imp head, imp caster, worm, potions, UI sfx)\n\nJeremy Kenyon: Fireball knockback,
+    enemy stagger functionality\n\nAvery Pratt: Cursor switching and pause improvements\n\nJeremy
+    Jackson: Gold code and related bag icon, weapon cost implemented (prototyped)\n\nMagnus
+    Mikander: Spike sound effects and implementation, mega worm cutscene, \n\nHuberth
+    Laurent Ariza Varela: Sound effects: player damage and player death, skeleton
+    boss animations and voices, skeleton enemy death and movement\n\nJeff \"Axphin\"
+    Hanlon: Fireball related sounds\n\nStebs: Sound Effects & Implementation: Main
+    Menu Music, mega worm sounds and music\n\nThis game was created by members of
+    Gamkedo Club - for more information, or to join us, visit Gamkedo.com"

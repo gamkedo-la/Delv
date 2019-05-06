@@ -58,6 +58,9 @@
         </relationship>
     </object>
     <object class="MixerInput" id="{ca5aaee2-6153-4121-921c-0251d1d04657}">
+        <relationship name="masters">
+            <destination>{5d5cd9de-b45d-4c2f-a0ca-3e8ad3133bb7}</destination>
+        </relationship>
         <relationship name="effectChain">
             <destination>{4def3f35-47e8-4ba5-b49b-b7e21ef4bbd8}</destination>
         </relationship>
@@ -208,7 +211,7 @@
     </object>
     <object class="EventMixerGroup" id="{04ac7bd5-aaec-440e-a453-c2b5f573e091}">
         <property name="volume">
-            <value>-10</value>
+            <value>-6</value>
         </property>
         <property name="name">
             <value>Calm</value>
@@ -258,7 +261,7 @@
     </object>
     <object class="EventMixerGroup" id="{fca06b6a-fbb7-4899-9098-2aa522b2bb07}">
         <property name="volume">
-            <value>-12</value>
+            <value>-10.5</value>
         </property>
         <property name="name">
             <value>In Combat</value>
@@ -323,7 +326,7 @@
             <value>52</value>
         </property>
         <property name="quantizationInterval">
-            <value>2</value>
+            <value>6</value>
         </property>
         <relationship name="triggerConditions">
             <destination>{00e3615a-73b5-43b7-97f4-df1fe78076ef}</destination>
