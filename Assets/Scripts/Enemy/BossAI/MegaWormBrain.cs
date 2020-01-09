@@ -382,8 +382,7 @@ public class MegaWormBrain : MonoBehaviour
 		Debug.Log(gameObject + " health damaged by " + DMG);
 		HP -= DMG;
 		Debug.Log(gameObject + " health is now " + HP);
-        //Play Hurt Sound Here
-        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Enemies/Worm Boss/wormboss_hit", gameObject);
+		//Play Hurt Sound Here
 		if (DMG > 10)
 		{
 			if ((GameManagerScript.instance.ParticleIntensity > 0))

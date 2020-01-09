@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.10.00">
     <object class="EncodingSetting" id="{1780813c-c32f-4e77-8ce9-3a70ac786fd8}">
         <property name="encodingFormat">
-            <value>1</value>
+            <value>3</value>
         </property>
         <property name="quality">
             <value>90</value>
