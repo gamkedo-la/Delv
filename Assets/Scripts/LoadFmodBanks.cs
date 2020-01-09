@@ -2,64 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class LoadFmodBanks : MonoBehaviour
 {
-    [FMODUnity.BankRef]
-    public List<string> banks;
-    bool HasBankLoaded = false;
-
-    public GameObject loadingScreen;
-    public GameObject buttonStart;
-    public GameObject loadingText;
-    public string sceneName = "MainMenu";
-    public Slider slider;
-    public Text progressText;
-
-
-    private void Awake()
+    bool didLoad = false;
+    private void Start()
     {
-        foreach (string b in banks)
-        {
-            FMODUnity.RuntimeManager.LoadBank(b, true);
-            Debug.Log("Loaded bank " + b);
-        }
+        FMODUnity.RuntimeManager.LoadBank("Master Bank");
+        FMODUnity.RuntimeManager.LoadBank("Master Bank.strings");
+        StartCoroutine(TimeOutGo());
     }
 
     void Update()
     {
-        if(!HasBankLoaded)
+        if (didLoad == false && FMODUnity.RuntimeManager.HasBankLoaded("Master Bank")
+                && FMODUnity.RuntimeManager.HasBankLoaded("Master Bank.strings"))
         {
-            if (FMODUnity.RuntimeManager.HasBankLoaded("Master Bank"))
-            {
-                Debug.Log("Master Bank Loaded");
-                HasBankLoaded = true;
-            }
+            didLoad = true;
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
     }
 
-    public void LoadLevel(int sceneIndex)
+    IEnumerator TimeOutGo()
     {
-        StartCoroutine(LoadAsynchronously(sceneIndex));
-    }
-
-    public IEnumerator LoadAsynchronously(int sceneIndex)
-    {
-        loadingScreen.SetActive(true);
-        loadingText.SetActive(true);
-        buttonStart.SetActive(false);
-
-        yield return new WaitForSeconds(2);
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-
-        while(!operation.isDone)
+        yield return new WaitForSeconds(15.0f);
+        if (didLoad == false)
         {
-            float progress = Mathf.Clamp01(operation.progress / .9f);
-            slider.value = progress;
-            progressText.text = progress * 100f + "%";
-            yield return null;
+            didLoad = true;
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
     }
 }

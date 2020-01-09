@@ -2344,7 +2344,7 @@ PrefabInstance:
     - target: {fileID: 7380902546327251592, guid: d38ebff77834f41629b083b08339d580,
         type: 3}
       propertyPath: PlayEvent
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8836196800882588835, guid: d38ebff77834f41629b083b08339d580,
         type: 3}
@@ -2360,6 +2360,19 @@ PrefabInstance:
         type: 3}
       propertyPath: OnButtonPress.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040092555211598464, guid: d38ebff77834f41629b083b08339d580,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359491295, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 359491297, guid: d38ebff77834f41629b083b08339d580, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1858079663, guid: d38ebff77834f41629b083b08339d580, type: 3}

@@ -18,7 +18,7 @@ MonoBehaviour:
   SourceProjectPathUnformatted: Delv - Fmod Project/DelvPrelude.fspro
   SourceBankPathUnformatted: Delv - Fmod Project/Build
   AutomaticEventLoading: 1
-  AutomaticSampleLoading: 0
+  AutomaticSampleLoading: 1
   ImportType: 0
   TargetAssetPath: 
   LoggingLevel: 2
